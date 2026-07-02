@@ -16,7 +16,7 @@ def regimes(regs=None):
     import operators as ops
     regs = regs or ops.load_regimes()
     for name, r in regs.items():
-        _say("【%s】%s" % (r["label"], r["feature"]))
+        _say("【%s】%s" % (r["label"], r.get("feature", r.get("fingerprint", ""))))
         _say("   配方:", " → ".join(s["op"] for s in r["steps"]))
 
 

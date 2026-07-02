@@ -2,20 +2,26 @@
 # 只改这一档;engine/ 只读不改,改完重跑 run.py 即同步。
 
 # 站点
-site: lujiazui                 # 单站预设(notebook 01/02/03)
+site: dapuqiao                 # 单站预设(notebook 01/02/03)
 report_sites:                  # 批量出 canvas/report 的清单(不带参数跑时)
-  - lujiazui                   # 资本/超高层
-  - caoyang                    # 单位/工人新村
-  - yuyuan                     # 居民/里弄石库门
+  - dapuqiao                   # 里弄/田子坊/24小时协商弄堂
 # 可加任何 05/data/<slug>/buildings.parquet 存在的站(如 waitan xujiahui nanjingxi ...)。
 
 # 权力体制(05 regimes.yaml 的 key + current 基线)
 regimes:
   - current
-  - developer_led
-  - state_led
-  - resident_self_build
-  - shared
+  - tourism_capture
+  - everyday_life_first
+  - heritage_micro_economy
+  - negotiated_24h_alley
+
+# 反事实高度情景(05 power_scenarios.yaml 的 key;footprint 不变,只切换高度)
+counterfactual_scenarios:
+  - current
+  - tourism_capture
+  - everyday_life_first
+  - heritage_micro_economy
+  - negotiated_24h_alley
 
 # AI 图像模型(Replicate)
 #   google/nano-banana             = 预设,保结构改外观最稳
@@ -34,7 +40,7 @@ massing_dpi: 140
 #   街区内 = 实心体块;街区外的「周边环」= 透明语境(给 ControlNet canny/depth 城市语境)。
 #   红线 = 街区多边形边界。卫星底覆盖「街区 + 周边环」全场景(比旧版大)。
 # 周边环宽度(米):study 街区外扩多少米当透明语境。改大=更多周边、canvas 档案更大。
-#   ⚠ 改这个数后要重建周边体量:  python run.py context lujiazui   (需 05 的 DATASET_ROOT)
+#   ⚠ 改这个数后要重建周边体量:  python run.py context dapuqiao   (需 05 的 DATASET_ROOT)
 context_margin_m: 800
 study_frac: 0.5   # 已停用(旧版中心矩形);留着不影响。
 
@@ -61,6 +67,7 @@ prompts:
     lujiazui: "a riverside Shanghai financial district by the Huangpu river"
     caoyang:  "a Shanghai workers' village (danwei) superblock district"
     yuyuan:   "a Shanghai old-town lane-house (lilong) district"
+    dapuqiao: "a Shanghai lilong and Tianzifang alley district around Dapuqiao"
     waitan:   "a Shanghai bund waterfront district with historic facades"
     nanjingxi: "a central Shanghai commercial avenue district"
     default:  "a dense Chinese city district"
@@ -77,3 +84,11 @@ prompts:
       look: "fine-grain self-built low-rise vernacular, brick and tile, organic narrow lanes, rooftop additions, laundry and greenery, lived-in and informal"
     shared:
       look: "egalitarian mid-rise blocks of even height, generous shared ground level, courtyards, trees and public greenery, calm low-contrast palette"
+    tourism_capture:
+      look: "tourism-driven commercial alley district, intensified visitor-facing frontage, boutique retail, signage glow, compact cultural consumption routes"
+    everyday_life_first:
+      look: "resident-first neighborhood, calmer lanes, safer pedestrian passages, modest commercial presence, community services and everyday domestic life"
+    heritage_micro_economy:
+      look: "heritage-preserving micro-economy, small workshops, independent shops, low-rise fine-grain fabric, preserved lilong texture and craft culture"
+    negotiated_24h_alley:
+      look: "24-hour negotiated alley, balanced night-time quiet zones, cultural micro-shops, protected resident gates, flexible public access and safety-first circulation"

@@ -49,6 +49,38 @@ def regime_recs(slug=None, regimes=None):
     return out, regs
 
 
+def counterfactual_recs(slug=None, scenarios=None):
+    """对某站点施加高度反事实情景,得 {scenario: recs}(footprint 不变,只换 h)。"""
+    scenarios = scenarios or getattr(settings, "COUNTERFACTUAL_SCENARIOS", [])
+    if not scenarios:
+        return {}, {}
+    slug = use_site(slug)
+    df = C.assign_all(C.current_buildings(slug))
+    scen = C.load_scenarios()
+    out = {}
+    for name in scenarios:
+        d = df.copy()
+        if name != "current":
+            d["height_m"] = C.scenario_heights(d, scen[name]).values
+        out[name] = C.to_recs(d)
+    return out, scen
+
+
+def counterfactual_label(scenarios, name):
+    labels = {
+        "current": "现状",
+        "tourism_capture": "旅游流量资本主导",
+        "everyday_life_first": "居民安全与日常生活优先",
+        "heritage_micro_economy": "遗产与小商户共生",
+        "negotiated_24h_alley": "24小时协商弄堂",
+        "developer_led": "开发商主导",
+        "community_led": "社区主导",
+        "state_eco": "国家生态",
+        "developer_renewal": "开发更新增量",
+    }
+    return labels.get(name, name)
+
+
 def load_context_recs(slug=None):
     """读某站点周边语境 recs（透明语境层，供 canny/depth/massing 的 ControlNet 语境）。
     无 context.parquet 则回 []。frozen=True、in_study=0、sh='context'（不参与算子/形态度量）。"""

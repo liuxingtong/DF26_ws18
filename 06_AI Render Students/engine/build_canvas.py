@@ -54,6 +54,7 @@ def _context_polys(recs, ox, oy, simplify=2.0):
 def build_geometry(slug, regimes=None):
     regimes = regimes or settings.REGIMES
     rr, regs = ws05.regime_recs(slug, regimes)
+    cf_rr, cf_scen = ws05.counterfactual_recs(slug)
     context_recs = ws05.load_context_recs(slug)                  # 周边语境(透明,跨体制不变),没有则 []
     base = rr.get("current") or next(iter(rr.values()))
     smnx, smny, smxx, smxy = _origin(base)                       # study bounds(现状 footprint,稳定)
@@ -66,8 +67,14 @@ def build_geometry(slug, regimes=None):
         ox, oy = smnx, smny
         fmxx, fmxy = smxx, smxy
     data = {name: _regime_polys(recs, ox, oy) for name, recs in rr.items()}
+    cf_keys = []
+    for name, recs in cf_rr.items():
+        key = "cf_" + name
+        cf_keys.append(key)
+        data[key] = _regime_polys(recs, ox, oy)
     context = _context_polys(context_recs, ox, oy) if context_recs else []
     labels = {name: ws05.regime_label(regs, name) for name in rr}
+    labels.update({"cf_" + name: ws05.counterfactual_label(cf_scen, name) for name in cf_rr})
     # 卫星底 = 全场景(study + 周边环),factor=1;local 相对 (ox,oy)
     sat, satext = None, None
     try:
@@ -78,7 +85,9 @@ def build_geometry(slug, regimes=None):
     rings = ws05.C.study_poly_rings(slug)                        # study 街区多边形(UTM 环)= 红线
     study_poly = ([[[round(x - ox, 1), round(y - oy, 1)] for x, y in ring] for ring in rings]
                   if rings else None)
-    return {"regimes": list(rr.keys()), "labels": labels, "colors": ws05.C.SH_COLOR,
+    regime_keys = list(rr.keys())
+    return {"regimes": regime_keys + cf_keys, "regimeKeys": regime_keys, "counterfactualKeys": cf_keys,
+            "labels": labels, "colors": ws05.C.SH_COLOR,
             "sh_label": {k: v.split("(")[0] for k, v in ws05.C.SH_LABEL.items()},
             "data": data, "context": context, "sat": sat, "satExtent": satext,
             "studyPoly": study_poly,
@@ -249,6 +258,9 @@ HTML = """<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8">
   <div class="grp">权力体制</div>
   <div class="row">%s</div>
 
+  <div class="grp">反事实高度情景</div>
+  <div class="row">%s</div>
+
   <div class="grp">导出模式</div>
   <div class="row">
     <button data-mode="massing" class="on">体块 massing</button>
@@ -284,16 +296,24 @@ def build(slug=None):
     slug = slug or settings.SLUG
     geom = build_geometry(slug)
     geom["slug"] = slug
-    geom["prompts"] = {r: d["prompt"] for r, d in prompt_gen.build_all(slug, geom["regimes"]).items()}
+    regime_prompts = {r: d["prompt"] for r, d in prompt_gen.build_all(slug, settings.REGIMES).items()}
+    cf_prompts = {
+        key: "反事实高度情景:%s。Footprint 与角色标签不变,只按 power_scenarios.yaml 重分配高度。"
+        % geom["labels"][key]
+        for key in geom.get("counterfactualKeys", [])
+    }
+    geom["prompts"] = {**regime_prompts, **cf_prompts}
     three = (WEB / "three.min.js").read_text(encoding="utf-8")
     orbit = (WEB / "OrbitControls.js").read_text(encoding="utf-8")
     place = geom["labels"].get(geom["regimes"][0], slug)
     site_name = ws05.C.site_meta(slug)["name"]
     reg_btns = "".join('<button data-reg="%s"%s>%s</button>' % (
-        r, ' class="on"' if r == geom["regimes"][0] else "", geom["labels"][r]) for r in geom["regimes"])
+        r, ' class="on"' if r == geom["regimes"][0] else "", geom["labels"][r]) for r in geom["regimeKeys"])
+    cf_btns = "".join('<button data-reg="%s">%s</button>' % (r, geom["labels"][r])
+                      for r in geom.get("counterfactualKeys", []))
     legend = "".join('<span><i style="background:%s"></i>%s</span>' % (geom["colors"][sh], geom["sh_label"].get(sh, sh))
                      for sh in ["state", "developer", "resident", "unknown"])
-    html = HTML % (site_name, CSS, site_name, reg_btns, legend, slug, three, orbit, viewer_js(geom))
+    html = HTML % (site_name, CSS, site_name, reg_btns, cf_btns, legend, slug, three, orbit, viewer_js(geom))
     p = OUT / slug / "canvas.html"
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(html, encoding="utf-8")

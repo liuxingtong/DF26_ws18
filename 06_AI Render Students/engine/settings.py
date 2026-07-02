@@ -11,6 +11,7 @@ _cfg = yaml.safe_load(open(ROOT / "config.yaml", encoding="utf-8"))
 SLUG = _cfg["site"]                                    # 單站預設
 REPORT_SITES = _cfg["report_sites"]                    # 批量站點清單
 REGIMES = _cfg["regimes"]                              # 權力體制(05 regimes.yaml key)
+COUNTERFACTUAL_SCENARIOS = _cfg.get("counterfactual_scenarios", [])  # 反事實高度情景(05 power_scenarios.yaml key)
 MODEL = _cfg["model"]                                  # AI 圖像模型(Replicate)
 CAM = {"elev": _cfg["camera"]["elev"], "azim": _cfg["camera"]["azim"]}   # 固定機位
 MASSING_DPI = _cfg["massing_dpi"]                      # 體塊參考圖 dpi
