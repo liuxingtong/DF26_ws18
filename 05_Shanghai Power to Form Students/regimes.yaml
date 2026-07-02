@@ -94,3 +94,76 @@ shared:
         toward: median,
         alpha: 0.7,
       }
+
+# ---- 曹杨新村 / 工人新村情境(自定义算子 linear_slab / courtyard_open / uniform_cohort) ----
+
+danwei_planned:
+  label: 单位规划主导
+  desc: 工人新村典型:锁公共、均质板楼(18m±2)、释出大院、高度趋同。state 不动。
+  fingerprint: 均质大院(高度CV 低、覆盖适中、内院开放)
+  steps:
+    - {op: freeze, who: [state]}
+    - {op: uniform_cohort, target: [resident], band_m: 18, spread: 2}
+    - {op: courtyard_open, target: [resident, developer], ratio: 0.75, cap_m: 36}
+    - {op: level, target: [resident, developer], toward: median, alpha: 0.8}
+
+incremental_extension:
+  label: 渐进加建
+  desc: 居民沿长轴接建板楼、适度细分自建单元。state 公共不动。
+  fingerprint: 沿街拉长(瘦长比略升、栋数增加)
+  steps:
+    - {op: freeze, who: [state]}
+    - {op: linear_slab, target: [resident], stretch: 1.25, cap_m: 42}
+    - {op: infill, target: [resident], cell_m2: 90, min_h: 5, max_h: 18, vary: 0.3}
+    - {op: level, target: [resident], toward: p40, alpha: 0.5}
+
+old_block_renewal:
+  label: 老旧小区更新
+  desc: 塔化变细+沿街拉长+适度加密——开发商主导改造工人新村板楼。
+  fingerprint: 板楼塔化(瘦长比升高、高度略增)
+  steps:
+    - {op: freeze, who: [state]}
+    - {op: slim, target: [resident, developer], ratio: 0.55}
+    - {op: linear_slab, target: [resident], stretch: 1.15, cap_m: 48}
+    - {op: densify, target: [resident, developer], far_gain: 1.35, cap_m: 42}
+
+# ---- 打浦桥 / 田子坊:24小时协商弄堂情境 ----
+
+tourism_capture:
+  label: 旅游流量资本主导
+  desc: 文旅运营、平台商业与房东以游客容量、消费效率和商业可见性为优先。外围可更新商业建筑获得有限重组与增量开发权;居民住宅和公共设施保持稳定。
+  fingerprint: 商业界面强化、游客主线集中、外围开发强度上升、边缘支弄与日常空间被弱化。
+  steps:
+    - {op: freeze, who: [state, resident]}
+    - {op: split_to_towers, target: [developer], above_m2: 1200, k: 2}
+    - {op: slim, target: [developer], ratio: 0.82}
+    - {op: densify, target: [developer], far_gain: 1.10, cap_m: 36}
+
+everyday_life_first:
+  label: 居民安全与日常生活优先
+  desc: 居民的回家权、安静权、消防安全与日常服务优先于过度商业扩张。居民住宅和公共设施冻结,由外围可更新商业空间适度让出地面以改善通行、疏散和社区服务。
+  fingerprint: 高度变化温和、居民生活核心稳定、公共通行空间增加、商业扩张受控。
+  steps:
+    - {op: freeze, who: [state, resident]}
+    - {op: open_ground, target: [developer], ratio: 0.88, cap_m: 24}
+    - {op: level, target: [developer], toward: median, alpha: 0.45}
+
+heritage_micro_economy:
+  label: 遗产与小商户共生
+  desc: 历史建筑、居民生活核心、小商户与创意工作室获得优先权。限制大尺度商业整合,将可更新商业体量细分为低成本经营、居民服务和文化展示单元。
+  fingerprint: 细粒度经营单元增加、中低层尺度、商业体量分散、历史里弄保持生活性与文化生产能力。
+  steps:
+    - {op: freeze_tags, tags: [heritage, residential_core, emergency_access]}
+    - {op: micro_lease, target: [developer], above_m2: 500, cell_m2: 80, affordable_ratio: 0.35, local_service_ratio: 0.20, culture_ratio: 0.15, min_h: 6, max_h: 18, seed: 42}
+    - {op: frontage_quota, primary_routes: tourist_spine, frontage_buffer_m: 8, max_tourism_ratio: 0.45, min_local_service_ratio: 0.15, min_micro_shop_ratio: 0.25, min_culture_ratio: 0.15, seed: 42}
+
+negotiated_24h_alley:
+  label: 24小时协商弄堂
+  desc: 不同主体不永久占有弄堂,而是在不同时间与客流状态下获得不同优先权。白天支持游客、小商户与文化活动;高峰期优先消防与疏散;夜间将部分消费空间和支弄归还给居民、维护与安静生活。
+  fingerprint: 历史与居民核心受保护、细粒度经营共存、游客流线可调节、夜间空间归还、公共安全与文化活力并行。
+  steps:
+    - {op: freeze_tags, tags: [heritage, residential_core, emergency_access]}
+    - {op: micro_lease, target: [developer], above_m2: 500, cell_m2: 80, affordable_ratio: 0.35, local_service_ratio: 0.20, culture_ratio: 0.15, min_h: 6, max_h: 18, seed: 42}
+    - {op: frontage_quota, primary_routes: tourist_spine, frontage_buffer_m: 8, max_tourism_ratio: 0.45, min_local_service_ratio: 0.15, min_micro_shop_ratio: 0.25, min_culture_ratio: 0.15, seed: 42}
+    - {op: crowd_valve, route: tourist_spine, crowd_threshold: 0.75, one_way_links: true, protect_tags: [resident_gate, emergency_access], relief_nodes: 3}
+    - {op: night_reversion, start_hour: 22, quiet_buffer_m: 10, commercial_shutdown_ratio: 0.60, protect_tags: [residential_core, resident_gate]}

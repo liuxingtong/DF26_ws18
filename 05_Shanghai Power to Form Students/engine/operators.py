@@ -253,6 +253,31 @@ OPS = {"freeze": freeze, "weight_height": weight_height, "concentrate": concentr
        "infill": infill, "level": level, "open_ground": open_ground, "scale": scale,
        "scale_graded": scale_graded}
 
+# 自定义算子(engine/my_operator.py):与内置算子平权,可直接写进 regimes.yaml
+import my_operator as _mo
+taper = _mo.taper
+linear_slab = _mo.linear_slab
+courtyard_open = _mo.courtyard_open
+uniform_cohort = _mo.uniform_cohort
+twist = _mo.twist
+freeze_tags = _mo.freeze_tags
+micro_lease = _mo.micro_lease
+frontage_quota = _mo.frontage_quota
+crowd_valve = _mo.crowd_valve
+night_reversion = _mo.night_reversion
+OPS.update({
+    "taper": taper,
+    "linear_slab": linear_slab,
+    "courtyard_open": courtyard_open,
+    "uniform_cohort": uniform_cohort,
+    "twist": twist,
+    "freeze_tags": freeze_tags,
+    "micro_lease": micro_lease,
+    "frontage_quota": frontage_quota,
+    "crowd_valve": crowd_valve,
+    "night_reversion": night_reversion,
+})
+
 
 def register(name, fn):
     """运行时登记一个新算子(notebook 里复制粘贴自己的算子后调用,不必改本文件)。"""

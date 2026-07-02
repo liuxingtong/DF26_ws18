@@ -6,9 +6,9 @@
 #    不填 DATASET_ROOT 也完全没问题:随包已带 3 站缓存,离线即可跑全部主流程。详见 数据集说明.md。
 from pathlib import Path
 
-SLUG = "lujiazui"  # 当前站点:改成 SITES 里任一 slug。换街道见 数据集说明.md「换成别的街道」。
+SLUG = "dapuqiao"  # 当前站点:改成 SITES 里任一 slug。换地方的完整玩法见「05_换地方-按街道取」notebook。
 
-DATASET_ROOT = "C:/baidunetdiskdownload/data_collection/上海城市数据集"  # (可选)你解压的「上海城市数据集」根目录(字符串路径),例:
+DATASET_ROOT = "F:/Aworks/DF2026/data/上海城市数据集"  # (可选)你解压的「上海城市数据集」根目录(字符串路径),例:
 #     DATASET_ROOT = "/Users/you/Downloads/上海城市数据集"
 #   留 None = 用随包缓存(离线)。填了、且数据集在,才会从原始数据建新街道的缓存。
 

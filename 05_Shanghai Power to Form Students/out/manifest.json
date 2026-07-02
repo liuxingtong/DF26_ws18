@@ -1,0 +1,50 @@
+{
+ "sites": {
+  "lujiazui": {
+   "name": "陆家嘴街道",
+   "family": "资本/超高层",
+   "step": "01",
+   "updated": "20260701_115252",
+   "figures": [
+    "lujiazui/Step_01/20260701_115252/01_data_overview.png"
+   ],
+   "n": 3263
+  },
+  "caoyang": {
+   "name": "曹杨新村街道",
+   "family": "单位/工人新村",
+   "step": "04",
+   "updated": "20260701_143807",
+   "figures": [
+    "caoyang/Step_04/20260701_143807/01_operator_demo.png",
+    "caoyang/Step_04/20260701_143807/02_operator_demo.png",
+    "caoyang/Step_04/20260701_143807/03_operator_demo.png",
+    "caoyang/Step_04/20260701_143807/04_regime_compare.png",
+    "caoyang/Step_04/20260701_143807/05_fingerprint_bars.png",
+    "caoyang/Step_04/20260701_143807/06_operator_demo.png"
+   ],
+   "n": 1654
+  },
+  "dapuqiao": {
+   "name": "打浦桥街道",
+   "family": "居民/里弄+田子坊",
+   "step": "04",
+   "updated": "20260701_171047",
+   "figures": [
+    "dapuqiao/Step_04/20260701_171047/01_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/02_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/03_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/04_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/05_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/06_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/07_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/08_operator_demo.png",
+    "dapuqiao/Step_04/20260701_171047/09_regime_compare.png",
+    "dapuqiao/Step_04/20260701_171047/10_fingerprint_bars.png",
+    "dapuqiao/Step_04/20260701_171047/11_operator_demo.png"
+   ],
+   "n": 1370
+  }
+ },
+ "generated": "2026-07-01 17:11:10"
+}

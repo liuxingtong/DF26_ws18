@@ -1,0 +1,45 @@
+# power_scenarios_original.yaml — 原版情景(修改前)
+# conserve 为主:总 GFA 守恒,只在角色间重分配;developer_renewal / max_change 为 grow 对照。
+scenarios:
+  current:                 # 基线:conserve 全权重 1 → 完全不变
+    _mode: conserve
+
+  developer_led:           # 开发商主导:资本多拿一点,其余让出一点(总量守恒)
+    _mode: conserve
+    developer: {mult: 1.6}
+    resident:  {mult: 0.90}
+    state:     {mult: 0.95}
+    informal:  {mult: 0.85}
+    unknown:   {mult: 0.95}
+
+  community_led:           # 社区主导:居民/在地多拿,资本让出(总量守恒)
+    _mode: conserve
+    developer: {mult: 0.70}
+    resident:  {mult: 1.30}
+    state:     {mult: 1.10}
+    informal:  {mult: 1.20}
+    unknown:   {mult: 1.00}
+
+  state_eco:               # 国家生态:公共多拿、资本让出(总量守恒)
+    _mode: conserve
+    developer: {mult: 0.70}
+    resident:  {mult: 0.95}
+    state:     {mult: 1.60}
+    informal:  {mult: 1.00}
+    unknown:   {mult: 0.95}
+
+  developer_renewal:       # (grow 对照)都更新增:资本与居民实际加盖,总 GFA 上升
+    _mode: grow
+    developer: {mult: 1.5}
+    resident:  {mult: 1.15}
+    state:     {mult: 1.0}
+    informal:  {mult: 1.0}
+    unknown:   {mult: 1.2}
+
+  max_change:              # 看最大变化:grow 模式,总量大涨(均值约 +200%)
+    _mode: grow
+    resident:  {mult: 4.0, cap_m: 250}
+    developer: {mult: 4.0, cap_m: 350}
+    unknown:   {mult: 3.0, cap_m: 200}
+    state:     {mult: 2.0, cap_m: 150}
+    informal:  {mult: 2.0, cap_m: 80}

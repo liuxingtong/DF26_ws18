@@ -40,3 +40,35 @@ scenarios:
     state:     {mult: 1.0}
     informal:  {mult: 1.0}
     unknown:   {mult: 1.2}
+
+  tourism_capture:          # 打浦桥:旅游流量资本主导,文旅商业多拿高度/容量
+    _mode: conserve
+    developer: {mult: 1.35, cap_m: 36}
+    resident:  {mult: 0.88}
+    state:     {mult: 0.95}
+    informal:  {mult: 1.00}
+    unknown:   {mult: 0.95}
+
+  everyday_life_first:      # 打浦桥:居民安全与日常生活优先,资本让出
+    _mode: conserve
+    developer: {mult: 0.72, cap_m: 24}
+    resident:  {mult: 1.25}
+    state:     {mult: 1.15}
+    informal:  {mult: 1.00}
+    unknown:   {mult: 1.00}
+
+  heritage_micro_economy:   # 打浦桥:遗产、小商户、创意工作室共生,中低层细粒度
+    _mode: conserve
+    developer: {mult: 0.88, cap_m: 30}
+    resident:  {mult: 1.12}
+    state:     {mult: 1.10}
+    informal:  {mult: 1.00}
+    unknown:   {mult: 1.00}
+
+  negotiated_24h_alley:     # 打浦桥:24小时协商弄堂,居民/安全/文化与商业相对均衡
+    _mode: conserve
+    developer: {mult: 1.02, cap_m: 30}
+    resident:  {mult: 1.08}
+    state:     {mult: 1.12}
+    informal:  {mult: 1.00}
+    unknown:   {mult: 1.00}

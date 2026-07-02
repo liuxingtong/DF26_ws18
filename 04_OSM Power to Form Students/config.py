@@ -1,8 +1,8 @@
 # config.py —— 换地方:只填中心点 LAT/LON + 半径 RADIUS_M,保存后 Run All(或重跑任何 step)。
 # Change location: set the center LAT/LON + RADIUS_M, then Run All. BBOX & UTM are auto-derived.
-PLACE = "東京"  # "Toa Payoh"   # 地名,仅用于标注 / label only
-LAT = 35.676287  # 中心点纬度 latitude;填了就抓这个新地方(需 pip install osmnx + 联网)
-LON = 139.747738  # 中心点经度 longitude
+PLACE = "五角场"  # 地名,仅用于标注 / label only
+LAT = 31.310400  # 中心点纬度 latitude;填了就抓这个新地方(需 pip install osmnx + 联网)
+LON = 121.517208  # 中心点经度 longitude
 RADIUS_M = 1200  # 中心到边的距离(米);范围约 2×RADIUS_M 见方
 
 # ===== 以下自动推导,通常不用改 / auto-derived — usually leave as is =====
