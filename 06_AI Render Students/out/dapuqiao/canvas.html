@@ -1138,7 +1138,7 @@ function init(){
   const b=GEOM.bounds, cx=(b[0]+b[2])/2, cy=(b[1]+b[3])/2, span=Math.max(b[2]-b[0],b[3]-b[1]);
   // 卫星地面
   if(GEOM.sat){const tx=new THREE.TextureLoader().load(GEOM.sat); if(THREE.sRGBEncoding!==undefined)tx.encoding=THREE.sRGBEncoding;
-    const se=GEOM.satExtent, gw=se[2]-se[0], gh=se[3]-se[1];
+    const se=GEOM.satExtent, osmScale=3, gw=(se[2]-se[0])*osmScale, gh=(se[3]-se[1])*osmScale;
     ground=new THREE.Mesh(new THREE.PlaneGeometry(gw,gh),new THREE.MeshBasicMaterial({map:tx}));
     ground.position.set((se[0]+se[2])/2,(se[1]+se[3])/2,-0.3); scene.add(ground);}
   // 红色研究范围边界 = study 街区多边形(整个 study 都实心),z 略高于地面
