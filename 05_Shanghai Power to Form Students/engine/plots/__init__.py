@@ -29,7 +29,7 @@ from .step2_power import power_map
 from .step3_policy import policy_heatmap
 from .step4_form import skyline_panels, metrics
 from .step5_3d import city_3d, city_3d_plotly
-from .operator_atlas import operator_demo, regime_compare, feature_bars
+from .operator_atlas import operator_demo, operator_diff, tag_map, regime_compare, feature_bars
 
 __all__ = [
     "SH_COLOR", "SH_LABEL", "HEIGHT_CMAP",
@@ -37,5 +37,5 @@ __all__ = [
     "origin_of", "building_faces", "capture", "autosave",
     "satellite_figureground", "data_overview", "power_map", "policy_heatmap",
     "skyline_panels", "metrics", "city_3d", "city_3d_plotly",
-    "operator_demo", "regime_compare", "feature_bars",
+    "operator_demo", "operator_diff", "tag_map", "regime_compare", "feature_bars",
 ]

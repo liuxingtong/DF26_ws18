@@ -49,11 +49,11 @@ def satellite_figureground(df, utm=common.UTM, zoom=16, show=True):
     A = (ext[3] - ext[2]) / (ext[1] - ext[0])            # 影像 高/宽 比 → figure 配到内容,消上下留白
     pw = 6.4                                             # 单幅宽(英寸)
     fig, axes = plt.subplots(1, 3, figsize=(3 * pw + 0.8, pw * A + 1.5))
-    axes[0].imshow(img, extent=iext); axes[0].set_title("① 真实卫星(Esri)", fontsize=12)
+    axes[0].imshow(img, extent=iext); axes[0].set_title("1. Real Satellite Imagery (Esri)", fontsize=12)
     axes[1].set_facecolor("white"); _draw_footprints(axes[1], df, utm, alpha=1.0)
-    axes[1].set_title("② figure-ground(footprint 依角色著色)", fontsize=12); _legend(axes[1])
+    axes[1].set_title("2. Figure-Ground by Stakeholder", fontsize=12); _legend(axes[1])
     axes[2].imshow(img, extent=iext, alpha=.92); _draw_footprints(axes[2], df, utm, alpha=.6)
-    axes[2].set_title("③ 叠图(真实 + 我们的离散读法)", fontsize=12); _legend(axes[2])
+    axes[2].set_title("3. Overlay: Imagery + Discrete Reading", fontsize=12); _legend(axes[2])
     for ax in axes:
         ax.set_xlim(ext[0], ext[1]); ax.set_ylim(ext[2], ext[3]); ax.set_aspect("equal"); ax.axis("off")
     _base.footer(fig, y=-0.005)

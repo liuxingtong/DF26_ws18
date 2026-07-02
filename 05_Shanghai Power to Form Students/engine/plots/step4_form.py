@@ -21,12 +21,12 @@ def skyline_panels(df, heights, names=None, show=True):
         h = heights[name]
         hmap = dict(zip(df.index, h.values))
         _base.plot_footprints(ax, df, color_for=lambda r, _m=hmap: _base.HEIGHT_CMAP(norm(_m[r.name])))
-        ax.set_title("%s\n平均高 %.1f m · 最高 %.0f m" % (name, h.mean(), h.max()), fontsize=11)
+        ax.set_title("%s\nMean %.1f m | Max %.0f m" % (_base.display_label(name), h.mean(), h.max()), fontsize=11)
     for ax in axes[len(names):]:                         # 多余格子隐藏(情景数非偶数时)
         ax.set_visible(False)
     sm = ScalarMappable(norm=norm, cmap=_base.HEIGHT_CMAP); sm.set_array([])
     fig.colorbar(sm, cax=cax).set_label(                # cax 高度 = subplots 全高
-        "建物高度 (m) — 同一色阶,可横向比对", fontsize=10)
+        "Building height (m) — shared scale across panels", fontsize=10)
     _base.footer(fig)
     _base.autosave(fig, "skyline_panels")
     if show:
@@ -56,24 +56,26 @@ def metrics(df, heights, names=None, show=True):
     cols = [palette[i % len(palette)] for i in range(len(names))]
 
     axs[0, 0].bar(x, gfa_x, color=cols); axs[0, 0].axhline(1.0, ls="--", lw=1, color="k")
-    axs[0, 0].set_title("总 GFA ×base")
+    display_names = [_base.display_label(name) for name in names]
+
+    axs[0, 0].set_title("Total GFA × baseline")
     for i, v in enumerate(gfa_x):
         axs[0, 0].text(i, v, "×%.2f" % v, ha="center", va="bottom", fontsize=10)
-    axs[0, 1].bar(x, mean_h, color=cols); axs[0, 1].set_title("平均高 (m)")
+    axs[0, 1].bar(x, mean_h, color=cols); axs[0, 1].set_title("Mean height (m)")
     for i, v in enumerate(mean_h):
         axs[0, 1].text(i, v, "%.1f" % v, ha="center", va="bottom", fontsize=10)
-    axs[1, 0].bar(x, max_h, color=cols); axs[1, 0].set_title("最高 (m)")
+    axs[1, 0].bar(x, max_h, color=cols); axs[1, 0].set_title("Max height (m)")
     for i, v in enumerate(max_h):
         axs[1, 0].text(i, v, "%.0f" % v, ha="center", va="bottom", fontsize=10)
     for ax in (axs[0, 0], axs[0, 1], axs[1, 0]):
-        ax.set_xticks(x); ax.set_xticklabels(names, rotation=12)
+        ax.set_xticks(x); ax.set_xticklabels(display_names, rotation=12)
 
     n_sh = len(by_sh); w = 0.8 / max(n_sh, 1)
     for k, (sh, d) in enumerate(by_sh.items()):
         axs[1, 1].bar(x + (k - (n_sh - 1) / 2) * w, [d[n] for n in names], width=w,
                       color=_base.SH_COLOR[sh], label=_base.SH_LABEL[sh])
-    axs[1, 1].set_title("各 stakeholder 平均高 (m)")
-    axs[1, 1].set_xticks(x); axs[1, 1].set_xticklabels(names, rotation=12)
+    axs[1, 1].set_title("Mean height by stakeholder (m)")
+    axs[1, 1].set_xticks(x); axs[1, 1].set_xticklabels(display_names, rotation=12)
     axs[1, 1].legend(loc="upper center", bbox_to_anchor=(0.5, -0.12),
                      ncol=max(n_sh, 1), fontsize=8, frameon=False)
 

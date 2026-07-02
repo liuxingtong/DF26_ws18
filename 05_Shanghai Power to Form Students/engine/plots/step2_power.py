@@ -26,12 +26,12 @@ def power_map(df, show=True):
 
     y = np.arange(len(order)); bw = 0.38
     colors = [_base.SH_COLOR[sh] for sh in order]
-    ax_bar.barh(y + bw / 2, n_share, height=bw, color=colors, edgecolor="white", label="栋数占比")
+    ax_bar.barh(y + bw / 2, n_share, height=bw, color=colors, edgecolor="white", label="Building share")
     ax_bar.barh(y - bw / 2, a_share, height=bw, color=colors, edgecolor="white",
-                alpha=0.5, label="面积占比")
+                alpha=0.5, label="Area share")
     ax_bar.set_yticks(y)
     ax_bar.set_yticklabels([_base.SH_LABEL[sh] for sh in order], fontsize=8)
-    ax_bar.invert_yaxis(); ax_bar.set_xlabel("占比 share")
+    ax_bar.invert_yaxis(); ax_bar.set_xlabel("Share")
     ax_bar.legend(loc="upper center", bbox_to_anchor=(0.5, -0.09), ncol=2, fontsize=8, frameon=False)
 
     _base.footer(fig, y=-0.005)

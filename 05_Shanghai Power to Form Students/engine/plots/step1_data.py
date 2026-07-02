@@ -12,18 +12,18 @@ def data_overview(df, show=True):
     fig, (axL, axR) = plt.subplots(1, 2, figsize=(15, 7))
 
     _base.plot_footprints(axL, df, color_for=lambda r: "#9a9a9a")
-    axL.set_title("建筑占地(全灰:这步只看楼本身,还没贴角色)", fontsize=12)
+    axL.set_title("Building Footprints (gray: geometry only, before stakeholder mapping)", fontsize=12)
 
     hi = int(h.max())
     bins = range(0, hi + 8, max(3, hi // 80 * 3 or 3))
-    axR.hist(h, bins=bins, color="#4a6fa5", label="实测高度 measured_ai")
+    axR.hist(h, bins=bins, color="#4a6fa5", label="Measured height (measured_ai)")
     n_hi = int((h > 100).sum())
     if n_hi:
-        axR.hist(h[h > 100], bins=bins, color="#c0654a", label=">100m 超高层 ×%d" % n_hi)
-    axR.axvline(h.mean(), color="#222", ls="--", lw=1.2, label="平均 %.1f m" % h.mean())
-    axR.axvline(h.quantile(.9), color="#5a9367", ls=":", lw=1.2, label="p90 %.1f m" % h.quantile(.9))
-    axR.set_xlabel("高度 height (m)  ·  最高 %.0f m" % h.max()); axR.set_ylabel("栋数 count")
-    axR.set_title("实测高度分布(全为 AI 解译实测,非楼层估算)", fontsize=12)
+        axR.hist(h[h > 100], bins=bins, color="#c0654a", label="Super-tall >100 m ×%d" % n_hi)
+    axR.axvline(h.mean(), color="#222", ls="--", lw=1.2, label="Mean %.1f m" % h.mean())
+    axR.axvline(h.quantile(.9), color="#5a9367", ls=":", lw=1.2, label="P90 %.1f m" % h.quantile(.9))
+    axR.set_xlabel("Height (m)  |  Max %.0f m" % h.max()); axR.set_ylabel("Building count")
+    axR.set_title("Measured Height Distribution (AI-derived, not floor-count estimates)", fontsize=12)
     axR.legend(loc="upper right", fontsize=9, frameon=False)
 
     _base.footer(fig, y=-0.005)

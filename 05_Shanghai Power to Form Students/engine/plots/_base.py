@@ -55,6 +55,53 @@ SH_LABEL = common.SH_LABEL
 
 HEIGHT_CMAP = plt.get_cmap("viridis")   # 高度色阶:低=深紫、高=黄,所有图共用可横比
 
+DISPLAY_LABELS = {
+    "current": "Current",
+    "现状": "Current",
+    "developer_led": "Developer-led",
+    "community_led": "Community-led",
+    "state_eco": "State-led Ecology",
+    "developer_renewal": "Developer Renewal",
+    "tourism_capture": "Tourism Capture",
+    "everyday_life_first": "Everyday Life First",
+    "heritage_micro_economy": "Heritage Micro-Economy",
+    "negotiated_24h_alley": "Negotiated 24h Alley",
+    "state_led": "State-led / Centralized",
+    "resident_self_build": "Resident Self-Build",
+    "developer_scale_graded": "Developer Gradient Expansion",
+    "shared": "Shared / Public Commons",
+    "danwei_planned": "Danwei Planned",
+    "incremental_extension": "Incremental Extension",
+    "old_block_renewal": "Old Block Renewal",
+    "开发商主导": "Developer-led",
+    "社区主导": "Community-led",
+    "国家生态": "State-led Ecology",
+    "旅游流量资本主导": "Tourism Capture",
+    "居民安全与日常生活优先": "Everyday Life First",
+    "遗产与小商户共生": "Heritage Micro-Economy",
+    "24小时协商弄堂": "Negotiated 24h Alley",
+    "政府主导 / 中央集权": "State-led / Centralized",
+    "居民自建为主": "Resident Self-Build",
+    "共享 / 公共平权": "Shared / Public Commons",
+    "单位规划主导": "Danwei Planned",
+    "渐进加建": "Incremental Extension",
+    "老旧小区更新": "Old Block Renewal",
+    "开发商渐变放大": "Developer Gradient Expansion",
+}
+
+TEXT_REPLACEMENTS = {
+    "拆板成塔": "Split Slabs into Towers",
+    "居民自建": "Resident Infill",
+    "中央集权": "Centralized Concentration",
+    "向权力重心收拢": "toward the power centroid",
+    "保护历史/居住/消防": "protect heritage / residential / emergency access",
+    "大商业拆成微租赁单元": "split large commercial blocks into micro-lease units",
+    "游客主线界面配额": "tourist spine frontage quota",
+    "高峰客流阀门": "peak crowd valve",
+    "22点后夜间归还": "night reversion after 22:00",
+    "现状": "Current",
+}
+
 
 # ---- footprint 著色(step1/2/4 共用):用 common 的批量版(快)-----------------
 plot_footprints = common.plot_footprints
@@ -64,6 +111,30 @@ def legend_below(ax, handles, labels, ncol=None, fontsize=8):
     """图例放座标轴下方一排,不盖资料。"""
     ax.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.5, -0.04),
               ncol=ncol or len(labels), fontsize=fontsize, frameon=False)
+
+
+def display_label(value):
+    """Normalize scenario/regime labels to concise English for chart display."""
+    if value is None:
+        return value
+    text = str(value).strip()
+    if not text:
+        return text
+    if text in DISPLAY_LABELS:
+        return DISPLAY_LABELS[text]
+    if "_" in text and text == text.lower():
+        return text.replace("_", " ").title()
+    return text
+
+
+def english_text(value):
+    """Translate known Chinese chart phrases while leaving function names/params intact."""
+    if value is None:
+        return value
+    text = display_label(value)
+    for src, dst in sorted(TEXT_REPLACEMENTS.items(), key=lambda item: len(item[0]), reverse=True):
+        text = text.replace(src, dst)
+    return text
 
 
 def height_norm(*height_series):

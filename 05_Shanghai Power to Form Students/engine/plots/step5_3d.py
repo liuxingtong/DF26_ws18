@@ -35,7 +35,7 @@ def city_3d(sub, height_col="height_m", elev=30, azim=-60, top=None, show=True):
     hmax = float(sub[height_col].max())
     ax.set_xlim(0, xmax); ax.set_ylim(0, ymax); ax.set_zlim(0, hmax * 1.1)
     ax.set_box_aspect((xmax, ymax, max(hmax, 1) * 4))   # z 拉高,量体才明显
-    ax.set_xlabel("x (m)"); ax.set_ylabel("y (m)"); ax.set_zlabel("高度 (m)")
+    ax.set_xlabel("x (m)"); ax.set_ylabel("y (m)"); ax.set_zlabel("Height (m)")
     ax.view_init(elev=elev, azim=azim)
 
     handles = [plt.Rectangle((0, 0), 1, 1, facecolor=_base.SH_COLOR[s]) for s in common.STAKEHOLDERS]
@@ -93,7 +93,7 @@ def city_3d_plotly(sub, height_col="height_m"):
 
     fig = go.Figure(data=traces)
     fig.update_layout(
-        scene=dict(xaxis_title="x (m)", yaxis_title="y (m)", zaxis_title="高度 (m)",
+        scene=dict(xaxis_title="x (m)", yaxis_title="y (m)", zaxis_title="Height (m)",
                    aspectmode="manual", aspectratio=dict(x=1.6, y=1.6, z=0.9)),
         legend=dict(orientation="h", yanchor="top", y=0, xanchor="center", x=0.5),
         margin=dict(l=0, r=0, t=0, b=0))

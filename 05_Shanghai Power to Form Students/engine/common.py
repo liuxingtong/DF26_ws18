@@ -55,8 +55,8 @@ UTM = 32651
 FLOOR_H = 3.5
 
 STAKEHOLDERS = ["state", "developer", "resident", "informal", "unknown"]
-SH_LABEL = {"state": "政府/公共", "developer": "开发商/资本", "resident": "居民",
-            "informal": "非正式(本数据无信号)", "unknown": "未标(无用途join)"}
+SH_LABEL = {"state": "State / Public", "developer": "Developer / Capital", "resident": "Residents",
+            "informal": "Informal (no signal in this dataset)", "unknown": "Unknown / Unmatched"}
 SH_COLOR = {"state": "#4a6fa5", "developer": "#c0654a", "resident": "#5a9367",
             "informal": "#c2a23c", "unknown": "#b8b8b8"}
 
