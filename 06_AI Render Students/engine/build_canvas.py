@@ -78,7 +78,7 @@ def build_geometry(slug, regimes=None):
     # 卫星底 = 全场景(study + 周边环),factor=1;local 相对 (ox,oy)
     sat, satext = None, None
     try:
-        sat, local = ws05.C.ground_sat(ox, oy, fmxx, fmxy, OUT / slug / "ground_scene.jpg", factor=1.0)
+        sat, local = ws05.C.ground_sat(ox, oy, fmxx, fmxy, OUT / slug / "ground_scene.jpg", factor=6.0)
         satext = [local[0], local[1], local[2], local[3]]        # ground_sat local 已相对 (ox,oy)
     except Exception as e:
         print("  卫星底跳过:", e)
@@ -129,7 +129,7 @@ button.acc{background:var(--accent);color:#fff;border-color:var(--accent);}
 def viewer_js(geom):
     return "const GEOM=%s;\n" % json.dumps(geom, separators=(",", ":")) + r"""
 const COL=GEOM.colors;
-let scene,cam,renderer,controls,ground,boundary,groups={},cur=GEOM.regimes[0],mode="massing",saved=[];
+let scene,cam,renderer,controls,ground,boundary,groups={},cur=GEOM.regimes[0],mode="massing",showOsm=true,saved=[];
 let matDepth,matNormal,edges=[],ctxMeshes=[],ctxEdges=[];
 const edgeMat=new THREE.LineBasicMaterial({color:0xffffff});   // canny:白色硬边
 function init(){
@@ -207,7 +207,7 @@ function styleMesh(m,massing,seg,canny){
 function applyMode(){
   const massing=(mode==="massing"), seg=(mode==="segmentation"), canny=(mode==="canny");
   scene.overrideMaterial = (mode==="depth")?matDepth : (mode==="normal")?matNormal : null;
-  if(ground) ground.visible = massing;                     // 只有 massing 显示卫星;条件图要干净底
+  if(ground) ground.visible = massing && showOsm;           // 只有 massing 可显示卫星;条件图要干净底
   if(boundary) boundary.visible = massing;                 // 红线只在 massing 显示
   // 背景:massing 浅灰,normal/seg 白,depth/canny 黑
   scene.background=new THREE.Color(massing?0xeef1f0:((mode==="normal"||seg)?0xffffff:0x000000));
@@ -222,6 +222,7 @@ function setRegime(name){cur=name; for(const k in groups)groups[k].visible=(k===
   document.querySelectorAll("[data-reg]").forEach(b=>b.classList.toggle("on",b.dataset.reg===name));
   document.getElementById("prm").textContent=GEOM.prompts?GEOM.prompts[name]:"";}
 function setMode(m){mode=m;applyMode();}
+function toggleOsm(){showOsm=!showOsm; applyMode(); document.getElementById("osmToggle").classList.toggle("on",showOsm);}
 // —— 导出 ——
 function dl(name){renderer.render(scene,cam);
   renderer.domElement.toBlob(bl=>{const a=document.createElement("a");a.href=URL.createObjectURL(bl);
@@ -242,6 +243,7 @@ async function exportAllSaved(){if(!saved.length){alert("先保存至少一个�
 window.addEventListener("DOMContentLoaded",()=>{init();
   document.querySelectorAll("[data-reg]").forEach(b=>b.onclick=()=>setRegime(b.dataset.reg));
   document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+  document.getElementById("osmToggle").onclick=toggleOsm;
   setRegime(cur);});
 """
 
@@ -270,6 +272,9 @@ HTML = """<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8">
     <button data-mode="canny">边缘 canny</button>
   </div>
   <div class="legend">%s</div>
+
+  <div class="grp">底图</div>
+  <button id="osmToggle" class="big on">OSM 底图</button>
 
   <div class="grp">角度</div>
   <button class="big acc" onclick="saveAngle()">保存当前角度</button>

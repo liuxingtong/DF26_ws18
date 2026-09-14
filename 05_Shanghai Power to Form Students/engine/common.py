@@ -479,7 +479,7 @@ def ground_sat(minx, miny, maxx, maxy, cache_png, factor=2.0):
     if cache_png.exists() and meta_p.exists():
         meta = _json.load(open(meta_p))
         # 只有 bounds 相符才复用(dict 新格式);旧格式(meta=list)或范围变了(加 context / 改 margin)→ 视为过期,重抓
-        if isinstance(meta, dict) and meta.get("bounds") == req:
+        if isinstance(meta, dict) and meta.get("bounds") == req and meta.get("factor", 1.0) == factor:
             return "data:image/jpeg;base64," + base64.b64encode(cache_png.read_bytes()).decode(), meta["local"]
     cx, cy = (minx + maxx) / 2, (miny + maxy) / 2
     hw, hh = (maxx - minx) / 2 * factor, (maxy - miny) / 2 * factor
@@ -495,7 +495,7 @@ def ground_sat(minx, miny, maxx, maxy, cache_png, factor=2.0):
     arr = img[:, :, :3] if (getattr(img, "ndim", 0) == 3 and img.shape[2] >= 3) else img
     cache_png.parent.mkdir(parents=True, exist_ok=True)
     Image.fromarray(arr).save(cache_png, "JPEG", quality=82)
-    _json.dump({"local": local, "bounds": req}, open(meta_p, "w"))       # 存 bounds 供下次比对失效
+    _json.dump({"local": local, "bounds": req, "factor": factor}, open(meta_p, "w"))       # 存 bounds 供下次比对失效
     return "data:image/jpeg;base64," + base64.b64encode(cache_png.read_bytes()).decode(), local
 
 
