@@ -1,0 +1,87 @@
+dataset: Dapuqiao Open Research Layers
+generated_at_utc: '2026-09-18T06:14:56+00:00'
+osm_base_timestamps:
+- '2026-09-18T06:13:21Z'
+overpass_endpoint: https://overpass-api.de/api/interpreter
+place_query: 打浦桥街道, 黄浦区, 上海市, 中国
+boundary_osm_relation: 12235958
+source: OpenStreetMap contributors
+source_url: https://www.openstreetmap.org/relation/12235958
+license: ODbL-1.0
+license_url: https://www.openstreetmap.org/copyright
+crs: EPSG:4326
+boundary_area_km2: 1.573924
+limitations:
+- OpenStreetMap completeness and tags vary by feature and date.
+- Only two public-space candidates were mapped in this OSM snapshot; coverage is incomplete.
+- The OSM boundary area is about 0.86% smaller than the legacy local boundary used
+  by site.yaml.
+- Public-space access and ownership have not been field verified.
+- These files are not official planning, cadastral, or heritage records.
+- Alley entrances are not represented as a separately verified layer.
+quality:
+  study_boundary:
+    features: 1
+    crs: EPSG:4326
+    empty_geometries: 0
+    null_geometries: 0
+    invalid_geometries: 0
+    duplicate_osm_keys: 0
+    geometry_types:
+    - Polygon
+    bounds:
+    - 121.4574087
+    - 31.2030929
+    - 121.4802155
+    - 31.2158231
+    null_names: 0
+    null_name_rate: 0.0
+  street_network:
+    features: 260
+    crs: EPSG:4326
+    empty_geometries: 0
+    null_geometries: 0
+    invalid_geometries: 0
+    duplicate_osm_keys: 0
+    geometry_types:
+    - LineString
+    - MultiLineString
+    bounds:
+    - 121.4574114
+    - 31.2031163
+    - 121.4802094
+    - 31.2158158
+    null_names: 115
+    null_name_rate: 0.442308
+  public_services:
+    features: 89
+    crs: EPSG:4326
+    empty_geometries: 0
+    null_geometries: 0
+    invalid_geometries: 0
+    duplicate_osm_keys: 0
+    geometry_types:
+    - Point
+    bounds:
+    - 121.4575669
+    - 31.2036619
+    - 121.4798531
+    - 31.2154532
+    null_names: 6
+    null_name_rate: 0.067416
+  public_space_candidates:
+    features: 2
+    crs: EPSG:4326
+    empty_geometries: 0
+    null_geometries: 0
+    invalid_geometries: 0
+    duplicate_osm_keys: 0
+    geometry_types:
+    - Point
+    bounds:
+    - 121.4663008
+    - 31.2068797
+    - 121.4742806
+    - 31.209327
+    null_names: 0
+    null_name_rate: 0.0
