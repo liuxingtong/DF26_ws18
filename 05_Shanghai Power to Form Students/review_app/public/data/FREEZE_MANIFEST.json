@@ -1,0 +1,20 @@
+{
+  "freeze_id": "dapuqiao-heritage-review-2026-09-27",
+  "generated_at": "2026-09-27T20:56:14+0800",
+  "timezone": "Asia/Shanghai",
+  "record_count": 16,
+  "included_in_optimization": 12,
+  "excluded_from_optimization": 4,
+  "unresolved_record_ids": ["HP-74", "HP-75", "HP-83", "HP-88"],
+  "hash_algorithm": "SHA-256",
+  "files": {
+    "buildings.geojson": "86063620882cbf4975a7be4083ece26f8085f44209665b1ab3d1ba6149a408ec",
+    "heritage_proxy.geojson": "91e833aea2c50da9b9d947939269a4829b397eb340fd85561c9029c530399969",
+    "public_spaces.geojson": "77e9e2eeec931a3bd7673c9d32be5a4a852ecd1176ec0539b5a17ecdda42914b",
+    "streets.geojson": "69e85114cb185f71dbc561c991fc36ba6814a0123824dddcbe625a5c4ea1e56c",
+    "zones.geojson": "8feeea47f8f181e372fa5ab1a35c83d8e433f362095d72ac2e2cada3586f3028",
+    "review_cases.json": "22fa8d3998d50d9e020cfe22fecc3db5a0de0dadc2531d2621e1f76b218b01f3"
+  },
+  "policy": "All official records remain in the evidence database. Records marked include_in_optimization=false are excluded from building-level optimization until their spatial extent is resolved.",
+  "secret_check": "No AMap API key is stored in this package."
+}

@@ -1,0 +1,1358 @@
+{
+  "generated_at": "2026-09-27T20:56:14+0800",
+  "coordinate_note": "AMap GCJ-02 results converted to WGS84 for local GeoJSON display.",
+  "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+  "reviews": [
+    {
+      "id": "HP-73",
+      "number": 73,
+      "name": "荣金大戏院旧址",
+      "address": "建国东路11号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国东路11号",
+      "amap_level": "门址",
+      "amap_candidate_count": 2,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "梨园坊",
+      "amap_aoi_area_m2": "8942.103578",
+      "location": [
+        121.47618638902335,
+        31.21561802882466
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌地理编码与建筑轮廓重合；名称检索未提供更可靠的独立 POI。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "1296"
+      ],
+      "candidates": [
+        {
+          "bid": "1296",
+          "distance_m": 0.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1294",
+          "distance_m": 5.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1295",
+          "distance_m": 9.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1298",
+          "distance_m": 13.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-74",
+      "number": 74,
+      "name": "恒昌里",
+      "address": "建国东路31弄",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国东路31弄",
+      "amap_level": "道路",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "梨园坊",
+      "amap_aoi_area_m2": "8942.103578",
+      "location": [
+        121.4759576361306,
+        31.215550426786486
+      ],
+      "compound": true,
+      "review_required": true,
+      "match_status": "manual_review",
+      "spatial_status": "unresolved",
+      "include_in_optimization": false,
+      "exclusion_reason": "历史里弄名称与现状更新项目名称发生漂移，无法仅凭高德判定原建筑范围。",
+      "evidence_confidence": "review",
+      "evidence_reason": "历史里弄名称与现状更新项目名称发生漂移，无法仅凭高德判定原建筑范围。",
+      "online_evidence": [
+        {
+          "title": "建国东路历史建筑图文记录",
+          "url": "https://blog.sina.com.cn/s/blog_5d1bdf480102vvtp.html",
+          "tier": "线索",
+          "note": "记录称恒昌里为建国东路17弄、16幢、建筑面积2084㎡，与官方名录的31弄存在门牌冲突。"
+        }
+      ],
+      "suggested_bids": [],
+      "candidates": [
+        {
+          "bid": "1295",
+          "distance_m": 0.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1296",
+          "distance_m": 14.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1294",
+          "distance_m": 14.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1293",
+          "distance_m": 15.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1290",
+          "distance_m": 25.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1279",
+          "distance_m": 26.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1292",
+          "distance_m": 28.3,
+          "stakeholder": "unknown",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1291",
+          "distance_m": 30.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1289",
+          "distance_m": 35.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1298",
+          "distance_m": 36.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1286",
+          "distance_m": 40.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1287",
+          "distance_m": 42.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-75",
+      "number": 75,
+      "name": "康益里",
+      "address": "建国东路39弄",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国东路39弄",
+      "amap_level": "住宅区",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "思家公寓",
+      "amap_aoi_area_m2": "464.049946",
+      "location": [
+        121.47566668501213,
+        31.215409688561916
+      ],
+      "compound": true,
+      "review_required": true,
+      "match_status": "manual_review",
+      "spatial_status": "unresolved",
+      "include_in_optimization": false,
+      "exclusion_reason": "历史名称未检出，现状 AOI 为思家公寓；需人工判断历史范围与现状建筑的关系。",
+      "evidence_confidence": "review",
+      "evidence_reason": "历史名称未检出，现状 AOI 为思家公寓；需人工判断历史范围与现状建筑的关系。",
+      "online_evidence": [
+        {
+          "title": "新民晚报《娘家康益里》",
+          "url": "https://www.sohu.com/a/605943141_121286085",
+          "tier": "媒体",
+          "note": "作者明确回忆建国东路39弄23号属于康益里，并称2021年前后仍面临动迁。"
+        },
+        {
+          "title": "建国东路历史建筑图文记录",
+          "url": "https://blog.sina.com.cn/s/blog_5d1bdf480102vvtp.html",
+          "tier": "线索",
+          "note": "记录康益里建于1936年，为31幢二层砖木建筑，建筑面积2040㎡。"
+        }
+      ],
+      "suggested_bids": [],
+      "candidates": [
+        {
+          "bid": "1292",
+          "distance_m": 0.0,
+          "stakeholder": "unknown",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1279",
+          "distance_m": 1.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1293",
+          "distance_m": 7.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1289",
+          "distance_m": 14.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1295",
+          "distance_m": 23.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1286",
+          "distance_m": 26.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1290",
+          "distance_m": 28.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1284",
+          "distance_m": 28.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1288",
+          "distance_m": 32.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1287",
+          "distance_m": 37.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1294",
+          "distance_m": 44.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1277",
+          "distance_m": 44.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-76",
+      "number": 76,
+      "name": "建国中路103弄18号住宅",
+      "address": "建国中路103弄18号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国中路103弄18号",
+      "amap_level": "门牌号",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "永理二小区西区",
+      "amap_aoi_area_m2": "2005.527067",
+      "location": [
+        121.46483882194441,
+        31.21117008578834
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌地理编码与最近建筑距离不超过 10m，预选最近建筑。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "596"
+      ],
+      "candidates": [
+        {
+          "bid": "596",
+          "distance_m": 1.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "1322",
+          "distance_m": 2.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "597",
+          "distance_m": 4.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "594",
+          "distance_m": 10.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "600",
+          "distance_m": 19.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        }
+      ]
+    },
+    {
+      "id": "HP-77",
+      "number": 77,
+      "name": "杨度旧居",
+      "address": "建国中路155弄13号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国中路155弄13号",
+      "amap_level": "门址",
+      "amap_candidate_count": 1,
+      "amap_poi_name": "杨度旧居",
+      "amap_poi_address": "建国中路与瑞金二路交叉口东120米",
+      "amap_aoi_name": "上海田子坊",
+      "amap_aoi_area_m2": "16979.888593",
+      "location": [
+        121.46346178709013,
+        31.210435009089636
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌地理编码与最近建筑距离不超过 10m，预选最近建筑。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "560"
+      ],
+      "candidates": [
+        {
+          "bid": "560",
+          "distance_m": 1.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "545",
+          "distance_m": 5.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "562",
+          "distance_m": 10.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "547",
+          "distance_m": 10.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "563",
+          "distance_m": 14.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "568",
+          "distance_m": 18.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "583",
+          "distance_m": 19.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        }
+      ]
+    },
+    {
+      "id": "HP-78",
+      "number": 78,
+      "name": "汪亚尘旧居",
+      "address": "建国中路155弄15号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国中路155弄15号",
+      "amap_level": "门牌号",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "上海田子坊",
+      "amap_aoi_area_m2": "16979.888593",
+      "location": [
+        121.46348987374115,
+        31.21039209908945
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌地理编码与最近建筑距离不超过 10m，预选最近建筑。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "545"
+      ],
+      "candidates": [
+        {
+          "bid": "545",
+          "distance_m": 0.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "560",
+          "distance_m": 6.4,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "547",
+          "distance_m": 8.4,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "562",
+          "distance_m": 9.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "563",
+          "distance_m": 14.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "542",
+          "distance_m": 15.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-79",
+      "number": 79,
+      "name": "建国中路155弄25号住宅",
+      "address": "建国中路155弄25号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国中路155弄25号",
+      "amap_level": "门址",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "上海田子坊",
+      "amap_aoi_area_m2": "16979.888593",
+      "location": [
+        121.46366741487593,
+        31.21020462833758
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌地理编码与最近建筑距离不超过 10m，预选最近建筑。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "541"
+      ],
+      "candidates": [
+        {
+          "bid": "541",
+          "distance_m": 2.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "543",
+          "distance_m": 2.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "419",
+          "distance_m": 5.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "542",
+          "distance_m": 8.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "547",
+          "distance_m": 11.4,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "417",
+          "distance_m": 12.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "545",
+          "distance_m": 15.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "420",
+          "distance_m": 17.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-80",
+      "number": 80,
+      "name": "瑞金二路215号住宅",
+      "address": "瑞金二路215号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区瑞金二路215号",
+      "amap_level": "门址",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "黄浦区海华小学分校",
+      "amap_aoi_area_m2": "1685.944384",
+      "location": [
+        121.46243478653057,
+        31.210270565295126
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌地理编码与最近建筑距离不超过 10m，预选最近建筑。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "554"
+      ],
+      "candidates": [
+        {
+          "bid": "554",
+          "distance_m": 0.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "555",
+          "distance_m": 3.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "557",
+          "distance_m": 9.4,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "408",
+          "distance_m": 13.9,
+          "stakeholder": "state",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "559",
+          "distance_m": 14.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "552",
+          "distance_m": 15.8,
+          "stakeholder": "state",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "406",
+          "distance_m": 18.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-81",
+      "number": 81,
+      "name": "合丰帽厂旧址",
+      "address": "泰康路248弄48-50号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区泰康路248弄48-2号",
+      "amap_level": "门址",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "上海田子坊",
+      "amap_aoi_area_m2": "16979.888593",
+      "location": [
+        121.46415683507239,
+        31.21058166298014
+      ],
+      "compound": true,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌为 48–50 号且点位落在田子坊 AOI 内，预选两个与门牌点重合的建筑轮廓。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "566",
+        "569"
+      ],
+      "candidates": [
+        {
+          "bid": "569",
+          "distance_m": 0.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "566",
+          "distance_m": 0.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "584",
+          "distance_m": 7.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "586",
+          "distance_m": 11.4,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "548",
+          "distance_m": 12.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "561",
+          "distance_m": 13.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "583",
+          "distance_m": 17.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "567",
+          "distance_m": 19.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "564",
+          "distance_m": 23.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "565",
+          "distance_m": 26.4,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "576",
+          "distance_m": 27.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        },
+        {
+          "bid": "546",
+          "distance_m": 28.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": true
+        }
+      ]
+    },
+    {
+      "id": "HP-82",
+      "number": 82,
+      "name": "勤乐邨",
+      "address": "泰康路316弄",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区泰康路316弄",
+      "amap_level": "道路",
+      "amap_candidate_count": 1,
+      "amap_poi_name": "勤乐邨",
+      "amap_poi_address": "泰康路316弄1-8号,泰康路332弄1-4号",
+      "amap_aoi_name": "勤乐村",
+      "amap_aoi_area_m2": "862.043673",
+      "location": [
+        121.46283203096196,
+        31.209311997900272
+      ],
+      "compound": true,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "检出同名勤乐邨 POI，逆地理编码 AOI 面积约 862㎡；预选 AOI 中心附近两栋建筑。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "359",
+        "371"
+      ],
+      "candidates": [
+        {
+          "bid": "359",
+          "distance_m": 2.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "371",
+          "distance_m": 2.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "357",
+          "distance_m": 17.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "376",
+          "distance_m": 18.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "374",
+          "distance_m": 19.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "358",
+          "distance_m": 21.4,
+          "stakeholder": "unknown",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "360",
+          "distance_m": 27.5,
+          "stakeholder": "developer",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "378",
+          "distance_m": 27.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "375",
+          "distance_m": 28.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "373",
+          "distance_m": 34.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "398",
+          "distance_m": 35.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "381",
+          "distance_m": 38.4,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-83",
+      "number": 83,
+      "name": "海会寺旧址",
+      "address": "丽园路565号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区丽园路565号",
+      "amap_level": "门址",
+      "amap_candidate_count": 2,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "丽园公园",
+      "amap_aoi_area_m2": "15544.125996",
+      "location": [
+        121.47573943722159,
+        31.209446740326875
+      ],
+      "compound": true,
+      "review_required": true,
+      "match_status": "manual_review",
+      "spatial_status": "unresolved",
+      "include_in_optimization": false,
+      "exclusion_reason": "门牌点落在丽园公园 AOI 内，旧址可能已不存在，不能强行匹配现状建筑。",
+      "evidence_confidence": "review",
+      "evidence_reason": "门牌点落在丽园公园 AOI 内，旧址可能已不存在，不能强行匹配现状建筑。",
+      "online_evidence": [
+        {
+          "title": "海会寺旧址现场与地名志摘录",
+          "url": "https://www.meipian.cn/42b3t2cx",
+          "tier": "现场线索",
+          "note": "2017与2022年的现场记录指向丽园路565号，称南侧大殿仍存并已挂牌。"
+        },
+        {
+          "title": "斜土路记忆中的海会寺",
+          "url": "https://www.sohu.com/a/247115306_798813",
+          "tier": "地方志线索",
+          "note": "文章援引地方志称寺址为丽园路567号，并指出565-2仍有部分建筑，形成门牌差异。"
+        }
+      ],
+      "suggested_bids": [],
+      "candidates": [
+        {
+          "bid": "846",
+          "distance_m": 20.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "844",
+          "distance_m": 20.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "845",
+          "distance_m": 35.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "843",
+          "distance_m": 38.9,
+          "stakeholder": "developer",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "842",
+          "distance_m": 41.3,
+          "stakeholder": "developer",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "840",
+          "distance_m": 41.5,
+          "stakeholder": "developer",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-84",
+      "number": 84,
+      "name": "漫画会旧址",
+      "address": "黄陂南路847弄9号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区黄陂南路847",
+      "amap_level": "门牌号",
+      "amap_candidate_count": 2,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "中海国际中心",
+      "amap_aoi_area_m2": "19439.440679",
+      "location": [
+        121.47309745361537,
+        31.21326867309551
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "medium",
+      "evidence_reason": "门牌可定位至最近建筑，但历史名称未被 POI 独立印证，按中等置信度预选。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "1119"
+      ],
+      "candidates": [
+        {
+          "bid": "1119",
+          "distance_m": 6.3,
+          "stakeholder": "developer",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-85",
+      "number": 85,
+      "name": "上海美术专科学校旧址",
+      "address": "顺昌路560号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区顺昌路560号",
+      "amap_level": "门址",
+      "amap_candidate_count": 2,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "顺昌路550弄小区",
+      "amap_aoi_area_m2": "3178.216084",
+      "location": [
+        121.4749675170832,
+        31.21379752829391
+      ],
+      "compound": true,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "medium",
+      "evidence_reason": "门牌点与一栋建筑轮廓重合；历史名称未被 POI 独立印证，按中等置信度预选。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "1196"
+      ],
+      "candidates": [
+        {
+          "bid": "1196",
+          "distance_m": 0.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1193",
+          "distance_m": 15.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1184",
+          "distance_m": 16.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1203",
+          "distance_m": 18.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1197",
+          "distance_m": 19.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1202",
+          "distance_m": 20.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1182",
+          "distance_m": 22.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1187",
+          "distance_m": 22.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1201",
+          "distance_m": 25.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1218",
+          "distance_m": 27.3,
+          "stakeholder": "state",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1243",
+          "distance_m": 31.0,
+          "stakeholder": "unknown",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1191",
+          "distance_m": 32.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-86",
+      "number": 86,
+      "name": "天祥里",
+      "address": "永年路149弄",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区永年路149弄",
+      "amap_level": "道路",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "永年路149弄小区",
+      "amap_aoi_area_m2": "4188.399338",
+      "location": [
+        121.47428732953091,
+        31.213277910058864
+      ],
+      "compound": true,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "逆地理编码命中永年路149弄小区 AOI，按 AOI 面积与中心距离预选建筑组。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "1181",
+        "1180",
+        "1168",
+        "1167",
+        "1183",
+        "1170",
+        "1178",
+        "1176"
+      ],
+      "candidates": [
+        {
+          "bid": "1181",
+          "distance_m": 1.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1180",
+          "distance_m": 4.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1168",
+          "distance_m": 11.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1167",
+          "distance_m": 14.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1183",
+          "distance_m": 17.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1170",
+          "distance_m": 21.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1178",
+          "distance_m": 22.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1176",
+          "distance_m": 28.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1198",
+          "distance_m": 37.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1199",
+          "distance_m": 38.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1195",
+          "distance_m": 40.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1182",
+          "distance_m": 41.0,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-87",
+      "number": 87,
+      "name": "佛化祗园法会旧址",
+      "address": "永年路78弄3号",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区永年路78",
+      "amap_level": "门牌号",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "梨园坊",
+      "amap_aoi_area_m2": "8942.103578",
+      "location": [
+        121.47576911793476,
+        31.214313493565662
+      ],
+      "compound": false,
+      "review_required": false,
+      "match_status": "preannotated",
+      "spatial_status": "preannotated",
+      "include_in_optimization": true,
+      "exclusion_reason": null,
+      "evidence_confidence": "high",
+      "evidence_reason": "门牌地理编码与最近建筑距离不超过 10m，预选最近建筑。",
+      "online_evidence": [],
+      "suggested_bids": [
+        "1220"
+      ],
+      "candidates": [
+        {
+          "bid": "1220",
+          "distance_m": 7.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1221",
+          "distance_m": 11.3,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1215",
+          "distance_m": 11.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1224",
+          "distance_m": 19.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    },
+    {
+      "id": "HP-88",
+      "number": 88,
+      "name": "安顺里",
+      "address": "建国东路143弄",
+      "official_source": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "amap_formatted_address": "上海市黄浦区建国东路143弄",
+      "amap_level": "道路",
+      "amap_candidate_count": 1,
+      "amap_poi_name": null,
+      "amap_poi_address": null,
+      "amap_aoi_name": "顺昌路504弄小区",
+      "amap_aoi_area_m2": "10431.644928",
+      "location": [
+        121.47424610496249,
+        31.21432229922438
+      ],
+      "compound": true,
+      "review_required": true,
+      "match_status": "manual_review",
+      "spatial_status": "unresolved",
+      "include_in_optimization": false,
+      "exclusion_reason": "逆地理编码返回的现状小区名称与历史名称、门牌关系不一致，保留人工复核。",
+      "evidence_confidence": "review",
+      "evidence_reason": "逆地理编码返回的现状小区名称与历史名称、门牌关系不一致，保留人工复核。",
+      "online_evidence": [
+        {
+          "title": "上海市黄浦区房屋征收决定",
+          "url": "https://www.shanghai.gov.cn/gwk/search/content/bf584fc1728a46779e00dd9b3009a69c",
+          "tier": "政府",
+          "note": "官方清单将建国东路143弄1—83号及169弄全部列入68街坊征收范围。"
+        },
+        {
+          "title": "建国东路历史建筑图文记录",
+          "url": "https://blog.sina.com.cn/s/blog_5d1bdf480102vvtp.html",
+          "tier": "线索",
+          "note": "记录称安顺里跨143弄与169弄，为87幢二层砖木建筑，建筑面积8534㎡。"
+        }
+      ],
+      "suggested_bids": [],
+      "candidates": [
+        {
+          "bid": "1246",
+          "distance_m": 0.2,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1209",
+          "distance_m": 2.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1249",
+          "distance_m": 8.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1244",
+          "distance_m": 8.9,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1245",
+          "distance_m": 9.1,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1242",
+          "distance_m": 20.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1250",
+          "distance_m": 23.7,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1211",
+          "distance_m": 23.8,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1261",
+          "distance_m": 35.5,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1199",
+          "distance_m": 35.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1204",
+          "distance_m": 36.4,
+          "stakeholder": "unknown",
+          "in_existing_proxy": false
+        },
+        {
+          "bid": "1256",
+          "distance_m": 38.6,
+          "stakeholder": "resident",
+          "in_existing_proxy": false
+        }
+      ]
+    }
+  ]
+}
