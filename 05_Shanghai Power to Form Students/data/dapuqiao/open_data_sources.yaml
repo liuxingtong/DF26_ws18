@@ -13,12 +13,19 @@ crs: EPSG:4326
 boundary_area_km2: 1.573924
 limitations:
 - OpenStreetMap completeness and tags vary by feature and date.
-- Only two public-space candidates were mapped in this OSM snapshot; coverage is incomplete.
+- Only two public-space candidates were mapped in this OSM snapshot; coverage is incomplete
+  and neither is used by the optimization objective.
 - The OSM boundary area is about 0.86% smaller than the legacy local boundary used
   by site.yaml.
-- Public-space access and ownership have not been field verified.
+- Liyuan Park is verified as a context-level public park through AMap and government
+  sources; the current OSM polygon is research geometry, not a surveyed or legal boundary.
+- The latest official schedule located is the historical 2021 listing (05:00-21:00);
+  current whole-park hours remain unverified.
+- Baiyulan Square remains an unverified and excluded OSM candidate; its public access
+  and ownership are not established.
 - These files are not official planning, cadastral, or heritage records.
-- Alley entrances are not represented as a separately verified layer.
+- The alley layer is non-exhaustive: gate 1 has an official narrative cross-check,
+  while gate 2 is an OSM-only frozen candidate; neither enters optimization.
 quality:
   study_boundary:
     features: 1
@@ -77,11 +84,28 @@ quality:
     invalid_geometries: 0
     duplicate_osm_keys: 0
     geometry_types:
-    - Point
+    - Polygon
     bounds:
-    - 121.4663008
-    - 31.2068797
-    - 121.4742806
-    - 31.209327
+    - 121.4657517
+    - 31.2062964
+    - 121.4758566
+    - 31.2097813
     null_names: 0
     null_name_rate: 0.0
+public_space_refreshed_at_utc: '2026-09-28T00:11:42+00:00'
+public_space_osm_base_timestamp: '2026-09-28T00:10:20Z'
+supplemental_update_records:
+- date: '2026-09-27'
+  scope: heritage review and formal-input freeze
+  records:
+  - ../../review_app/public/data/review_cases.json
+  - ../../review_app/public/data/FREEZE_MANIFEST.json
+  - formal_input_quality.json
+  - ../../optimization/research_assumptions.yaml
+- date: '2026-09-28'
+  scope: public-space polygon refresh, alley-entrance evidence and unresolved-gap freeze
+  records:
+  - public_space_verification.json
+  - alley_entrance_verification.json
+  - online_gap_freeze.json
+source_archive: SOURCE_ARCHIVE.json

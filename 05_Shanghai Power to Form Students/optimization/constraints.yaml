@@ -1,0 +1,46 @@
+constraints:
+  geometry_validity:
+    violation_code: geometry
+    severity: blocking
+    handling: reject_candidate
+  study_boundary:
+    violation_code: boundary
+    severity: blocking
+    handling: reject_candidate
+    tolerance_m: 0.05
+  heritage_unchanged:
+    violation_code: heritage
+    severity: blocking
+    handling: reject_candidate
+  height_limit:
+    violation_code: height_limit
+    severity: blocking
+    prevention: operator_clamp
+    handling: reject_candidate
+  zone_far:
+    violation_code: zone_far
+    severity: blocking
+    prevention: proportional_capacity_scale
+    handling: reject_candidate
+  zone_coverage:
+    violation_code: zone_coverage
+    severity: blocking
+    prevention: footprint_subset_operation
+    handling: reject_candidate
+  residential_retention:
+    violation_code: residential_retention
+    severity: blocking
+    handling: reject_candidate
+  new_overlap:
+    violation_code: new_overlap
+    severity: blocking
+    prevention: footprint_subset_operation
+    handling: reject_candidate
+    added_area_tolerance_m2: 0.5
+  change_scope:
+    violation_code: change_scope
+    severity: blocking
+    handling: reject_candidate
+    source: scenario.implementation.maximum_changed_building_ratio
+
+policy_note: 算子先执行声明的预防性截断、缩放或子集操作；任何检查后仍存在的 blocking 违规都不回退为伪可行方案，而是淘汰整个候选。

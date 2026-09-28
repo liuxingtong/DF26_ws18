@@ -4,3 +4,11 @@
 # 大纲 md（过程稿）
 教学大纲_*.md
 教學大綱_*.md
+
+# 单轮多目标优化运行产物（配置和代码追踪，按时间戳生成的结果不入库）
+out/*/optimization/
+out/*/calibration/
+out/*/experiments/
+out/*/method_comparison/
+out/*/formal_preflight/
+out/*/scenario_suites/

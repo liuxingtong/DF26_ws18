@@ -250,7 +250,11 @@ def main():
     clean_geojson(streets, OUT / "streets.geojson", street_cols)
     clean_geojson(proxy, OUT / "heritage_proxy.geojson", ["bid", "review_status"])
     public = gpd.read_file(DATA / "public_space_candidates.geojson")
-    clean_geojson(public, OUT / "public_spaces.geojson", ["name", "research_status"])
+    clean_geojson(
+        public,
+        OUT / "public_spaces.geojson",
+        ["name", "research_status", "include_in_objective"],
+    )
     payload = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "coordinate_note": "AMap GCJ-02 results converted to WGS84 for local GeoJSON display.",

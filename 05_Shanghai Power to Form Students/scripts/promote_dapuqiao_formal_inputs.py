@@ -21,6 +21,7 @@ WS05 = Path(__file__).resolve().parents[1]
 DATA = WS05 / "data" / "dapuqiao"
 DRAFTS = DATA / "drafts"
 REVIEW = WS05 / "review_app" / "public" / "data" / "review_cases.json"
+REVIEW_MANIFEST = WS05 / "review_app" / "public" / "data" / "FREEZE_MANIFEST.json"
 FREEZE_DATE = date(2026, 9, 27).isoformat()
 
 
@@ -70,6 +71,10 @@ def build_controls(zones: gpd.GeoDataFrame) -> pd.DataFrame:
 
 
 def build_heritage(buildings: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    manifest = json.loads(REVIEW_MANIFEST.read_text(encoding="utf-8"))
+    expected_review_hash = manifest.get("files", {}).get("review_cases.json")
+    if expected_review_hash != sha256(REVIEW):
+        raise ValueError("review_cases.json does not match its frozen SHA-256 manifest")
     reviews = json.loads(REVIEW.read_text(encoding="utf-8"))["reviews"]
     included = [row for row in reviews if row.get("include_in_optimization")]
     unresolved = [row for row in reviews if not row.get("include_in_optimization")]

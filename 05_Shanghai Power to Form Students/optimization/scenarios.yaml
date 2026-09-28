@@ -1,0 +1,68 @@
+scenarios:
+  tourism_capture:
+    id: tourism_capture
+    label: 旅游流量资本主导
+    description: 在保护历史对象和居民住宅的前提下，允许可更新商业建筑获得较高的容量增量，并要求一部分更新同时改善临街开放空间。
+    source_status: research_assumption
+    demand: {commercial_growth: 0.85, visitor_pressure: 0.85, public_space_demand: 0.45}
+    defaults: {height_limit_m: 36.0, max_far: 3.20, max_coverage_ratio: 0.65, minimum_residential_retention: 0.90}
+    implementation: {maximum_changed_zone_ratio: 0.45, maximum_changed_building_ratio: 0.30}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [resident, developer]}
+      maximum_intensity: {densify: 1.0, open_ground: 0.55}
+
+  everyday_life_first:
+    id: everyday_life_first
+    label: 居民安全与日常生活优先
+    description: 冻结居民住宅与历史对象，只允许外围可更新商业建筑进行温和调整，重点改善通行和临街开放空间。
+    source_status: research_assumption
+    demand: {commercial_growth: 0.25, visitor_pressure: 0.45, public_space_demand: 0.85}
+    defaults: {height_limit_m: 30.0, max_far: 2.80, max_coverage_ratio: 0.55, minimum_residential_retention: 0.98}
+    implementation: {maximum_changed_zone_ratio: 0.25, maximum_changed_building_ratio: 0.15}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [developer]}
+      maximum_intensity: {densify: 0.25, open_ground: 0.85}
+
+  heritage_micro_economy:
+    id: heritage_micro_economy
+    label: 遗产与小商户共生
+    description: 严格冻结历史代理和居民住宅，以低强度、少量更新模拟可更新商业空间的微改造条件；微租赁和业态配额暂作为后续非形态评价指标。
+    source_status: research_assumption
+    demand: {commercial_growth: 0.45, visitor_pressure: 0.40, public_space_demand: 0.65}
+    defaults: {height_limit_m: 24.0, max_far: 2.50, max_coverage_ratio: 0.55, minimum_residential_retention: 1.00}
+    implementation: {maximum_changed_zone_ratio: 0.20, maximum_changed_building_ratio: 0.12}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [developer]}
+      maximum_intensity: {densify: 0.20, open_ground: 0.50}
+      deferred_indicators: [affordable_micro_units, local_service_frontage, cultural_space_ratio]
+
+  negotiated_24h_alley:
+    id: negotiated_24h_alley
+    label: 24小时协商弄堂
+    description: 把全天候协商所需的消防、通行和夜间归还空间视为形态前提，以较强的地面释放和有限容量调整生成候选方案；时段运营规则单独记录，不伪装成建筑形态。
+    source_status: research_assumption
+    demand: {commercial_growth: 0.50, visitor_pressure: 0.75, public_space_demand: 0.95}
+    defaults: {height_limit_m: 30.0, max_far: 2.80, max_coverage_ratio: 0.52, minimum_residential_retention: 0.98}
+    implementation: {maximum_changed_zone_ratio: 0.30, maximum_changed_building_ratio: 0.18}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [resident, developer]}
+      maximum_intensity: {densify: 0.35, open_ground: 1.0}
+      operational_rules: [crowd_valve, night_reversion]
+
+  # Backward-compatible alias used by earlier commands and notebooks.
+  dapuqiao_tourism_livability:
+    id: dapuqiao_tourism_livability
+    label: 打浦桥旅游增长与日常生活保护（旧版共同任务）
+    description: 旧版单情景实验，仅保留用于复现实验；平台不再把它当作四情景结果。
+    source_status: research_assumption
+    demand: {commercial_growth: 0.20, visitor_pressure: 0.75, public_space_demand: 0.65}
+    defaults: {height_limit_m: 36.0, max_far: 3.0, max_coverage_ratio: 0.60, minimum_residential_retention: 0.80}
+    implementation: {maximum_changed_zone_ratio: 0.40, maximum_changed_building_ratio: 0.30}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [resident, developer], open_ground: [resident, developer]}
+      maximum_intensity: {densify: 1.0, open_ground: 1.0}

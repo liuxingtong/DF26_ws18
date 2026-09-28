@@ -1,0 +1,33 @@
+operators:
+  noop:
+    label: 保持现状
+    action: preserve
+    intensity: {min: 0.0, max: 0.0}
+    expected_effect: {height: unchanged, footprint: unchanged, gfa: unchanged}
+    required_checks: []
+
+  densify:
+    label: 合规增加高度与容量
+    action: increase_development_capacity
+    intensity: {min: 0.0, max: 1.0}
+    parameters:
+      maximum_height_gain_ratio: 0.30
+      capacity_allocation: proportional_to_requested_gfa
+    eligibility:
+      heritage: false
+      editable: true
+    expected_effect: {height: increase_within_zone_headroom, footprint: unchanged, gfa: increase}
+    required_checks: [geometry, boundary, heritage, height_limit, far, residential_retention]
+
+  open_ground:
+    label: 缩减建筑占地并释放地面
+    action: release_street_connected_ground
+    intensity: {min: 0.0, max: 1.0}
+    parameters:
+      minimum_footprint_ratio: 0.75
+      compensate_gfa: true
+    eligibility:
+      heritage: false
+      editable: true
+    expected_effect: {height: increase_limited, footprint: decrease, gfa: approximately_conserved}
+    required_checks: [geometry, boundary, heritage, height_limit, far, coverage, residential_retention]

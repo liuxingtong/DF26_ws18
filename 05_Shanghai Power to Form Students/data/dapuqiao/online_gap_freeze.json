@@ -1,0 +1,82 @@
+{
+  "freeze_date": "2026-09-28",
+  "purpose": "Register gaps that remained unresolved after targeted online research so unsupported values cannot enter the paper experiment.",
+  "summary": {
+    "items_reviewed": 5,
+    "partially_enriched_then_frozen": 2,
+    "frozen_without_model_use": 3,
+    "new_proxy_variables_added": 0
+  },
+  "items": [
+    {
+      "id": "liyuan_current_legal_boundary",
+      "status": "partially_enriched_then_frozen",
+      "added": "Current OSM way polygon, version and timestamp as research geometry.",
+      "frozen": "Surveyed or legal ownership boundary and area.",
+      "reason": "No authoritative cadastral or surveyed polygon was located; the OSM polygon is not a legal boundary.",
+      "model_use": "excluded"
+    },
+    {
+      "id": "liyuan_current_opening_hours",
+      "status": "partially_enriched_then_frozen",
+      "added": "Official 2021 published schedule of 05:00-21:00 and a 2025 official shared-lawn reference.",
+      "frozen": "Current 2026 whole-park opening hours.",
+      "reason": "The most recent located official page confirms a 2025 program but does not publish current whole-park hours.",
+      "model_use": "excluded"
+    },
+    {
+      "id": "tianzifang_exhaustive_entrance_inventory",
+      "status": "frozen_without_model_use",
+      "added": "Gate 1 official narrative cross-check and two OSM research points.",
+      "frozen": "Exhaustive entrance inventory, surveyed coordinates, schedules and capacities.",
+      "reason": "The official sanitation contract defines an operational lane scope, not a surveyed entrance inventory.",
+      "model_use": "excluded"
+    },
+    {
+      "id": "unresolved_heritage_building_boundaries",
+      "status": "frozen_without_model_use",
+      "added": "Official addresses reconfirmed for 恒昌里、康益里、海会寺旧址、安顺里.",
+      "frozen": "Building-level polygons for the four unresolved records.",
+      "reason": "Official address evidence does not resolve current building footprints amid ambiguous extents, demolition or name drift.",
+      "model_use": "excluded"
+    },
+    {
+      "id": "uniform_heritage_setback_distance",
+      "status": "frozen_without_model_use",
+      "added": "Applicable municipal rules were reviewed.",
+      "frozen": "Any invented universal numeric heritage buffer or setback.",
+      "reason": "Municipal rules defer to approved object-specific protection/control ranges, detailed planning or site analysis rather than supplying one universal distance.",
+      "model_use": "not_created"
+    }
+  ],
+  "sources": [
+    {
+      "title": "2021年城市公园延长开放名单",
+      "url": "https://lhsr.sh.gov.cn/cmsres/99/99d8041e933d40259d86d3a556daeb12/051e89e66f8b0d8cfa9e00e63822dbfc.pdf"
+    },
+    {
+      "title": "2025年黄浦区公园共享草坪试点",
+      "url": "https://lhsr.sh.gov.cn/ywdt/20250915/c44b20ec-3822-4053-a336-65f2cd27a29b.html"
+    },
+    {
+      "title": "畅游田子坊",
+      "url": "https://mzj.sh.gov.cn/lnb-lyxx/20201215/c866c6e45002465aae7880724081d3cf.html"
+    },
+    {
+      "title": "田子坊保洁费用（环卫保洁2025）合同",
+      "url": "https://jpg.zfcg.sh.gov.cn/sh-gov-open-doc/1035IC/86b57ec4-2392-441c-8af3-8e20b0305ab3.pdf"
+    },
+    {
+      "title": "黄浦区第二批文物保护点公布名单",
+      "url": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf"
+    },
+    {
+      "title": "上海市历史文化风貌区和优秀历史建筑保护条例",
+      "url": "https://ghzyj.sh.gov.cn/nw2521/20231011/3ebd9e6592054f96ad79651107485914.html"
+    },
+    {
+      "title": "上海市城市规划管理技术规定",
+      "url": "https://www.shanghai.gov.cn/xxzfgzwj/20210608/7c162f6f13f64d9ba26f21db7a11503b.html"
+    }
+  ]
+}

@@ -65,15 +65,39 @@
     "invalid_geometries": 0,
     "duplicate_osm_keys": 0,
     "geometry_types": [
-      "Point"
+      "Polygon"
     ],
     "bounds": [
-      121.4663008,
-      31.2068797,
-      121.4742806,
-      31.209327
+      121.4657517,
+      31.2062964,
+      121.4758566,
+      31.2097813
     ],
     "null_names": 0,
-    "null_name_rate": 0.0
+    "null_name_rate": 0.0,
+    "research_status_counts": {
+      "candidate_unverified_excluded": 1,
+      "verified_public_park_context": 1
+    },
+    "included_in_objective": 0,
+    "verification_date": "2026-09-28"
+  },
+  "alley_entrances": {
+    "features": 2,
+    "crs": "EPSG:4326",
+    "empty_geometries": 0,
+    "null_geometries": 0,
+    "invalid_geometries": 0,
+    "geometry_types": [
+      "Point"
+    ],
+    "research_status_counts": {
+      "verified_research_entrance": 1,
+      "osm_candidate_unverified_frozen": 1
+    },
+    "included_in_optimization": 0,
+    "included_in_objective": 0,
+    "exhaustive_inventory": false,
+    "verification_date": "2026-09-28"
   }
 }

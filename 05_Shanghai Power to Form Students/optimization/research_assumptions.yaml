@@ -1,0 +1,76 @@
+profile:
+  id: dapuqiao_v1
+  label: 打浦桥研究假设 v1
+  status: research_assumption
+  statutory_planning_result: false
+  frozen_on: 2026-09-18
+
+spatial_inputs:
+  study_boundary:
+    rule: 使用仓库中的打浦桥 OSM 研究边界
+    evidence_class: reproducible_open_data
+  intervention_zones:
+    rule: 使用道路缓冲带切分形成的 38 个道路围合单元
+    evidence_class: derived_research_assumption
+  unmatched_buildings:
+    count_at_freeze: 32
+    rule: 保留在现状模型中，但设为不可编辑背景，不强行并入最近单元
+    evidence_class: conservative_research_assumption
+
+heritage_constraints:
+  name: 黄浦区第二批文物保护点建筑级冻结匹配
+  official_records_in_scope: 16
+  records_with_frozen_building_match: 12
+  protected_building_footprints: 21
+  unresolved_records_excluded: [HP-74, HP-75, HP-83, HP-88]
+  rule: heritage_buildings.geojson 中的建筑不可拆除、移动、缩小首层或增高
+  evidence_class: official_record_plus_reviewed_geocoded_building_match
+  limitation: 建筑轮廓是论文实验的冻结研究匹配，不是法律意义上的保护边界；4 条范围未决记录不进入优化
+
+planning_controls:
+  baseline_rule: 现状高度、容积率和覆盖率是每个单元控制值的下限，避免把现有合法形态误判为违规
+  provisional_defaults:
+    height_limit_m: 36.0
+    max_far: 3.0
+    max_coverage_ratio: 0.60
+    minimum_residential_retention: 0.80
+  evidence_class: provisional_common_sense_assumption
+  limitation: 暂未获得覆盖全部 38 个研究单元的逐地块法定控规指标，以上数值只用于方法实验和敏感性分析
+  official_adjustment_reference:
+    public_open_space_floor_area_increase_ratio: 0.15
+    height_increase_at_or_below_50m_m: 5.0
+    height_increase_above_50m_ratio: 0.10
+    height_increase_above_50m_cap_m: 10.0
+    use: 仅作为敏感性分析边界的参考，不直接宣称为所有地块的建设权
+
+objective_measurement:
+  source: optimization/objectives.yaml
+  street_access_buffer_m: 5.0
+  rule: 四情景与传统参数基线固定使用同一目标测量口径，不随治理情景变化
+  epsilon: {residential_disruption: 0.001, development_capacity: 0.0005, street_connected_released_ground: 0.00005}
+  status: confirmed_research_assumption
+
+sources:
+  - id: huangpu_tianzifang_2023
+    title: 黄浦区田子坊地区综合管理办法
+    issuer: 上海市黄浦区人民政府
+    document_number: 黄府规〔2023〕3号
+    effective_period: 2023-03-12/2028-03-11
+    url: https://www.shhuangpu.gov.cn/uploadfile/67df7dac-a401-4334-adb0-727f73943994/%E9%BB%84%E5%BA%9C%E8%A7%84%E3%80%902023%E3%80%913.pdf
+    used_for: 田子坊范围、特色建筑保护、有机更新、微更新、利益表达与商居沟通
+  - id: shanghai_detailed_plan_2020
+    title: 上海市详细规划实施深化管理规定
+    issuer: 上海市规划和自然资源局
+    document_number: 沪规划资源详〔2020〕503号
+    url: https://ghzyj.sh.gov.cn/nw2510/20221108/21a1f33a1a5d4389832527ba4b84e890.html
+    used_for: 容积率、高度、公共开放空间及现状用地调整条件的参考边界
+  - id: huangpu_unit_plan_2020_2035
+    title: 上海市黄浦区单元规划（2020—2035）
+    issuer: 上海市规划和自然资源局、黄浦区人民政府
+    url: https://ghzyj.sh.gov.cn/ghjh/20220130/901091f009c94f99b6a8559b26fc80d1.html
+    used_for: 上位规划背景；不能替代逐地块控制性详细规划
+  - id: shanghai_historic_buildings
+    title: 上海市优秀历史建筑名录
+    issuer: 上海市房屋管理局
+    url: https://fgj.sh.gov.cn/yxlsjz/index.html
+    used_for: 后续逐栋核对；当前版本尚未完成地址到建筑几何的可靠关联

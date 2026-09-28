@@ -14,5 +14,9 @@ pyproj           # 卫星重投影
 pillow           # 卫星底图存 JPEG
 plotly           # 阶段 C 的浏览器可拖动 3D（matplotlib 3D 不需要它)
 
+# 单轮多目标优化框架（当前先用可复现随机基线验证全管线；NSGA-II 接入时使用）:
+pymoo
+scipy             # 配对 Wilcoxon 检验与秩双列效应量
+
 # 注:换街道 / 自己建缓存(build_cache)需 geopandas 能读原始 shapefile(已含)。
 # 不需要 osmnx（那是 04_OSM 版用的;上海版用本地多源数据）。
