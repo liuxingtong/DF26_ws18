@@ -59,30 +59,41 @@ def conceptual():
 
 
 def workflow():
-    width, height = 1600, 510
+    width, height = 1600, 390
     image, ink = canvas(width, height, "Research Workflow")
-    top = [
-        (45, "Frozen inputs", ("Data and provenance",)),
-        (360, "Scenario rules", ("Access and intensity",)),
-        (675, "Form operations", ("Candidate geometry",)),
-        (990, "Hard constraints", ("Repair or reject",)),
-        (1305, "Three objectives", ("Evaluate feasible form",)),
-    ]
-    for x, heading, lines in top:
-        box(ink, x, 120, 250, 115, heading, lines)
-    for x in (295, 610, 925, 1240):
-        arrow(ink, x + 5, 178, x + 60, 178)
-    bottom = [
-        (205, "NSGA-II", ("Independent evaluations",)),
-        (595, "Pareto set", ("Exact and epsilon fronts",)),
-        (985, "Role ranking", ("Priority tiers",)),
-        (1375, "3D review", ("Trace each change",)),
-    ]
-    for x, heading, lines in bottom:
-        box(ink, x, 323, 225, 115, heading, lines)
-    for x in (430, 820, 1210):
-        arrow(ink, x + 10, 380, x + 155, 380)
-    ink.line(((1430 * SCALE, 235 * SCALE), (1430 * SCALE, 295 * SCALE), (317 * SCALE, 295 * SCALE), (317 * SCALE, 323 * SCALE)), fill=LINE, width=2 * SCALE)
+    centers = [145, 405, 665, 925, 1185, 1445]
+    labels = ["Urban data", "Scenario rules", "Form generation", "Pareto search", "Role choice", "3D review"]
+    for x in centers:
+        ink.rounded_rectangle(((x - 97) * SCALE, 120 * SCALE, (x + 97) * SCALE, 270 * SCALE), radius=7 * SCALE, fill="#fbfcfb", outline="#aab4b2", width=2 * SCALE)
+    for x in (242, 502, 762, 1022, 1282):
+        arrow(ink, x + 5, 194, x + 70, 194)
+    for x, label in zip(centers, labels):
+        ink.text((x * SCALE, 309 * SCALE), label, font=font(19, True), fill=INK, anchor="mm")
+    # Roads and buildings
+    for dx in (-42, 0, 42):
+        ink.rectangle(((centers[0] + dx - 15) * SCALE, 165 * SCALE, (centers[0] + dx + 15) * SCALE, 224 * SCALE), outline=INK, width=2 * SCALE)
+    ink.line(((85 * SCALE, 151 * SCALE), (205 * SCALE, 240 * SCALE)), fill=INK, width=3 * SCALE)
+    # Rule sliders
+    for dy, knob in ((-27, -20), (0, 28), (27, 0)):
+        y = 194 + dy
+        ink.line(((355 * SCALE, y * SCALE), (455 * SCALE, y * SCALE)), fill=INK, width=2 * SCALE)
+        ink.ellipse(((405 + knob - 6) * SCALE, (y - 6) * SCALE, (405 + knob + 6) * SCALE, (y + 6) * SCALE), fill="white", outline=INK, width=2 * SCALE)
+    # Massing block silhouettes
+    for dx, h in ((-45, 38), (-12, 66), (25, 50)):
+        ink.rectangle(((665 + dx) * SCALE, (225 - h) * SCALE, (665 + dx + 28) * SCALE, 225 * SCALE), outline=INK, width=2 * SCALE)
+    # Pareto front
+    ink.line(((876 * SCALE, 227 * SCALE), (876 * SCALE, 153 * SCALE), (977 * SCALE, 153 * SCALE)), fill=INK, width=2 * SCALE)
+    for dx, dy in ((-28, 13), (-10, -8), (13, -18), (37, -34)):
+        x, y = 925 + dx, 196 + dy
+        ink.ellipse(((x - 5) * SCALE, (y - 5) * SCALE, (x + 5) * SCALE, (y + 5) * SCALE), fill=INK)
+    # Preference ranks
+    for i, dx in enumerate((-32, 0, 32), start=1):
+        ink.ellipse(((1185 + dx - 15) * SCALE, 181 * SCALE, (1185 + dx + 15) * SCALE, 211 * SCALE), outline=INK, width=2 * SCALE)
+        ink.text(((1185 + dx) * SCALE, 196 * SCALE), str(i), font=font(15, True), fill=INK, anchor="mm")
+    # 3D blocks
+    ink.polygon(((1400 * SCALE, 218 * SCALE), (1438 * SCALE, 200 * SCALE), (1474 * SCALE, 218 * SCALE), (1436 * SCALE, 238 * SCALE)), outline=INK)
+    ink.line(((1400 * SCALE, 218 * SCALE), (1400 * SCALE, 179 * SCALE), (1438 * SCALE, 161 * SCALE), (1474 * SCALE, 179 * SCALE), (1474 * SCALE, 218 * SCALE)), fill=INK, width=2 * SCALE)
+    ink.line(((1438 * SCALE, 161 * SCALE), (1438 * SCALE, 200 * SCALE)), fill=INK, width=2 * SCALE)
     save(image, "research_workflow.png", width, height)
 
 

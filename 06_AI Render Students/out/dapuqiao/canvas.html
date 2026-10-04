@@ -10,7 +10,7 @@
  padding:14px 15px;box-shadow:0 2px 12px rgba(0,0,0,.1);}
 .panel h1{font-size:16px;margin:0 0 3px;} .panel .sub{font-size:11.5px;color:var(--muted);margin:0 0 10px;}
 .grp{margin:12px 0 5px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
-.step{margin:17px 0 7px;font-size:17px;line-height:1.3;font-weight:750;color:var(--ink);text-transform:none;letter-spacing:0;}
+.step{font-size:17px;line-height:1.3;font-weight:750;color:var(--ink);text-transform:none;letter-spacing:0;}
 .row{display:flex;flex-wrap:wrap;gap:5px;}
 button{font:inherit;font-size:12px;border:1px solid var(--line);background:#fff;color:var(--ink);
  border-radius:16px;padding:5px 11px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05);}
@@ -44,32 +44,44 @@ button.acc{background:var(--accent);color:#fff;border-color:var(--accent);}
 .pareto-legend .good{color:#43885f}.pareto-legend .bad{color:#c44d45}
 .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px;}.metric{background:#f5f7f6;border-radius:7px;padding:6px;}
 .metric b{display:block;font-size:12px}.metric span{font-size:9.5px;color:var(--muted)}
-details{border-top:1px solid var(--line);margin-top:7px;padding-top:5px;}summary{cursor:pointer;font-size:11.5px;font-weight:650;}
+details{border-top:1px solid var(--line);margin-top:9px;padding-top:7px;}summary{cursor:pointer;font-size:12px;font-weight:700;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+summary::-webkit-details-marker{display:none;}summary::after{content:'⌄';font-size:17px;line-height:1;color:var(--accent);transform:rotate(-90deg);transition:transform .16s;}details[open]>summary::after{transform:rotate(0);}
+.step-panel{border:1px solid var(--line);border-radius:10px;padding:0 10px 10px;margin:9px 0;background:#fff;}
+.step-panel>summary{padding:10px 0 3px;} .step-panel[open]>summary{padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:9px;}
+.step-panel .note{margin:8px 0 0;} .step-panel .card{margin:8px 0;}
+.settings-row{display:grid;grid-template-columns:1fr 62px;gap:8px;align-items:center;margin:10px 0;}
+.settings-row label{grid-column:1/-1;font-size:11.5px;font-weight:700;line-height:1.2;}
+.settings-row input[type=range]{width:100%;margin:0;accent-color:var(--accent);}
+.settings-row input[type=number]{width:62px;padding:4px;border:1px solid var(--line);border-radius:5px;font:inherit;font-size:12px;text-align:right;}
+.settings-note{font-size:10.5px;color:var(--muted);line-height:1.4;margin:8px 0;}
 @media(max-width:700px){.panel{width:calc(100vw - 20px);left:10px;top:10px;max-height:56vh}.hint{display:none}.cards{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 </style></head><body>
 <div id="stage"><canvas id="cv"></canvas></div>
 <div class="panel">
   <h1>Dapuqiao, Shanghai · Urban Form Explorer</h1>
-  <p class="sub">Scenario rules, Pareto solutions and spatial form.</p>
-  <div id="researchStats" class="stats"></div>
-
-  <div class="grp step">Step 1 · Choose a scenario</div>
+  <details class="step-panel" open><summary class="step">Step 1 · Choose a scenario</summary>
   <div id="scenarioButtons" class="row"></div>
-  <div id="scenarioDetail"></div>
-  <div class="note">Each scenario changes the permitted actions. Your role selection stays active when you switch scenarios.</div>
+  <details><summary>Scenario details</summary><div id="scenarioDetail"></div><div class="note">Each scenario changes permitted actions. The selected perspective stays active.</div></details>
+  </details>
 
-  <div class="grp step">Step 2 · Choose a perspective</div>
+  <details class="step-panel"><summary class="step">Step 2 · Choose a perspective</summary>
   <div id="roleViewButtons" class="row"></div>
-  <div id="roleViewDetail"></div>
+  <details><summary>Selection details</summary><div id="roleViewDetail"></div></details>
   <div id="solutionMetrics"></div>
   <div id="solutionButtons" class="row"></div>
+  </details>
 
-  <div class="grp step">Step 3 · Explore Pareto trade-offs</div>
+  <details class="step-panel"><summary class="step">Step 3 · Explore Pareto trade-offs</summary>
   <svg id="paretoPlot" aria-label="Pareto solution scatter plot"></svg>
   <div class="pareto-legend"><span class="good">Lower residential exposure</span><span>→</span><span class="bad">Higher exposure</span></div>
-  <div class="card"><p>Right means more added floor area; up means more ground released along streets. Greener points have lower residential exposure. The outlined point is this perspective's preferred solution.</p><p class="meta">Positive additions and net GFA change are separate measures. Compare points within the same scenario.</p></div>
+  <details><summary>How to read this chart</summary><div class="card"><p>Right: more added floor area. Up: more ground release. Green: lower residential exposure. Outline: selected solution.</p><p class="meta">Added floor area and net GFA change are different measures.</p></div></details>
+  </details>
 
   <details><summary>Optimization settings and priorities</summary>
+    <div id="researchStats" class="stats"></div>
+    <div id="settingsControls"></div>
+    <p class="settings-note">Exploratory values only. The displayed solutions were generated with the archived settings; changing a slider does not rerun optimization.</p>
+    <button class="big" onclick="exportSettingsDraft()">Download settings draft</button>
     <div class="grp">Shared optimization task</div>
     <div id="scenarioCard" class="card"></div>
     <div class="grp">Workflow</div><div id="workflowCard" class="card"></div>
@@ -79,8 +91,7 @@ details{border-top:1px solid var(--line);margin-top:7px;padding-top:5px;}summary
     <div class="grp">Hard constraints</div><div id="constraintsList" class="card"></div>
   </details>
 
-  <div class="grp">Search comparison</div>
-  <div id="experimentCard"></div>
+  <details><summary>Search comparison</summary><div id="experimentCard"></div></details>
 
   <div class="grp">3D display</div>
   <div class="row">
@@ -89,7 +100,7 @@ details{border-top:1px solid var(--line);margin-top:7px;padding-top:5px;}summary
     <button data-mode="normal">Normals</button>
     <button data-mode="segmentation">Segments</button>
   </div>
-  <div class="legend"><span><i style="background:#4a6fa5"></i>State / Public</span><span><i style="background:#c0654a"></i>Developer / Capital</span><span><i style="background:#5a9367"></i>Residents</span><span><i style="background:#b8b8b8"></i>Unknown / Unmatched</span></div>
+  <details><summary>Stakeholder colors</summary><div class="legend"><span><i style="background:#4a6fa5"></i>State / Public</span><span><i style="background:#c0654a"></i>Developer / Capital</span><span><i style="background:#5a9367"></i>Residents</span><span><i style="background:#b8b8b8"></i>Unknown / Unmatched</span></div></details>
 
   <div class="grp">Ground map</div>
   <div class="row">
@@ -1352,13 +1363,28 @@ function renderScenarioTechnical(){const r=GEOM.research||{},sr=currentScenarioR
   const scenarioDefs=r.scenario_definitions||{},s=scenarioDefs[scenarioId]||{},def=s.defaults||{},impl=s.implementation||{},ranges=s.uncertainty_ranges||{};
   const range=(name,formatter)=>{const v=ranges[name];return Array.isArray(v)?`${formatter(v[0])}–${formatter(v[1])}`:"—";};
   const operatorRanges=[["densify_intensity","Addition"],["open_ground_intensity","Ground release"],["split_to_towers_intensity","Mass split"],["heritage_step_down_intensity","Height redistribution"],["public_space_reconfiguration_intensity","Public space"],["courtyard_access_improvement_intensity","Courtyard access"]].filter(([k])=>Array.isArray(ranges[k])).map(([k,label])=>`<span class="pill">${label}: ${range(k,x=>num(x,2))}</span>`).join("");
-  document.getElementById("scenarioCard").innerHTML=`<h3>${esc(scenarioName(scenarioId))}</h3><p>${esc((SCENARIOS[scenarioId]||{}).description||"")}</p><div class="row"><span class="pill">Housing retained: ${range("minimum_residential_retention",x=>pct(x,0))}</span><span class="pill">Zones changed: ${range("maximum_changed_zone_ratio",x=>pct(x,0))}</span><span class="pill">Buildings changed: ${range("maximum_changed_building_ratio",x=>pct(x,0))}</span>${operatorRanges}</div><p class="meta">This run uses ${pct(def.minimum_residential_retention,0)} housing retention and a ${pct(impl.maximum_changed_building_ratio,0)} building-change cap. These are research parameters.</p>`;
+  document.getElementById("scenarioCard").innerHTML=`<h3>${esc(scenarioName(scenarioId))}</h3><p>${esc((SCENARIOS[scenarioId]||{}).description||"")}</p><div class="row"><span class="pill">Housing retained: ${range("minimum_residential_retention",x=>pct(x,0))}</span><span class="pill">Zones changed: ${range("maximum_changed_zone_ratio",x=>pct(x,0))}</span><span class="pill">Buildings changed: ${range("maximum_changed_building_ratio",x=>pct(x,0))}</span>${operatorRanges}</div>`;
+  const settingRows=[
+    ["Housing retained (%)",Math.round(100*Number(def.minimum_residential_retention??0.8)),50,100,1],
+    ["Building-change cap (%)",Math.round(100*Number(impl.maximum_changed_building_ratio??0.3)),0,100,1],
+    ["Height limit (m)",Number(def.height_limit_m??36),10,200,1],
+    ["Maximum FAR",Number(def.max_far??3),0,10,0.1],
+    ["Maximum coverage (%)",Math.round(100*Number(def.max_coverage_ratio??0.6)),0,100,1]
+  ];
+  document.getElementById("settingsControls").innerHTML=settingRows.map(([label,value,min,max,step],i)=>`<div class="settings-row"><label for="settingRange${i}">${esc(label)}</label><input id="settingRange${i}" type="range" min="${min}" max="${max}" step="${step}" value="${value}"><input aria-label="${esc(label)} value" type="number" min="${min}" max="${max}" step="${step}" value="${value}"></div>`).join("");
+  document.querySelectorAll(".settings-row").forEach(row=>{const range=row.querySelector('input[type="range"]'),number=row.querySelector('input[type="number"]');range.oninput=()=>{number.value=range.value;};number.oninput=()=>{const v=Number(number.value);if(Number.isFinite(v))range.value=Math.max(Number(range.min),Math.min(Number(range.max),v));};});
   document.getElementById("workflowCard").innerHTML=`<p><b>Urban data</b> → scenario rules → 38 street-bounded zones → form operations → constraint checks → NSGA-II → Pareto set → perspective ranking → 3D comparison</p>`;
   const avail=search.operator_availability||{},zoneCount=Object.keys(avail).length,opCount=k=>Object.values(avail).filter(xs=>xs.includes(k)).length;
   document.querySelectorAll("[data-op-availability]").forEach(el=>{const k=el.dataset.opAvailability;el.textContent=zoneCount?`Available in ${opCount(k)} of ${zoneCount} zones`:'Unavailable in this scenario';});
   const balancedKey=(sr.role_keys||{}).balanced_compromise,solutionButtons=document.getElementById("solutionButtons");
   solutionButtons.innerHTML=balancedKey?`<button data-solution-key="${esc(balancedKey)}">View balanced solution</button>`:'<span class="note">No balanced solution is available.</span>';
   solutionButtons.querySelectorAll("[data-solution-key]").forEach(b=>b.onclick=()=>setRegime(b.dataset.solutionKey));}
+function exportSettingsDraft(){
+  const values=Object.fromEntries([...document.querySelectorAll(".settings-row")].map(row=>[row.querySelector("label").textContent,Number(row.querySelector('input[type="number"]').value)]));
+  const payload={scenario:selectedScenario,kind:"exploratory_settings_draft",values};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`${GEOM.slug}_${selectedScenario}_settings_draft.json`;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+}
 function renderResearch(){const r=GEOM.research||{},d=r.draft_summary||{},q=(r.formal_input_quality||{}).counts||{},ass=(r.assumptions||{}).profile||{};
   const stats=document.getElementById("researchStats");if(!stats)return;
   stats.innerHTML=[[q.buildings||d.building_count||1370,"Buildings"],[q.intervention_zones||d.zone_count||38,"Zones"],[q.heritage_building_footprints||21,"Protected buildings"],[3,"Objectives"]].map(x=>`<div class="stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");

@@ -72,10 +72,10 @@ def front_figure():
         for seed in (11, 23, 37, 53, 71):
             path = SOURCE / "runs" / key / f"seed_{seed}" / "pareto_solutions.csv"
             fronts[key].extend(rows(path))
-    xmax = scale_max([float(row["development_capacity"]) for items in fronts.values() for row in items])
-    ymax = scale_max([float(row["street_connected_released_ground"]) for items in fronts.values() for row in items], 0.0001)
     left, top, pw, ph, gap = 126, 167, 340, 320, 78
     for index, (key, heading) in enumerate(METHODS):
+        xmax = scale_max([float(row["development_capacity"]) for row in fronts[key]], 0.001)
+        ymax = scale_max([float(row["street_connected_released_ground"]) for row in fronts[key]], 0.0001)
         x0 = left + index * (pw + gap)
         label(draw, x0 + pw / 2, 122, heading, 17, bold=True, anchor="mm")
         vertical(image, x0 - 75, top + ph / 2, "Ground release (%)", 14)
@@ -100,7 +100,7 @@ def front_figure():
     for index, color in enumerate(("#238270", "#7d7754", "#cd3f37")):
         x = 322 + index * 63
         draw.ellipse((x * S, 597 * S, (x + 15) * S, 612 * S), fill=color)
-    label(draw, 523, 596, "low to high", 13)
+    label(draw, 523, 596, "low to high · panel scales vary", 13)
     save(image, "formal_pareto_fronts.png", width, height)
 
 
