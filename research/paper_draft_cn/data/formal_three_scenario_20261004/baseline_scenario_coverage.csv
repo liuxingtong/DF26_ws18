@@ -1,0 +1,16 @@
+﻿seed,scenario_id,scenario_over_baseline,baseline_over_scenario,scenario_pareto_count,baseline_pareto_count
+11,public_coordination,0.038461538461538464,0.14285714285714285,14,26
+11,development_growth,0.038461538461538464,0.0,5,26
+11,resident_heritage_priority,0.0,0.0,7,26
+23,public_coordination,0.03225806451612903,0.1111111111111111,9,31
+23,development_growth,0.03225806451612903,0.0,4,31
+23,resident_heritage_priority,0.0,0.2,10,31
+37,public_coordination,0.034482758620689655,0.2631578947368421,19,29
+37,development_growth,0.034482758620689655,0.0,7,29
+37,resident_heritage_priority,0.034482758620689655,0.16666666666666666,6,29
+53,public_coordination,0.027777777777777776,0.0,9,36
+53,development_growth,0.027777777777777776,0.0,4,36
+53,resident_heritage_priority,0.027777777777777776,0.0,7,36
+71,public_coordination,0.038461538461538464,0.0,9,26
+71,development_growth,0.038461538461538464,0.08333333333333333,12,26
+71,resident_heritage_priority,0.038461538461538464,0.0,4,26

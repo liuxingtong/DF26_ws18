@@ -19,9 +19,16 @@ W, H = 1680, 600
 
 
 def font(size, bold=False):
-    family = "Arial Bold.ttf" if bold else "Arial.ttf"
-    path = Path("/System/Library/Fonts/Supplemental") / family
-    return ImageFont.truetype(str(path), size * SCALE)
+    candidates = [
+        Path("/Library/Fonts/Microsoft/微软雅黑 Bold.ttf" if bold else "/Library/Fonts/Microsoft/微软雅黑.ttf"),
+        Path("/Library/Fonts/Microsoft/msyhbd.ttc" if bold else "/Library/Fonts/Microsoft/msyh.ttc"),
+        Path("/System/Library/Fonts/PingFang.ttc"),
+    ]
+    path = next((item for item in candidates if item.exists()), None)
+    if path is None:
+        raise FileNotFoundError("Install Microsoft YaHei or a CJK fallback font to render the figure")
+    index = 8 if bold and path.name == "PingFang.ttc" else 2 if path.name == "PingFang.ttc" else 0
+    return ImageFont.truetype(str(path), size * SCALE, index=index)
 
 
 def draw():
@@ -37,16 +44,20 @@ def draw():
     def text(x, y, value, size=16, fill="#26302e", bold=False, anchor=None):
         ink.text((x * SCALE, y * SCALE), value, font=font(size, bold), fill=fill, anchor=anchor)
 
-    text(70, 35, "Pareto solutions by governance scenario", 25, bold=True)
-    text(70, 76, "Preview only · seed 11 · 60 independent evaluations per scenario", 15, "#596663")
-    text(70, 104, "Y axis: street-facing ground release / site area", 13, "#596663")
-    left, top, chart_w, chart_h, gap = 95, 162, 425, 300, 82
+    text(W / 2, 52, "Pareto Solutions", 27, "#111111", bold=True, anchor="ma")
+    left, top, chart_w, chart_h, gap = 120, 155, 420, 310, 110
     for index, (key, title) in enumerate(SCENARIOS):
         x0 = left + index * (chart_w + gap)
         run = runs[key]
         rows = run["pareto"]
-        text(x0, 126, title, 18, bold=True)
-        text(x0 + chart_w, 126, f"n = {len(rows)}", 14, "#596663", anchor="ra")
+        text(x0 + chart_w / 2, 116, title, 19, "#111111", bold=True, anchor="ma")
+        y_label = "Ground release (%)"
+        label_font = font(15, True)
+        label_w = round(220 * SCALE)
+        label = Image.new("RGBA", (label_w, 40 * SCALE), (255, 255, 255, 0))
+        ImageDraw.Draw(label).text((label_w / 2, 20 * SCALE), y_label, font=label_font, fill="#111111", anchor="mm")
+        label = label.rotate(90, expand=True)
+        image.paste(label, (round((x0 - 83) * SCALE), round((top + chart_h / 2) * SCALE - label.height / 2)), label)
         for tick in (0, 0.01, 0.02, 0.03):
             x = x0 + tick / 0.03 * chart_w
             line([(x, top), (x, top + chart_h)], "#e6ebe9")
@@ -69,13 +80,13 @@ def draw():
             if row["solution_id"] in (selected.get("resident"), selected.get("development"), selected.get("public_planning")):
                 rr = 12 * SCALE
                 ink.ellipse((center[0] - rr, center[1] - rr, center[0] + rr, center[1] + rr), outline="#26302e", width=2 * SCALE)
-        text(x0 + chart_w / 2, 520, "Positive GFA additions / site area", 14, "#465450", anchor="ma")
-    text(95, 567, "Color: residential exposure", 14, "#596663")
+        text(x0 + chart_w / 2, 513, "Added GFA (%)", 15, "#111111", bold=True, anchor="ma")
+    text(120, 563, "Residential exposure", 14, "#111111", bold=True)
     for i, color in enumerate(("#34866f", "#77796c", "#cc4d40")):
-        x = 302 + i * 94
+        x = 312 + i * 65
         ink.ellipse((x * SCALE, 567 * SCALE, (x + 14) * SCALE, 581 * SCALE), fill=color)
-    text(605, 567, "low                 high", 13, "#596663")
-    text(1160, 567, "Outlined: selected by at least one role", 13, "#596663")
+    text(515, 563, "low to high", 13, "#111111")
+    text(1100, 563, "Outline: role selection", 13, "#111111")
     image.resize((W, H), Image.Resampling.LANCZOS).save(OUTPUT, optimize=True)
     print(OUTPUT)
 
