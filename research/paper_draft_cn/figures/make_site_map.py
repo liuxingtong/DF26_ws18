@@ -103,7 +103,7 @@ def tile_pixel(x, y, zoom):
     return (x + MERCATOR) / (2 * MERCATOR) * world, (MERCATOR - y) / (2 * MERCATOR) * world
 
 
-def fetch_raster(extent, zoom, cache, provider):
+def fetch_raster(extent, zoom, cache):
     if cache.exists():
         return Image.open(cache).convert("RGB")
     x0, y0, x1, y1 = extent
@@ -114,10 +114,7 @@ def fetch_raster(extent, zoom, cache, provider):
     mosaic = Image.new("RGB", ((col1 - col0 + 1) * 256, (row1 - row0 + 1) * 256), "white")
     for row in range(row0, row1 + 1):
         for col in range(col0, col1 + 1):
-            if provider == "osm":
-                url = f"https://tile.openstreetmap.org/{zoom}/{col}/{row}.png"
-            else:
-                url = f"https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{zoom}/{row}/{col}.jpg"
+            url = f"https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{zoom}/{row}/{col}.jpg"
             response = urlopen(Request(url, headers={"User-Agent": "DF26 academic figure (github.com/liuxingtong/DF26_ws18)"}), timeout=25)
             tile = Image.open(io.BytesIO(response.read())).convert("RGB")
             mosaic.paste(tile, ((col - col0) * 256, (row - row0) * 256))
@@ -128,7 +125,7 @@ def fetch_raster(extent, zoom, cache, provider):
 
 def detailed_local_image(extent, panel):
     """Blend the georeferenced Esri cache with Sentinel imagery at its edges."""
-    fallback = fetch_raster(extent, 14, HERE / "dapuqiao_sentinel_local_2016.jpg", "eox")
+    fallback = fetch_raster(extent, 14, HERE / "dapuqiao_sentinel_local_2016.jpg")
     width, height = (panel[2] - panel[0]) * S, (panel[3] - panel[1]) * S
     base = np.asarray(fallback.resize((width, height), Image.Resampling.LANCZOS), dtype=np.float32)
     meta = json.loads((GROUND / "ground_scene.json").read_text())
@@ -171,8 +168,9 @@ def draw():
     area = area_geometry()
     city = city_geometry()
     city_box, local_box, units_box = PANELS
-    city_extent = expand_to_aspect(city.bounds,
-                                   (city_box[2] - city_box[0]) / (city_box[3] - city_box[1]), margin=0.07)
+    locator = json.loads((HERE / "shanghai_positron_screenshot.json").read_text())
+    west, south, east, north = locator["bounds_lonlat"]
+    city_extent = (*TO_MERC.transform(west, south), *TO_MERC.transform(east, north))
     local_extent = expand_to_aspect(area.bounds,
                                     (local_box[2] - local_box[0]) / (local_box[3] - local_box[1]), margin=0.18)
     units_extent = expand_to_aspect(area.bounds,
@@ -183,7 +181,7 @@ def draw():
     for panel, title in zip(PANELS, ("Shanghai", "Dapuqiao", "Building functions")):
         ink.text(((panel[0] + panel[2]) * S / 2, 113 * S), title, font=font(20, True), fill=INK, anchor="mm")
 
-    city_raster = fetch_raster(city_extent, 9, HERE / "shanghai_osm_land.jpg", "osm")
+    city_raster = Image.open(HERE / locator["image"]).convert("RGB")
     city_raster = city_raster.resize(((city_box[2] - city_box[0]) * S, (city_box[3] - city_box[1]) * S), Image.Resampling.LANCZOS)
     image.paste(city_raster, (city_box[0] * S, city_box[1] * S))
     image.paste(detailed_local_image(local_extent, local_box), (local_box[0] * S, local_box[1] * S))
@@ -196,7 +194,7 @@ def draw():
     cx, cy = area.centroid.x, area.centroid.y
     px, py = point_in_panel(cx, cy, city_extent, city_box)
     ink.ellipse((px - 8 * S, py - 8 * S, px + 8 * S, py + 8 * S), fill="white", outline=RED, width=4 * S)
-    ink.text((px + 14 * S, py - 9 * S), "Dapuqiao", font=font(17, True), fill="white", stroke_width=2 * S, stroke_fill=INK)
+    ink.text((px + 14 * S, py - 9 * S), "Study area", font=font(17, True), fill="white", stroke_width=2 * S, stroke_fill=INK)
     draw_polygon(ink, area, local_extent, local_box, outline="white", width=7)
     draw_polygon(ink, area, local_extent, local_box, outline=RED, width=4)
 
@@ -224,7 +222,7 @@ def draw():
         ink.text(((x + 34) * S, (y + 10) * S), label, font=font(16, True), fill=INK, anchor="lm")
     ink.line((50 * S, 754 * S, 83 * S, 754 * S), fill=RED, width=3 * S)
     ink.text((95 * S, 754 * S), "Study boundary", font=font(13, True), fill=INK, anchor="lm")
-    ink.text((550 * S, 754 * S), "© OpenStreetMap contributors · geoBoundaries 2019 · Esri World Imagery · EOXCloudless 2016 (CC BY 4.0)", font=font(11), fill="#4a5352", anchor="lm")
+    ink.text((550 * S, 754 * S), "OpenFreeMap / © OpenMapTiles · © OpenStreetMap contributors · geoBoundaries 2019 · Esri · EOXCloudless (CC BY 4.0)", font=font(11), fill="#4a5352", anchor="lm")
     image.resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS).save(OUTPUT, optimize=True)
     print(OUTPUT)
 

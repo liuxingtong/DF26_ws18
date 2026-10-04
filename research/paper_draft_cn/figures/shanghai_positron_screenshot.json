@@ -1,0 +1,6 @@
+{
+  "bounds_lonlat": [120.82918881706735, 30.65000000000005, 122.21081118292875, 31.899999999999764],
+  "source": "OpenFreeMap Positron screenshot; OpenMapTiles and OpenStreetMap data",
+  "labels": "hidden in source style; English figure labels added separately",
+  "image": "shanghai_positron_screenshot.jpg"
+}
