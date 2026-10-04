@@ -46,11 +46,11 @@
 
 每个更新单元对应一组研究控制参数。更新单元由道路围合生成，用于控制研究中的形态操作；法定地块和控规要求仍需依据主管部门资料核验。公共空间候选与非穷尽的弄堂入口资料用于了解场地背景；其中一处公共空间候选已核实为公园，另一处仍待核实。实验使用冻结输入，并保存文件校验信息。
 
-图 2 从上海市域定位打浦桥，再以覆盖完整研究边界的局部卫星图和等比例单元图展示场地。38 个道路围合单元各用一种颜色，深绿色标出 21 个冻结保护建筑轮廓。卫星底图采用 EOXCloudless 2016 年 Sentinel-2 影像（EOX IT Services GmbH，含改编的 Copernicus Sentinel 数据，CC BY 4.0），仅用于地理定位；边界和单元线划为研究输入。
+图 2 左侧在 OpenStreetMap 底图上叠加上海市域轮廓（geoBoundaries 2019），标出打浦桥位置。中间的局部卫星图覆盖完整研究边界，主体使用仓库中缓存的 Esri World Imagery，边缘以 EOXCloudless 2016 年 Sentinel-2 影像补足。右侧将 1,370 栋建筑轮廓按冻结数据中的 EULUC 用途分类；缺少该字段时，参考建筑功能或 AOI 标签，仍无法判别的建筑标为“Other / unknown”。图中的建筑色块、街道留白和研究边界均按投影坐标等比例绘制。底图用于定位和读图，建筑用途类别表示本研究数据中的属性。
 
-![图 2. 打浦桥研究区卫星底图、38 个道路围合更新单元和 21 个冻结保护建筑轮廓。](figures/study_area_satellite.png)
+![图 2. 上海市域定位、打浦桥研究区卫星图和建筑用途色块。](figures/study_area_satellite.png)
 
-**图 2.** 上海、打浦桥研究边界与更新单元
+**图 2.** 上海、打浦桥研究边界与建筑用途
 
 ## 4. 方法
 
@@ -204,5 +204,8 @@ NSGA-II 对每个情景分别搜索（Deb et al., 2002）。每产生一个候�
 - Wang, M., & Zhou, Y. (2022). The production and evolution of urban cultural and creative tourism destination from the perspective of power space: A case study of Tianzifang, Shanghai. *Geographical Research*, 41(2), 373–389. <https://doi.org/10.11821/dlyj020201265>
 - Wang, Y., Hu, Q., Tang, P., Fang, R., & Meng, Y. (2024). *Urban Site Adaptive Layout Generation: User-configurable Algorithms Based on MQP*. Proceedings of CAADRIA 2024, Vol. 2, 505–514. <https://doi.org/10.52842/conf.caadria.2024.2.505>
 - Zhang, B., Mo, Y., Li, B., Wang, Y., Zhang, C., & Shi, J. (2024). *SIMForms: A Web-Based Generative Application Fusing Forms, Metrics, and Visuals for Early-Stage Design*. Proceedings of CAADRIA 2024, Vol. 1, 373–382. <https://doi.org/10.52842/conf.caadria.2024.1.373>
+- OpenStreetMap contributors. *OpenStreetMap data and standard map tiles*. <https://www.openstreetmap.org/copyright>
+- geoBoundaries. *China ADM1, Shanghai Municipality, gbOpen, 2019*. <https://www.geoboundaries.org/api/current/gbOpen/CHN/ADM1/>
+- Esri. *World Imagery*（含影像供应方与 GIS User Community 贡献）. <https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9>
 - EOX IT Services GmbH. *Sentinel-2 cloudless 2016 imagery*（含改编的 Copernicus Sentinel 数据，CC BY 4.0）. <https://cloudless.eox.at/license-non-commercial>
 - 黄浦区人民政府（2023）。《黄浦区田子坊地区综合管理办法》，黄府规〔2023〕3 号，2023 年 3 月 12 日施行。<https://service.shanghai.gov.cn/XingZhengWenDangKuJyh/XZGFDetails.aspx?docid=230220141250SGUTAJDzyGiwTLVshtA>
