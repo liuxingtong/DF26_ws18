@@ -98,6 +98,15 @@ class DapuqiaoCanvasModelTests(unittest.TestCase):
         self.assertNotIn("baselineOverlay", script)
         self.assertNotIn('mode==="canny"', script)
 
+    def test_ground_map_stays_visible_in_every_display_mode(self):
+        script = build_canvas.viewer_js({})
+
+        self.assertIn('groundSat.visible = basemap==="satellite"', script)
+        self.assertIn('groundOsm.visible = basemap==="osm"', script)
+        self.assertIn('if(mode==="depth")m.material=matDepth', script)
+        self.assertIn('else if(mode==="normal")m.material=matNormal', script)
+        self.assertNotIn("scene.overrideMaterial", script)
+
     def test_solution_card_names_positive_increment_and_shows_net_gfa(self):
         script = build_canvas.viewer_js({})
 

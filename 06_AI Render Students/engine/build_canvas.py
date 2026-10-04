@@ -541,15 +541,21 @@ function styleMesh(m,massing,seg){
 }
 function applyMode(){
   const massing=(mode==="massing"), seg=(mode==="segmentation");
-  scene.overrideMaterial = (mode==="depth")?matDepth : (mode==="normal")?matNormal : null;
-  if(groundSat) groundSat.visible = massing && basemap==="satellite";
-  if(groundOsm) groundOsm.visible = massing && basemap==="osm";
-  if(osmGroup) osmGroup.visible = massing && basemap==="osm";
+  // Apply diagnostic materials to buildings only; the chosen ground map keeps its own material.
+  if(groundSat) groundSat.visible = basemap==="satellite";
+  if(groundOsm) groundOsm.visible = basemap==="osm";
+  if(osmGroup) osmGroup.visible = basemap==="osm";
   if(boundary) boundary.visible = massing;                 // 红线只在 massing 显示
   // Background: gray for massing, white for normal/segmentation, black for depth.
   scene.background=new THREE.Color(massing?0xeef1f0:((mode==="normal"||seg)?0xffffff:0x000000));
-  for(const name in groups) for(const m of groups[name].children){ if(m.isMesh) styleMesh(m,massing,seg); }
-  for(const m of ctxMeshes) styleMesh(m,massing,seg);
+  const buildingMaterial=m=>{
+    if(!m.baseMaterial)m.baseMaterial=m.material;
+    if(mode==="depth")m.material=matDepth;
+    else if(mode==="normal")m.material=matNormal;
+    else{m.material=m.baseMaterial;styleMesh(m,massing,seg);}
+  };
+  for(const name in groups) for(const m of groups[name].children){if(m.isMesh)buildingMaterial(m);}
+  for(const m of ctxMeshes)buildingMaterial(m);
   for(const el of edges) el.visible = false;
   for(const el of ctxEdges) el.visible = massing;
   document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("on",b.dataset.mode===mode));
