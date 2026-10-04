@@ -1,0 +1,32 @@
+[
+  {
+    "file": "S16_Inverse_Design_Urban_Procedural_2012.pdf",
+    "url": "https://cs.purdue.edu/homes/bbenes/papers/Vanegas12ToG.pdf",
+    "status": "downloaded",
+    "bytes": 9096403
+  },
+  {
+    "file": "S17_Interactive_Procedural_Street_Modeling_2008.pdf",
+    "url": "https://www.cs.drexel.edu/~david/Classes/Papers/a103-chen.pdf",
+    "status": "downloaded",
+    "bytes": 6282315
+  },
+  {
+    "file": "S18_Social_Force_Pedestrian_Dynamics_1995.pdf",
+    "url": "https://harvest.aps.org/v2/journals/articles/10.1103/PhysRevE.51.4282/fulltext",
+    "status": "downloaded",
+    "bytes": 307566
+  },
+  {
+    "file": "S19_PlanGPT_arXiv2024.pdf",
+    "url": "https://arxiv.org/pdf/2402.19273",
+    "status": "downloaded",
+    "bytes": 5323585
+  },
+  {
+    "file": "S20_Spatial_Planning_Deep_RL_2023.pdf",
+    "url": "https://fi.ee.tsinghua.edu.cn/public/publications/77681512-6436-11ee-84fe-0242ac120002.pdf",
+    "status": "downloaded",
+    "bytes": 4446291
+  }
+]

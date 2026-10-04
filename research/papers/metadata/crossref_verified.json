@@ -1,0 +1,1245 @@
+{
+  "B3": {
+    "doi": "10.52842/conf.caadria.2025.1.223",
+    "title": [
+      "LLM Planning Agents: Exploring the potential and challenges of large language model agents in urban design and planning"
+    ],
+    "authors": [
+      {
+        "given": "Eduardo Rico",
+        "family": "Carranza",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Sheng-Yang",
+        "family": "Huang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Guanhong",
+        "family": "Li",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "container": [
+      "CAADRIA proceedings",
+      "Proceedings of the 30th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 1]"
+    ],
+    "url": "https://doi.org/10.52842/conf.caadria.2025.1.223",
+    "abstract": null,
+    "link": null,
+    "source": "https://api.crossref.org/works/10.52842%2Fconf.caadria.2025.1.223"
+  },
+  "C5": {
+    "doi": "10.52842/conf.caadria.2022.2.485",
+    "title": [
+      "PlacemakingAI : Participatory Urban Design with Generative Adversarial Networks"
+    ],
+    "authors": [
+      {
+        "given": "Dongyun",
+        "family": "Kim",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "George",
+        "family": "Guida",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Jose Luis",
+        "family": "García del Castillo y López",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "container": [
+      "CAADRIA proceedings",
+      "Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 2]"
+    ],
+    "source": "https://api.crossref.org/works/10.52842%2Fconf.caadria.2022.2.485"
+  },
+  "C6": {
+    "doi": "10.52842/conf.caadria.2022.2.505",
+    "title": [
+      "Participatory Planning: Heritage Conservation Through Co-design and Co-decision"
+    ],
+    "authors": [
+      {
+        "given": "Siew Leng",
+        "family": "Leong",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Patrick",
+        "family": "Janssen",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "container": [
+      "CAADRIA proceedings",
+      "Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 2]"
+    ],
+    "url": "https://doi.org/10.52842/conf.caadria.2022.2.505",
+    "abstract": null,
+    "link": null,
+    "source": "https://api.crossref.org/works/10.52842%2Fconf.caadria.2022.2.505"
+  },
+  "C7": {
+    "doi": "10.52842/conf.caadria.2022.1.585",
+    "title": [
+      "A Framework for a Gameful Collective Urbanism Based on Tokenized Location Data and Liquid Democracy: Early Prototyping of a Case Study Using E-bikes"
+    ],
+    "authors": [
+      {
+        "given": "Salma",
+        "family": "Tabi",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Yasushi",
+        "family": "Sakai",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Nguyen",
+        "family": "Tung",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Masahiro",
+        "family": "Taima",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Aqil",
+        "family": "Cheddadi",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Yasushi",
+        "family": "Ikeda",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "container": [
+      "CAADRIA proceedings",
+      "Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 1]"
+    ],
+    "url": "https://doi.org/10.52842/conf.caadria.2022.1.585",
+    "abstract": null,
+    "link": null,
+    "source": "https://api.crossref.org/works/10.52842%2Fconf.caadria.2022.1.585"
+  },
+  "C8": {
+    "doi": "10.52842/conf.caadria.2022.1.625",
+    "title": [
+      "A Web-based Interactive Tool for Urban Fabric Generation: A Case Study of Chinese Rural Context"
+    ],
+    "authors": [
+      {
+        "given": "Qiyan",
+        "family": "Zhang",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Biao",
+        "family": "Li",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yichen",
+        "family": "Mo",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yulong",
+        "family": "Chen",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Peng",
+        "family": "Tang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "container": [
+      "CAADRIA proceedings",
+      "Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 1]"
+    ],
+    "source": "https://api.crossref.org/works/10.52842%2Fconf.caadria.2022.1.625"
+  },
+  "D9": {
+    "doi": "10.52842/conf.caadria.2024.2.169",
+    "title": [
+      "Text-to-City: Controllable 3D Urban Block Generation With Latent Diffusion Model"
+    ],
+    "authors": [
+      {
+        "given": "Junling",
+        "family": "Zhuang",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Guanhong",
+        "family": "Li",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Hang",
+        "family": "Xu",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Jintu",
+        "family": "Xu",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Runjia",
+        "family": "Tian",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "container": [
+      "CAADRIA proceedings",
+      "Proceedings of the 29th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 2]"
+    ],
+    "url": "https://doi.org/10.52842/conf.caadria.2024.2.169",
+    "abstract": null,
+    "link": null,
+    "source": "https://api.crossref.org/works/10.52842%2Fconf.caadria.2024.2.169"
+  },
+  "E13": {
+    "doi": "10.52842/conf.caadria.2025.3.121",
+    "title": [
+      "New Frontiers in Built Heritage Management: AI assistant for advanced data integration and building information retrieval"
+    ],
+    "authors": [
+      {
+        "given": "Cassia De Lian",
+        "family": "Cui",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Edoardo",
+        "family": "Currà",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Antonio",
+        "family": "Fioravanti",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Wei",
+        "family": "Yan",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "container": [
+      "CAADRIA proceedings",
+      "Proceedings of the 30th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 3]"
+    ],
+    "url": "https://doi.org/10.52842/conf.caadria.2025.3.121",
+    "abstract": null,
+    "link": null,
+    "source": "https://api.crossref.org/works/10.52842%2Fconf.caadria.2025.3.121"
+  },
+  "D11": {
+    "doi": "10.1145/3710912",
+    "title": [
+      "From Fake Perfects to Conversational Imperfects: Exploring Image-Generative AI as a Boundary Object for Participatory Design of Public Spaces"
+    ],
+    "authors": [
+      {
+        "ORCID": "https://orcid.org/0000-0003-0543-699X",
+        "authenticated-orcid": false,
+        "given": "Jose A.",
+        "family": "Guridi",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Department of Information Science, Cornell University, Ithaca, NY, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-0951-7845",
+        "authenticated-orcid": false,
+        "given": "Angel Hsing-Chi",
+        "family": "Hwang",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "School for Communication and Journalism, University of Southern California, Los Angeles, CA, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-2065-0065",
+        "authenticated-orcid": false,
+        "given": "Duarte",
+        "family": "Santo",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Independent Scholar, Madeira Island, Portugal"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0009-0007-8296-4637",
+        "authenticated-orcid": false,
+        "given": "Maria",
+        "family": "Goula",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Landscape Architecture, Cornell University, Ithaca, NY, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-1221-1978",
+        "authenticated-orcid": false,
+        "given": "Cristobal",
+        "family": "Cheyre",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Information Science, Cornell University, Ithaca, NY, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-5005-0394",
+        "authenticated-orcid": false,
+        "given": "Lee",
+        "family": "Humphreys",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Communication, Cornell University, Ithaca, NY, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0009-0009-8149-413X",
+        "authenticated-orcid": false,
+        "given": "Marco",
+        "family": "Rangel",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Studio-MLA, Los Angeles, CA, USA"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2025,
+          5,
+          2
+        ]
+      ]
+    },
+    "container": [
+      "Proceedings of the ACM on Human-Computer Interaction"
+    ],
+    "url": "https://doi.org/10.1145/3710912",
+    "abstract": "<jats:p>Designing public spaces requires balancing the interests of diverse stakeholders within a constrained physical and institutional space. Designers usually approach these problems through participatory methods but struggle to incorporate diverse perspectives into design outputs. The growing capabilities of image-generative artificial intelligence (IGAI) could support participatory design. Prior work in leveraging IGAI's capabilities in design has focused on augmenting the experience and performance of individual creators. We study how IGAI could facilitate participatory processes when designing public spaces, a complex collaborative task. We conducted workshops and IGAI-mediated interviews in a real-world participatory process to upgrade a park in Los Angeles. We found (1) a shift from focusing on accuracy to fostering richer conversations as the desirable outcome of adopting IGAI in participatory design, (2) that IGAI promoted more space-aware conversations, and (3) that IGAI-mediated conversations are subject to the abilities of the facilitators in managing the interaction between themselves, the AI, and stakeholders. We contribute by discussing practical implications for using IGAI in participatory design, including success metrics, relevant skills, and asymmetries between designers and stakeholders. We finish by proposing a series of open research questions.</jats:p>",
+    "link": [
+      {
+        "URL": "https://dl.acm.org/doi/10.1145/3710912",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      },
+      {
+        "URL": "https://dl.acm.org/doi/pdf/10.1145/3710912",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ],
+    "source": "https://api.crossref.org/works/10.1145%2F3710912"
+  },
+  "A1": {
+    "doi": "10.1016/j.scs.2025.106441",
+    "title": [
+      "Bi-directional mapping of morphology metrics and 3D city blocks for enhanced characterisation and generation of urban form"
+    ],
+    "authors": [
+      {
+        "ORCID": "https://orcid.org/0000-0002-6249-1816",
+        "authenticated-orcid": false,
+        "given": "Chenyi",
+        "family": "Cai",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Biao",
+        "family": "Li",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Qiyan",
+        "family": "Zhang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0001-9471-5370",
+        "authenticated-orcid": false,
+        "given": "Xiao",
+        "family": "Wang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-6229-7749",
+        "authenticated-orcid": false,
+        "given": "Filip",
+        "family": "Biljecki",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0003-2562-8374",
+        "authenticated-orcid": false,
+        "given": "Pieter",
+        "family": "Herthogs",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2025,
+          7
+        ]
+      ]
+    },
+    "container": [
+      "Sustainable Cities and Society"
+    ],
+    "url": "https://doi.org/10.1016/j.scs.2025.106441",
+    "abstract": null,
+    "link": [
+      {
+        "URL": "https://api.elsevier.com/content/article/PII:S2210670725003178?httpAccept=text/xml",
+        "content-type": "text/xml",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      },
+      {
+        "URL": "https://api.elsevier.com/content/article/PII:S2210670725003178?httpAccept=text/plain",
+        "content-type": "text/plain",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      }
+    ],
+    "source": "https://api.crossref.org/works/10.1016%2Fj.scs.2025.106441"
+  },
+  "D10": {
+    "doi": "10.1016/j.buildenv.2025.113892",
+    "title": [
+      "Human-guided urban form generation using multimodal diffusion models"
+    ],
+    "authors": [
+      {
+        "ORCID": "https://orcid.org/0009-0000-9093-199X",
+        "authenticated-orcid": false,
+        "given": "Mingyi",
+        "family": "He",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0003-2089-4606",
+        "authenticated-orcid": false,
+        "given": "Yuebing",
+        "family": "Liang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Shenhao",
+        "family": "Wang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yunhan",
+        "family": "Zheng",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Qingyi",
+        "family": "Wang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0003-3208-6016",
+        "authenticated-orcid": false,
+        "given": "Dingyi",
+        "family": "Zhuang",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Li",
+        "family": "Tian",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Jinhua",
+        "family": "Zhao",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2026,
+          1
+        ]
+      ]
+    },
+    "published_online": null,
+    "published_print": {
+      "date-parts": [
+        [
+          2026,
+          1
+        ]
+      ]
+    },
+    "container": [
+      "Building and Environment"
+    ],
+    "source": "https://api.crossref.org/works/10.1016%2Fj.buildenv.2025.113892"
+  },
+  "S16": {
+    "doi": "10.1145/2366145.2366187",
+    "title": [
+      "Inverse design of urban procedural models"
+    ],
+    "authors": [
+      {
+        "given": "Carlos A.",
+        "family": "Vanegas",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Purdue University, U. C. Berkeley"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Ignacio",
+        "family": "Garcia-Dorado",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Purdue University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Daniel G.",
+        "family": "Aliaga",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Purdue University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Bedrich",
+        "family": "Benes",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Purdue University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Paul",
+        "family": "Waddell",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "U.C. Berkeley"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2012,
+          11
+        ]
+      ]
+    },
+    "container": [
+      "ACM Transactions on Graphics"
+    ],
+    "source": "https://api.crossref.org/works/10.1145%2F2366145.2366187"
+  },
+  "S17": {
+    "doi": "10.1145/1360612.1360702",
+    "title": [
+      "Interactive procedural street modeling"
+    ],
+    "authors": [
+      {
+        "given": "Guoning",
+        "family": "Chen",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Oregon State University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Gregory",
+        "family": "Esch",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Oregon State University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Peter",
+        "family": "Wonka",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Arizona State University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Pascal",
+        "family": "Müller",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Procedural Inc. / ETH Zürich"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Eugene",
+        "family": "Zhang",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Oregon State University"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2008,
+          8
+        ]
+      ]
+    },
+    "container": [
+      "ACM Transactions on Graphics"
+    ],
+    "source": "https://api.crossref.org/works/10.1145%2F1360612.1360702"
+  },
+  "S18": {
+    "doi": "10.1103/physreve.51.4282",
+    "title": [
+      "Social force model for pedestrian dynamics"
+    ],
+    "authors": [
+      {
+        "given": "Dirk",
+        "family": "Helbing",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Péter",
+        "family": "Molnár",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          1995,
+          5,
+          1
+        ]
+      ]
+    },
+    "container": [
+      "Physical Review E"
+    ],
+    "source": "https://api.crossref.org/works/10.1103%2FPhysRevE.51.4282"
+  },
+  "S20": {
+    "doi": "10.1038/s43588-023-00503-5",
+    "title": [
+      "Spatial planning of urban communities via deep reinforcement learning"
+    ],
+    "authors": [
+      {
+        "ORCID": "https://orcid.org/0000-0002-1837-6730",
+        "authenticated-orcid": false,
+        "given": "Yu",
+        "family": "Zheng",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Yuming",
+        "family": "Lin",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Liang",
+        "family": "Zhao",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Tinghai",
+        "family": "Wu",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Depeng",
+        "family": "Jin",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0001-5617-1659",
+        "authenticated-orcid": false,
+        "given": "Yong",
+        "family": "Li",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2023,
+          9,
+          11
+        ]
+      ]
+    },
+    "container": [
+      "Nature Computational Science"
+    ],
+    "source": "https://api.crossref.org/works/10.1038%2Fs43588-023-00503-5"
+  }
+}

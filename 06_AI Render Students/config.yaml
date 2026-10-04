@@ -7,7 +7,8 @@ report_sites:                  # 批量出 canvas/report 的清单(不带参数�
   - dapuqiao                   # 里弄/田子坊/24小时协商弄堂
 # 可加任何 05/data/<slug>/buildings.parquet 存在的站(如 waitan xujiahui nanjingxi ...)。
 
-# 权力体制(05 regimes.yaml 的 key + current 基线)
+# 历史影像/动画管线保留的旧权力体制（不是当前优化情景）。
+# 打浦桥 canvas 当前只嵌入 current 基底与 scenarios.yaml 的三个新情景解。
 regimes:
   - current
   - tourism_capture
@@ -15,7 +16,7 @@ regimes:
   - heritage_micro_economy
   - negotiated_24h_alley
 
-# 反事实高度情景(05 power_scenarios.yaml 的 key;footprint 不变,只切换高度)
+# 历史影像/动画管线的反事实高度情景（当前 canvas 不嵌入）。
 counterfactual_scenarios:
   - current
   - tourism_capture

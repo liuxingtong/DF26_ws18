@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the four Dapuqiao research scenarios with one equal NSGA-II budget."""
+"""Run the three current Dapuqiao governance scenarios with one equal NSGA-II budget."""
 
 from __future__ import annotations
 
@@ -20,7 +20,10 @@ sys.path.insert(0, str(WS05))
 from engine.optimization.data import CONFIG_ROOT, load_study, load_yaml  # noqa: E402
 from engine.optimization.nsga2 import run_nsga2  # noqa: E402
 from engine.optimization.metrics import quality_summary  # noqa: E402
-from engine.optimization.roles import evaluate_role_sensitivity, evaluate_roles  # noqa: E402
+from engine.optimization.roles import (  # noqa: E402
+    evaluate_role_priority_sensitivity,
+    evaluate_roles,
+)
 from run_dapuqiao_optimization import (  # noqa: E402
     export_run,
     git_metadata,
@@ -32,10 +35,9 @@ from run_dapuqiao_optimization import (  # noqa: E402
 
 
 SCENARIOS = (
-    "tourism_capture",
-    "everyday_life_first",
-    "heritage_micro_economy",
-    "negotiated_24h_alley",
+    "public_coordination",
+    "development_growth",
+    "resident_heritage_priority",
 )
 
 
@@ -74,9 +76,11 @@ def main() -> int:
                 generations=args.generations,
                 seed=seed,
             )
-            reference = study.objective_config.get("normalization_reference", {})
-            role_rows, selections = evaluate_roles(pareto, role_config, reference)
-            sensitivity_rows = evaluate_role_sensitivity(pareto, role_config, reference)
+            epsilon = study.objective_config.get("epsilon", {})
+            role_rows, selections = evaluate_roles(pareto, role_config, epsilon)
+            sensitivity_rows = evaluate_role_priority_sensitivity(
+                pareto, role_config, epsilon
+            )
             optimization_runtime_seconds = time.perf_counter() - started
             output = export_run(
                 study,
@@ -88,7 +92,7 @@ def main() -> int:
                 samples=0,
                 search_metadata=metadata,
                 output_dir=suite_root / scenario_id / f"seed_{seed}",
-                role_sensitivity_rows=sensitivity_rows,
+                role_priority_sensitivity_rows=sensitivity_rows,
                 optimization_runtime_seconds=optimization_runtime_seconds,
             )
             summary_rows.append({
@@ -134,7 +138,8 @@ def main() -> int:
             "population": args.population,
             "generations": args.generations,
             "shared_objective_measurement": True,
-            "shared_role_normalization": True,
+            "shared_role_epsilon": True,
+            "role_preference_model": "epsilon_tiered_lexicographic",
             "objective_measurement": study.objective_config.get("measurement", {}),
             "epsilon": study.objective_config.get("epsilon", {}),
             "normalization_reference": study.objective_config.get(

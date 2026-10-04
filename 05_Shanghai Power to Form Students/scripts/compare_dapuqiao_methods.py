@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare one conventional parameter baseline with four governance scenarios."""
+"""Compare one conventional parameter baseline with three governance scenarios."""
 
 from __future__ import annotations
 
@@ -40,7 +40,10 @@ from engine.optimization.parameter_baseline import (  # noqa: E402
     build_parameter_baseline_study,
     run_parameter_baseline,
 )
-from engine.optimization.roles import evaluate_role_sensitivity, evaluate_roles  # noqa: E402
+from engine.optimization.roles import (  # noqa: E402
+    evaluate_role_priority_sensitivity,
+    evaluate_roles,
+)
 from run_dapuqiao_optimization import (  # noqa: E402
     export_run,
     git_metadata,
@@ -52,10 +55,9 @@ from run_dapuqiao_optimization import (  # noqa: E402
 
 
 SCENARIOS = (
-    "tourism_capture",
-    "everyday_life_first",
-    "heritage_micro_economy",
-    "negotiated_24h_alley",
+    "public_coordination",
+    "development_growth",
+    "resident_heritage_priority",
 )
 BASELINE_ID = "conventional_parameter_baseline"
 
@@ -68,7 +70,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--evaluation-budget", type=int)
     parser.add_argument(
         "--jobs", type=int, default=1,
-        help="按随机种子并行的进程数；每个种子内部仍顺序运行五种方法",
+        help="按随机种子并行的进程数；每个种子内部仍顺序运行基线和三个情景",
     )
     parser.add_argument(
         "--research-demo", action="store_true",
@@ -190,12 +192,11 @@ def plot_pareto(path: Path, records: list[dict]) -> None:
     methods = (BASELINE_ID, *SCENARIOS)
     labels = {
         BASELINE_ID: "Parameter baseline",
-        "tourism_capture": "Tourism capture",
-        "everyday_life_first": "Everyday life",
-        "heritage_micro_economy": "Heritage micro-economy",
-        "negotiated_24h_alley": "Negotiated 24h alley",
+        "public_coordination": "Public coordination",
+        "development_growth": "Development growth",
+        "resident_heritage_priority": "Resident + heritage",
     }
-    figure, axes = plt.subplots(1, 5, figsize=(18, 3.8), sharex=True, sharey=True)
+    figure, axes = plt.subplots(1, 4, figsize=(15, 3.8), sharex=True, sharey=True)
     scatter = None
     for axis, method_id in zip(axes, methods):
         for record in records:
@@ -321,7 +322,7 @@ def run_seed_worker(
     runs_root: Path,
     skip_geometries: bool,
 ) -> tuple[list[dict], list[str]]:
-    """Run all five methods for one seed in an isolated process."""
+    """Run the baseline and all three scenarios for one seed in an isolated process."""
     specs = load_yaml(CONFIG_ROOT / "operator_specs.yaml").get("operators", {})
     roles = load_yaml(CONFIG_ROOT / "role_profiles.yaml")
     baseline_config = load_yaml(CONFIG_ROOT / "parameter_baseline.yaml")
@@ -376,9 +377,11 @@ def run_seed_worker(
                 study, specs, population=population,
                 generations=generations, seed=seed, evaluation_budget=budget,
             )
-            reference = study.objective_config.get("normalization_reference", {})
-            role_rows, selections = evaluate_roles(front, roles, reference)
-            sensitivity_rows = evaluate_role_sensitivity(front, roles, reference)
+            epsilon = study.objective_config.get("epsilon", {})
+            role_rows, selections = evaluate_roles(front, roles, epsilon)
+            sensitivity_rows = evaluate_role_priority_sensitivity(
+                front, roles, epsilon
+            )
         runtime_seconds = time.perf_counter() - started
         if metadata.get("effective_evaluation_budget") != budget:
             raise RuntimeError(f"{method_id} seed={seed} 的有效评价预算不一致")
@@ -388,7 +391,7 @@ def run_seed_worker(
             seed=seed, samples=0, search_metadata=metadata,
             output_dir=run_output, method_id=method_id,
             export_geometries=not skip_geometries,
-            role_sensitivity_rows=sensitivity_rows,
+            role_priority_sensitivity_rows=sensitivity_rows,
             quality_config=objective_config,
             optimization_runtime_seconds=runtime_seconds,
         )
@@ -612,7 +615,7 @@ def main() -> int:
             "paired_unit": "random seed",
             "test": "two-sided paired Wilcoxon signed-rank",
             "effect_size": "matched-pairs rank-biserial correlation; positive favors scenario",
-            "multiplicity": "Holm correction across four scenario-vs-baseline tests per metric",
+            "multiplicity": "Holm correction across three scenario-vs-baseline tests per metric",
             "primary_metric": "hypervolume",
             "caution": "Five paired seeds have low power; report raw seed values and effect sizes.",
         },
@@ -632,7 +635,7 @@ def main() -> int:
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     report = [
-        "# 打浦桥传统参数基线与四治理情景对照", "",
+        "# 打浦桥传统参数基线与三治理情景对照", "",
         f"- 随机种子：{', '.join(map(str, seeds))}",
         f"- 每方法/种子有效独立评价预算：{budget}",
         "- 共同控制基线：36 m、FAR 3.0、覆盖率 0.60、住宅 GFA 保留 0.80；现状超过基线时保留现状下限；共同目标测量使用 5 m 街道缓冲",

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
-import { Check, ChevronLeft, ChevronRight, Download, Layers3, MapPin, Search, X } from 'lucide-react'
+import { BarChart3, Check, ChevronLeft, ChevronRight, Download, Layers3, MapPin, Search, X } from 'lucide-react'
+import ExperimentDashboard from './ExperimentDashboard'
 
 const DATA_FILES = ['buildings', 'zones', 'streets', 'heritage_proxy', 'public_spaces']
 const initialLayers = { buildings:true, zones:true, streets:true, heritage_proxy:true, official:true }
@@ -59,7 +60,7 @@ function ReviewMap({ data, selected, selectedBids, onToggleBid, layers }) {
   return <div className="map-host" ref={host} aria-label="打浦桥数据复核地图" />
 }
 
-function App() {
+function ReviewWorkspace({ onShowResults }) {
   const { data, error } = useReviewData()
   const [onlyAmbiguous, setOnlyAmbiguous] = useState(true)
   const [search, setSearch] = useState('')
@@ -96,6 +97,7 @@ function App() {
       <div className="source-note">官方名录 · 高德地理编码 · 本地建筑轮廓</div>
       <label className="search"><Search size={16}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="搜索名称、地址或编号" /></label>
       <button className="text-button active">审核</button>
+      <button className="text-button" onClick={onShowResults}><BarChart3 size={16}/>实验结果</button>
       <button className="text-button" onClick={exportReview}><Download size={16}/>导出</button>
     </header>
 
@@ -172,6 +174,17 @@ function App() {
     </aside>
     <footer className="statusbar"><span>审核进度</span><div className="progress"><i style={{width:`${records.length?reviewedCount/records.length*100:0}%`}}/></div><b>{reviewedCount} / {records.length}</b><span className="current"><MapPin size={14}/>当前：{selected.name}</span><span>坐标：WGS84</span></footer>
   </div>
+}
+
+function App() {
+  const [view, setView] = useState(() => window.location.hash === '#results' ? 'results' : 'review')
+  const show = next => {
+    setView(next)
+    window.location.hash = next === 'results' ? 'results' : 'review'
+  }
+  return view === 'results'
+    ? <ExperimentDashboard onShowReview={() => show('review')}/>
+    : <ReviewWorkspace onShowResults={() => show('results')}/>
 }
 
 export default App

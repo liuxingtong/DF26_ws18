@@ -38,7 +38,10 @@ from engine.optimization.metrics import (  # noqa: E402
     front_distribution,
     quality_summary,
 )
-from engine.optimization.roles import evaluate_role_sensitivity, evaluate_roles  # noqa: E402
+from engine.optimization.roles import (  # noqa: E402
+    evaluate_role_priority_sensitivity,
+    evaluate_roles,
+)
 from engine.optimization.search import run_random_baseline  # noqa: E402
 
 
@@ -49,7 +52,7 @@ def parse_args() -> argparse.Namespace:
     audit.add_argument("--research-demo", action="store_true", help="同时显示调试假设后的状态")
 
     run = sub.add_parser("run", help="运行可复现随机搜索基线和角色后评价")
-    run.add_argument("--scenario", default="tourism_capture")
+    run.add_argument("--scenario", default="public_coordination")
     run.add_argument("--samples", type=int, default=100)
     run.add_argument("--backend", choices=["random", "nsga2"], default="nsga2")
     run.add_argument("--population", type=int, default=40)
@@ -255,7 +258,7 @@ def input_scope_metadata() -> dict:
 def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, samples: int,
                search_metadata: dict, output_dir: Path | None = None,
                method_id: str | None = None, export_geometries: bool = True,
-               role_sensitivity_rows: list[dict] | None = None,
+               role_priority_sensitivity_rows: list[dict] | None = None,
                quality_config: dict | None = None,
                optimization_runtime_seconds: float | None = None) -> Path:
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -280,11 +283,13 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
         "warnings": study.warnings,
         "single_pass": True,
         "role_feedback_enabled": False,
+        "role_preference_model": {
+            "type": "epsilon_tiered_lexicographic",
+            "compromise": "minimum_worst_role_rank",
+            "numeric_weights_used": False,
+        },
         "objective_measurement": study.objective_config.get("measurement", {}),
         "epsilon": study.objective_config.get("epsilon", {}),
-        "role_normalization_reference": study.objective_config.get(
-            "normalization_reference", {}
-        ),
         "exported_epsilon_pareto_solution_count": len(pareto),
         "quality_normalization_reference": quality_config.get(
             "normalization_reference", {}
@@ -330,7 +335,10 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
         ],
     )
     write_csv(output / "role_rankings.csv", role_rows)
-    write_csv(output / "role_sensitivity.csv", role_sensitivity_rows or [])
+    write_csv(
+        output / "role_priority_sensitivity.csv",
+        role_priority_sensitivity_rows or [],
+    )
     write_csv(
         output / "epsilon_sensitivity.csv",
         epsilon_sensitivity(candidates, study.objective_config),
@@ -381,7 +389,7 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
 
 def main() -> int:
     args = parse_args()
-    scenario_name = getattr(args, "scenario", "tourism_capture")
+    scenario_name = getattr(args, "scenario", "public_coordination")
     study = load_study(scenario_name, research_demo=args.research_demo)
     if args.command == "audit":
         print(json.dumps(audit_dict(study), ensure_ascii=False, indent=2))
@@ -411,16 +419,16 @@ def main() -> int:
         candidates, pareto, search_metadata = run_random_baseline(
             study, operator_specs, samples=args.samples, seed=args.seed
         )
-    reference_bounds = study.objective_config.get("normalization_reference", {})
-    role_rows, selections = evaluate_roles(pareto, role_config, reference_bounds)
-    role_sensitivity_rows = evaluate_role_sensitivity(
-        pareto, role_config, reference_bounds
+    epsilon = study.objective_config.get("epsilon", {})
+    role_rows, selections = evaluate_roles(pareto, role_config, epsilon)
+    role_priority_sensitivity_rows = evaluate_role_priority_sensitivity(
+        pareto, role_config, epsilon
     )
     optimization_runtime_seconds = time.perf_counter() - started
     output = export_run(
         study, candidates, pareto, role_rows, selections, seed=args.seed, samples=args.samples,
         search_metadata=search_metadata,
-        role_sensitivity_rows=role_sensitivity_rows,
+        role_priority_sensitivity_rows=role_priority_sensitivity_rows,
         optimization_runtime_seconds=optimization_runtime_seconds,
     )
     print(f"候选方案：{len(candidates)}")

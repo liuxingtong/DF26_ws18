@@ -1,0 +1,357 @@
+TY  - JOUR
+ID  - A1
+TI  - Bi-directional mapping of morphology metrics and 3D city blocks for enhanced characterisation and generation of urban form
+PY  - 2025
+T2  - Sustainable Cities and Society
+AU  - Chenyi Cai
+AU  - Biao Li
+AU  - Qiyan Zhang
+AU  - Xiao Wang
+AU  - Filip Biljecki
+AU  - Pieter Herthogs
+DO  - 10.1016/j.scs.2025.106441
+UR  - https://doi.org/10.1016/j.scs.2025.106441
+AB  - 研究“用哪些数字才能准确描述一片城市，以及能否从这些数字找回相应的三维形态”。作者把纽约三维街块转成多组形态指标，比较不同指标组描述高度、街块形状与空间组织的能力，再通过编码、聚类和案例检索找到相似街块。主要贡献是把形态分析与形态检索连接起来；文中的“生成”主要通过检索已有案例实现，并非任意生成全新的城市。
+N1  - 数据与算法比较研究。你上传的是 arXiv v2（2025-06-13），首页说明它是正式期刊论文的接受稿；文件名的 arXiv2024 只是首次预印本年份。
+N1  - Related preprint DOI: 10.48550/arXiv.2412.15801
+N1  - Uploaded/read title: Bi-directional mapping of morphology metrics and 3D city blocks for enhanced characterisation and generation of urban form
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/A1_BiDirectional_Mapping_Morphology_arXiv2024.pdf
+ER  - 
+
+TY  - UNPB
+ID  - A2
+TI  - CoDesignAI: An AI-Enabled Multi-Agent, Multi-User System for Collaborative Urban Design at the Conceptual Stage
+PY  - 2026
+T2  - arXiv
+AU  - Zhaoxi Zhang
+AU  - Ruolin Wu
+AU  - Feiyang Ren
+AU  - Sridevi Turaga
+AU  - Tamir Mendel
+DO  - 10.48550/arXiv.2603.16008
+UR  - https://doi.org/10.48550/arXiv.2603.16008
+AB  - 研究怎样让多个真实使用者共同讨论城市设计，同时获得不同专业 AI 代理的帮助。平台把多人讨论、专业角色代理、街景底图和生成式图像结合起来：AI 整理讨论、归纳共同意图并辅助可视化，使用者再继续修改。文章主要介绍系统架构和互动流程，是协作平台原型的早期探索，尚未用大规模用户实验验证可扩展性或普遍包容性。
+N1  - 2026 年 arXiv 预印本；真实用户与 AI 专家共同参与的系统概念，不是用 AI 居民完全替代公众。
+N1  - Uploaded/read title: CoDesignAI: An AI-Enabled Multi-Agent, Multi-User System for Collaborative Urban Design at the Conceptual Stage
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/A2_CoDesignAI_MultiAgent_arXiv2026.pdf
+ER  - 
+
+TY  - CONF
+ID  - B3
+TI  - LLM Planning Agents: Exploring the potential and challenges of large language model agents in urban design and planning
+PY  - 2025
+T2  - CAADRIA proceedings; Proceedings of the 30th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 1]
+AU  - Eduardo Rico Carranza
+AU  - Sheng-Yang Huang
+AU  - Guanhong Li
+DO  - 10.52842/conf.caadria.2025.1.223
+UR  - https://doi.org/10.52842/conf.caadria.2025.1.223
+AB  - 研究大语言模型能否像规划审查人员一样理解开发提案、提出意见并作出判断。以水管理为重点，比较顺序式和嵌套式代理组织，以及不同规模模型在 63 项开发提案上的表现。嵌套组织在研究中的推理表现较好，但代理常因缺少地方资料而给出泛泛回答，也存在偏差、空间理解不足和偏题。核心是规划分析与审查支持，而非直接生成三维街区。
+N1  - CAADRIA 2025，卷 1，223–232；实验范围为特定规划审查任务，模型更大不必然表现更好。
+N1  - Uploaded/read title: LLM Planning Agents: Exploring the potential and challenges of large language model agents in urban design and planning
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/B3_LLM_Planning_Agents_CAADRIA2025.pdf
+ER  - 
+
+TY  - UNPB
+ID  - B4
+TI  - Large Language Model for Participatory Urban Planning
+PY  - 2024
+T2  - arXiv
+AU  - Zhilun Zhou
+AU  - Yuming Lin
+AU  - Depeng Jin
+AU  - Yong Li
+DO  - 10.48550/arXiv.2402.17161
+UR  - https://doi.org/10.48550/arXiv.2402.17161
+AB  - 让大模型分别扮演规划师和具有不同年龄、家庭等背景的居民，围绕土地用途方案讨论，再由规划师修改方案。文章用“鱼缸讨论”减少大量居民代理同时发言的成本，并在北京两个区域比较服务可达性、生态、满意度与包容性指标。作者报告多项指标改善，但这里的居民参与首先是代理模拟，不能把模型中的满意度直接理解为真实居民调查结果。
+N1  - arXiv 2024。PDF 内的 2018 年会议模板和 XXXXXXX DOI 是未替换的占位信息，不作为正式书目。
+N1  - Uploaded/read title: Large Language Model for Participatory Urban Planning
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/B4_LLM_Participatory_Urban_Planning_Zhou2024.pdf
+ER  - 
+
+TY  - CONF
+ID  - C5
+TI  - PlacemakingAI : Participatory Urban Design with Generative Adversarial Networks
+PY  - 2022
+T2  - CAADRIA proceedings; Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 2]
+AU  - Dongyun Kim
+AU  - George Guida
+AU  - Jose Luis García del Castillo y López
+DO  - 10.52842/conf.caadria.2022.2.485
+UR  - https://doi.org/10.52842/conf.caadria.2022.2.485
+AB  - 研究如何降低城市空间设计的表达门槛，让人们快速看到并修改未来街道的可能面貌。作者结合街景数据、生成对抗网络和实时界面，生成与步行体验有关的街道图像变体，并允许用户迭代操控。重点是街景层面的早期构想与沟通，不是建筑地块层面的精确改造。文章展示原型潜力，将进一步用户测试和更便捷的反馈机制列为后续工作。
+N1  - CAADRIA 2022，卷 2，485–494；生成视觉方案的原型研究。
+N1  - Uploaded/read title: PlacemakingAI : Participatory Urban Design with Generative Adversarial Networks
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/C5_PlacemakingAI_CAADRIA2022.pdf
+ER  - 
+
+TY  - CONF
+ID  - C6
+TI  - Participatory Planning: Heritage Conservation Through Co-design and Co-decision
+PY  - 2022
+T2  - CAADRIA proceedings; Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 2]
+AU  - Siew Leng Leong
+AU  - Patrick Janssen
+DO  - 10.52842/conf.caadria.2022.2.505
+UR  - https://doi.org/10.52842/conf.caadria.2022.2.505
+AB  - 讨论遗产更新中公民常常只能提意见、难以影响最后决定的问题，提出把共同设计和共同决策连接到规划许可过程。文章展示网页原型，让人们从鸟瞰和多个沉浸视角查看新加坡遗产场地中的方案，理解尺度和环境影响。其更大的制度构想是让公众提案、反馈和投票影响许可；实际展示重点是方案查看器，不能等同完整投票治理机制已落地。
+N1  - CAADRIA 2022，卷 2，505–514；参与机制提案与遗产场地可视化原型。
+N1  - Uploaded/read title: Participatory Planning: Heritage Conservation Through Co-design and Co-decision
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/C6_Participatory_Heritage_CoDesign_CAADRIA2022.pdf
+ER  - 
+
+TY  - CONF
+ID  - C7
+TI  - A Framework for a Gameful Collective Urbanism Based on Tokenized Location Data and Liquid Democracy: Early Prototyping of a Case Study Using E-bikes
+PY  - 2022
+T2  - CAADRIA proceedings; Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 1]
+AU  - Salma Tabi
+AU  - Yasushi Sakai
+AU  - Nguyen Tung
+AU  - Masahiro Taima
+AU  - Aqil Cheddadi
+AU  - Yasushi Ikeda
+DO  - 10.52842/conf.caadria.2022.1.585
+UR  - https://doi.org/10.52842/conf.caadria.2022.1.585
+AB  - 研究如何让居民的日常空间使用和地方知识进入集体决策。作者把公共空间的临时使用权、位置数据的代币化和可委托投票的流动民主结合起来，提出具有游戏化参与体验的治理框架，并以电动自行车情境展示早期界面原型。这里的重点是参与激励与权利分配，不是城市形态生成或人流预测；其成效仍处于概念与早期原型阶段。
+N1  - CAADRIA 2022，卷 1，585–594；“临时空间权利”是主题之一，但不是完整的日夜运营仿真。
+N1  - Uploaded/read title: A Framework for a Gameful Collective Urbanism Based on Tokenized Location Data and Liquid Democracy: Early Prototyping of a Case Study Using E-bikes
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/C7_Gameful_Collective_Urbanism_CAADRIA2022.pdf
+ER  - 
+
+TY  - CONF
+ID  - C8
+TI  - A Web-based Interactive Tool for Urban Fabric Generation: A Case Study of Chinese Rural Context
+PY  - 2022
+T2  - CAADRIA proceedings; Proceedings of the 27th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 1]
+AU  - Qiyan Zhang
+AU  - Biao Li
+AU  - Yichen Mo
+AU  - Yulong Chen
+AU  - Peng Tang
+DO  - 10.52842/conf.caadria.2022.1.625
+UR  - https://doi.org/10.52842/conf.caadria.2022.1.625
+AB  - 研究如何让使用者在浏览器中生成符合地方环境的街道与地块肌理。系统将地形、自然边界、既有道路和规划结构等影响组织起来，通过张量场和规则系统控制生成。案例面向中国乡村，强调生成形态与当地原型的关系。虽然整体框架讨论街道、地块和建筑，本文的技术叙述重点是场、街道和地块，未完整展开建筑生成。
+N1  - CAADRIA 2022，卷 1，625–634；程序化生成与网页交互原型。
+N1  - Uploaded/read title: A Web-based Interactive Tool for Urban Fabric Generation: A Case Study of Chinese Rural Context
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/C8_WebBased_Urban_Fabric_Tool_CAADRIA2022.pdf
+ER  - 
+
+TY  - CONF
+ID  - D9
+TI  - Text-to-City: Controllable 3D Urban Block Generation With Latent Diffusion Model
+PY  - 2024
+T2  - CAADRIA proceedings; Proceedings of the 29th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 2]
+AU  - Junling Zhuang
+AU  - Guanhong Li
+AU  - Hang Xu
+AU  - Jintu Xu
+AU  - Runjia Tian
+DO  - 10.52842/conf.caadria.2024.2.169
+UR  - https://doi.org/10.52842/conf.caadria.2024.2.169
+AB  - 研究如何把“城市风格、建筑密度”等文字条件变成三维街块。作者先让潜在扩散模型生成深度图，再把深度转换成高度，重建三维城市形态，并在三个城市的数据上展示条件控制和形态外推。文章报告了密度等条件的控制能力，也指出训练范围之外的描述、同时指定多项指标时仍有困难。它的输出目标是三维街块，而不仅是好看的透视效果图。
+N1  - CAADRIA 2024，卷 2，169–178；有条件生成和量化误差评价。
+N1  - Uploaded/read title: Text-to-City: Controllable 3D Urban Block Generation With Latent Diffusion Model
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/D9_TextToCity_LDM_CAADRIA2024.pdf
+ER  - 
+
+TY  - JOUR
+ID  - D10
+TI  - Human-guided urban form generation using multimodal diffusion models
+PY  - 2026
+T2  - Building and Environment
+AU  - Mingyi He
+AU  - Yuebing Liang
+AU  - Shenhao Wang
+AU  - Yunhan Zheng
+AU  - Qingyi Wang
+AU  - Dingyi Zhuang
+AU  - Li Tian
+AU  - Jinhua Zhao
+DO  - 10.1016/j.buildenv.2025.113892
+UR  - https://doi.org/10.1016/j.buildenv.2025.113892
+AB  - 研究为什么一次性生成最终设计难以保留设计师控制，并将过程拆成道路与用地、建筑布局、细节与影像三个阶段。每个阶段接受文字和图像条件，允许人检查并修改中间结果，再进入下一步。上传的预印本在芝加哥和纽约数据上比较真实性、遵循指令程度与多样性，报告优于相应基线。重点是可分阶段干预的生成流程，而非自动替代协商。
+N1  - 上传文件是 2025 年 arXiv v1。已确认更名后的正式版 Human-guided urban form generation using multimodal diffusion models，Building and Environment 287（2026），113892。摘要说明依据上传版本，未把正式版新增研究细节混入。
+N1  - Related preprint DOI: 10.48550/arXiv.2505.24260
+N1  - Uploaded/read title: Generative AI for Urban Design: A Stepwise Approach Integrating Human Expertise with Multimodal Diffusion Models
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/D10_Stepwise_GenAI_Urban_Design_arXiv2025.pdf
+ER  - 
+
+TY  - JOUR
+ID  - D11
+TI  - From Fake Perfects to Conversational Imperfects: Exploring Image-Generative AI as a Boundary Object for Participatory Design of Public Spaces
+PY  - 2025
+T2  - Proceedings of the ACM on Human-Computer Interaction
+AU  - Jose A. Guridi
+AU  - Angel Hsing-Chi Hwang
+AU  - Duarte Santo
+AU  - Maria Goula
+AU  - Cristobal Cheyre
+AU  - Lee Humphreys
+AU  - Marco Rangel
+DO  - 10.1145/3710912
+UR  - https://doi.org/10.1145/3710912
+AB  - 研究生成图像在公众空间共创中到底有什么价值。作者参与洛杉矶一个公园更新项目，通过工作坊和 AI 图像辅助访谈观察交流过程。发现图像价值未必取决于是否逼真或完全符合提示词：某些不完美图像反而会引出更具体的空间讨论、隐藏需求和分歧。效果也强烈依赖主持人如何协调公众、设计师与 AI。它是一项真实参与过程的定性研究。
+N1  - 上传为 arXiv 2024 v1；正式发表于 Proceedings of the ACM on Human-Computer Interaction（2025），DOI 10.1145/3710912。PDF 内 XXXXXXX 是模板占位符。
+N1  - Related preprint DOI: 10.48550/arXiv.2411.00949
+N1  - Uploaded/read title: From Fake Perfects to Conversational Imperfects: Exploring Image-Generative AI as a Boundary Object for Participatory Design of Public Spaces
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/D11_Conversational_Imperfects_BoundaryObject_arXiv.pdf
+ER  - 
+
+TY  - UNPB
+ID  - D12
+TI  - WeDesign: Generative AI-Facilitated Community Consultations for Urban Public Space Design
+PY  - 2025
+T2  - arXiv
+AU  - Rashid Mushkani
+AU  - Hugo Berard
+AU  - Shin Koseki
+DO  - 10.48550/arXiv.2508.19256
+UR  - https://doi.org/10.48550/arXiv.2508.19256
+AB  - 研究文本生成图像能否让社区咨询更容易表达、交流和迭代。作者在蒙特利尔举办半天工作坊，包含五个混合焦点小组，并访谈六位规划专业人士。实时图像鼓励创意与对话，但对行动不便者需求、地方建筑细节和双语提示的表现不足，一些图像精致却脱离场地。文章的重点是实际使用经验、表达门槛与包容性，而不是新的图像生成算法。
+N1  - arXiv 2025；上传为 v3（2025-09-15）。五个小组不等于五位参与者。
+N1  - Uploaded/read title: WeDesign: Generative AI-Facilitated Community Consultations for Urban Public Space Design
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/D12_WeDesign_arXiv2025.pdf
+ER  - 
+
+TY  - CONF
+ID  - E13
+TI  - New Frontiers in Built Heritage Management: AI assistant for advanced data integration and building information retrieval
+PY  - 2025
+T2  - CAADRIA proceedings; Proceedings of the 30th Conference on Computer Aided Architectural Design Research in Asia (CAADRIA) [Volume 3]
+AU  - Cassia De Lian Cui
+AU  - Edoardo Currà
+AU  - Antonio Fioravanti
+AU  - Wei Yan
+DO  - 10.52842/conf.caadria.2025.3.121
+UR  - https://doi.org/10.52842/conf.caadria.2025.3.121
+AB  - 研究如何把历史文献等非结构化资料与遗产建筑信息模型 HBIM 连接起来，让非程序员也能查询复杂建筑知识。作者以意大利蒂沃利的赫拉克勒斯圣所和原 Segrè 造纸厂为案例，将 AI 助手用于资料访问、解释与跨专业交流，并作定性评估。重点是遗产知识管理与信息问答；实验证据来自案例的一小部分，数据准备和解释准确性仍是限制。
+N1  - CAADRIA 2025，卷 3，121–130；不是直接生成遗产街区更新方案的系统。
+N1  - Uploaded/read title: New Frontiers in Built Heritage Management: AI assistant for advanced data integration and building information retrieval
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/E13_Built_Heritage_AI_CAADRIA2025.pdf
+ER  - 
+
+TY  - CONF
+ID  - E14
+TI  - A Case for Socially Driven Pedestrian Simulations in Urban Environments
+PY  - 2026
+T2  - CAADRIA 2026, Volume 3, 645–654
+AU  - Puja Bhagat
+AU  - Jonathan Wong
+AU  - Milad Showkatbakhsh
+UR  - https://www.emtech.aaschool.ac.uk/publications/
+AB  - 研究行人为什么不总沿最短路径行走，以及人的社会行为会怎样改变空间流动。作者介绍 Grasshopper 插件 Kova PedSim，将社会性行为纳入行人模拟，并比较它与传统模拟在不同城市空间实验中的路径与涌现行为。文章强调，考虑交往倾向后，路径会更加多样，能揭示潜在聚集和未充分使用的区域。这是仿真工具研究，不能直接当作特定街区的已校准预测。
+N1  - CAADRIA 2026，卷 3，645–654。通过上传论文和作者团队出版页核对；未找到可验证 DOI，保留为空。
+N1  - Uploaded/read title: A Case for Socially Driven Pedestrian Simulations in Urban Environments
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/E14_Social_Pedestrian_Sim_CAADRIA2026.pdf
+ER  - 
+
+TY  - CONF
+ID  - E15
+TI  - Knowledge System Construction for Human-Factors-Oriented Urban Regeneration Empowered by Retrieval-Augmented Generation: A case study of age-friendly micro-space renewal in residential communities
+PY  - 2026
+T2  - CAADRIA 2026, Volume 1, 305–314
+AU  - Hanzhe Guo
+AU  - Zhe Guo
+AU  - Jinhao Xie
+AU  - Xing Chen
+AB  - 研究如何将分散的环境心理学、行为研究和设计指南组织成能被设计工作使用的知识。系统把文献证据整理成可检索记录，再生成有来源的设计指导，并连接更新图像和空间变化评价。作者展示上海、合肥的三个适老微更新案例，并由十位建筑专业学生和教师组成焦点组评估。文章报告初步效率和互动收益，同时承认人因证据可能冲突、依赖场景，建议不能代替设计判断。
+N1  - CAADRIA 2026，卷 1，305–314。书目信息来自上传论文；未找到可验证 DOI，保留为空。
+N1  - Uploaded/read title: Knowledge System Construction for Human-Factors-Oriented Urban Regeneration Empowered by Retrieval-Augmented Generation: A case study of age-friendly micro-space renewal in residential communities
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/uploaded/E15_HumanFactors_Urban_Knowledge_CAADRIA2026.pdf
+ER  - 
+
+TY  - JOUR
+ID  - S16
+TI  - Inverse design of urban procedural models
+PY  - 2012
+T2  - ACM Transactions on Graphics
+AU  - Carlos A. Vanegas
+AU  - Ignacio Garcia-Dorado
+AU  - Daniel G. Aliaga
+AU  - Bedrich Benes
+AU  - Paul Waddell
+DO  - 10.1145/2366145.2366187
+UR  - https://doi.org/10.1145/2366145.2366187
+AB  - 研究如何让使用者指定希望达到的结果，而不必自己调整大量底层生成参数。用户可提出日照、室内采光、到公园的距离等目标，系统反向寻找能实现目标的模型参数和城市布局。论文展示局部和整体目标下的交互编辑与多个备选结果。它连接的是高层量化目标与程序化几何模型，不涉及大语言模型或真实居民协商。
+N1  - ACM Transactions on Graphics 31(6)，2012；作者公开稿。论文书目为 11 页，下载文件含额外页，PDF 共 12 页。
+N1  - Uploaded/read title: Inverse design of urban procedural models
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/additional/S16_Inverse_Design_Urban_Procedural_2012.pdf
+ER  - 
+
+TY  - JOUR
+ID  - S17
+TI  - Interactive procedural street modeling
+PY  - 2008
+T2  - ACM Transactions on Graphics
+AU  - Guoning Chen
+AU  - Gregory Esch
+AU  - Peter Wonka
+AU  - Pascal Müller
+AU  - Eugene Zhang
+DO  - 10.1145/1360612.1360702
+UR  - https://doi.org/10.1145/1360612.1360702
+AB  - 研究怎样高效创建和修改大尺度街道网络，同时保留用户对整体方向和局部形状的控制。使用者通过笔刷、旋转、平滑和约束等操作调整方向场，系统生成相应街网，并可进一步编辑图结构、展示三维城市。它是街网程序化建模的基础论文，重点在几何控制和交互效率，并非行人交通性能的直接验证。
+N1  - ACM Transactions on Graphics 27(3)，2008；这里记录期刊版 DOI，SIGGRAPH 收录版本可能使用不同 DOI。
+N1  - Uploaded/read title: Interactive procedural street modeling
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/additional/S17_Interactive_Procedural_Street_Modeling_2008.pdf
+ER  - 
+
+TY  - JOUR
+ID  - S18
+TI  - Social force model for pedestrian dynamics
+PY  - 1995
+T2  - Physical Review E
+AU  - Dirk Helbing
+AU  - Péter Molnár
+DO  - 10.1103/physreve.51.4282
+UR  - https://doi.org/10.1103/physreve.51.4282
+AB  - 研究如何用个体运动规则解释人群整体行为。模型把行人的目标速度、对他人及边界的避让、吸引作用等组织成运动动力学，展示相互作用如何产生自组织现象。它是微观行人模拟的经典基础，有助于理解“客流仿真”具体研究的对象。这里的社会力主要是行为动机的数学表示，并不等于详细模拟居民、游客的文化身份和权利关系。
+N1  - Physical Review E 51，4282–4286，正式发表年份为 1995；不要与后来上传 arXiv 的 1998 年混淆。
+N1  - Uploaded/read title: Social force model for pedestrian dynamics
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/additional/S18_Social_Force_Pedestrian_Dynamics_1995.pdf
+ER  - 
+
+TY  - UNPB
+ID  - S19
+TI  - PlanGPT: Enhancing Urban Planning with Tailored Language Model and Efficient Retrieval
+PY  - 2024
+T2  - arXiv
+AU  - He Zhu
+AU  - Wenjia Zhang
+AU  - Nuoxian Huang
+AU  - Boyang Li
+AU  - Luyao Niu
+AU  - Zipei Fan
+AU  - Tianle Lun
+AU  - Yicheng Tao
+AU  - Junyou Su
+AU  - Zhaoya Gong
+AU  - Chenyu Fang
+AU  - Xing Liu
+DO  - 10.48550/arXiv.2402.19273
+UR  - https://doi.org/10.48550/arXiv.2402.19273
+AB  - 研究通用大模型在规划文本生成、资料检索和文档评价上回答不够专业的问题。作者结合规划领域资料、专门模型训练和检索工具，构建面向城市与国土空间规划工作的系统，并报告专业任务上的改善。文章聚焦知识与文本工作的准确性和效率，不是从文本直接生成三维城市。它与面向单个更新场景的人因知识系统具有不同范围。
+N1  - arXiv 2024 预印本；此处是 PlanGPT 原论文，不是后来另行发表的 PlanGPT-VL。
+N1  - Uploaded/read title: PlanGPT: Enhancing Urban Planning with Tailored Language Model and Efficient Retrieval
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/additional/S19_PlanGPT_arXiv2024.pdf
+ER  - 
+
+TY  - JOUR
+ID  - S20
+TI  - Spatial planning of urban communities via deep reinforcement learning
+PY  - 2023
+T2  - Nature Computational Science
+AU  - Yu Zheng
+AU  - Yuming Lin
+AU  - Liang Zhao
+AU  - Tinghai Wu
+AU  - Depeng Jin
+AU  - Yong Li
+DO  - 10.1038/s43588-023-00503-5
+UR  - https://doi.org/10.1038/s43588-023-00503-5
+AB  - 研究在不规则社区中如何自动安排土地用途与道路。作者把空间表示为图，将规划拆成连续决策，并用图神经网络和强化学习探索布局。在合成与真实社区实验中，模型在论文设定的客观指标上优于所比较的人工方案，也展示人机协作减少规划时间的可能。结论限定于相应任务和指标，不能解释成 AI 在所有城市价值判断上都优于规划师。
+N1  - Nature Computational Science 3，748–762，2023；作者机构提供正式论文 PDF。
+N1  - Uploaded/read title: Spatial planning of urban communities via deep reinforcement learning
+N1  - Local PDF: /Users/edy/Documents/GitHub/DF26_ws18/research/papers/additional/S20_Spatial_Planning_Deep_RL_2023.pdf
+ER  - 

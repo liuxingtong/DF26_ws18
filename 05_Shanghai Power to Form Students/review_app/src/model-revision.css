@@ -1,0 +1,22 @@
+.model-revision-note {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 16px 18px;
+  border: 1px solid #e6b957;
+  border-left: 4px solid #d99517;
+  border-radius: 8px;
+  background: #fff9e8;
+  color: #614408;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.model-revision-note strong {
+  color: #4f3600;
+  font-size: 14px;
+}
+
+.model-revision-note div {
+  color: #7b5b16;
+}

@@ -21,7 +21,15 @@ from .pareto import morphology_signature, pareto_sets
 from .search import evaluate_candidate
 
 
-OPERATOR_NAMES = ("noop", "densify", "open_ground")
+OPERATOR_NAMES = (
+    "noop",
+    "densify",
+    "open_ground",
+    "split_to_towers",
+    "heritage_step_down",
+    "public_space_reconfiguration",
+    "courtyard_access_improvement",
+)
 
 
 def _random_generator(kwargs):
@@ -82,6 +90,18 @@ class MixedDecisionSampling(Sampling):
         if n_samples >= 3:
             matrix[2, 0::2] = 1
             matrix[2, 1::2] = 0.2
+        if n_samples >= 4:
+            matrix[3, 0::2] = 3
+            matrix[3, 1::2] = 0.5
+        if n_samples >= 5:
+            matrix[4, 0::2] = 4
+            matrix[4, 1::2] = 0.5
+        if n_samples >= 6:
+            matrix[5, 0::2] = 5
+            matrix[5, 1::2] = 0.5
+        if n_samples >= 7:
+            matrix[6, 0::2] = 6
+            matrix[6, 1::2] = 0.5
         return matrix
 
 
@@ -136,7 +156,8 @@ class DapuqiaoNSGA2Problem(ElementwiseProblem):
             study.scenario.get("implementation", {}).get("maximum_changed_zone_ratio", 0.40)
         )
         self.operator_availability = build_operator_availability(
-            study.buildings, study.zones, study.controls, study.scenario
+            study.buildings, study.zones, study.controls, study.scenario,
+            operator_specs,
         )
         _, _, self.intensity_limits = operator_policy(study.scenario)
         maximum_building_ratio = float(

@@ -31,3 +31,58 @@ operators:
       editable: true
     expected_effect: {height: increase_limited, footprint: decrease, gfa: approximately_conserved}
     required_checks: [geometry, boundary, heritage, height_limit, far, coverage, residential_retention]
+
+  split_to_towers:
+    label: 大体量拆分
+    action: split_oversized_mass_with_cross_axis_gap
+    intensity: {min: 0.0, max: 1.0}
+    parameters:
+      minimum_building_area_m2: 300.0
+      maximum_gap_ratio: 0.08
+      compensate_gfa: true
+    eligibility:
+      heritage: false
+      editable: true
+    expected_effect: {height: increase_limited, footprint: separated_parts, gfa: approximately_conserved}
+    required_checks: [geometry, boundary, heritage, height_limit, far, coverage, residential_retention, overlap]
+
+  heritage_step_down:
+    label: 敏感对象退台
+    action: redistribute_height_away_from_residential_and_heritage
+    intensity: {min: 0.0, max: 1.0}
+    parameters:
+      influence_distance_m: 80.0
+      maximum_height_redistribution_ratio: 0.30
+    eligibility:
+      heritage: false
+      editable: true
+    expected_effect: {height: lower_near_sensitive_and_higher_farther_away, footprint: unchanged, gfa: conserved_within_zone}
+    required_checks: [geometry, boundary, heritage, height_limit, far, residential_retention]
+
+  public_space_reconfiguration:
+    label: 公共空间重构
+    action: release_ground_around_public_assets
+    intensity: {min: 0.0, max: 1.0}
+    parameters:
+      minimum_footprint_ratio: 0.90
+      maximum_setback_depth_m: 4.0
+      compensate_gfa: false
+    eligibility:
+      heritage: false
+      stakeholder: [state]
+    expected_effect: {height: unchanged, footprint: slightly_decrease, gfa: decrease}
+    required_checks: [geometry, boundary, heritage, coverage, overlap]
+
+  courtyard_access_improvement:
+    label: 院落通行改善
+    action: create_small_ground_level_access_space
+    intensity: {min: 0.0, max: 1.0}
+    parameters:
+      minimum_footprint_ratio: 0.92
+      maximum_corridor_width_m: 3.0
+      compensate_gfa: false
+    eligibility:
+      heritage: false
+      stakeholder: [resident]
+    expected_effect: {height: unchanged, footprint: slightly_decrease, gfa: decrease}
+    required_checks: [geometry, boundary, heritage, coverage, residential_retention, overlap]

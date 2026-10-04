@@ -12,3 +12,7 @@ __pycache__/
 99_教學檔案*/**
 !99_教學檔案*/**/
 !99_教學檔案*/**/*.pptx
+
+# Local research references and temporary processing outputs.
+research/papers/**/*.pdf
+tmp/

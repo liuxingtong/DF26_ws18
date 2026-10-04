@@ -65,6 +65,15 @@ def synthetic_city():
         "noop": {},
         "densify": {"parameters": {"maximum_height_gain_ratio": 0.3}},
         "open_ground": {"parameters": {"minimum_footprint_ratio": 0.75, "compensate_gfa": True}},
+        "split_to_towers": {"parameters": {
+            "minimum_building_area_m2": 300.0,
+            "maximum_gap_ratio": 0.08,
+            "compensate_gfa": True,
+        }},
+        "heritage_step_down": {"parameters": {
+            "influence_distance_m": 80.0,
+            "maximum_height_redistribution_ratio": 0.30,
+        }},
     }
     return buildings, boundary, streets, zones, controls, scenario, specs
 
@@ -109,6 +118,40 @@ class OptimizationFrameworkTests(unittest.TestCase):
         self.assertLess(descriptors["net_gfa_change_m2"], 0.0)
         self.assertAlmostEqual(
             descriptors["positive_gfa_increment_m2"], 400.0 / 3.5
+        )
+
+    def test_height_change_exposes_residents_in_same_update_zone_without_weights(self):
+        buildings, boundary, streets, _, _, scenario, _ = synthetic_city()
+        buildings.loc[buildings.bid.eq("B2"), "zone_id"] = "Z1"
+        candidate = buildings.copy()
+        candidate.loc[candidate.bid.eq("B2"), "height_m"] = 16.0
+        objectives, descriptors = evaluate_objectives(
+            buildings,
+            candidate,
+            [{"bid": "B2", "zone_id": "Z1", "operator": "densify"}],
+            boundary,
+            streets,
+            scenario,
+        )
+
+        self.assertEqual(objectives["residential_disruption"], 1.0)
+        self.assertEqual(descriptors["direct_residential_change_ratio"], 0.0)
+        self.assertEqual(descriptors["exposed_resident_buildings"], 1.0)
+
+    def test_objective_labels_and_capacity_normalization_match_revised_meaning(self):
+        config = load_yaml(CONFIG_ROOT / "objectives.yaml")
+
+        self.assertEqual(
+            config["objectives"]["residential_disruption"]["label"],
+            "居住影响暴露",
+        )
+        self.assertEqual(
+            config["objectives"]["development_capacity"]["label"],
+            "正向增建量",
+        )
+        self.assertEqual(
+            config["normalization_reference"]["development_capacity"]["maximum"],
+            0.03,
         )
 
     def test_street_buffer_is_fixed_by_objective_config(self):
@@ -235,7 +278,7 @@ class OptimizationFrameworkTests(unittest.TestCase):
         self.assertEqual(impacts[("Z2", "open_ground")], 1)
 
     def test_scenario_policy_limits_operator_targets_and_intensity(self):
-        buildings, _, _, zones, controls, _, specs = synthetic_city()
+        buildings, _, streets, zones, controls, _, specs = synthetic_city()
         scenario = {"operator_policy": {
             "allowed_operators": ["open_ground"],
             "stakeholder_targets": {"open_ground": ["developer"]},
@@ -251,6 +294,169 @@ class OptimizationFrameworkTests(unittest.TestCase):
         self.assertEqual(len(changes), 1)
         self.assertAlmostEqual(changes[0]["intensity"], 0.4)
         self.assertLess(after.loc[after.bid.eq("B2"), "geometry"].iloc[0].area, 400.0)
+
+    def test_split_to_towers_creates_separated_parts_and_preserves_gfa(self):
+        buildings, boundary, streets, zones, controls, _, specs = synthetic_city()
+        scenario = {"operator_policy": {
+            "allowed_operators": ["split_to_towers"],
+            "stakeholder_targets": {"split_to_towers": ["developer"]},
+            "maximum_intensity": {"split_to_towers": 1.0},
+        }}
+        before = buildings.loc[buildings.bid.eq("B2")].iloc[0]
+        after, changes = apply_decisions(
+            buildings,
+            [ZoneDecision("Z2", "split_to_towers", 1.0)],
+            controls,
+            specs,
+            zones,
+            scenario=scenario,
+        )
+        changed = after.loc[after.bid.eq("B2")].iloc[0]
+        self.assertEqual(len(changes), 1)
+        self.assertEqual(changed.geometry.geom_type, "MultiPolygon")
+        self.assertEqual(len(changed.geometry.geoms), 2)
+        self.assertLess(changed.geometry.area, before.geometry.area)
+        before_gfa = before.geometry.area * before.height_m
+        after_gfa = changed.geometry.area * changed.height_m
+        self.assertAlmostEqual(after_gfa, before_gfa, places=5)
+        _, descriptors = evaluate_objectives(
+            buildings, after, changes, boundary, streets, scenario
+        )
+        self.assertEqual(descriptors["split_to_towers_count"], 1.0)
+
+    def test_heritage_step_down_moves_height_away_from_sensitive_buildings(self):
+        buildings, boundary, streets, zones, controls, _, specs = synthetic_city()
+        extra = gpd.GeoDataFrame([
+            {"bid": "B3", "height_m": 12.0, "stakeholder_proxy": "developer",
+             "residential_proxy": False, "heritage": False, "editable": True,
+             "zone_id": "Z2", "geometry": box(85, 70, 95, 80)},
+        ], crs=buildings.crs)
+        extra["base_height_m"] = extra["height_m"]
+        extra["base_area_m2"] = extra.geometry.area
+        buildings = pd.concat([buildings, extra], ignore_index=True)
+        buildings = gpd.GeoDataFrame(buildings, geometry="geometry", crs=32651)
+        scenario = {"operator_policy": {
+            "allowed_operators": ["heritage_step_down"],
+            "stakeholder_targets": {"heritage_step_down": ["developer"]},
+            "maximum_intensity": {"heritage_step_down": 1.0},
+        }}
+        before_gfa = float((
+            buildings.loc[buildings.zone_id.eq("Z2")].geometry.area
+            * buildings.loc[buildings.zone_id.eq("Z2"), "height_m"]
+        ).sum())
+        after, changes = apply_decisions(
+            buildings,
+            [ZoneDecision("Z2", "heritage_step_down", 1.0)],
+            controls,
+            specs,
+            zones,
+            scenario=scenario,
+        )
+        near_height = float(after.loc[after.bid.eq("B2"), "height_m"].iloc[0])
+        far_height = float(after.loc[after.bid.eq("B3"), "height_m"].iloc[0])
+        after_gfa = float((
+            after.loc[after.zone_id.eq("Z2")].geometry.area
+            * after.loc[after.zone_id.eq("Z2"), "height_m"]
+        ).sum())
+        self.assertEqual({row["bid"] for row in changes}, {"B2", "B3"})
+        self.assertLess(near_height, 12.0)
+        self.assertGreater(far_height, 12.0)
+        self.assertAlmostEqual(after_gfa, before_gfa, places=5)
+        _, descriptors = evaluate_objectives(
+            buildings, after, changes, boundary, streets, scenario
+        )
+        self.assertEqual(descriptors["heritage_step_down_count"], 2.0)
+
+    def test_new_form_operators_are_unavailable_without_real_effect(self):
+        buildings, _, streets, zones, controls, _, specs = synthetic_city()
+        buildings.loc[buildings.bid.eq("B2"), "geometry"] = box(60, 10, 65, 15)
+        scenario = {"operator_policy": {
+            "allowed_operators": ["split_to_towers", "heritage_step_down"],
+            "stakeholder_targets": {
+                "split_to_towers": ["developer"],
+                "heritage_step_down": ["developer"],
+            },
+        }}
+        availability = build_operator_availability(
+            buildings, zones, controls, scenario, specs
+        )
+        self.assertEqual(availability["Z2"], ("noop",))
+
+    def test_current_scenarios_assign_distinct_explainable_operator_sets(self):
+        scenarios = load_yaml(CONFIG_ROOT / "scenarios.yaml")["scenarios"]
+        self.assertEqual(
+            set(scenarios["public_coordination"]["operator_policy"]["allowed_operators"]),
+            {"densify", "open_ground", "heritage_step_down", "public_space_reconfiguration", "courtyard_access_improvement"},
+        )
+        self.assertEqual(
+            set(scenarios["development_growth"]["operator_policy"]["allowed_operators"]),
+            {"densify", "open_ground", "split_to_towers", "courtyard_access_improvement"},
+        )
+        self.assertEqual(
+            set(scenarios["resident_heritage_priority"]["operator_policy"]["allowed_operators"]),
+            {"open_ground", "heritage_step_down", "public_space_reconfiguration", "courtyard_access_improvement"},
+        )
+
+    def test_low_intensity_operators_change_only_their_explainable_targets(self):
+        buildings, _, streets, zones, controls, _, specs = synthetic_city()
+        specs.update({
+            "public_space_reconfiguration": {"parameters": {"minimum_footprint_ratio": 0.90}},
+            "courtyard_access_improvement": {"parameters": {"minimum_footprint_ratio": 0.92}},
+        })
+        buildings.loc[buildings["bid"].eq("B1"), "stakeholder"] = "state"
+        buildings.loc[buildings["bid"].eq("B1"), "stakeholder_proxy"] = "state"
+        buildings.loc[buildings["bid"].eq("B1"), "editable"] = False
+        buildings.loc[buildings["bid"].eq("B2"), "stakeholder"] = "resident"
+        buildings.loc[buildings["bid"].eq("B2"), "stakeholder_proxy"] = "resident"
+        buildings.loc[buildings["bid"].eq("B2"), "residential_proxy"] = True
+        scenario = {"operator_policy": {
+            "allowed_operators": ["public_space_reconfiguration", "courtyard_access_improvement"],
+            "stakeholder_targets": {
+                "public_space_reconfiguration": ["state"],
+                "courtyard_access_improvement": ["resident"],
+            },
+        }}
+        public_result, public_changes = apply_decisions(
+            buildings,
+            [ZoneDecision("Z1", "public_space_reconfiguration", 1.0)],
+            controls,
+            specs,
+            zones,
+            scenario,
+            streets=streets,
+        )
+        self.assertEqual({item["bid"] for item in public_changes}, {"B1"})
+        self.assertLess(public_result.loc[public_result["bid"].eq("B1"), "geometry"].iloc[0].area,
+                        buildings.loc[buildings["bid"].eq("B1"), "geometry"].iloc[0].area)
+        self.assertEqual(public_result.loc[public_result["bid"].eq("B1"), "height_m"].iloc[0],
+                         buildings.loc[buildings["bid"].eq("B1"), "height_m"].iloc[0])
+        self.assertGreater(
+            public_result.loc[public_result["bid"].eq("B1"), "geometry"].iloc[0].bounds[1],
+            buildings.loc[buildings["bid"].eq("B1"), "geometry"].iloc[0].bounds[1],
+        )
+
+        resident_result, resident_changes = apply_decisions(
+            buildings,
+            [ZoneDecision("Z2", "courtyard_access_improvement", 1.0)],
+            controls,
+            specs,
+            zones,
+            scenario,
+            streets=streets,
+        )
+        self.assertEqual({item["bid"] for item in resident_changes}, {"B2"})
+        self.assertLess(resident_result.loc[resident_result["bid"].eq("B2"), "geometry"].iloc[0].area,
+                        buildings.loc[buildings["bid"].eq("B2"), "geometry"].iloc[0].area)
+        self.assertEqual(resident_result.loc[resident_result["bid"].eq("B2"), "height_m"].iloc[0],
+                         buildings.loc[buildings["bid"].eq("B2"), "height_m"].iloc[0])
+        original_centroid = buildings.loc[
+            buildings["bid"].eq("B2"), "geometry"
+        ].iloc[0].centroid
+        self.assertFalse(
+            resident_result.loc[
+                resident_result["bid"].eq("B2"), "geometry"
+            ].iloc[0].contains(original_centroid)
+        )
 
     def test_only_new_overlap_is_reported(self):
         buildings, boundary, _, zones, controls, scenario, _ = synthetic_city()
@@ -285,12 +491,16 @@ class OptimizationFrameworkTests(unittest.TestCase):
                       candidate("C", 0.3, 0.05, 0.05)]
         front = nondominated(candidates)
         self.assertEqual({item.solution_id for item in front}, {"A", "B"})
-        config = {"roles": {"resident": {"weights": {
-            "residential_disruption": 1.0,
-            "development_capacity": 0.0,
-            "street_connected_released_ground": 0.0,
-        }, "thresholds": {}}}}
-        _, selected = evaluate_roles(front, config)
+        config = {"roles": {"resident": {"priority_order": [
+            "residential_disruption",
+            "street_connected_released_ground",
+            "development_capacity",
+        ]}}}
+        _, selected = evaluate_roles(front, config, {
+            "residential_disruption": 0.001,
+            "development_capacity": 0.0005,
+            "street_connected_released_ground": 0.00005,
+        })
         self.assertEqual(selected["resident"], "A")
 
     def test_pareto_pipeline_keeps_full_front_and_filters_epsilon_equivalents(self):
@@ -324,7 +534,7 @@ class OptimizationFrameworkTests(unittest.TestCase):
         self.assertEqual(diagnostics["full_pareto_count"], 2)
         self.assertEqual(diagnostics["objective_duplicate_count"], 1)
 
-    def test_fixed_role_bounds_make_scores_independent_of_other_candidates(self):
+    def test_epsilon_tiered_priority_uses_second_objective_for_near_ties(self):
         def candidate(sid, disruption, development, released):
             return CandidateEvaluation(
                 sid, [], None, [],
@@ -334,23 +544,50 @@ class OptimizationFrameworkTests(unittest.TestCase):
                 {}, [],
             )
 
-        a = candidate("A", 0.1, 0.004, 0.001)
-        b = candidate("B", 0.2, 0.008, 0.002)
-        c = candidate("C", 0.01, 0.0001, 0.0001)
-        config = {"roles": {"planner": {"weights": {
-            "residential_disruption": 0.4,
-            "development_capacity": 0.3,
-            "street_connected_released_ground": 0.3,
-        }, "thresholds": {}}}}
-        bounds = {
-            "residential_disruption": {"minimum": 0.0, "maximum": 0.3},
-            "development_capacity": {"minimum": 0.0, "maximum": 0.01},
-            "street_connected_released_ground": {"minimum": 0.0, "maximum": 0.0025},
+        a = candidate("A", 0.1000, 0.004, 0.001)
+        b = candidate("B", 0.1005, 0.004, 0.002)
+        config = {"roles": {"resident": {"priority_order": [
+            "residential_disruption",
+            "street_connected_released_ground",
+            "development_capacity",
+        ]}}}
+        epsilon = {
+            "residential_disruption": 0.001,
+            "development_capacity": 0.0005,
+            "street_connected_released_ground": 0.00005,
         }
-        first, _ = evaluate_roles([a, b], config, bounds)
-        second, _ = evaluate_roles([a, c], config, bounds)
-        score = lambda rows: next(row["score"] for row in rows if row["solution_id"] == "A")
-        self.assertAlmostEqual(score(first), score(second))
+        rows, selected = evaluate_roles([a, b], config, epsilon)
+        self.assertEqual(selected["resident"], "B")
+        self.assertNotIn("score", rows[0])
+        self.assertEqual(rows[0]["priority_1_tier"], 1)
+
+    def test_identical_priority_signatures_share_the_same_rank(self):
+        def candidate(sid):
+            return CandidateEvaluation(
+                sid, [], None, [],
+                {"residential_disruption": 0.1,
+                 "development_capacity": 0.004,
+                 "street_connected_released_ground": 0.002},
+                {}, [],
+            )
+
+        config = {"roles": {"resident": {"priority_order": [
+            "residential_disruption",
+            "street_connected_released_ground",
+            "development_capacity",
+        ]}}}
+        rows, _ = evaluate_roles(
+            [candidate("A"), candidate("B")],
+            config,
+            {
+                "residential_disruption": 0.001,
+                "development_capacity": 0.0005,
+                "street_connected_released_ground": 0.00005,
+            },
+        )
+
+        self.assertEqual([row["priority_signature"] for row in rows], ["1>1>1", "1>1>1"])
+        self.assertEqual([row["rank"] for row in rows], [1, 1])
 
     def test_nsga2_backend_runs_single_pass(self):
         buildings, boundary, streets, zones, controls, scenario, specs = synthetic_city()
@@ -373,6 +610,41 @@ class OptimizationFrameworkTests(unittest.TestCase):
         self.assertEqual(metadata["unique_evaluations"], 4)
         self.assertFalse(metadata["building_scope_repair_enabled"])
         self.assertTrue(metadata["convergence"])
+
+    def test_nsga2_search_space_includes_split_to_towers(self):
+        buildings, boundary, streets, zones, controls, scenario, specs = synthetic_city()
+        study = SimpleNamespace(
+            buildings=buildings,
+            boundary=boundary,
+            streets=streets,
+            zones=zones,
+            controls=controls,
+            scenario={
+                **scenario,
+                "implementation": {
+                    "maximum_changed_zone_ratio": 1.0,
+                    "maximum_changed_building_ratio": 1.0,
+                },
+                "operator_policy": {
+                    "allowed_operators": ["split_to_towers"],
+                    "stakeholder_targets": {"split_to_towers": ["developer"]},
+                    "maximum_intensity": {"split_to_towers": 1.0},
+                },
+            },
+            blockers=[],
+        )
+        candidates, _, metadata = run_nsga2(
+            study, specs, population=4, generations=2, seed=23,
+            evaluation_budget=2,
+        )
+        active_operators = {
+            decision.operator
+            for candidate in candidates
+            for decision in candidate.decisions
+            if decision.operator != "noop"
+        }
+        self.assertEqual(active_operators, {"split_to_towers"})
+        self.assertIn("split_to_towers", metadata["operator_availability"]["Z2"])
 
     def test_parameter_baseline_ignores_stakeholder_editability_but_not_heritage(self):
         buildings, boundary, streets, zones, controls, scenario, _ = synthetic_city()

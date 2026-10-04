@@ -1,34 +1,33 @@
 roles:
   resident:
     label: 居民利益视角
-    weights:
-      residential_disruption: 0.60
-      development_capacity: 0.10
-      street_connected_released_ground: 0.30
-    thresholds:
-      residential_disruption_max: 0.20
+    priority_order:
+      - residential_disruption
+      - street_connected_released_ground
+      - development_capacity
+    feasibility_required: true
 
   development:
     label: 开发实施视角
-    weights:
-      residential_disruption: 0.15
-      development_capacity: 0.65
-      street_connected_released_ground: 0.20
-    thresholds: {}
+    priority_order:
+      - development_capacity
+      - street_connected_released_ground
+      - residential_disruption
+    feasibility_required: true
 
   public_planning:
     label: 公共规划视角
-    weights:
-      residential_disruption: 0.35
-      development_capacity: 0.20
-      street_connected_released_ground: 0.45
-    thresholds:
-      feasible_required: true
+    priority_order:
+      - street_connected_released_ground
+      - residential_disruption
+      - development_capacity
+    feasibility_required: true
 
 metadata:
-  status: research_hypothesis
-  note: 权重是可审查的初始假设，不代表真实居民、开发者或政府调查结果；正式论文需做敏感性分析。
+  status: ordinal_research_hypothesis
+  selection_method: epsilon_tiered_lexicographic
+  compromise_method: minimum_worst_role_rank
+  note: 角色只声明目标优先顺序，不使用精确权重；目标差异小于 objectives.yaml 的 epsilon 时视为同一档，再比较下一优先级。角色排序仅用于 Pareto 解生成后的选择，不回写优化循环。
 
 sensitivity:
-  weight_factors: [0.8, 1.2]
-  threshold_factors: [0.8, 1.2]
+  adjacent_priority_swaps: true

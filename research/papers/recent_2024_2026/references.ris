@@ -1,0 +1,173 @@
+TY  - CONF
+ID  - R21
+TI  - SIMForms: A Web-Based Generative Application Fusing Forms, Metrics, and Visuals for Early-Stage Design
+PY  - 2024
+T2  - CAADRIA 2024
+AU  - Zhang, Baizhou
+AU  - Mo, Yichen
+AU  - Li, Biao
+AU  - Wang, Yanyu
+AU  - Zhang, Chao
+AU  - Shi, Ji
+DO  - 10.52842/conf.caadria.2024.1.373
+UR  - https://doi.org/10.52842/conf.caadria.2024.1.373
+AB  - 研究早期设计中形态、量化指标与视觉表现分离的问题。网页应用将规则式参数建模、指标计算反馈和 AI 概念图生成放在同一流程中，使用者通过简单操作探索不同形态。它与我们“算子—指标—展示”的结构很接近，适合作为已有技术参照；公众如何协商、意见如何影响结果不是这篇摘要验证的重点。不能仅以集成三维生成和指标面板主张新颖性。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R22
+TI  - Urban Analytics and Generative Deep Learning for Context Responsive Design in Digital Twins: A Singapore Study
+PY  - 2024
+T2  - CAADRIA 2024
+AU  - Nazim, Ibrahim
+AU  - Joyce, SamConrad
+DO  - 10.52842/conf.caadria.2024.2.495
+UR  - https://doi.org/10.52842/conf.caadria.2024.2.495
+AB  - 研究数字孪生通常擅长展示数据，却不支持充分的设计探索这一断裂。以 Virtual Singapore 为平台，探索利用城市数据、三维交互和针对地方规划肌理训练的生成模型支持快速方案原型，同时讨论平台开发限制。它直接连接 C6 提到的 Virtual Singapore 与后续设计支持问题。两篇共享这一平台议题，不据此推断它是 C6 的直接续作。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R23
+TI  - Urban Site Adaptive Layout Generation: User-configurable Algorithms Based on MQP
+PY  - 2024
+T2  - CAADRIA 2024
+AU  - Wang, Yujiao
+AU  - Hu, Qian
+AU  - Tang, Peng
+AU  - Fang, Rong
+AU  - Meng, Yuan
+DO  - 10.52842/conf.caadria.2024.2.505
+UR  - https://doi.org/10.52842/conf.caadria.2024.2.505
+AB  - 把复杂边界、已有道路及入口、地块邻接等条件组织成混合二次规划问题，通过硬约束与可加权软约束生成布局，使用校园规划案例说明应用。它对“用户意图怎样变成明确空间条件”很有价值。不过作者在结论中承认每轮生成仍是单向过程、可见性与交互不足，逐阶段调整的友好界面是未来工作，因此不应把它写成成熟的实时城市编辑器。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R24
+TI  - Participatory Space Auto-Encapsulation: Bridging Human Relationships to Building Typology with Machine Intelligence
+PY  - 2024
+T2  - CAADRIA 2024
+AU  - Zhang, Yi
+AU  - Peng, Ziyu
+AU  - Lu, Weisheng
+DO  - 10.52842/conf.caadria.2024.2.231
+UR  - https://doi.org/10.52842/conf.caadria.2024.2.231
+AB  - 面向合居住宅，将入住者的关系、共同兴趣、面积与共享空间意愿组织成社会图，再通过图学习转成空间关系，最后由规则生成布局与三维形态。原文报告访谈 75 人、构造 100 个 minimum dwelling 单元的关系数据。这是本轮最明确讨论“人际关系—空间关系—形态”转译的论文之一。访谈中的共同居住关系包含设想情境，不能等同于建成后的居住效果验证；合居尺度也不能直接覆盖历史街区中的产权与群体冲突。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R25
+TI  - Kit-of-Parts Design for Architecture Co-Creation Games
+PY  - 2024
+T2  - CAADRIA 2024
+AU  - Ng, Provides
+AU  - Li, Yuechun
+AU  - Zhu, Shutong
+AU  - vanAmeijde, Jeroen
+DO  - 10.52842/conf.caadria.2024.2.221
+UR  - https://doi.org/10.52842/conf.caadria.2024.2.221
+AB  - 研究公众在沙盒游戏中用什么样的构件才能有效提出空间方案。社区参与者通过定制游戏共创公共空间，比较 modular-integrated、modular、discrete 三类构件系统。初步结果指出，抽象程度和离散粒度会影响学习门槛、协作启动、创意以及方案的可实施性。与 C6 把建模交给 SketchUp 用户相比，这篇更直接触及公众“能编辑什么、编辑到哪一层”。不能推断任一种构件系统在所有任务中最好。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R26
+TI  - Empowering End-Users in Spatial Design Tasks: An empirical study of co-design in extended reality
+PY  - 2025
+T2  - CAADRIA 2025
+AU  - Hu, Weiheng
+AU  - Kahlon, Yuval
+AU  - Nakatani, Momoko
+AU  - Fujii, Haruyuki
+DO  - 10.52842/conf.caadria.2025.4.347
+UR  - https://doi.org/10.52842/conf.caadria.2025.4.347
+AB  - 让建筑师和终端用户合作完成指定空间设计，比较 MR 平台与传统绘图工具，通过行为及反馈的质性分析研究协作、沟通和参与体验。它的价值在于直接比较参与过程，而不只展示一个系统界面。这里所核实的摘要没有给出足以支持普遍优势的量化效应量；也不能将建筑空间实验等同于街区层面的利益协商效果。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R27
+TI  - Rethinking Participatory Architectural Design: Harnessing Immersive Environments & AI for Facilitating Designer-Stakeholder Collaboration
+PY  - 2025
+T2  - CAAD Futures 2025
+AU  - Hu, Weiheng
+AU  - Kahlon, Yuval
+AU  - Nakatani, Momoko
+AU  - Fujii, Haruyuki
+DO  - 10.25442/hku.29345678
+UR  - https://doi.org/10.25442/hku.29345678
+AB  - 以交流理论区分参与者对设计的理解与对设计形成的贡献，综述筛选了 27 篇研究，并用沉浸式草绘和 AI 辅助体素草绘两个探索案例讨论新工具定位。它指出视觉理解得到较多支持，而把参与者意图转成可继续修改的设计输入仍不足。非常适合解释为什么在 C6 之上需要“可编辑、可追踪的共同设计”；其自身是框架与探索性研究，并未证明完整系统的普遍有效性。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R28
+TI  - Enhancing End-to-End Processing, Analysis, and Visualisation of Citizen Participation Data in Urban Design and Planning
+PY  - 2025
+T2  - CAAD Futures 2025
+AU  - Ataman, Cem
+AU  - Tunçer, Bige
+AU  - Perrault, Simon
+DO  - 10.25442/hku.29365973
+UR  - https://doi.org/10.25442/hku.29365973
+AB  - 提出网页工具 DIP-DAT，把公众参与数据的预处理、可配置分析参数和交互可视化放入同一界面，帮助规划者处理大量反馈，并报告跨领域专家评价。它主要服务于分析反馈的专业人员，有助于补齐“收集评论之后怎样处理”的环节；不负责把每条意见直接转成可编辑三维形态。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R29
+TI  - Perceptual Urban Form
+PY  - 2025
+T2  - CAAD Futures 2025
+AU  - Meng Chan, Chee
+AU  - Chando Kim, Frederick
+DO  - 10.25442/hku.29365799
+UR  - https://doi.org/10.25442/hku.29365799
+AB  - 根据作者研究说明，论文研究三维城市数据及不同表示方式如何进入形态与感知的回归分析，并探索无监督学习对人和机器理解的联系。它对应“形态—感知”的关联，而不是已经验证的“利益诉求—形态”生成机制。正式注册标题为 Perceptual Urban Form；会议早期节目表写 Deep Perceptual Urban Form，以正式记录为准。
+N1  - 作者研究说明；未读全文
+ER  - 
+
+TY  - CONF
+ID  - R30
+TI  - Situating Digital Participation: Incorporating material, contextual, and performative learnings into digital toolkits
+PY  - 2024
+T2  - eCAADe 2024
+AU  - Drechsel, Matti
+AU  - Förster, Nick
+AU  - Schubert, Gerhard
+AU  - Petzold, Frank
+DO  - 10.52842/conf.ecaade.2024.2.465
+UR  - https://doi.org/10.52842/conf.ecaade.2024.2.465
+AB  - 以 NEBourhood-hubs 的位置选择、配置和设计为背景，把现场行走、身体体验和协作活动形成的知识带入数字工具设计。通过建筑与城市设计教学中的原型探索，讨论数字工具如何保留具体地点的复杂经验。对历史街区有价值，因为居民的生活知识经常难以被预设选项覆盖；它是现场过程与教学原型研究，不是完整协商平台的规模化验证。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R31
+TI  - Data-Informed Design Democratization: Engaging design stakeholders for creating livable built environments
+PY  - 2024
+T2  - eCAADe 2024
+AU  - Khan, MdZishaan
+AU  - Erhan, Halil
+AU  - YagmurKilimci, ElifSezen
+DO  - 10.52842/conf.ecaade.2024.2.475
+UR  - https://doi.org/10.52842/conf.ecaade.2024.2.475
+AB  - 提出 Di-Dem 概念框架，以九项核心特征审视参与工具，再评价十个平台，关注数据获取、可理解的展示、包容性讨论与反馈。它帮助区分“有评论框”和“意见建立在可理解数据上”这两种状态。其证据是框架构建与平台特征评价，不是十个平台之间的真实用户随机对照实验。
+N1  - 摘要或正文核读；详见README逐条说明
+ER  - 
+
+TY  - CONF
+ID  - R32
+TI  - Digital Participation in Sustainable Urban Densification: Exploratory Design Methods for Timber Building Stock Extensions
+PY  - 2026
+T2  - CAADRIA 2026
+AU  - Papadimitraki, Maria
+AU  - Wagner, Hans Jakob
+AU  - Menges, Achim
+UR  - https://www.hansjakobwagner.com/publications/proceedings/
+AB  - 作者与机构已确认发表及报告。论文关注如何把多层木结构系统从新建拓展到既有建筑扩建，并将计算设计与数字参与联系起来。对“在既有城市中编辑和增建”的任务贴切；本轮只作主题候选，尚不足以判断参与者具体编辑权限、社区样本和实际效益。
+N1  - 出版身份与主题初筛；DOI及全文待核
+ER  - 

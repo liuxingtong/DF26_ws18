@@ -1,12 +1,12 @@
 objectives:
   residential_disruption:
     direction: minimize
-    label: 居住空间扰动
+    label: 居住影响暴露
     unit: ratio
-    definition: 受修改住宅的现状 GFA / 现状住宅总 GFA
+    definition: 被直接修改，或与增高、拆分、退台建筑位于同一道路围合更新单元的住宅现状 GFA / 住宅总 GFA；采用离散暴露判定，不使用距离权重
   development_capacity:
     direction: maximize
-    label: 合规开发容量
+    label: 正向增建量
     unit: floor_area_ratio_delta
     definition: 逐建筑计算的正 GFA 增量之和 / 研究区面积；减量建筑不能抵消增量建筑
   street_connected_released_ground:
@@ -16,7 +16,7 @@ objectives:
     definition: 现状占地减去方案占地后与道路缓冲相交的面积 / 研究区面积；只读取建筑足迹与街道网络，不读取公共空间背景图层，也不表示公共空间面积、权属或可达性
 
 measurement:
-  # 四个情景共同使用；不得由情景配置覆盖。
+  # 三个当前情景共同使用；不得由情景配置覆盖。
   street_access_buffer_m: 5.0
 
 data_dependencies:
@@ -44,9 +44,10 @@ epsilon:
   street_connected_released_ground: 0.00005
 
 normalization_reference:
-  # 固定于现有四情景探索范围之外的圆整上界；超界值会截到 0/1，且应触发复核。
+  # 2026-09-28 根据新增算子后的三情景预览重新校准并冻结；上界取高于
+  # 已观测 0.02377 的圆整值 0.03。超界仍会截到 0/1 并触发复核。
   residential_disruption: {minimum: 0.0, maximum: 0.35}
-  development_capacity: {minimum: 0.0, maximum: 0.01}
+  development_capacity: {minimum: 0.0, maximum: 0.03}
   street_connected_released_ground: {minimum: 0.0, maximum: 0.0025}
 
 representative_sampling:

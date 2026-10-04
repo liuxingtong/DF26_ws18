@@ -151,7 +151,11 @@ def load_study(
     shared_experiment_controls: bool = False,
     data_root: Path = DATA_ROOT,
 ) -> StudyData:
-    scenarios = load_yaml(CONFIG_ROOT / "scenarios.yaml").get("scenarios", {})
+    scenario_config = load_yaml(CONFIG_ROOT / "scenarios.yaml")
+    scenarios = {
+        **scenario_config.get("archived_scenarios", {}),
+        **scenario_config.get("scenarios", {}),
+    }
     if scenario_name not in scenarios:
         raise KeyError(f"未知情景：{scenario_name}")
     scenario = deepcopy(scenarios[scenario_name])

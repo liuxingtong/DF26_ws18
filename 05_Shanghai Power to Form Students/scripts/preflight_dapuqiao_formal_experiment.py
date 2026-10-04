@@ -28,10 +28,9 @@ from run_dapuqiao_optimization import (  # noqa: E402
 
 
 SCENARIOS = (
-    "tourism_capture",
-    "everyday_life_first",
-    "heritage_micro_economy",
-    "negotiated_24h_alley",
+    "public_coordination",
+    "development_growth",
+    "resident_heritage_priority",
 )
 METHODS = ("conventional_parameter_baseline", *SCENARIOS)
 EXPECTED_CONSTRAINT_CODES = {

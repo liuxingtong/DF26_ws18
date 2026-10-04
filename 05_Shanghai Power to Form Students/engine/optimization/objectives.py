@@ -61,8 +61,33 @@ def evaluate_objectives(
     changed_ids = {item["bid"] for item in changes}
     base_res = baseline[baseline["residential_proxy"].fillna(False)]
     changed_res = base_res[base_res["bid"].astype(str).isin(changed_ids)]
+    height_impact_operators = {
+        "densify",
+        "split_to_towers",
+        "heritage_step_down",
+        "parameter_height_footprint",
+    }
+    height_impact_ids = {
+        str(item["bid"])
+        for item in changes
+        if item.get("operator") in height_impact_operators
+    }
+    exposed_zone_ids = set(
+        baseline.loc[
+            baseline["bid"].astype(str).isin(height_impact_ids), "zone_id"
+        ].astype(str)
+    )
+    exposed_res = base_res[
+        base_res["bid"].astype(str).isin(changed_ids)
+        | base_res["zone_id"].astype(str).isin(exposed_zone_ids)
+    ]
     residential_total = context.residential_gfa
-    residential_disruption = _gfa(changed_res) / residential_total if residential_total > 0 else 0.0
+    direct_residential_change_ratio = (
+        _gfa(changed_res) / residential_total if residential_total > 0 else 0.0
+    )
+    residential_disruption = (
+        _gfa(exposed_res) / residential_total if residential_total > 0 else 0.0
+    )
 
     base_gfa = context.baseline_gfa
     candidate_gfa = _gfa(candidate)
@@ -137,9 +162,15 @@ def evaluate_objectives(
         "net_gfa_change_m2": float(candidate_gfa - base_gfa),
         "net_gfa_change_far": float((candidate_gfa - base_gfa) / site_area)
         if site_area > 0 else 0.0,
+        "direct_residential_change_ratio": float(direct_residential_change_ratio),
+        "exposed_resident_buildings": float(len(exposed_res)),
         "street_access_buffer_m": context.street_access_buffer_m,
         "densify_count": float(op_counts.get("densify", 0)),
         "open_ground_count": float(op_counts.get("open_ground", 0)),
+        "split_to_towers_count": float(op_counts.get("split_to_towers", 0)),
+        "heritage_step_down_count": float(op_counts.get("heritage_step_down", 0)),
+        "public_space_reconfiguration_count": float(op_counts.get("public_space_reconfiguration", 0)),
+        "courtyard_access_improvement_count": float(op_counts.get("courtyard_access_improvement", 0)),
         "parameter_count": float(op_counts.get("parameter_height_footprint", 0)),
         "changed_resident_buildings": float(changed_stakeholders.get("resident", 0)),
         "changed_developer_buildings": float(changed_stakeholders.get("developer", 0)),

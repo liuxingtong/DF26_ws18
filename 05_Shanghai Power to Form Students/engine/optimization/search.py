@@ -52,6 +52,7 @@ def evaluate_candidate(
         study.buildings, decisions, study.controls, operator_specs, study.zones,
         scenario=study.scenario,
         minimum_change=objective_config.get("numerical_resolution", {}),
+        streets=study.streets,
     )
     violations = check_constraints(
         study.buildings, candidate, study.boundary, study.zones, study.controls, study.scenario
@@ -91,7 +92,8 @@ def run_random_baseline(
     max_changed_ratio = float(study.scenario.get("implementation", {}).get("maximum_changed_zone_ratio", 0.40))
     rng = random.Random(seed)
     availability = build_operator_availability(
-        study.buildings, study.zones, study.controls, study.scenario
+        study.buildings, study.zones, study.controls, study.scenario,
+        operator_specs,
     )
     _, _, intensity_limits = operator_policy(study.scenario)
     candidates = []

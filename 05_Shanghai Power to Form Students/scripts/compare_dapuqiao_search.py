@@ -34,7 +34,7 @@ from run_dapuqiao_optimization import (  # noqa: E402
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--scenario", default="tourism_capture")
+    parser.add_argument("--scenario", default="public_coordination")
     parser.add_argument("--seeds", default="11,23,37")
     parser.add_argument("--population", type=int, default=20)
     parser.add_argument("--generations", type=int, default=10)
