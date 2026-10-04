@@ -1,7 +1,7 @@
 """
 build_canvas.py 交互式 HTML 画布:orbit 找角度,存角度,导出 massing / ControlNet 图。
 生成自含单档 out/<slug>/canvas.html(内联 Three.js):真实卫星底 + 各体制体块;
-导出模式 massing / depth / normal / segmentation / canny 作 AI 参考图或 ControlNet 条件图。
+导出模式 massing / depth / normal / segmentation 作 AI 参考图或 ControlNet 条件图。
 几何由 05 实算注入,零 AI,不联网(除抓一次卫星底)。
 跑:python run.py canvas [slug]
 """
@@ -400,7 +400,8 @@ CSS = """
  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;
  padding:14px 15px;box-shadow:0 2px 12px rgba(0,0,0,.1);}
 .panel h1{font-size:16px;margin:0 0 3px;} .panel .sub{font-size:11.5px;color:var(--muted);margin:0 0 10px;}
-.grp{margin:10px 0 4px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+.grp{margin:12px 0 5px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+.step{margin:17px 0 7px;font-size:17px;line-height:1.3;font-weight:750;color:var(--ink);text-transform:none;letter-spacing:0;}
 .row{display:flex;flex-wrap:wrap;gap:5px;}
 button{font:inherit;font-size:12px;border:1px solid var(--line);background:#fff;color:var(--ink);
  border-radius:16px;padding:5px 11px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05);}
@@ -442,11 +443,10 @@ details{border-top:1px solid var(--line);margin-top:7px;padding-top:5px;}summary
 def viewer_js(geom):
     return "const GEOM=%s;\n" % json.dumps(geom, separators=(",", ":"), default=str) + r"""
 const COL=GEOM.colors;
-let scene,cam,renderer,controls,groundSat,groundOsm,osmGroup,boundary,baselineOverlay,groups={},cur=GEOM.regimes[0],mode="massing",basemap="osm",saved=[];
-let baselineOverlayOn=true;
+let scene,cam,renderer,controls,groundSat,groundOsm,osmGroup,boundary,groups={},cur=GEOM.regimes[0],mode="massing",basemap=(GEOM.sat&&GEOM.satExtent)?"satellite":"osm",saved=[];
 let selectedScenario=null,selectedRole=null;
 let matDepth,matNormal,edges=[],ctxMeshes=[],ctxEdges=[];
-const edgeMat=new THREE.LineBasicMaterial({color:0xffffff});   // canny:白色硬边
+const edgeMat=new THREE.LineBasicMaterial({color:0x2b2b2b});
 function buildGroup(name){
   if(groups[name])return groups[name];
   if(!GEOM.data[name])return null;
@@ -461,18 +461,6 @@ function buildGroup(name){
   }
   return g;
 }
-function buildBaselineOverlay(){
-  if(baselineOverlay||!GEOM.data.current)return baselineOverlay;
-  baselineOverlay=new THREE.Group();scene.add(baselineOverlay);
-  const material=new THREE.LineBasicMaterial({color:0xffb000,transparent:true,opacity:.72});
-  for(const r of GEOM.data.current){
-    const sh=new THREE.Shape();r.p.forEach((pt,i)=>i?sh.lineTo(pt[0],pt[1]):sh.moveTo(pt[0],pt[1]));
-    const geo=new THREE.ExtrudeGeometry(sh,{depth:1,bevelEnabled:false});
-    const line=new THREE.LineSegments(new THREE.EdgesGeometry(geo,15),material);
-    line.scale.z=r.h;baselineOverlay.add(line);
-  }
-  return baselineOverlay;
-}
 function init(){
   const st=document.getElementById("stage"),w=st.clientWidth,h=st.clientHeight;
   scene=new THREE.Scene(); scene.background=new THREE.Color(0xeef1f0);
@@ -485,7 +473,7 @@ function init(){
   const dl=new THREE.DirectionalLight(0xffffff,0.48); dl.position.set(0.6,-1,1.4); scene.add(dl);
   const b=GEOM.bounds, cx=(b[0]+b[2])/2, cy=(b[1]+b[3])/2, span=Math.max(b[2]-b[0],b[3]-b[1]);
   // 卫星地面
-  if(GEOM.sat){const tx=new THREE.TextureLoader().load(GEOM.sat); if(THREE.sRGBEncoding!==undefined)tx.encoding=THREE.sRGBEncoding;
+  if(GEOM.sat&&GEOM.satExtent){const tx=new THREE.TextureLoader().load(GEOM.sat,undefined,undefined,()=>setBasemap("osm")); if(THREE.sRGBEncoding!==undefined)tx.encoding=THREE.sRGBEncoding;
     const se=GEOM.satExtent, gw=se[2]-se[0], gh=se[3]-se[1];
     groundSat=new THREE.Mesh(new THREE.PlaneGeometry(gw,gh),new THREE.MeshBasicMaterial({map:tx}));
     groundSat.position.set((se[0]+se[2])/2,(se[1]+se[3])/2,-0.35); scene.add(groundSat);}
@@ -534,57 +522,76 @@ function animate(){requestAnimationFrame(animate);controls.update();
     matDepth.uniforms.uNear.value=Math.max(1,dist-span*0.75); matDepth.uniforms.uFar.value=dist+span*0.75;}
   renderer.render(scene,cam);}
 // —— 模式:材质切换(massing 素模 / depth / normal / segmentation)——
-function styleMesh(m,massing,seg,canny){
+function styleMesh(m,massing,seg){
   const inside=m.userData.in!==0;                          // in=1 study 实心 / in=0 周边透明
   if(massing){ m.material.color.set(inside?"#b9b1a8":"#cbc5bd");
     m.material.transparent=!inside; m.material.opacity=inside?1.0:0.38; }
   else{ m.material.transparent=false; m.material.opacity=1.0;
-    if(seg) m.material.color.set(COL[m.userData.sh]||"#999");
-    else if(canny) m.material.color.set(0x000000); }       // 黑面遮挡,只留白色硬边
+    if(seg) m.material.color.set(COL[m.userData.sh]||"#999"); }
   m.material.needsUpdate=true;
 }
 function applyMode(){
-  const massing=(mode==="massing"), seg=(mode==="segmentation"), canny=(mode==="canny");
+  const massing=(mode==="massing"), seg=(mode==="segmentation");
   scene.overrideMaterial = (mode==="depth")?matDepth : (mode==="normal")?matNormal : null;
   if(groundSat) groundSat.visible = massing && basemap==="satellite";
   if(groundOsm) groundOsm.visible = massing && basemap==="osm";
   if(osmGroup) osmGroup.visible = massing && basemap==="osm";
   if(boundary) boundary.visible = massing;                 // 红线只在 massing 显示
-  if(baselineOverlay)baselineOverlay.visible=baselineOverlayOn&&massing&&cur!=="current";
-  // 背景:massing 浅灰,normal/seg 白,depth/canny 黑
+  // Background: gray for massing, white for normal/segmentation, black for depth.
   scene.background=new THREE.Color(massing?0xeef1f0:((mode==="normal"||seg)?0xffffff:0x000000));
-  for(const name in groups) for(const m of groups[name].children){ if(m.isMesh) styleMesh(m,massing,seg,canny); }
-  for(const m of ctxMeshes) styleMesh(m,massing,seg,canny);   // 周边语境同规则(depth/normal/seg/canny 都含,给 ControlNet 语境)
-  edgeMat.color.set(canny?0xffffff:0x2b2b2b);               // canny 白硬边;massing 深灰勾透明周边
-  for(const el of edges) el.visible = canny;                        // study 实心:只有 canny 显硬边
-  for(const el of ctxEdges) el.visible = canny || massing;          // 周边透明:massing 勾轮廓 + canny 硬边
+  for(const name in groups) for(const m of groups[name].children){ if(m.isMesh) styleMesh(m,massing,seg); }
+  for(const m of ctxMeshes) styleMesh(m,massing,seg);
+  for(const el of edges) el.visible = false;
+  for(const el of ctxEdges) el.visible = massing;
   document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("on",b.dataset.mode===mode));
 }
 function setRegime(name){const target=buildGroup(name);if(!target)return;cur=name;for(const k in groups)groups[k].visible=(k===cur);
-  if(cur!=="current")buildBaselineOverlay();
   applyMode();
   document.querySelectorAll("[data-reg]").forEach(b=>b.classList.toggle("on",b.dataset.reg===name));
-  document.getElementById("prm").textContent=GEOM.prompts?GEOM.prompts[name]||"":"";
+  document.getElementById("prm").textContent=name==="current"?"Existing building form.":"Generated form from the selected scenario. Role preferences are applied after optimization.";
   renderSolutionMetrics(name);highlightPareto(name);}
 function setMode(m){mode=m;applyMode();}
 function setBasemap(name){basemap=name;applyMode();document.querySelectorAll("[data-basemap]").forEach(b=>b.classList.toggle("on",b.dataset.basemap===name));}
-function toggleBaselineOverlay(){baselineOverlayOn=!baselineOverlayOn;applyMode();const b=document.getElementById("baselineOverlayButton");if(b)b.classList.toggle("on",baselineOverlayOn);}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function num(v,d=3){const n=Number(v);return Number.isFinite(n)?n.toFixed(d):"—";}
 function pct(v,d=1){const n=Number(v);return Number.isFinite(n)?`${(n*100).toFixed(d)}%`:"—";}
+const SCENARIOS={
+  public_coordination:{label:"Public coordination",description:"Public agencies protect heritage while allowing modest changes to public land, courtyard access and selected development sites."},
+  development_growth:{label:"Development growth",description:"A wider action area allows compliant additions and mass splitting while keeping shared heritage and safety limits."},
+  resident_heritage_priority:{label:"Residents and heritage",description:"Housing and heritage receive stronger protection; small access and ground-release actions remain possible."}
+};
+const ROLES={resident:"Residents",development:"Development",public_planning:"Public planning"};
+const OBJECTIVES={residential_disruption:"Residential exposure",development_capacity:"Added floor area",street_connected_released_ground:"Street-facing ground release"};
+const OPERATORS={noop:"Keep existing form",densify:"Add capacity",open_ground:"Release ground",split_to_towers:"Split large mass",heritage_step_down:"Step down near sensitive sites",public_space_reconfiguration:"Reconfigure public space",courtyard_access_improvement:"Improve courtyard access"};
+const OP_TEXT={
+  noop:"Keep the existing form as a baseline.",densify:"Allocate additional floor area within height and FAR limits.",
+  open_ground:"Reduce ground coverage along streets; compensate floor area where allowed.",
+  split_to_towers:"Open a gap through an oversized mass and redistribute floor area within limits.",
+  heritage_step_down:"Move height away from homes and heritage within the same zone.",
+  public_space_reconfiguration:"Create a shallow setback on eligible public assets.",
+  courtyard_access_improvement:"Open a small access gap at eligible residential courtyards."
+};
+const OBJECTIVE_TEXT={
+  residential_disruption:"Existing residential GFA directly changed or exposed within an intervention zone, divided by total residential GFA.",
+  development_capacity:"Sum of positive building-level GFA additions divided by the study area; reductions do not offset additions.",
+  street_connected_released_ground:"Ground released from building footprints within the street buffer, divided by the study area."
+};
+function scenarioName(key){return (SCENARIOS[key]||{}).label||key;}
+function roleName(key){return ROLES[key]||key;}
+function solutionName(key){const m=((GEOM.research||{}).solution_metrics||{})[key];return key==="current"?"Existing condition":m?`${scenarioName(m.scenario_id)} · Solution ${m.solution_id}`:key;}
 function currentScenarioRun(){return ((GEOM.research||{}).scenario_runs||{})[selectedScenario]||{};}
 function renderSolutionMetrics(key){const el=document.getElementById("solutionMetrics"),r=GEOM.research||{};
   if(!el)return;const m=(r.solution_metrics||{})[key];
-  if(!m){el.innerHTML='<div class="note">当前显示规则情景的三维推演。角色选择会保留这个情景并标出其共同 Pareto 首选；需要时再点“查看该角色的 Pareto 首选方案”。</div>';return;}
-  el.innerHTML=`<div class="card ok"><h3>${esc(GEOM.labels[key]||m.solution_id)}</h3><div class="metric-grid">
-    <div class="metric"><b>${pct(m.residential_disruption)}</b><span>居住影响暴露 · 越低越好</span></div>
-    <div class="metric"><b>${num(m.development_capacity,4)}</b><span>正向增建量 · 越高越好</span></div>
-    <div class="metric"><b>${pct(m.street_connected_released_ground,3)}</b><span>临街释放地面 · 越高越好</span></div>
-    <div class="metric"><b>${num(m.net_gfa_change_m2,0)} m²</b><span>净 GFA 变化 · 可正可负</span></div>
-    <div class="metric"><b>${esc(m.changed_buildings||0)}</b><span>发生形态变化的建筑</span></div></div>
-    <p class="meta">方案 ${esc(m.solution_id)} · 可行=${esc(m.feasible)} · 违规=${esc(m.violation_count||0)}</p></div>`;}
+  if(!m){el.innerHTML='<div class="note">Select a Pareto point to inspect its 3D form and measures.</div>';return;}
+  el.innerHTML=`<div class="card ok"><h3>${esc(solutionName(key))}</h3><div class="metric-grid">
+    <div class="metric"><b>${pct(m.residential_disruption)}</b><span>Residential exposure · lower is better</span></div>
+    <div class="metric"><b>${num(m.development_capacity,4)}</b><span>Added floor area · higher is better</span></div>
+    <div class="metric"><b>${pct(m.street_connected_released_ground,3)}</b><span>Street-facing ground release · higher is better</span></div>
+    <div class="metric"><b>${num(m.net_gfa_change_m2,0)} m²</b><span>Net GFA change</span></div>
+    <div class="metric"><b>${esc(m.changed_buildings||0)}</b><span>Buildings changed</span></div></div>
+    <p class="meta">Solution ${esc(m.solution_id)} · Feasible: ${esc(m.feasible)} · Violations: ${esc(m.violation_count||0)}</p></div>`;}
 function renderPareto(){const sr=currentScenarioRun(),rows=sr.pareto||[],svg=document.getElementById("paretoPlot");if(!svg)return;
-  if(!rows.length){svg.innerHTML='<text x="12" y="28" font-size="12" fill="#8a5d16">该情景尚无可读取的优化运行结果。</text>';return;}
+  if(!rows.length){svg.innerHTML='<text x="12" y="28" font-size="12" fill="#8a5d16">No optimization results are available.</text>';return;}
   const W=340,H=210,L=42,R=12,T=12,B=38;
   const xs=rows.map(x=>Number(x.development_capacity)),ys=rows.map(x=>Number(x.street_connected_released_ground));
   const ds=rows.map(x=>Number(x.residential_disruption));
@@ -595,11 +602,11 @@ function renderPareto(){const sr=currentScenarioRun(),rows=sr.pareto||[],svg=doc
     body+=`<line x1="${xx}" y1="${T}" x2="${xx}" y2="${H-B}" stroke="#e2e7e5"/><text x="${xx}" y="${H-B+14}" text-anchor="middle" font-size="9" fill="#677472">${pct(xv,1)}</text>`;
     body+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#e2e7e5"/><text x="${L-5}" y="${yy+3}" text-anchor="end" font-size="9" fill="#677472">${pct(yv,2)}</text>`;}
   body+=`<line class="axis" x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}"/><line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${H-B}"/>
-    <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#677472">正向增建量 / 场地面积 →</text>
-    <text x="11" y="${H/2}" transform="rotate(-90 11 ${H/2})" text-anchor="middle" font-size="10" fill="#677472">临街释放地面 →</text>`;
+    <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#677472">Added floor area / site area →</text>
+    <text x="11" y="${H/2}" transform="rotate(-90 11 ${H/2})" text-anchor="middle" font-size="10" fill="#677472">Ground release →</text>`;
   for(const row of rows){const d=Number(row.residential_disruption),t=(d-dr[0])/(dr[1]-dr[0]||1),red=Math.round(72+160*t),green=Math.round(142-70*t);
     const sid=row.solution_id,selected=selectedIds.has(sid),key=Object.keys(sr.solution_metrics||{}).find(k=>sr.solution_metrics[k].solution_id===sid);
-    body+=`<circle class="dot ${selected?'sel':''}" tabindex="0" role="button" aria-label="查看方案 ${esc(sid)}" data-sid="${esc(sid)}" data-key="${esc(key||'')}" cx="${sx(Number(row.development_capacity))}" cy="${sy(Number(row.street_connected_released_ground))}" r="${selected?5.5:4}" fill="rgb(${red},${green},92)"><title>${esc(sid)}｜居住影响暴露 ${pct(d)}｜正向增建量 ${num(row.development_capacity,4)}｜净GFA ${num(row.net_gfa_change_m2,0)}m²｜释放 ${pct(row.street_connected_released_ground,3)}</title></circle>`;}
+    body+=`<circle class="dot ${selected?'sel':''}" tabindex="0" role="button" aria-label="View solution ${esc(sid)}" data-sid="${esc(sid)}" data-key="${esc(key||'')}" cx="${sx(Number(row.development_capacity))}" cy="${sy(Number(row.street_connected_released_ground))}" r="${selected?5.5:4}" fill="rgb(${red},${green},92)"><title>${esc(sid)} | Residential exposure ${pct(d)} | Added floor area ${num(row.development_capacity,4)} | Net GFA ${num(row.net_gfa_change_m2,0)} m² | Ground release ${pct(row.street_connected_released_ground,3)}</title></circle>`;}
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.innerHTML=body;
   svg.querySelectorAll(".dot").forEach(dot=>{const open=()=>{const key=dot.dataset.key;if(key)setRegime(key);};dot.onclick=open;dot.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}};});}
 function highlightPareto(key){const r=GEOM.research||{},m=(r.solution_metrics||{})[key],svg=document.getElementById("paretoPlot");if(!svg)return;
@@ -607,10 +614,8 @@ function highlightPareto(key){const r=GEOM.research||{},m=(r.solution_metrics||{
 function selectScenario(key){const r=GEOM.research||{},s=(r.scenario_catalog||{})[key];if(!s)return;
   selectedScenario=key;
   document.querySelectorAll("[data-scenario]").forEach(b=>b.classList.toggle("on",b.dataset.scenario===key));
-  const opLabels={freeze:"锁定主体",freeze_tags:"锁定保护对象",split_to_towers:"大体量拆分",heritage_step_down:"敏感对象退台",public_space_reconfiguration:"公共空间重构",courtyard_access_improvement:"院落通行改善",slim:"缩小轮廓",densify:"增加容量",open_ground:"释放地面",level:"平缓高度",micro_lease:"细分经营单元",frontage_quota:"沿街业态配额",crowd_valve:"客流阀门",night_reversion:"夜间归还"};
   const sr=currentScenarioRun(),cfg=sr.run_config||{},policy=((cfg.search||{}).operator_policy)||{};
-  const statusLabel=sr.display_status==="preview_single_seed"?"平台预览（非正式实验）":esc(sr.display_status||"结果状态未标注");
-  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(s.label)}</h3><p>${esc(s.description)}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(opLabels[op]||op)}</span>`).join("")}</div><p class="meta">${(sr.pareto||[]).length} 个 Pareto 方案 · ${statusLabel} · seed ${esc(sr.seed??"—")} · 运行 ${esc(sr.directory||"—")}</p></div>`;
+  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(scenarioName(key))}</h3><p>${esc((SCENARIOS[key]||{}).description||"")}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(OPERATORS[op]||op)}</span>`).join("")}</div></div>`;
   renderPareto();renderScenarioTechnical();
   const roleKey=(sr.role_keys||{})[selectedRole],fallbackKey=roleKey||Object.keys(sr.solution_metrics||{})[0]||"current";setRegime(fallbackKey);
   renderCombination();}
@@ -620,44 +625,42 @@ function selectRole(role){const r=GEOM.research||{},v=(r.roles||{})[role],key=(c
   if(key)setRegime(key);renderCombination();}
 function renderCombination(){const r=GEOM.research||{},s=(r.scenario_catalog||{})[selectedScenario],v=(r.roles||{})[selectedRole],key=(currentScenarioRun().role_keys||{})[selectedRole],m=(r.solution_metrics||{})[key];
   const el=document.getElementById("roleViewDetail");if(!el||!s||!v)return;
-  if(!key||!m){el.innerHTML=`<div class="card warning"><h3>${esc(s.label)} × ${esc(v.label)}</h3><p>该角色首选方案缺少可验证的三维几何，因此不切换模型，也不把上一方案冒充为当前组合。</p></div>`;return;}
-  el.innerHTML=`<div class="card ok"><h3>${esc(s.label)} × ${esc(v.label)}</h3><p>当前三维形态是${esc(v.label)}按离散优先级在该情景独立 Pareto 解集中的首选方案。</p><p class="meta">组合方案 ${esc((m||{}).solution_id||"—")} · 逐级排序只发生在求解之后，不回写优化循环。</p></div>`;}
+  if(!key||!m){el.innerHTML=`<div class="card warning"><h3>${esc(scenarioName(selectedScenario))} × ${esc(roleName(selectedRole))}</h3><p>No verified 3D geometry is available for this preferred solution.</p></div>`;return;}
+  el.innerHTML=`<div class="card ok"><h3>${esc(scenarioName(selectedScenario))} × ${esc(roleName(selectedRole))}</h3><p>This is the preferred Pareto solution for the selected perspective.</p><p class="meta">Solution ${esc(m.solution_id)} · Preferences are applied after optimization.</p></div>`;}
 function renderScenarioTechnical(){const r=GEOM.research||{},sr=currentScenarioRun(),cfg=sr.run_config||{},search=cfg.search||{},scenarioId=cfg.scenario_id||selectedScenario;
   const scenarioDefs=r.scenario_definitions||{},s=scenarioDefs[scenarioId]||{},def=s.defaults||{},impl=s.implementation||{},ranges=s.uncertainty_ranges||{};
   const range=(name,formatter)=>{const v=ranges[name];return Array.isArray(v)?`${formatter(v[0])}–${formatter(v[1])}`:"—";};
-  const operatorRanges=[["densify_intensity","增建强度"],["open_ground_intensity","释放强度"],["split_to_towers_intensity","拆分强度"],["heritage_step_down_intensity","退台强度"],["public_space_reconfiguration_intensity","公共空间重构强度"],["courtyard_access_improvement_intensity","院落改善强度"]].filter(([k])=>Array.isArray(ranges[k])).map(([k,label])=>`<span class="pill">${label}范围 ${range(k,x=>num(x,2))}</span>`).join("");
-  document.getElementById("scenarioCard").innerHTML=`<h3>${esc(s.label||scenarioId)}</h3><p>${esc(s.description||"")}</p><div class="row"><span class="pill">住宅保留范围 ${range("minimum_residential_retention",x=>pct(x,0))}</span><span class="pill">改动分区范围 ${range("maximum_changed_zone_ratio",x=>pct(x,0))}</span><span class="pill">改动建筑范围 ${range("maximum_changed_building_ratio",x=>pct(x,0))}</span>${operatorRanges}</div><p class="meta">当前三维运行使用范围内参考值：住宅保留 ${pct(def.minimum_residential_retention,0)}，最多改变 ${pct(impl.maximum_changed_building_ratio,0)} 建筑。它们是研究参数，不是法规阈值。</p>`;
-  document.getElementById("workflowCard").innerHTML=`<p><b>城市数据</b> → 情景约束与主体权限 → 38 个道路围合单元 → 算子和强度 → 约束修复 → NSGA-II → 该情景 Pareto 解集 → 三类角色按离散优先级逐级排序 → 三维比较</p><p class="meta">平台预览 · seed ${esc(sr.seed??"—")} · ${esc(sr.directory||"—")} · 种群 ${esc(search.population||"—")} × ${esc(search.generations||"—")} 代 · ${esc(search.unique_evaluations||"—")} 次唯一评价 · 无角色数值权重</p>`;
+  const operatorRanges=[["densify_intensity","Addition"],["open_ground_intensity","Ground release"],["split_to_towers_intensity","Mass split"],["heritage_step_down_intensity","Height redistribution"],["public_space_reconfiguration_intensity","Public space"],["courtyard_access_improvement_intensity","Courtyard access"]].filter(([k])=>Array.isArray(ranges[k])).map(([k,label])=>`<span class="pill">${label}: ${range(k,x=>num(x,2))}</span>`).join("");
+  document.getElementById("scenarioCard").innerHTML=`<h3>${esc(scenarioName(scenarioId))}</h3><p>${esc((SCENARIOS[scenarioId]||{}).description||"")}</p><div class="row"><span class="pill">Housing retained: ${range("minimum_residential_retention",x=>pct(x,0))}</span><span class="pill">Zones changed: ${range("maximum_changed_zone_ratio",x=>pct(x,0))}</span><span class="pill">Buildings changed: ${range("maximum_changed_building_ratio",x=>pct(x,0))}</span>${operatorRanges}</div><p class="meta">This run uses ${pct(def.minimum_residential_retention,0)} housing retention and a ${pct(impl.maximum_changed_building_ratio,0)} building-change cap. These are research parameters.</p>`;
+  document.getElementById("workflowCard").innerHTML=`<p><b>Urban data</b> → scenario rules → 38 street-bounded zones → form operations → constraint checks → NSGA-II → Pareto set → perspective ranking → 3D comparison</p>`;
   const avail=search.operator_availability||{},zoneCount=Object.keys(avail).length,opCount=k=>Object.values(avail).filter(xs=>xs.includes(k)).length;
-  document.querySelectorAll("[data-op-availability]").forEach(el=>{const k=el.dataset.opAvailability;el.textContent=zoneCount?`${opCount(k)} / ${zoneCount} 个更新单元可用`:'当前情景不可用';});
+  document.querySelectorAll("[data-op-availability]").forEach(el=>{const k=el.dataset.opAvailability;el.textContent=zoneCount?`Available in ${opCount(k)} of ${zoneCount} zones`:'Unavailable in this scenario';});
   const balancedKey=(sr.role_keys||{}).balanced_compromise,solutionButtons=document.getElementById("solutionButtons");
-  solutionButtons.innerHTML=balancedKey?`<button data-solution-key="${esc(balancedKey)}">查看最小最差主体名次的折中方案</button>`:'<span class="note">该情景尚无折中方案。</span>';
+  solutionButtons.innerHTML=balancedKey?`<button data-solution-key="${esc(balancedKey)}">View balanced solution</button>`:'<span class="note">No balanced solution is available.</span>';
   solutionButtons.querySelectorAll("[data-solution-key]").forEach(b=>b.onclick=()=>setRegime(b.dataset.solutionKey));}
 function renderResearch(){const r=GEOM.research||{},d=r.draft_summary||{},q=(r.formal_input_quality||{}).counts||{},ass=(r.assumptions||{}).profile||{};
   const stats=document.getElementById("researchStats");if(!stats)return;
-  stats.innerHTML=[[q.buildings||d.building_count||1370,"建筑"],[q.intervention_zones||d.zone_count||38,"更新单元"],[q.heritage_building_footprints||21,"遗产冻结建筑"],[3,"优化目标"]].map(x=>`<div class="stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+  stats.innerHTML=[[q.buildings||d.building_count||1370,"Buildings"],[q.intervention_zones||d.zone_count||38,"Zones"],[q.heritage_building_footprints||21,"Protected buildings"],[3,"Objectives"]].map(x=>`<div class="stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
   const scenarioButtons=document.getElementById("scenarioButtons");
-  scenarioButtons.innerHTML=Object.entries(r.scenario_catalog||{}).map(([k,v])=>`<button data-scenario="${esc(k)}">${esc(v.label)}</button>`).join("");
+  scenarioButtons.innerHTML=Object.entries(r.scenario_catalog||{}).map(([k,v])=>`<button data-scenario="${esc(k)}">${esc(scenarioName(k))}</button>`).join("");
   scenarioButtons.querySelectorAll("[data-scenario]").forEach(b=>b.onclick=()=>selectScenario(b.dataset.scenario));
-  const roleText={resident:"先减少居住影响暴露，再比较临街释放，最后比较正向增建量。",development:"先比较正向增建量，再比较临街释放，最后比较居住影响暴露。",public_planning:"先比较临街释放，再比较居住影响暴露，最后比较正向增建量。"};
-  const shortObjective={residential_disruption:"居住影响暴露",development_capacity:"正向增建量",street_connected_released_ground:"临街释放"};
-  document.getElementById("rolesList").innerHTML=Object.entries(r.roles||{}).map(([k,v])=>`<div class="card role"><h3>${esc(v.label)}</h3><p>${roleText[k]||"对同一组 Pareto 方案进行后评价。"}</p><div>${(v.priority_order||[]).map((o,i)=>`<span class="pill">${i+1}. ${esc(shortObjective[o]||o)}</span>`).join("")}</div><p class="meta">离散优先级 · epsilon 内视为同档 · 不使用精确权重</p></div>`).join("");
+  const roleText={resident:"Prioritize lower residential exposure, then ground release, then added floor area.",development:"Prioritize added floor area, then ground release, then lower residential exposure.",public_planning:"Prioritize ground release, then lower residential exposure, then added floor area."};
+  document.getElementById("rolesList").innerHTML=Object.entries(r.roles||{}).map(([k,v])=>`<div class="card role"><h3>${esc(roleName(k))}</h3><p>${roleText[k]||"Ranks the same Pareto set after optimization."}</p><div>${(v.priority_order||[]).map((o,i)=>`<span class="pill">${i+1}. ${esc(OBJECTIVES[o]||o)}</span>`).join("")}</div><p class="meta">Ordinal priority · differences within epsilon share a tier</p></div>`).join("");
   const roleViewButtons=document.getElementById("roleViewButtons");
-  roleViewButtons.innerHTML=Object.entries(r.roles||{}).map(([k,v])=>`<button data-role-view="${esc(k)}">${esc(v.label)}</button>`).join("");
+  roleViewButtons.innerHTML=Object.entries(r.roles||{}).map(([k,v])=>`<button data-role-view="${esc(k)}">${esc(roleName(k))}</button>`).join("");
   roleViewButtons.querySelectorAll("[data-role-view]").forEach(b=>b.onclick=()=>selectRole(b.dataset.roleView));
-  const opText={noop:"保持现状，作为基线和可行解。",densify:"先计算单元剩余 FAR 与逐栋限高，再按请求增量比例分配高度。",open_ground:"缩小首层轮廓释放临街地面，在限高允许时增高以尽量补偿建筑面积。",split_to_towers:"只对面积达到门槛的大体量沿主轴切出间隙，并在限高内补偿建筑面积。",heritage_step_down:"在同一更新单元内把高度从住宅与遗产附近转移到较远位置，总容量近似守恒。",public_space_reconfiguration:"公共主体的非遗产资产只从最近道路一侧形成浅退界，不增高；它表示候选公共空间，不是施工设计。",courtyard_access_improvement:"居民住宅从临街方向切出受面积上限约束的窄通行缺口，不拆楼、不增容；它表示潜在通道。"};
-  document.getElementById("operatorsList").innerHTML=Object.entries(r.operators||{}).map(([k,v])=>`<div class="card operator"><h3>${esc(v.label)} <span class="pill">${esc(k)}</span></h3><p>${opText[k]||esc(v.action)}</p><p class="meta" data-op-availability="${esc(k)}">可用性随所选情景更新</p></div>`).join("");
-  document.getElementById("objectivesList").innerHTML=Object.values(r.objectives||{}).map(v=>`<div class="card"><h3>${esc(v.label)} <span class="pill">${esc(v.direction)}</span></h3><p>${esc(v.definition)}</p></div>`).join("");
-  const constraintLabels={geometry_validity:"几何有效",study_boundary:"不越研究边界",heritage_unchanged:"保护对象不变",height_limit:"逐栋限高",zone_far:"单元容积率",zone_coverage:"单元覆盖率",residential_retention:"住宅保留",new_overlap:"新增体量不重叠",change_scope:"改动范围"};
+  document.getElementById("operatorsList").innerHTML=Object.entries(r.operators||{}).map(([k,v])=>`<div class="card operator"><h3>${esc(OPERATORS[k]||k)} <span class="pill">${esc(k)}</span></h3><p>${esc(OP_TEXT[k]||v.action)}</p><p class="meta" data-op-availability="${esc(k)}"></p></div>`).join("");
+  document.getElementById("objectivesList").innerHTML=Object.entries(r.objectives||{}).map(([k,v])=>`<div class="card"><h3>${esc(OBJECTIVES[k]||k)} <span class="pill">${esc(v.direction)}</span></h3><p>${esc(OBJECTIVE_TEXT[k]||"")}</p></div>`).join("");
+  const constraintLabels={geometry_validity:"Valid geometry",study_boundary:"Study area",heritage_unchanged:"Heritage unchanged",height_limit:"Building height",zone_far:"Zone FAR",zone_coverage:"Zone coverage",residential_retention:"Housing retained",new_overlap:"No new overlap",change_scope:"Change extent"};
   document.getElementById("constraintsList").innerHTML=Object.keys(r.constraints||{}).map(k=>`<span class="pill">${esc(constraintLabels[k]||k)}</span>`).join(" ");
-  const e=r.experiment||{},em=e.means||{},cov=e.coverage||{},manifest=e.manifest||{};document.getElementById("experimentCard").innerHTML=e.run?`<div class="card ${Number(cov.nsga_over_random)>Number(cov.random_over_nsga)?'ok':'warning'}"><h3>当前模型搜索对比 · ${esc(e.run)}</h3><p>情景 ${esc(manifest.scenario||'—')} · ${esc((manifest.seeds||[]).length||'—')} 个随机种子；评价预算 ${esc(manifest.equal_effective_independent_evaluation_budget||manifest.equal_evaluation_budget||'—')} / 算法 / 种子。NSGA-II 平均 Pareto ${num((em.nsga2||{}).pareto_count,1)}，随机搜索 ${num((em.random||{}).pareto_count,1)}。</p><p>支配覆盖 C(NSGA,随机)=${pct(cov.nsga_over_random)}；C(随机,NSGA)=${pct(cov.random_over_nsga)}。</p><p class="meta">这是算法搜索对比；角色偏好只在求解后按离散顺序选择。</p></div>`:'<div class="card warning">当前三情景尚无同预算算法对比；旧情景的搜索结果不在这里显示。</div>';
+  const e=r.experiment||{},em=e.means||{},cov=e.coverage||{},manifest=e.manifest||{};document.getElementById("experimentCard").innerHTML=e.run?`<div class="card ${Number(cov.nsga_over_random)>Number(cov.random_over_nsga)?'ok':'warning'}"><h3>Search comparison</h3><p>${esc(scenarioName(manifest.scenario||''))} · ${esc((manifest.seeds||[]).length||'—')} seeds · ${esc(manifest.equal_effective_independent_evaluation_budget||manifest.equal_evaluation_budget||'—')} evaluations per method and seed. Mean Pareto count: NSGA-II ${num((em.nsga2||{}).pareto_count,1)}, random search ${num((em.random||{}).pareto_count,1)}.</p><p>Dominance coverage: C(NSGA-II, random) ${pct(cov.nsga_over_random)}; C(random, NSGA-II) ${pct(cov.random_over_nsga)}.</p></div>`:'<div class="card warning">No equal-budget search comparison is available for these scenarios.</div>';
   renderPareto();renderSolutionMetrics(cur);const firstScenario=Object.keys(r.scenario_catalog||{})[0],firstRole=Object.keys(r.roles||{})[0];if(firstScenario)selectScenario(firstScenario);if(firstRole)selectRole(firstRole);}
 // —— 导出 ——
 function dl(name){renderer.render(scene,cam);
   renderer.domElement.toBlob(bl=>{const a=document.createElement("a");a.href=URL.createObjectURL(bl);
     a.download=name;a.click();},"image/png");}
 function exportCurrent(){dl(`${GEOM.slug}_${cur}_${mode}.png`);}
-const MODES=["massing","depth","normal","segmentation","canny"];
+const MODES=["massing","depth","normal","segmentation"];
 async function exportAllModes(a){const keep=mode;
   for(const m of MODES){setMode(m);await new Promise(r=>setTimeout(r,120));dl(`${GEOM.slug}_${cur}_${a!==undefined?("ang"+a+"_"):""}${m}.png`);}
   setMode(keep);}
@@ -665,89 +668,83 @@ function saveAngle(){saved.push({p:cam.position.toArray(),t:controls.target.toAr
 function gotoAngle(i){const a=saved[i];cam.position.fromArray(a.p);controls.target.fromArray(a.t);controls.update();}
 function delAngle(i){saved.splice(i,1);renderAngles();}
 function renderAngles(){const el=document.getElementById("angs");el.innerHTML=saved.map((a,i)=>
-  `<div class="ang"><a onclick="gotoAngle(${i})">角度 ${i+1}</a><span class="x" onclick="delAngle(${i})"></span></div>`).join("")||
-  '<div class="note">还没保存角度。转到满意的视角,点「保存当前角度」。</div>';}
-async function exportAllSaved(){if(!saved.length){alert("先保存至少一个角度");return;}
+  `<div class="ang"><a onclick="gotoAngle(${i})">View ${i+1}</a><span class="x" onclick="delAngle(${i})">×</span></div>`).join("")||
+  '<div class="note">No saved views yet.</div>';}
+async function exportAllSaved(){if(!saved.length){alert("Save at least one view first.");return;}
   for(let i=0;i<saved.length;i++){gotoAngle(i);await new Promise(r=>setTimeout(r,150));await exportAllModes(i+1);}}
 window.addEventListener("DOMContentLoaded",()=>{init();
   document.querySelectorAll("[data-reg]").forEach(b=>b.onclick=()=>setRegime(b.dataset.reg));
   document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
   document.querySelectorAll("[data-basemap]").forEach(b=>b.onclick=()=>setBasemap(b.dataset.basemap));
+  setBasemap(basemap);
   renderResearch();setRegime(cur);});
 """
 
 
-HTML = """<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>%s · 多目标更新推演</title>
+HTML = """<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>%s · Urban Form Explorer</title>
 <style>%s</style></head><body>
 <div id="stage"><canvas id="cv"></canvas></div>
 <div class="panel">
-  <h1>%s · 多目标更新推演</h1>
-  <p class="sub">研究假设、空间算子、Pareto 方案与三维形态放在同一个可追溯界面中。</p>
-  <a class="rep" href="report.html">完整报告</a>
+  <h1>%s · Urban Form Explorer</h1>
+  <p class="sub">Scenario rules, Pareto solutions and spatial form.</p>
   <div id="researchStats" class="stats"></div>
 
-  <div class="grp">第一步 · 选择一种研究情景</div>
+  <div class="grp step">Step 1 · Choose a scenario</div>
   <div id="scenarioButtons" class="row"></div>
   <div id="scenarioDetail"></div>
-  <div class="note">三个情景分别改变可操作范围和规则边界；切换后保留当前角色，并按同一套离散优先级从新解集中选择。</div>
+  <div class="note">Each scenario changes the permitted actions. Your role selection stays active when you switch scenarios.</div>
 
-  <div class="grp">第二步 · 叠加一种角色视角</div>
+  <div class="grp step">Step 2 · Choose a perspective</div>
   <div id="roleViewButtons" class="row"></div>
   <div id="roleViewDetail"></div>
   <div id="solutionMetrics"></div>
   <div id="solutionButtons" class="row"></div>
 
-  <div class="grp">第三步 · 阅读当前情景的 Pareto 取舍</div>
-  <svg id="paretoPlot" aria-label="Pareto 方案散点图"></svg>
-  <div class="pareto-legend"><span class="good">低居住扰动</span><span>→</span><span class="bad">高居住扰动</span></div>
-  <div class="card"><p><b>怎么看：</b>点越靠右，逐栋正向增建量越多；点越靠上，释放的临街地面越多；颜色越绿，直接修改或与强形态操作同处一个更新单元的住宅越少。黑圈标出当前角色按优先级逐级比较后的首选。</p><p class="meta">正向增建量不是净增长，净 GFA 在方案卡片中单列。三个情景分别计算，只有同一张图内的点可以直接比较。</p></div>
+  <div class="grp step">Step 3 · Explore Pareto trade-offs</div>
+  <svg id="paretoPlot" aria-label="Pareto solution scatter plot"></svg>
+  <div class="pareto-legend"><span class="good">Lower residential exposure</span><span>→</span><span class="bad">Higher exposure</span></div>
+  <div class="card"><p>Right means more added floor area; up means more ground released along streets. Greener points have lower residential exposure. The outlined point is this perspective's preferred solution.</p><p class="meta">Positive additions and net GFA change are separate measures. Compare points within the same scenario.</p></div>
 
-  <details><summary>查看定量优化设置、算子和角色优先级</summary>
-    <div class="grp">共同的定量优化任务</div>
+  <details><summary>Optimization settings and priorities</summary>
+    <div class="grp">Shared optimization task</div>
     <div id="scenarioCard" class="card"></div>
-    <div class="grp">计算流程</div><div id="workflowCard" class="card"></div>
-    <div class="grp">三类角色的离散优先级</div><div id="rolesList" class="cards"></div>
-    <div class="grp">形态算子</div><div id="operatorsList"></div>
-    <div class="grp">三个优化目标</div><div id="objectivesList"></div>
-    <div class="grp">硬约束</div><div id="constraintsList" class="card"></div>
+    <div class="grp">Workflow</div><div id="workflowCard" class="card"></div>
+    <div class="grp">Perspective priorities</div><div id="rolesList" class="cards"></div>
+    <div class="grp">Form operations</div><div id="operatorsList"></div>
+    <div class="grp">Optimization objectives</div><div id="objectivesList"></div>
+    <div class="grp">Hard constraints</div><div id="constraintsList" class="card"></div>
   </details>
 
-  <div class="grp">算法对比</div>
+  <div class="grp">Search comparison</div>
   <div id="experimentCard"></div>
 
-  <div class="grp">三维显示</div>
+  <div class="grp">3D display</div>
   <div class="row">
-    <button data-mode="massing" class="on">体块 massing</button>
-    <button data-mode="depth">深度 depth</button>
-    <button data-mode="normal">法线 normal</button>
-    <button data-mode="segmentation">分色 seg</button>
-    <button data-mode="canny">边缘 canny</button>
-    <button id="baselineOverlayButton" class="on" onclick="toggleBaselineOverlay()">橙线叠加现状</button>
+    <button data-mode="massing" class="on">Massing</button>
+    <button data-mode="depth">Depth</button>
+    <button data-mode="normal">Normals</button>
+    <button data-mode="segmentation">Segments</button>
   </div>
   <div class="legend">%s</div>
 
-  <div class="grp">三维底图</div>
+  <div class="grp">Ground map</div>
   <div class="row">
-    <button data-basemap="osm" class="on">OSM 道路</button>
-    <button data-basemap="satellite">卫星影像</button>
-    <button data-basemap="none">关闭底图</button>
+    <button data-basemap="satellite" class="on">Satellite</button>
+    <button data-basemap="osm">OSM streets</button>
+    <button data-basemap="none">None</button>
   </div>
 
-  <details><summary>角度与图片导出</summary>
-    <button class="big acc" onclick="saveAngle()">保存当前角度</button><div id="angs"></div>
-    <button class="big" onclick="exportCurrent()">导出当前视图</button>
-    <button class="big" onclick="exportAllModes()">当前角度全部 5 模式</button>
-    <button class="big" onclick="exportAllSaved()">所有保存角度 × 全部模式</button>
+  <details><summary>Views and image export</summary>
+    <button class="big acc" onclick="saveAngle()">Save current view</button><div id="angs"></div>
+    <button class="big" onclick="exportCurrent()">Export current view</button>
+    <button class="big" onclick="exportAllModes()">Export all 4 modes</button>
+    <button class="big" onclick="exportAllSaved()">Export all saved views</button>
     <div id="prm"></div>
-    <div class="note">PNG 命名 <code>%s_&lt;方案&gt;_&lt;模式&gt;.png</code>；条件图不含底图。</div>
-  </details>
-
-  <details><summary>研究边界与限制</summary>
-    <div class="note">当前平台使用公共协调、开发增长、居民生活与遗产保护三个研究情景。遗产硬约束采用 12 条已匹配官方记录对应的 21 个冻结建筑轮廓；4 条范围未决历史记录与 32 栋未匹配更新单元建筑分别记录、分别排除。情景参数以范围披露，当前三维方案是范围内参考值的一次求解，不能解释为法定规划。</div>
+    <div class="note">PNG: <code>%s_&lt;solution&gt;_&lt;mode&gt;.png</code>. Condition images omit the ground map.</div>
   </details>
 </div>
-<div class="hint">拖拽=旋转 滚轮=缩放 右键=平移</div>
+<div class="hint">Drag to orbit · Scroll to zoom · Right-click to pan</div>
 <script>%s</script>
 <script>%s</script>
 <script>%s</script>
@@ -775,7 +772,7 @@ def build(slug=None):
     three = (WEB / "three.min.js").read_text(encoding="utf-8")
     orbit = (WEB / "OrbitControls.js").read_text(encoding="utf-8")
     place = geom["labels"].get(geom["regimes"][0], slug)
-    site_name = ws05.C.site_meta(slug)["name"]
+    site_name = "Dapuqiao, Shanghai" if slug == "dapuqiao" else ws05.C.site_meta(slug)["name"]
     legend = "".join('<span><i style="background:%s"></i>%s</span>' % (geom["colors"][sh], geom["sh_label"].get(sh, sh))
                      for sh in ["state", "developer", "resident", "unknown"])
     html = HTML % (site_name, CSS, site_name, legend, slug, three, orbit, viewer_js(geom))

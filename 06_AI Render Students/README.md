@@ -37,7 +37,7 @@ python run.py canvas caoyang    # 单站
 - 打浦桥页面采用一条连续流程：选择三种治理情景 → 选择三类角色视角 → 阅读当前情景独立计算的 Pareto 取舍 → 查看三维与导出。正式搜索包含合规增建、临街地面释放、大体量拆分和敏感对象退台四个强形态动作，以及公共空间重构和居民院落通行改善两个低强度动作；三个情景分别读取自己的算子权限和优化结果，三类角色再按离散优先级对同一解集排序，形成 3×3 阅读组合。
 - **拖拽 orbit 找角度** → 「保存当前角度」存进列表,点一下回到那个角度。
 - 切换**情景或角色视角**时，形态、指标、Pareto 图和选中方案同步变化；图中每个点均可打开对应三维方案。
-- **5 种导出模式**(作 AI 参考图 / ControlNet 条件图):
+- **4 种导出模式**(作 AI 参考图 / ControlNet 条件图):
 
   | 模式 | 画面 | 用途 |
   |---|---|---|
@@ -45,10 +45,9 @@ python run.py canvas caoyang    # 单站
   | 深度 depth | 灰阶(近白远黑)黑底 | ControlNet **depth** |
   | 法线 normal | 表面法线彩色 白底 | ControlNet **normal** |
   | 分色 seg | 按权利方著色 白底 | ControlNet **segmentation** |
-  | 边缘 canny | 白色硬边 黑底 | ControlNet **canny / lineart** |
 
-- **导出**:当前视图 / 当前角度全部 5 模式 / 所有保存角度 × 全部模式。PNG 命名 `<slug>_<体制>_<模式>.png`。
-- 条件图(depth/normal/seg/canny)**不含卫星底、干净可直接喂 ControlNet**;massing 含真实卫星地面。
+- **导出**:当前视图 / 当前角度全部 4 模式 / 所有保存角度 × 全部模式。PNG 命名 `<slug>_<体制>_<模式>.png`。
+- 条件图(depth/normal/seg)**不含卫星底、干净可直接喂 ControlNet**;massing 默认显示真实卫星地面，也可切换 OSM 道路。
 
 ## 跑法
 

@@ -90,17 +90,19 @@ class DapuqiaoCanvasModelTests(unittest.TestCase):
         self.assertNotIn('onclick="selectScenario', script)
         self.assertNotIn('onclick="selectRole', script)
 
-    def test_viewer_can_overlay_current_form_for_change_reading(self):
+    def test_viewer_defaults_to_satellite_without_removed_display_modes(self):
         script = build_canvas.viewer_js({})
 
-        self.assertIn("buildBaselineOverlay", script)
-        self.assertIn("toggleBaselineOverlay", script)
+        self.assertIn('basemap=(GEOM.sat&&GEOM.satExtent)?"satellite":"osm"', script)
+        self.assertIn('const MODES=["massing","depth","normal","segmentation"]', script)
+        self.assertNotIn("baselineOverlay", script)
+        self.assertNotIn('mode==="canny"', script)
 
     def test_solution_card_names_positive_increment_and_shows_net_gfa(self):
         script = build_canvas.viewer_js({})
 
-        self.assertIn("正向增建量", script)
-        self.assertIn("净 GFA 变化", script)
+        self.assertIn("Added floor area", script)
+        self.assertIn("Net GFA change", script)
 
 
 if __name__ == "__main__":
