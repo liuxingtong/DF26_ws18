@@ -1,9 +1,11 @@
+metric_version: actual_geometry_v2
+
 objectives:
   residential_disruption:
     direction: minimize
     label: 居住影响暴露
     unit: ratio
-    definition: 被直接修改，或与增高、拆分、退台建筑位于同一道路围合更新单元的住宅现状 GFA / 住宅总 GFA；采用离散暴露判定，不使用距离权重
+    definition: 实际直接改变，或与实际增高达到 0.1 m、有效体量连通分量增加的建筑位于同一更新单元的住宅现状 GFA / 住宅总 GFA；不按算子名称判定，缺失单元不产生间接关联
   development_capacity:
     direction: maximize
     label: 净建筑面积变化

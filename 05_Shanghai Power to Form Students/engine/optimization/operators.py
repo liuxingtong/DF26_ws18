@@ -34,6 +34,9 @@ def _eligible_for_operator(rows: gpd.GeoDataFrame, operator: str, scenario: dict
         mask = rows["editable"].fillna(False) & ~rows["heritage"].fillna(False)
     if operator not in allowed:
         return mask & False
+    overrides = (scenario or {}).get("permission_overrides")
+    if overrides is not None:
+        return mask & rows["bid"].astype(str).isin(overrides.get(operator, []))
     stakeholder_targets = targets.get(operator)
     if stakeholder_targets:
         mask &= rows["stakeholder_proxy"].astype(str).isin(stakeholder_targets)

@@ -63,6 +63,13 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def decision_record(candidate):
+    """Lossless decisions for every evaluated candidate, including non-Pareto."""
+    return {"solution_id": candidate.solution_id,
+            "decision_type": "parameter" if candidate.decisions and hasattr(candidate.decisions[0], "height_multiplier") else "zone_operator",
+            "decisions": [asdict(item) for item in candidate.decisions]}
+
+
 def candidate_row(candidate) -> dict:
     def active(item) -> bool:
         return getattr(item, "operator", "parameter") != "noop"
@@ -289,6 +296,7 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
             "compromise": "minimum_worst_role_rank",
             "numeric_weights_used": False,
         },
+        "metric_version": study.objective_config.get("metric_version", "legacy_operator_tags"),
         "objective_measurement": study.objective_config.get("measurement", {}),
         "epsilon": study.objective_config.get("epsilon", {}),
         "exported_epsilon_pareto_solution_count": len(pareto),
@@ -311,6 +319,9 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
     (output / "run_config.json").write_text(
         json.dumps(run_config, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+    with (output / "candidate_decisions.jsonl").open("w", encoding="utf-8") as decision_file:
+        for item in candidates:
+            decision_file.write(json.dumps(decision_record(item), ensure_ascii=False) + "\n")
     write_csv(output / "all_candidates.csv", [candidate_row(item) for item in candidates])
     write_csv(output / "pareto_solutions.csv", [candidate_row(item) for item in pareto])
     by_id = {candidate.solution_id: candidate for candidate in candidates}

@@ -765,6 +765,7 @@ def main() -> int:
 
     manifest = {
         "created_at": datetime.now().isoformat(timespec="seconds"),
+        "metric_version": studies[SCENARIOS[0]].objective_config.get("metric_version", "legacy_operator_tags"),
         "study": "dapuqiao",
         "methods": [BASELINE_ID, *SCENARIOS],
         "comparison_groups": [EXISTING_ID, BASELINE_ID, *SCENARIOS],
@@ -776,7 +777,7 @@ def main() -> int:
         "control_envelope": args.control_envelope,
         "objective_definitions": {
             "residential_disruption": (
-                "居住 GFA 中被直接修改、或与增高/拆分/退台建筑处于同一更新单元的比例"
+                "居住 GFA 中实际直接改变、或与实际增高达到0.1m/有效体量拆分建筑处于同一更新单元的比例；不依赖算子名称"
             ),
             "development_capacity": (
                 "净建筑面积变化 = (Σ GFA_方案 − Σ GFA_现状) / 研究区面积；"

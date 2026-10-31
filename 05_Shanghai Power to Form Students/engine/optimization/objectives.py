@@ -4,6 +4,8 @@ from collections import Counter
 from dataclasses import dataclass
 
 import geopandas as gpd
+import numpy as np
+import shapely
 from shapely.ops import unary_union
 
 
@@ -53,6 +55,37 @@ def build_objective_context(
     )
 
 
+def actual_exposure_ids(baseline, candidate, numerical_resolution=None):
+    """Return direct changes and indirect impacts from actual form, not labels.
+
+    Indirect impacts are positive height gains or a newly divided physical mass.
+    Heights and footprint changes use the same resolution as the operators.
+    """
+    resolution = numerical_resolution or {}
+    height_min = float(resolution.get("minimum_building_height_change_m", 0.1))
+    area_min = float(resolution.get("minimum_building_footprint_change_m2", 1.0))
+    before = baseline.set_index(baseline["bid"].astype(str))
+    after = candidate.set_index(candidate["bid"].astype(str))
+    if not before.index.is_unique or not after.index.is_unique or set(before.index) != set(after.index):
+        raise ValueError("Exposure requires matching unique existing-building IDs")
+    after = after.reindex(before.index)
+    height_delta = after["height_m"].to_numpy(float) - before["height_m"].to_numpy(float)
+    height_changed = np.abs(height_delta) >= height_min - 1e-9
+    raised = height_delta >= height_min - 1e-9
+    geometries_differ = ~shapely.equals_exact(before.geometry.array, after.geometry.array, tolerance=0.0)
+    footprint_changed = np.zeros(len(before), dtype=bool)
+    split = np.zeros(len(before), dtype=bool)
+    def components(geom):
+        return sum(p.geom_type == "Polygon" and p.area >= area_min - 1e-9
+                   for p in getattr(geom, "geoms", [geom]))
+    for i in np.flatnonzero(geometries_differ):
+        old, new = before.geometry.iloc[i], after.geometry.iloc[i]
+        footprint_changed[i] = old.symmetric_difference(new).area >= area_min - 1e-9
+        split[i] = footprint_changed[i] and components(new) > components(old)
+    return (set(before.index[height_changed | footprint_changed]),
+            set(before.index[raised | split]))
+
+
 def evaluate_objectives(
     baseline: gpd.GeoDataFrame,
     candidate: gpd.GeoDataFrame,
@@ -69,26 +102,17 @@ def evaluate_objectives(
     site_area = context.site_area
     changed_ids = {item["bid"] for item in changes}
     base_res = baseline[baseline["residential_proxy"].fillna(False)]
-    changed_res = base_res[base_res["bid"].astype(str).isin(changed_ids)]
-    height_impact_operators = {
-        "densify",
-        "split_to_towers",
-        "heritage_step_down",
-        "parameter_height_footprint",
-    }
-    height_impact_ids = {
-        str(item["bid"])
-        for item in changes
-        if item.get("operator") in height_impact_operators
-    }
-    exposed_zone_ids = set(
-        baseline.loc[
-            baseline["bid"].astype(str).isin(height_impact_ids), "zone_id"
-        ].astype(str)
+    actual_changed_ids, height_impact_ids = actual_exposure_ids(
+        baseline, candidate, (objective_config or {}).get("numerical_resolution", {})
     )
+    changed_res = base_res[base_res["bid"].astype(str).isin(actual_changed_ids)]
+    impacted_zones = baseline.loc[
+        baseline["bid"].astype(str).isin(height_impact_ids), "zone_id"
+    ].dropna()
+    exposed_zone_ids = set(impacted_zones.astype(str))
     exposed_res = base_res[
-        base_res["bid"].astype(str).isin(changed_ids)
-        | base_res["zone_id"].astype(str).isin(exposed_zone_ids)
+        base_res["bid"].astype(str).isin(actual_changed_ids)
+        | (base_res["zone_id"].notna() & base_res["zone_id"].astype(str).isin(exposed_zone_ids))
     ]
     residential_total = context.residential_gfa
     direct_residential_change_ratio = (
