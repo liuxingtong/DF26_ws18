@@ -399,7 +399,8 @@ def load_study(
                 status["planning_controls"] = "research_demo_defaults"
         # Research-demo controls can either reproduce the original scenario-
         # specific envelopes or use the paper experiment's one frozen envelope.
-        # The latter is required for fair cross-method comparison.
+        # The latter is required for fair cross-method comparison and is applied
+        # below for canonical inputs as well.
         defaults = scenario.get("defaults", {})
         if controls is not None:
             controls = controls.copy()
@@ -407,10 +408,7 @@ def load_study(
                 if column in defaults:
                     controls[column] = float(defaults[column])
             controls["scenario_id"] = scenario.get("id", scenario_name)
-            if shared_experiment_controls:
-                controls["source"] = "shared paper-experiment assumption; not official planning data"
-                status["planning_controls"] = "shared_paper_experiment_assumption"
-            else:
+            if not shared_experiment_controls:
                 controls["source"] = "scenario-specific research assumption; not official planning data"
                 status["planning_controls"] = "scenario_specific_research_assumption"
         if heritage is None:
@@ -420,9 +418,35 @@ def load_study(
             else:
                 status["heritage"] = "research_demo_empty"
         warnings.append("当前使用研究假设输入；可用于披露假设的方法实验，不得解释为法定规划结果")
-        if shared_experiment_controls:
-            warnings.append("五组论文对照固定使用同一限高、FAR、覆盖率、住宅保留率与街道缓冲口径")
         blockers = []
+
+    # 共同控制包络必须在"规范输入"下同样生效。历史版本把这段覆盖写在
+    # `if research_demo:` 里面，使论文对照实际使用了逐单元 max(36 m, 现状) 的限高，
+    # 与实验清单里声明的 36 m / FAR 3.0 / 覆盖率 0.60 不符。这里对两种输入模式
+    # 都执行覆盖，并用唯一值检查防止再次静默回落到逐单元现状值。
+    if shared_experiment_controls:
+        if controls is None:
+            raise ValueError("shared_experiment_controls=True 但没有任何 planning_controls 可用")
+        required_columns = ("height_limit_m", "max_far", "max_coverage_ratio")
+        missing = [column for column in required_columns if column not in shared_defaults]
+        if missing:
+            raise ValueError(f"共同控制口径缺少字段：{missing}")
+        controls = controls.copy()
+        for column in required_columns:
+            controls[column] = float(shared_defaults[column])
+        controls["scenario_id"] = scenario.get("id", scenario_name)
+        controls["source"] = "shared paper-experiment assumption; not official planning data"
+        if "statutory_planning_control" in controls:
+            controls["statutory_planning_control"] = False
+        status["planning_controls"] = "shared_paper_experiment_assumption"
+        for column in required_columns:
+            unique = sorted({round(float(value), 9) for value in controls[column]})
+            if len(unique) != 1:
+                raise RuntimeError(f"共同控制口径下 {column} 未统一：{unique}")
+        warnings.append(
+            "五组论文对照固定使用同一限高、FAR、覆盖率、住宅保留率与街道缓冲口径；"
+            "单栋允许高度仍取 max(限高, 现状高度)，因此现状已高于限高的建筑不得再增高"
+        )
 
     buildings = _attach_heritage(buildings, heritage)
     buildings = _attach_zones(buildings, zones)

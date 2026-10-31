@@ -18,6 +18,9 @@ class ObjectiveContext:
     baseline_union: object
     street_access: object
     street_access_buffer_m: float
+    # Denominator of the street-adjacent release objective: the 5 m street
+    # buffer clipped to the study area, not the study area itself.
+    street_buffer_area: float
 
 
 def _gfa(frame: gpd.GeoDataFrame) -> float:
@@ -34,13 +37,19 @@ def build_objective_context(
     base_res = baseline[baseline["residential_proxy"].fillna(False)]
     measurement = (objective_config or {}).get("measurement", {})
     street_buffer_m = float(measurement.get("street_access_buffer_m", 5.0))
+    site_geometry = boundary.geometry.union_all()
+    street_access = unary_union(list(streets.geometry)).buffer(street_buffer_m)
+    street_buffer_area = float(street_access.intersection(site_geometry).area)
+    if street_buffer_area <= 0:
+        raise ValueError("街道缓冲与研究区没有交集，无法计算临街释放目标")
     return ObjectiveContext(
-        site_area=float(boundary.geometry.union_all().area),
+        site_area=float(site_geometry.area),
         baseline_gfa=_gfa(baseline),
         residential_gfa=_gfa(base_res),
         baseline_union=unary_union(list(baseline.geometry)),
-        street_access=unary_union(list(streets.geometry)).buffer(street_buffer_m),
+        street_access=street_access,
         street_access_buffer_m=street_buffer_m,
+        street_buffer_area=street_buffer_area,
     )
 
 
@@ -93,7 +102,8 @@ def evaluate_objectives(
     candidate_gfa = _gfa(candidate)
     base_by_id = baseline.set_index(baseline["bid"].astype(str))
     candidate_by_id = candidate.set_index(candidate["bid"].astype(str))
-    positive_gfa_increment_m2 = 0.0
+    gross_added_m2 = 0.0
+    gross_removed_m2 = 0.0
     minimum_gfa_change_m2 = float(
         (objective_config or {}).get("numerical_resolution", {}).get(
             "minimum_building_gfa_change_m2", 1.0
@@ -112,10 +122,13 @@ def evaluate_objectives(
             )
         increment = candidate_building_gfa - baseline_building_gfa
         if increment >= minimum_gfa_change_m2:
-            positive_gfa_increment_m2 += increment
-    development_capacity = (
-        positive_gfa_increment_m2 / site_area if site_area > 0 else 0.0
-    )
+            gross_added_m2 += increment
+        elif increment <= -minimum_gfa_change_m2:
+            gross_removed_m2 += -increment
+    net_gfa_change_m2 = candidate_gfa - base_gfa
+    # f2 is the net change: additions and removals cancel, so a candidate cannot
+    # buy capacity by demolishing first and rebuilding later.
+    development_capacity = net_gfa_change_m2 / site_area if site_area > 0 else 0.0
 
     # Current morphology operators only preserve or shrink footprints. Computing
     # the union of all 1,370 buildings for every candidate is unnecessary: start
@@ -138,7 +151,10 @@ def evaluate_objectives(
     else:
         released = context.baseline_union.difference(context.baseline_union)
     connected_released = released.intersection(context.street_access)
-    released_ratio = float(connected_released.area / site_area) if site_area > 0 else 0.0
+    released_ratio = (
+        float(connected_released.area / context.street_buffer_area)
+        if context.street_buffer_area > 0 else 0.0
+    )
 
     op_counts = Counter(item["operator"] for item in changes)
     changed_stakeholders = Counter(
@@ -158,13 +174,18 @@ def evaluate_objectives(
         "height_mean_m": float(heights.mean()),
         "height_max_m": float(heights.max()),
         "changed_buildings": float(len(changed_ids)),
-        "positive_gfa_increment_m2": float(positive_gfa_increment_m2),
-        "net_gfa_change_m2": float(candidate_gfa - base_gfa),
-        "net_gfa_change_far": float((candidate_gfa - base_gfa) / site_area)
+        "gross_added_m2": float(gross_added_m2),
+        "gross_removed_m2": float(gross_removed_m2),
+        # Legacy alias kept so archived runners and figures keep reading the
+        # added floor area without a schema change.
+        "positive_gfa_increment_m2": float(gross_added_m2),
+        "net_gfa_change_m2": float(net_gfa_change_m2),
+        "net_gfa_change_far": float(net_gfa_change_m2 / site_area)
         if site_area > 0 else 0.0,
         "direct_residential_change_ratio": float(direct_residential_change_ratio),
         "exposed_resident_buildings": float(len(exposed_res)),
         "street_access_buffer_m": context.street_access_buffer_m,
+        "street_buffer_area_m2": float(context.street_buffer_area),
         "densify_count": float(op_counts.get("densify", 0)),
         "open_ground_count": float(op_counts.get("open_ground", 0)),
         "split_to_towers_count": float(op_counts.get("split_to_towers", 0)),

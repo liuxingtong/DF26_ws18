@@ -3,8 +3,8 @@ roles:
     label: 居民利益视角
     priority_order:
       - residential_disruption
-      - street_connected_released_ground
       - development_capacity
+      - street_connected_released_ground
     feasibility_required: true
 
   development:

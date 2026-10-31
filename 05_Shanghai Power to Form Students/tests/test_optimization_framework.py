@@ -1,6 +1,9 @@
 import inspect
+import csv
 import sys
+import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -11,7 +14,16 @@ from shapely.geometry import LineString, box
 
 WS05 = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WS05))
+sys.path.insert(0, str(WS05 / "scripts"))
 
+from compare_dapuqiao_methods import pooled_feasible_bounds  # noqa: E402
+
+from engine.optimization.amplitude import (  # noqa: E402
+    apply_baseline_arm,
+    apply_operator_arm,
+    load_arms,
+    resolve_arm,
+)
 from engine.optimization.constraints import check_constraints, constraint_policy  # noqa: E402
 from engine.optimization.data import CONFIG_ROOT, load_study, load_yaml  # noqa: E402
 from engine.optimization.models import CandidateEvaluation, ZoneDecision  # noqa: E402
@@ -31,6 +43,7 @@ from engine.optimization.operators import build_operator_impact_counts  # noqa: 
 from engine.optimization.pareto import nondominated, pareto_sets  # noqa: E402
 from engine.optimization.parameter_baseline import (  # noqa: E402
     apply_parameter_decisions,
+    ParameterBaselineSampling,
     run_parameter_baseline,
 )
 from engine.optimization.roles import evaluate_roles  # noqa: E402
@@ -79,6 +92,45 @@ def synthetic_city():
 
 
 class OptimizationFrameworkTests(unittest.TestCase):
+    def test_pooled_bounds_include_feasible_non_pareto_candidates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "baseline" / "seed_11" / "all_candidates.csv"
+            path.parent.mkdir(parents=True)
+            with path.open("w", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=[
+                    "feasible", "residential_disruption", "development_capacity",
+                    "street_connected_released_ground",
+                ])
+                writer.writeheader()
+                writer.writerows([
+                    {"feasible": "True", "residential_disruption": 0,
+                     "development_capacity": 1, "street_connected_released_ground": 1},
+                    {"feasible": "True", "residential_disruption": 2,
+                     "development_capacity": -2, "street_connected_released_ground": 0},
+                    {"feasible": "False", "residential_disruption": 100,
+                     "development_capacity": 100, "street_connected_released_ground": 100},
+                ])
+            ideal, nadir = pooled_feasible_bounds(Path(directory), [
+                {"method_id": "baseline", "seed": 11}
+            ])
+            self.assertEqual(ideal.tolist(), [0.0, -1.0, -1.0])
+            self.assertEqual(nadir.tolist(), [2.0, 2.0, 0.0])
+
+    def test_parameter_sampling_includes_height_only_candidate(self):
+        import numpy as np
+        problem = SimpleNamespace(n_var=4, xl=np.array([1.0, .75, 1.0, .75]),
+                                  xu=np.array([1.5, 1.0, 1.5, 1.0]))
+        samples = ParameterBaselineSampling()._do(problem, 4)
+        self.assertTrue(any(np.allclose(row, [1.5, 1.0, 1.5, 1.0]) for row in samples))
+
+    def test_parameter_height_cap_is_logged(self):
+        buildings, boundary, streets, zones, controls, scenario, _ = synthetic_city()
+        controls.loc[controls.zone_id.eq("Z2"), "height_limit_m"] = 13
+        study = SimpleNamespace(buildings=buildings, boundary=boundary, streets=streets,
+                                zones=zones, controls=controls, scenario=scenario)
+        _, changes = apply_parameter_decisions(study, [ParameterDecision("Z2", 1.5, 1.0)])
+        self.assertIn("height_limit", changes[0]["clamped_by"])
+
     def test_operator_is_explicit_and_traced(self):
         buildings, _, _, _, controls, _, specs = synthetic_city()
         after, changes = apply_decisions(
@@ -104,7 +156,7 @@ class OptimizationFrameworkTests(unittest.TestCase):
             buildings.loc[buildings.bid.eq("B1"), "geometry"].iloc[0]
         ))
 
-    def test_development_capacity_sums_positive_building_gfa_not_net_change(self):
+    def test_development_capacity_is_net_gfa_change(self):
         buildings, boundary, streets, _, _, scenario, _ = synthetic_city()
         candidate = buildings.copy()
         candidate.loc[candidate.bid.eq("B1"), "geometry"] = box(10, 10, 20, 20)
@@ -114,10 +166,36 @@ class OptimizationFrameworkTests(unittest.TestCase):
         objectives, descriptors = evaluate_objectives(
             buildings, candidate, changes, boundary, streets, scenario
         )
-        self.assertGreater(objectives["development_capacity"], 0.0)
-        self.assertLess(descriptors["net_gfa_change_m2"], 0.0)
+        # The removal (200 m2 of footprint) outweighs the addition, so f2 is
+        # negative: a candidate cannot buy capacity by demolishing first.
+        self.assertLess(objectives["development_capacity"], 0.0)
         self.assertAlmostEqual(
-            descriptors["positive_gfa_increment_m2"], 400.0 / 3.5
+            objectives["development_capacity"], descriptors["net_gfa_change_far"]
+        )
+        self.assertAlmostEqual(descriptors["gross_added_m2"], 400.0 * 1.0 / 3.5)
+        self.assertAlmostEqual(descriptors["gross_removed_m2"], 300.0 * 10.0 / 3.5)
+
+    def test_net_capacity_penalises_offsetting_removal(self):
+        buildings, boundary, streets, _, _, scenario, _ = synthetic_city()
+        added_only = buildings.copy()
+        added_only.loc[added_only.bid.eq("B2"), "height_m"] = 13.0
+        added_and_removed = added_only.copy()
+        added_and_removed.loc[added_and_removed.bid.eq("B1"), "geometry"] = box(10, 10, 20, 20)
+        first, _ = evaluate_objectives(
+            buildings, added_only, [{"bid": "B2", "operator": "densify"}],
+            boundary, streets, scenario,
+        )
+        second, _ = evaluate_objectives(
+            buildings, added_and_removed,
+            [{"bid": "B2", "operator": "densify"},
+             {"bid": "B1", "operator": "open_ground"}],
+            boundary, streets, scenario,
+        )
+        self.assertGreater(first["development_capacity"], 0.0)
+        self.assertAlmostEqual(
+            first["development_capacity"] - second["development_capacity"],
+            300.0 * 10.0 / 3.5 / 10000.0,
+            places=9,
         )
 
     def test_height_change_exposes_residents_in_same_update_zone_without_weights(self):
@@ -147,11 +225,14 @@ class OptimizationFrameworkTests(unittest.TestCase):
         )
         self.assertEqual(
             config["objectives"]["development_capacity"]["label"],
-            "正向增建量",
+            "净建筑面积变化",
         )
+        reference = config["normalization_reference"]["development_capacity"]
+        self.assertLess(reference["minimum"], 0.0)
+        self.assertEqual(reference["maximum"], 0.03)
         self.assertEqual(
-            config["normalization_reference"]["development_capacity"]["maximum"],
-            0.03,
+            config["objectives"]["street_connected_released_ground"]["unit"],
+            "street_buffer_ratio",
         )
 
     def test_street_buffer_is_fixed_by_objective_config(self):
@@ -167,6 +248,36 @@ class OptimizationFrameworkTests(unittest.TestCase):
         )
         self.assertEqual(first.street_access_buffer_m, 5.0)
         self.assertTrue(first.street_access.equals(second.street_access))
+
+    def test_release_is_normalised_by_buffer_area_while_net_change_is_normalised_by_site(self):
+        buildings, boundary, streets, _, controls, scenario, specs = synthetic_city()
+        after, changes = apply_decisions(
+            buildings, [ZoneDecision("Z1", "open_ground", 1.0)], controls, specs
+        )
+        config = {"measurement": {"street_access_buffer_m": 10.0}}
+        context = build_objective_context(buildings, boundary, streets, scenario, config)
+        self.assertLess(context.street_buffer_area, context.site_area)
+        objectives, _ = evaluate_objectives(
+            buildings, after, changes, boundary, streets, scenario,
+            context=context, objective_config=config,
+        )
+        doubled = replace(context, site_area=context.site_area * 2)
+        doubled_objectives, _ = evaluate_objectives(
+            buildings, after, changes, boundary, streets, scenario,
+            context=doubled, objective_config=config,
+        )
+        # f3 reads the street buffer, so widening the study area must not move it.
+        self.assertAlmostEqual(
+            doubled_objectives["street_connected_released_ground"],
+            objectives["street_connected_released_ground"],
+            places=12,
+        )
+        # f2 is normalised by the study area, so it must halve.
+        self.assertAlmostEqual(
+            doubled_objectives["development_capacity"],
+            objectives["development_capacity"] / 2.0,
+            places=12,
+        )
 
     def test_sub_resolution_change_is_filtered(self):
         buildings, _, _, _, controls, _, specs = synthetic_city()
@@ -788,6 +899,82 @@ class OptimizationFrameworkTests(unittest.TestCase):
             row["evaluation_calls"] for row in first_metadata["convergence"]
         ]
         self.assertEqual(evaluation_calls, sorted(evaluation_calls))
+
+
+class AmplitudeArmTests(unittest.TestCase):
+    def test_every_arm_keeps_the_baseline_envelope_at_least_as_wide_as_permissions(self):
+        payload = load_arms()
+        self.assertIn("v1", payload["arms"])
+        self.assertIn("expanded", payload["arms"])
+        for arm_id, arm in payload["arms"].items():
+            operators = arm["operator_parameters"]
+            parameters = arm["parameter_baseline_parameters"]
+            with self.subTest(arm=arm_id):
+                self.assertGreaterEqual(
+                    parameters["height_multiplier"]["max"] - 1.0 + 1e-12,
+                    operators["densify"]["maximum_height_gain_ratio"],
+                )
+                self.assertLessEqual(
+                    parameters["footprint_ratio"]["min"],
+                    operators["open_ground"]["minimum_footprint_ratio"],
+                )
+
+    def test_arm_overrides_operators_and_baseline_without_mutating_inputs(self):
+        specs = load_yaml(CONFIG_ROOT / "operator_specs.yaml")["operators"]
+        baseline = load_yaml(CONFIG_ROOT / "parameter_baseline.yaml")
+        arm_id, arm = resolve_arm("expanded")
+        armed_specs = apply_operator_arm(specs, arm)
+        armed_baseline = apply_baseline_arm(baseline, arm)
+        self.assertEqual(arm_id, "expanded")
+        self.assertEqual(
+            armed_specs["densify"]["parameters"]["maximum_height_gain_ratio"], 0.50
+        )
+        self.assertEqual(
+            armed_baseline["baseline"]["parameters"]["height_multiplier"]["max"], 1.50
+        )
+        # Deep copies: the on-disk defaults must stay untouched so v1 stays reproducible.
+        self.assertEqual(specs["densify"]["parameters"]["maximum_height_gain_ratio"], 0.30)
+        self.assertEqual(
+            baseline["baseline"]["parameters"]["height_multiplier"]["max"], 1.30
+        )
+
+    def test_paper_arm_aliases_resolve_to_repository_arms(self):
+        self.assertEqual(resolve_arm("a0")[0], "v1")
+        self.assertEqual(resolve_arm("a1")[0], "expanded")
+        self.assertEqual(resolve_arm("A0")[0], "v1")
+        self.assertEqual(resolve_arm("A1")[0], "expanded")
+
+    def test_unknown_arm_is_rejected(self):
+        with self.assertRaises(KeyError):
+            resolve_arm("does_not_exist")
+
+
+class SharedControlEnvelopeTests(unittest.TestCase):
+    """Regression guard: the paper's shared 36 m / FAR 3.0 envelope must be real.
+
+    A previous version kept the override inside ``if research_demo:`` so canonical
+    paper runs silently used per-zone ``max(36, existing)`` caps instead.
+    """
+
+    def test_shared_controls_override_per_zone_frozen_values(self):
+        study = load_study("public_coordination", shared_experiment_controls=True)
+        for column, expected in (
+            ("height_limit_m", 36.0),
+            ("max_far", 3.0),
+            ("max_coverage_ratio", 0.6),
+        ):
+            with self.subTest(column=column):
+                values = {round(float(value), 9) for value in study.controls[column]}
+                self.assertEqual(values, {expected})
+        self.assertEqual(
+            study.source_status["planning_controls"],
+            "shared_paper_experiment_assumption",
+        )
+
+    def test_per_zone_controls_are_preserved_without_the_shared_envelope(self):
+        study = load_study("public_coordination", shared_experiment_controls=False)
+        self.assertGreater(study.controls["height_limit_m"].nunique(), 1)
+        self.assertGreater(float(study.controls["height_limit_m"].max()), 36.0)
 
 
 if __name__ == "__main__":

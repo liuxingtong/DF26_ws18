@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import json
 from copy import deepcopy
 from dataclasses import replace
 from typing import Any
@@ -9,6 +10,7 @@ import numpy as np
 import pandas as pd
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.core.problem import ElementwiseProblem
+from pymoo.core.sampling import Sampling
 from pymoo.optimize import minimize
 from shapely import affinity
 
@@ -21,6 +23,24 @@ from .pareto import morphology_signature, pareto_sets
 
 
 FLOOR_HEIGHT_M = 3.5
+
+
+class ParameterBaselineSampling(Sampling):
+    """Include interpretable height and release anchors in every initial population."""
+
+    def _do(self, problem, n_samples, **kwargs):
+        rng = kwargs.get("random_state") or np.random
+        matrix = rng.uniform(problem.xl, problem.xu, size=(n_samples, problem.n_var))
+        if n_samples >= 1:
+            matrix[0, 0::2] = problem.xu[0::2]
+            matrix[0, 1::2] = problem.xu[1::2]
+        if n_samples >= 2:
+            matrix[1, 0::2] = problem.xl[0::2]
+            matrix[1, 1::2] = problem.xl[1::2]
+        if n_samples >= 3:
+            matrix[2, 0::2] = (problem.xl[0::2] + problem.xu[0::2]) / 2
+            matrix[2, 1::2] = problem.xu[1::2]
+        return matrix
 
 
 def build_parameter_baseline_study(study, baseline_config: dict[str, Any]):
@@ -217,6 +237,10 @@ def apply_parameter_decisions(study, decisions: list[ParameterDecision]):
                 "footprint_change_m2": footprint_change_m2,
                 "gfa_change_m2": float(after_gfa_m2 - before_gfa_m2),
                 "requested_height_m": requested_height,
+                "clamped_by": ";".join(filter(None, [
+                    "height_limit" if before_height * decision.height_multiplier > requested_height + 1e-9 else "",
+                    "zone_far" if height_allocation < 1.0 - 1e-9 else "",
+                ])),
                 "capacity_allocation_ratio": height_allocation,
             })
     return result, changes
@@ -263,6 +287,9 @@ class ParameterBaselineProblem(ElementwiseProblem):
         self.cache = {}
         self.evaluations = []
         self.evaluation_calls = 0
+        self.retain_candidate_geometries = bool(
+            getattr(study, "retain_candidate_geometries", True)
+        )
         h_min, h_max, f_min, f_max = self.ranges
         lower = np.tile([h_min, f_min], len(self.zone_ids))
         upper = np.tile([h_max, f_max], len(self.zone_ids))
@@ -289,6 +316,8 @@ class ParameterBaselineProblem(ElementwiseProblem):
             )
             self.cache[key] = candidate
             self.evaluations.append(candidate)
+            if not self.retain_candidate_geometries:
+                candidate.buildings = None
         out["F"] = np.asarray(candidate.minimization_vector(), dtype=float)
         out["G"] = np.asarray([
             sum(item.severity == "blocking" for item in candidate.violations)
@@ -303,6 +332,7 @@ def run_parameter_baseline(
     generations: int = 20,
     seed: int = 42,
     evaluation_budget: int | None = None,
+    fixed_raw_budget: bool = False,
 ):
     if study.blockers:
         raise RuntimeError("正式运行被数据审计阻止：" + "；".join(study.blockers))
@@ -310,7 +340,8 @@ def run_parameter_baseline(
     attempted_generations = generations
     while True:
         problem = ParameterBaselineProblem(study, baseline_config)
-        algorithm = NSGA2(pop_size=population, eliminate_duplicates=True)
+        algorithm = NSGA2(pop_size=population, sampling=ParameterBaselineSampling(),
+                          eliminate_duplicates=True)
         recorder = ConvergenceRecorder(getattr(study, "objective_config", {}))
         minimize(
             problem,
@@ -326,7 +357,7 @@ def run_parameter_baseline(
             if candidate.has_effective_change:
                 active_by_morphology.setdefault(morphology_signature(candidate), candidate)
         active = list(active_by_morphology.values())
-        if len(active) >= target_budget:
+        if fixed_raw_budget or len(active) >= target_budget:
             break
         if attempted_generations >= max(generations * 20, generations + 200):
             raise RuntimeError(
@@ -344,18 +375,19 @@ def run_parameter_baseline(
         "P_00000",
         problem.objective_context,
     )
-    candidates = [baseline, *active[:target_budget]]
+    actual_budget = min(target_budget, len(active)) if fixed_raw_budget else target_budget
+    candidates = [baseline, *active[:actual_budget]]
     full_front, epsilon_front, representatives, diagnostics = pareto_sets(
         candidates, getattr(study, "objective_config", {})
     )
     convergence = [
         row for row in recorder.records
-        if int(row["effective_independent_evaluations"]) < target_budget
+        if int(row["effective_independent_evaluations"]) < actual_budget
     ]
     boundary_record = next(
         (
             row for row in recorder.records
-            if int(row["effective_independent_evaluations"]) >= target_budget
+            if int(row["effective_independent_evaluations"]) >= actual_budget
         ),
         None,
     )
@@ -370,7 +402,10 @@ def run_parameter_baseline(
     convergence.append({
         "generation": boundary_generation,
         "evaluation_calls": boundary_evaluation_calls,
-        "effective_independent_evaluations": target_budget,
+        "effective_independent_evaluations": actual_budget,
+        "front_minimization_vectors": json.dumps(
+            [candidate.minimization_vector() for candidate in epsilon_front]
+        ),
         **quality_summary(epsilon_front, getattr(study, "objective_config", {})),
     })
     return candidates, epsilon_front, {
@@ -378,8 +413,10 @@ def run_parameter_baseline(
         "population": population,
         "generations": generations,
         "generations_executed": attempted_generations,
-        "effective_evaluation_budget": target_budget,
-        "unique_evaluations": target_budget,
+        "effective_evaluation_budget": actual_budget,
+        "requested_evaluation_budget": target_budget,
+        "raw_evaluation_calls": int(problem.evaluation_calls),
+        "unique_evaluations": len(active),
         "raw_unique_evaluations": len(problem.evaluations),
         "discarded_unique_evaluations": max(0, len(active) - target_budget),
         "cache_hits": int(problem.evaluation_calls - len(problem.evaluations)),

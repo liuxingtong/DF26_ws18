@@ -277,12 +277,15 @@ def apply_decisions(
         allowed, _, intensity_limits = operator_policy(scenario)
         if decision.operator not in allowed:
             continue
-        intensity = min(float(decision.intensity), intensity_limits.get(decision.operator, 1.0))
+        requested_intensity = float(decision.intensity)
+        intensity = min(requested_intensity, intensity_limits.get(decision.operator, 1.0))
+        intensity_capped = intensity < requested_intensity - 1e-9
         zone_mask = result["zone_id"].astype(str).eq(str(decision.zone_id))
         eligible = zone_mask & _eligible_for_operator(result, decision.operator, scenario)
         control = control_by_zone.get(str(decision.zone_id), {})
         height_limit = float(control.get("height_limit_m", math.inf))
         spec = operator_specs[decision.operator]
+        clamp_by_index: dict[Any, list[str]] = {}
 
         step_targets: dict[Any, float] = {}
         if decision.operator == "heritage_step_down":
@@ -362,9 +365,17 @@ def apply_decisions(
             before_h = float(result.at[index, "height_m"])
             after_geom = before_geom
             after_h = before_h
+            clamps = clamp_by_index.setdefault(index, [])
+            if intensity_capped:
+                clamps.append("intensity_cap")
 
             if decision.operator == "densify":
+                gain = float(spec.get("parameters", {}).get("maximum_height_gain_ratio", 0.30))
                 requested_height = densify_targets[index]
+                if requested_height < before_h * (1.0 + gain * intensity) - 1e-9:
+                    clamps.append("height_limit")
+                if densify_scale < 1.0 - 1e-9:
+                    clamps.append("zone_far")
                 after_h = before_h + (requested_height - before_h) * densify_scale
             elif decision.operator == "open_ground":
                 minimum_ratio = float(spec.get("parameters", {}).get("minimum_footprint_ratio", 0.75))
@@ -376,9 +387,14 @@ def apply_decisions(
                 clipped = scaled.intersection(before_geom)
                 after_geom = clipped if not clipped.is_empty and clipped.area > 1e-6 else before_geom
                 actual_ratio = float(after_geom.area / before_geom.area)
+                if actual_ratio > requested_ratio + 1e-6:
+                    clamps.append("footprint_minimum")
                 if spec.get("parameters", {}).get("compensate_gfa", True):
                     effective_cap = max(before_h, height_limit)
-                    after_h = min(before_h / max(actual_ratio, 1e-6), effective_cap)
+                    requested_cap = before_h / max(actual_ratio, 1e-6)
+                    if requested_cap > effective_cap + 1e-6:
+                        clamps.append("height_limit")
+                    after_h = min(requested_cap, effective_cap)
             elif decision.operator == "split_to_towers":
                 parameters = spec.get("parameters", {})
                 minimum_area = float(parameters.get("minimum_building_area_m2", 300.0))
@@ -390,9 +406,16 @@ def apply_decisions(
                     actual_ratio = float(after_geom.area / before_geom.area)
                     if parameters.get("compensate_gfa", True):
                         effective_cap = max(before_h, height_limit)
-                        after_h = min(before_h / max(actual_ratio, 1e-6), effective_cap)
+                        requested_cap = before_h / max(actual_ratio, 1e-6)
+                        if requested_cap > effective_cap + 1e-6:
+                            clamps.append("height_limit")
+                        after_h = min(requested_cap, effective_cap)
             elif decision.operator == "heritage_step_down":
-                after_h = min(step_targets.get(index, before_h), max(before_h, height_limit))
+                step_target = step_targets.get(index, before_h)
+                effective_cap = max(before_h, height_limit)
+                if step_target > effective_cap + 1e-6:
+                    clamps.append("height_limit")
+                after_h = min(step_target, effective_cap)
             elif decision.operator == "public_space_reconfiguration":
                 parameters = spec.get("parameters", {})
                 minimum_ratio = float(parameters.get("minimum_footprint_ratio", 0.90))
@@ -407,6 +430,8 @@ def apply_decisions(
                         ),
                         minimum_ratio,
                     )
+                    if float(after_geom.area / before_geom.area) <= minimum_ratio + 1e-4:
+                        clamps.append("footprint_minimum")
             elif decision.operator == "courtyard_access_improvement":
                 parameters = spec.get("parameters", {})
                 minimum_ratio = float(parameters.get("minimum_footprint_ratio", 0.92))
@@ -424,6 +449,8 @@ def apply_decisions(
                         ),
                         minimum_ratio,
                     )
+                    if float(after_geom.area / before_geom.area) <= minimum_ratio + 1e-4:
+                        clamps.append("footprint_minimum")
             else:
                 raise NotImplementedError(f"算子尚未实现：{decision.operator}")
 
@@ -448,6 +475,10 @@ def apply_decisions(
                 "zone_id": str(decision.zone_id),
                 "operator": decision.operator,
                 "intensity": intensity,
+                "requested_intensity": requested_intensity,
+                # Which rule actually reduced the request: E3 counts these
+                # instead of re-deriving clamps from an ops log afterwards.
+                "clamped_by": ";".join(sorted(set(clamps))),
                 "before_height_m": before_h,
                 "after_height_m": after_h,
                 "before_area_m2": float(before_geom.area),

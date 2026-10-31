@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import json
 from typing import Any
 
 import numpy as np
@@ -171,6 +172,9 @@ class DapuqiaoNSGA2Problem(ElementwiseProblem):
         self.cache = {}
         self.evaluations = []
         self.evaluation_calls = 0
+        self.retain_candidate_geometries = bool(
+            getattr(study, "retain_candidate_geometries", True)
+        )
         lower = np.tile([0.0, 0.0], self.zone_count)
         upper = np.tile([float(len(OPERATOR_NAMES) - 1), 1.0], self.zone_count)
         super().__init__(n_var=self.zone_count * 2, n_obj=3, n_ieq_constr=1, xl=lower, xu=upper)
@@ -193,6 +197,8 @@ class DapuqiaoNSGA2Problem(ElementwiseProblem):
             )
             self.cache[key] = candidate
             self.evaluations.append(candidate)
+            if not self.retain_candidate_geometries:
+                candidate.buildings = None
         out["F"] = np.asarray(candidate.minimization_vector(), dtype=float)
         out["G"] = np.asarray([sum(item.severity == "blocking" for item in candidate.violations)], dtype=float)
 
@@ -214,6 +220,9 @@ class ConvergenceRecorder(Callback):
             "generation": int(algorithm.n_gen),
             "evaluation_calls": int(problem.evaluation_calls),
             "effective_independent_evaluations": int(active_count),
+            "front_minimization_vectors": json.dumps(
+                [candidate.minimization_vector() for candidate in front]
+            ),
             **quality_summary(front, self.objective_config),
         })
 
@@ -247,6 +256,7 @@ def run_nsga2(
     generations: int = 20,
     seed: int = 42,
     evaluation_budget: int | None = None,
+    fixed_raw_budget: bool = False,
 ):
     if study.blockers:
         raise RuntimeError("正式运行被数据审计阻止：" + "；".join(study.blockers))
@@ -264,11 +274,11 @@ def run_nsga2(
         mutation=MixedDecisionMutation(),
         eliminate_duplicates=True,
     )
-    maximum_generations = max(generations * 20, generations + 200)
+    maximum_generations = generations if fixed_raw_budget else max(generations * 20, generations + 200)
     result = minimize(
         problem,
         algorithm,
-        termination=IndependentEvaluationTermination(target_budget, maximum_generations),
+        termination=("n_gen", generations) if fixed_raw_budget else IndependentEvaluationTermination(target_budget, maximum_generations),
         seed=seed,
         verbose=False,
         save_history=False,
@@ -279,7 +289,7 @@ def run_nsga2(
         if candidate.has_effective_change:
             active_by_morphology.setdefault(morphology_signature(candidate), candidate)
     active = list(active_by_morphology.values())
-    if len(active) < target_budget:
+    if len(active) < target_budget and not fixed_raw_budget:
         raise RuntimeError(
             f"NSGA-II 在 {maximum_generations} 代内只能生成 {len(active)} 个独立非空候选，"
             f"未达到预算 {target_budget}"
@@ -292,18 +302,19 @@ def run_nsga2(
         "S_0000",
         problem.objective_context,
     )
-    candidates = [baseline, *active[:target_budget]]
+    actual_budget = min(target_budget, len(active)) if fixed_raw_budget else target_budget
+    candidates = [baseline, *active[:actual_budget]]
     full_front, epsilon_front, representatives, diagnostics = pareto_sets(
         candidates, getattr(study, "objective_config", {})
     )
     convergence = [
         row for row in recorder.records
-        if int(row["effective_independent_evaluations"]) < target_budget
+        if int(row["effective_independent_evaluations"]) < actual_budget
     ]
     boundary_record = next(
         (
             row for row in recorder.records
-            if int(row["effective_independent_evaluations"]) >= target_budget
+            if int(row["effective_independent_evaluations"]) >= actual_budget
         ),
         None,
     )
@@ -318,7 +329,10 @@ def run_nsga2(
     convergence.append({
         "generation": boundary_generation,
         "evaluation_calls": boundary_evaluation_calls,
-        "effective_independent_evaluations": target_budget,
+        "effective_independent_evaluations": actual_budget,
+        "front_minimization_vectors": json.dumps(
+            [candidate.minimization_vector() for candidate in epsilon_front]
+        ),
         **quality_summary(epsilon_front, getattr(study, "objective_config", {})),
     })
     return candidates, epsilon_front, {
@@ -326,8 +340,10 @@ def run_nsga2(
         "population": population,
         "generations": generations,
         "generations_executed": attempted_generations,
-        "effective_evaluation_budget": target_budget,
-        "unique_evaluations": target_budget,
+        "effective_evaluation_budget": actual_budget,
+        "requested_evaluation_budget": target_budget,
+        "raw_evaluation_calls": int(problem.evaluation_calls),
+        "unique_evaluations": len(active),
         "raw_unique_evaluations": len(problem.evaluations),
         "discarded_unique_evaluations": max(0, len(active) - target_budget),
         "cache_hits": int(problem.evaluation_calls - len(problem.evaluations)),
