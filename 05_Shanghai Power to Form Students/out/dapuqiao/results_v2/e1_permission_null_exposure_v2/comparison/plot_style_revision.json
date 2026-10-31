@@ -1,0 +1,10 @@
+{
+  "reason": "Move matched counts to axis labels to avoid overlapping observations",
+  "script_sha256": "72ccb5a08248abe59315a805b1962d5d3103a7db46943005a880b3f7ea482142",
+  "run_metrics_sha256": "b96c21c383f3d4718060507682872b0784fad5b5b4a15c3f2e895645fd00000e",
+  "figures": {
+    "fig5_permission_null.svg": "0c37600ba02a2e90e21861bc34a163e8abc03a987a9ae808208d60215ed618f3",
+    "fig5_permission_null.pdf": "72aedc00c7b2ea384a9889d1ba8d691b957f35805eabccfba82e8e0e04f20f0c",
+    "fig5_permission_null.png": "a9345ecc4e39476b097d9218ea2a34ed219811ca0d97a2321fb9709f45faaccf"
+  }
+}

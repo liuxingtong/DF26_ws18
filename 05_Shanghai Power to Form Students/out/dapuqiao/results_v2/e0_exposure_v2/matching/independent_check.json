@@ -1,0 +1,7 @@
+{
+  "metric_version": "actual_geometry_v2",
+  "checked_conditions": 360,
+  "source_runs": 40,
+  "matched_counts_and_optima_correct": true,
+  "missing_matches_preserved": true
+}

@@ -1,0 +1,221 @@
+{
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71,
+    83,
+    97,
+    109,
+    127,
+    139
+  ],
+  "denominator": "exported per-seed Pareto set",
+  "baseline": "all 10 BL exported Pareto sets, merged and filtered by exact dominance",
+  "tolerance": 1e-12,
+  "epsilon_reapplied": false,
+  "sources": [
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_11/pareto_solutions.csv",
+      "rows": 98,
+      "sha256": "516ff4f9c7d7986f7444bccca6ca4a084c735f629008e5b72fd32ccce5a39f32"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_23/pareto_solutions.csv",
+      "rows": 126,
+      "sha256": "9fbe15140b68a50eee518eec963791c9710989019219efa820c9abd6ca7ed829"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_37/pareto_solutions.csv",
+      "rows": 147,
+      "sha256": "edc86f004cccae430fb2208cf42245134471f3d630ba9b5642b9de6402a343f1"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_53/pareto_solutions.csv",
+      "rows": 125,
+      "sha256": "bf3b0a54175e054aad9d23ce73ca7455866a67305eb13b77075673f80c52b6d6"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_71/pareto_solutions.csv",
+      "rows": 96,
+      "sha256": "5fef39a5abf5e0fc2ffef90eeec2413669fb5d73b00f97abc3bc1b311ba62a2c"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_83/pareto_solutions.csv",
+      "rows": 123,
+      "sha256": "270cb21847ffb5caba47201d447040f8bad5bbb24fd9239a11de344da8ace594"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_97/pareto_solutions.csv",
+      "rows": 98,
+      "sha256": "fa44c26713e410e1181b3124ef752749baf5920d14c5fb9fc10798fe54602406"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_109/pareto_solutions.csv",
+      "rows": 118,
+      "sha256": "92d919231a351a1e21e49bfef138c775bb5784613fa275288d7e6471adec745d"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_127/pareto_solutions.csv",
+      "rows": 120,
+      "sha256": "f5d857baed9ad0ece7a9602e6346423c3fd5aec4fb73a4cedfc4489c07301ef0"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/conventional_parameter_baseline/seed_139/pareto_solutions.csv",
+      "rows": 118,
+      "sha256": "826786bae38fbbc5600d687d28f9efeff565a84807aa29a2904540c46f768c97"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_11/pareto_solutions.csv",
+      "rows": 24,
+      "sha256": "7c250d8e4757e436aee2e20a98b175678336d80908db81bb8ce959683ecdc2b3"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_23/pareto_solutions.csv",
+      "rows": 15,
+      "sha256": "c93a1326ad64bfdae2c65c91abdbdcccb160740d9e1f2c05302ffdbb8d00b510"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_37/pareto_solutions.csv",
+      "rows": 18,
+      "sha256": "f69a5576294f6ac79b5db724d9bd7755638718eeb60b7eb8e087346725005108"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_53/pareto_solutions.csv",
+      "rows": 26,
+      "sha256": "c66b6a9607aa417e9827cff78cd689a1089962140f32661cb2969a49f30a7072"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_71/pareto_solutions.csv",
+      "rows": 10,
+      "sha256": "c813a007658062303001a0fc08a4c158687ef52c8d5b78c7628703a5912a17a7"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_83/pareto_solutions.csv",
+      "rows": 18,
+      "sha256": "dc70bf1d141109ae70bbf760a2a902ec946bbda1d28cc943f0dd933214c2a664"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_97/pareto_solutions.csv",
+      "rows": 18,
+      "sha256": "6dcb0e129d877ec69e638f57435f1e480c397dac3eb9f790d1de111292e2bb70"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_109/pareto_solutions.csv",
+      "rows": 13,
+      "sha256": "28be30b57a5988fce45d4f51da03676b93c234ffdc213c1669a8778cba33643a"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_127/pareto_solutions.csv",
+      "rows": 27,
+      "sha256": "f02b5898673147786cd29748647499c8d124a1cd3889f25e641fb52f0bd1e310"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_139/pareto_solutions.csv",
+      "rows": 25,
+      "sha256": "918d34e1ca4b239568de4cb5822c535ce66d8c16b2f49b55d33d520a0923e1a2"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_11/pareto_solutions.csv",
+      "rows": 12,
+      "sha256": "7f16d04ee28900be92d6f95a8d69687d65176d1591056f0b90b5b867059bae54"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_23/pareto_solutions.csv",
+      "rows": 11,
+      "sha256": "f5096ac3875e15cb179d3e97f9d71834f105f510c3d2c1d32123198a3e1564c1"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_37/pareto_solutions.csv",
+      "rows": 12,
+      "sha256": "bffba7376ec9388ccb9a95c8b5b85f601a74a06f05dab44a64f6fc9fe6327b8e"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_53/pareto_solutions.csv",
+      "rows": 11,
+      "sha256": "6cec9345ad3a7247cdf5a5b1d79367970b28693f86d0511d53ba2824052ee23c"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_71/pareto_solutions.csv",
+      "rows": 11,
+      "sha256": "576e22a89b3bf7d50d6db109856e03384d8ad466a010fdb7341d93428eebbbde"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_83/pareto_solutions.csv",
+      "rows": 15,
+      "sha256": "b041800e0aed30202d0980f5f59ec339c049b708386e0bf459f50d0e320482ea"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_97/pareto_solutions.csv",
+      "rows": 15,
+      "sha256": "5e60883588ff98c1eef6dd952ab1bbed4ff9fb6910e89d57ba0d6304da34b631"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_109/pareto_solutions.csv",
+      "rows": 13,
+      "sha256": "ef1cdbc3426b08eb2e9b3c3d8a552a08736df11428ce23cc22b4e435dfbaf3df"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_127/pareto_solutions.csv",
+      "rows": 14,
+      "sha256": "5e0528835364ba54ac1a64fd25fd653d9eb9ca98ed246ffa413b798285de7358"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/development_growth/seed_139/pareto_solutions.csv",
+      "rows": 9,
+      "sha256": "c5f2a27f27cdad14718aaa1dfab7abd8ffb059c6024781b7970bc459b715f0d0"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_11/pareto_solutions.csv",
+      "rows": 13,
+      "sha256": "6c5d179b610bd5398e5e5addf37bfee744c3ee8f60eed15be78fad9fd6b4ae56"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_23/pareto_solutions.csv",
+      "rows": 11,
+      "sha256": "a203832932e36fc3e2289192d82b29d7e7f14c408624baa3d9cddd23954b1708"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_37/pareto_solutions.csv",
+      "rows": 10,
+      "sha256": "3624fb938bdeead136e7492193d8229358e6e7edf6730010088587e7b54eba0c"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_53/pareto_solutions.csv",
+      "rows": 11,
+      "sha256": "7f89737e5c0ebd08ef0c5c8c31e68e59a8f693fdc5e57b714837a7aae67a109e"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_71/pareto_solutions.csv",
+      "rows": 14,
+      "sha256": "0f30486f1c1b5e5142c11122d781b33e8bd692e56a1f39c17307d5191900a264"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_83/pareto_solutions.csv",
+      "rows": 20,
+      "sha256": "bdd31359f8f32bc1ce6a15e9fbf852188d682e3f418bced3d2077cf006e4732a"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_97/pareto_solutions.csv",
+      "rows": 13,
+      "sha256": "9d10269f2a56ffda513f513a7fca41e50981ad4da55b64482c9a6f8f505f8bbd"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_109/pareto_solutions.csv",
+      "rows": 21,
+      "sha256": "73e4a84a68ca3c7e30dcf9fa02902931391077e6da6dc2b66c4a2365798d3a4d"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_127/pareto_solutions.csv",
+      "rows": 19,
+      "sha256": "ca51d83a20cc5ef4cbfe086b1d3e121032400c6fdd286afcf14d2741e9c30592"
+    },
+    {
+      "path": "out/dapuqiao/results_v2/e0_exposure_v2/runs/resident_heritage_priority/seed_139/pareto_solutions.csv",
+      "rows": 14,
+      "sha256": "c0cfcc3c86551fd3d399ec8790d070cee8c9d6e6e91706d46e4a18b9b9e6bc91"
+    }
+  ],
+  "baseline_front_count": 398
+}

@@ -1,0 +1,277 @@
+{
+  "metric_version": "actual_geometry_v2",
+  "complete_runs": [
+    {
+      "run": "runs/conventional_parameter_baseline/seed_109",
+      "raw_calls": 2000,
+      "candidates": 1963,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_11",
+      "raw_calls": 2000,
+      "candidates": 1934,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_127",
+      "raw_calls": 2000,
+      "candidates": 1953,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_139",
+      "raw_calls": 2000,
+      "candidates": 1950,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_23",
+      "raw_calls": 2000,
+      "candidates": 1944,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_37",
+      "raw_calls": 2000,
+      "candidates": 1940,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_53",
+      "raw_calls": 2000,
+      "candidates": 1941,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_71",
+      "raw_calls": 2000,
+      "candidates": 1946,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_83",
+      "raw_calls": 2000,
+      "candidates": 1930,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/conventional_parameter_baseline/seed_97",
+      "raw_calls": 2000,
+      "candidates": 1936,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_109",
+      "raw_calls": 2000,
+      "candidates": 1517,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_11",
+      "raw_calls": 2000,
+      "candidates": 1528,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_127",
+      "raw_calls": 2000,
+      "candidates": 1569,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_139",
+      "raw_calls": 2000,
+      "candidates": 1547,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_23",
+      "raw_calls": 2000,
+      "candidates": 1548,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_37",
+      "raw_calls": 2000,
+      "candidates": 1537,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_53",
+      "raw_calls": 2000,
+      "candidates": 1576,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_71",
+      "raw_calls": 2000,
+      "candidates": 1557,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_83",
+      "raw_calls": 2000,
+      "candidates": 1539,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/development_growth/seed_97",
+      "raw_calls": 2000,
+      "candidates": 1560,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_109",
+      "raw_calls": 2000,
+      "candidates": 1472,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_11",
+      "raw_calls": 2000,
+      "candidates": 1520,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_127",
+      "raw_calls": 2000,
+      "candidates": 1434,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_139",
+      "raw_calls": 2000,
+      "candidates": 1572,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_23",
+      "raw_calls": 2000,
+      "candidates": 1553,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_37",
+      "raw_calls": 2000,
+      "candidates": 1473,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_53",
+      "raw_calls": 2000,
+      "candidates": 1576,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_71",
+      "raw_calls": 2000,
+      "candidates": 1478,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_83",
+      "raw_calls": 2000,
+      "candidates": 1550,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/public_coordination/seed_97",
+      "raw_calls": 2000,
+      "candidates": 1472,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_109",
+      "raw_calls": 2000,
+      "candidates": 1347,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_11",
+      "raw_calls": 2000,
+      "candidates": 1418,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_127",
+      "raw_calls": 2000,
+      "candidates": 1433,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_139",
+      "raw_calls": 2000,
+      "candidates": 1423,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_23",
+      "raw_calls": 2000,
+      "candidates": 1361,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_37",
+      "raw_calls": 2000,
+      "candidates": 1268,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_53",
+      "raw_calls": 2000,
+      "candidates": 1351,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_71",
+      "raw_calls": 2000,
+      "candidates": 1389,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_83",
+      "raw_calls": 2000,
+      "candidates": 1413,
+      "metric_version": "actual_geometry_v2"
+    },
+    {
+      "run": "runs/resident_heritage_priority/seed_97",
+      "raw_calls": 2000,
+      "candidates": 1363,
+      "metric_version": "actual_geometry_v2"
+    }
+  ],
+  "files": {
+    "README.md": "2e88394636786f5290db12b859f9514044c1be3e437e02c247675704d362c917",
+    "fairness_audit.csv": "7fded17ee1658a6eb3b454e991d42f41f0e291505fc011a58b2435431cb44e6b",
+    "existing_conditions.csv": "6a8fed978e12704aa2cfee940464163d1664e393da7f0d9df3775ee262a9d2c3",
+    "paired_statistical_tests.csv": "b9fdd28f1e65500690e52f6ce830c71ab8dd3ec3d577e20a914e0fe3055527a3",
+    "baseline_scenario_coverage.csv": "83315b654fd5b783b29d03b1ea0bc9e6bf60ed51008e7039e8996e1baf35277a",
+    "aggregate_summary.csv": "786a62477e8cea6c317a4ab99e6bd9815b6c862a33fce5432efd621546a9c034",
+    "run_summary.csv": "d460bcc43d4f7ce6f0670c645e86a09a1f745483f2ff32e1c92cc9a0c79e4703",
+    "pareto_distribution.csv": "337733210b7f791545965a67ea48b07eb2523a11ccce120011d379dd6b4537b4",
+    "experiment_manifest.json": "d0469da67eeab6d74ba3845e734502f411b3199389b324ae7e31d9ce29a4df81",
+    "baseline_dominance/dominance_by_seed.csv": "49a704214e20c0de5f3bea4175014151fdf5e63dbce2f94345e9a95805497321",
+    "baseline_dominance/baseline_merged_front.csv": "c7a37334170212d1f92bd9541d8654113196d29991df3e2a7e3f41461096a178",
+    "baseline_dominance/provenance.json": "4be64a53c4295881af777a9f00c7db10f2d7234d5ef078c15a3994d54ca17ea7",
+    "baseline_dominance/dominance_summary.csv": "be7c1150e0956a17d82c90a0b3b47b84e0e4cb9b4a9fff41a1883811524dcf8e",
+    "baseline_dominance/pareto_annotated.csv": "b37f1fd963720b901b22e0b0ed4419b49a0237da7f4aceaa7c11fe5380635780",
+    "matching/summary.json": "1e30477a9d6e780d858183cfb27069edcb996ed812d4e52c03c7f8f5b30a2feb",
+    "matching/matched_capacity_detail.csv": "1f7f3e7da6158bede4b43cf8599d57e8f571fac0eb4e4ae0154fa1444102e563",
+    "matching/matched_disruption_summary.csv": "cc3a33507087d77bb4819dd12764b1328377a64a3cadd99a57b172e8d503c91e",
+    "matching/matched_disruption_detail.csv": "f80a72ab89a1e31a1304dc799bc927dfb622ed3b1fd7a15fa26177b6b40db886",
+    "matching/report.md": "747d8f5a6b06aea76dccd9894fc48181d8f679131d8aeff1406c7456e012b4d1",
+    "matching/matched_capacity_summary.csv": "f33023a2d30f09e83c06446cb5923313a4eaf39e1d4db85ad125ff5d52c7339c",
+    "status/seed_71.json": "12872bce59b845b23fe4e577ec8b845f3421cd4b83954a69047e328459a65168",
+    "status/seed_127.json": "68982ecf8a1a9e03c031a71c14f3d79ac9b184e221e4c5983af59d7b950a1a6d",
+    "status/seed_139.json": "431af4fa99c89d77bfb737cfe876cd8424406d714ed39cb66eb5cf09435d2b70",
+    "status/seed_97.json": "316cedef777ea0ee228b1b73098c2052a36bde9a72f2b838e36e804d8325e83d",
+    "status/seed_109.json": "ac2c548e73a7af73cb1a2926124e5ddfa2db450780e95628a4ea20369173d995",
+    "status/seed_11.json": "0d87720fa573c8f1b879cdafd64f3cf1d4b322ac62e2d8eaca6583d789e8e07f",
+    "status/seed_83.json": "55a9842782652cdf06c8c74eebd9a05356261d69d5bad2620d5536771da7d730",
+    "status/seed_23.json": "0b82abc9d847ce669bb173f14aa3ba2662005f3408746fed4380b39d8443f4c3",
+    "status/seed_37.json": "2b7a0fb25d3574ff93e3150fd5589562c383543e1d2553bf0557d98f2da9eeb7",
+    "status/seed_53.json": "79a522431e39311e8bc2ff5738f93d0c60e2f6d61347becfdf689d90ce20f675"
+  }
+}

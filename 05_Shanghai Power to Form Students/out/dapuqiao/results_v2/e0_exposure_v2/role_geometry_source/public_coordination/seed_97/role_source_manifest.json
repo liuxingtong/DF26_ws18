@@ -1,0 +1,28 @@
+{
+  "source_run": "/data/liuxingtong/df26_exposure_v2_20261031/ws05/out/dapuqiao/results_v2/e0_exposure_v2/runs/public_coordination/seed_97",
+  "subset": "selected role solutions only; not a complete search archive",
+  "ids": [
+    "N_00761",
+    "N_00914",
+    "N_00922",
+    "N_01274"
+  ],
+  "source_sha256": {
+    "all_candidates.csv": "1e0658c2be5c92d1f3e5f56161d97e6bcd5104f005d5a72aa67be5b3301aaece",
+    "candidate_decisions.jsonl": "8b2619ceb9dbcf4e2d7179479a711a46820a4ce63b973907dd8ae237a25789e6"
+  },
+  "files": {
+    "run_config.json": "969f7082c4209f3c612851980e1cc47994cae31793b440a8e350fb8d2b53fc68",
+    "selected_solutions.json": "0ee3f875b720af2415c2c7ff36906fd606b0f3c8b0e2fae04801c58d617a625f",
+    "all_candidates.csv": "7699965a25ddb8af95c1d5d76543e9af790ad6ca2cc2dda5442d0ebe581ae30e",
+    "candidate_decisions.jsonl": "7483815a37e406ee77149945abe72d4e9e94dd58945d57cbf87cdab2636a1917",
+    "config/amplitude_arms.yaml": "d0ebb3f1ddb1ca88567cba9777c7bb9e29ff3c109aa0878b0a36b3ad2f360c57",
+    "config/parameter_baseline.yaml": "7143c41655cf0424bbbb339f48cb3c48cb720c20a376c6c3a8acd7b31d9600cb",
+    "config/scenarios.yaml": "e8ecb03a837ec8d4f03c951eead11852b1bc3a1d648dc74b6df61168c7f6e7ba",
+    "config/research_assumptions.yaml": "9e1a5e55f4d04c46862eb295ca7f756f3b6e8966634473f9c6d6dbba571626d2",
+    "config/constraints.yaml": "a835f003819fd5fdc76f68f2232c9eb9b798a16d8ee8180635f386200abc84e4",
+    "config/role_profiles.yaml": "e6d2f245b24838db6419b5479989e5504508971d5f5b545a10fe4e9936914d92",
+    "config/operator_specs.yaml": "f8ec2eeb760302651f83d21196db8fd6a5c6131c1ed12bacca5e0f04249f1b79",
+    "config/objectives.yaml": "8856dfb9179cb954182ba2924f8b0b1c05856f333f2878e069928f62fa2a85f5"
+  }
+}

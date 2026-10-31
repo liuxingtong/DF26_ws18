@@ -1,0 +1,31 @@
+{
+  "complete_runs": 130,
+  "candidate_csv_and_lossless_archive_sha256_checked": 260,
+  "local_vs_remote_run_metrics_match": 130,
+  "independent_rectangle_union_hv_checks": [
+    {
+      "source": "real",
+      "method": "conventional_parameter_baseline",
+      "table": null,
+      "seed": 11,
+      "sliced_hypervolume": 0.8476327210685586,
+      "reference_hypervolume": 0.8476327210685582
+    },
+    {
+      "source": "real",
+      "method": "public_coordination",
+      "table": null,
+      "seed": 11,
+      "sliced_hypervolume": 0.32713261560335405,
+      "reference_hypervolume": 0.3271326156033538
+    },
+    {
+      "source": "random",
+      "method": "development_growth",
+      "table": 0,
+      "seed": 11,
+      "sliced_hypervolume": 0.2848931762521411,
+      "reference_hypervolume": 0.28489317625214106
+    }
+  ]
+}
