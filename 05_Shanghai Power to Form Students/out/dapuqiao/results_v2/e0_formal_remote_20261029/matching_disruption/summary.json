@@ -1,0 +1,39 @@
+{
+  "runs": "out/dapuqiao/results_v2/e0_formal_remote_20261029/runs",
+  "methods": [
+    "public_coordination",
+    "development_growth",
+    "resident_heritage_priority"
+  ],
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71,
+    83,
+    97,
+    109,
+    127,
+    139
+  ],
+  "capacity": {
+    "bands_pct": [
+      0.0,
+      0.2,
+      0.4,
+      0.6
+    ],
+    "tolerance_pp": 0.05
+  },
+  "disruption": {
+    "ceiling_pct": [
+      0.0,
+      5.0,
+      10.0,
+      20.0,
+      30.0
+    ]
+  },
+  "note": "unreachable 表示该方法在该档没有可行候选；不做插值。"
+}
