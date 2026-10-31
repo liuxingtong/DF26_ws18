@@ -665,3 +665,9 @@ PC 共 151 个 Pareto 解，其中 112 个未被支配（24 个正净增建）�
 脚本 scripts/analyze_dapuqiao_baseline_dominance.py；修正输出 baseline_dominance_pareto/（含逐种子统计、每条 Pareto 解的 dominated_by_baseline、BL 合并前沿和输入 SHA256）。原文件未改写。NumPy 独立复算所有支配标记一致；已检验严格劣解、目标相同、互有取舍和已知 50% 分母示例。
 
 出图为 fig3_merged_pareto_fronts、fig3_merged_pareto_zoom 和 fig3_baseline_nondominated_share，均包含 PNG/PDF/SVG。原右侧建筑用途面板替换为主体标签和冻结对象，独立标签图移出正文。
+
+## 19. 正式暴露指标核查（2026-10-31）
+
+40 份正式代码快照确认 open_ground 补偿增高未触发间接暴露。已从正式日志复现 1,504 个 Pareto 解的原暴露值；仅补计 open_ground 增高超过 0.1 m 的诊断中，PC 87/151、DG 69/99、RH 56/76 的暴露上升。该结果不是重新搜索后的指标。E6、BL 未支配比例和角色首选均为旧定义归档，待统一规则后更新。
+
+详见 2026-10-31_暴露核查与图5图6状态.md。图6已用 PC seed97 三个角色的精确决策重建，逐栋高度、面积、修改ID与原三项目标均通过核对；图5缺有效零模型批次，待统一暴露口径后补跑。

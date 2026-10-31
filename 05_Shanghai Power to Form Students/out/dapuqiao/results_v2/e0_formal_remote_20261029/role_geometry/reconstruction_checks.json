@@ -1,0 +1,20 @@
+[
+  {
+    "role": "resident",
+    "solution_id": "N_00810",
+    "changed_ids_and_geometry_measures_match": true,
+    "objectives_match": true
+  },
+  {
+    "role": "development",
+    "solution_id": "N_01500",
+    "changed_ids_and_geometry_measures_match": true,
+    "objectives_match": true
+  },
+  {
+    "role": "public_planning",
+    "solution_id": "N_01465",
+    "changed_ids_and_geometry_measures_match": true,
+    "objectives_match": true
+  }
+]
