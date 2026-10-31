@@ -132,7 +132,7 @@ def draw(detail, output):
             paired=[r[metric] for r in real if r['seed'] in PAIRED_SEEDS and r[metric] is not None]
             ax.scatter(np.linspace(-.09,.09,len(other)),other,s=15,c='#a5a5a5',alpha=.6,zorder=2)
             ax.scatter(np.linspace(-.07,.07,len(paired)),paired,s=23,c='#0072B2',zorder=3)
-            if paired:ax.plot([-.16,.16],[statistics.median(paired)]*2,c='#222222',lw=1.3)
+            if len(paired)==3:ax.plot([-.16,.16],[statistics.median(paired)]*2,c='#222222',lw=1.3)
             medians=[]
             for k in range(10):
                 values=[r[metric] for r in detail if r['source']=='random' and r['method']==method and r['table']==k]
@@ -140,12 +140,12 @@ def draw(detail, output):
                 if len(values)==3 and all(v is not None for v in values):medians.append(statistics.median(values))
             ax.scatter(1+np.linspace(-.1,.1,len(medians)),medians,s=23,c='#D55E00',marker='D',zorder=3)
             if medians:ax.plot([.84,1.16],[statistics.median(medians)]*2,c='#222222',lw=1.3)
-            ax.text(.98,.97,f'{len(medians)}/10 complete tables',ha='right',va='top',transform=ax.transAxes,fontsize=6.5)
+            ax.text(.98,.97,f'{len(paired)}/3 real seeds; {len(medians)}/10 tables',ha='right',va='top',transform=ax.transAxes,fontsize=6.5)
             if not paired and not medians:ax.text(.5,.45,'No matched candidates',ha='center',transform=ax.transAxes,color='#666666')
             ax.set(xticks=[0,1],xticklabels=['Real\nseeds','Random\ntable medians'],xlim=(-.4,1.4))
             ax.grid(axis='y',color='#e8e8e8',lw=.5);ax.set_axisbelow(True)
             if col==0:ax.set_ylabel('Hypervolume' if row==0 else 'Matched residential exposure (%)')
-    fig.legend(handles=[Line2D([],[],marker='o',ls='',color='#0072B2',label='Paired real seeds (n=3)'),
+    fig.legend(handles=[Line2D([],[],marker='o',ls='',color='#0072B2',label='Matched paired real seeds (up to 3)'),
                         Line2D([],[],marker='o',ls='',color='#a5a5a5',label='Other real seeds (n=7)'),
                         Line2D([],[],marker='D',ls='',color='#D55E00',label='Random table median (3 seeds)')],
                loc='outside lower center',ncol=3,frameon=False,fontsize=7)
