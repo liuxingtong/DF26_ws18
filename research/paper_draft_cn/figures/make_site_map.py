@@ -20,7 +20,7 @@ from make_preview_pareto import font
 ROOT = Path(__file__).resolve().parents[3]
 DATA = ROOT / "05_Shanghai Power to Form Students/data/dapuqiao"
 HERE = Path(__file__).resolve().parent
-OUTPUT = HERE / "study_area_satellite.png"
+OUTPUT = HERE / "fig1_study_area_stakeholders.png"
 GROUND = ROOT / "06_AI Render Students/out/dapuqiao"
 MERCATOR = 20037508.342789244
 TO_MERC = Transformer.from_crs(4326, 3857, always_xy=True)
@@ -178,7 +178,7 @@ def draw():
     image = Image.new("RGB", (WIDTH * S, HEIGHT * S), "white")
     ink = ImageDraw.Draw(image)
     ink.text((WIDTH * S / 2, 56 * S), "Dapuqiao Study Area", font=font(30, True), fill=INK, anchor="mm")
-    for panel, title in zip(PANELS, ("Shanghai", "Dapuqiao", "Building functions")):
+    for panel, title in zip(PANELS, ("Shanghai", "Dapuqiao", "Stakeholder labels")):
         ink.text(((panel[0] + panel[2]) * S / 2, 113 * S), title, font=font(20, True), fill=INK, anchor="mm")
 
     city_raster = Image.open(HERE / locator["image"]).convert("RGB")
@@ -189,8 +189,6 @@ def draw():
     ink = ImageDraw.Draw(image, "RGBA")
     for panel in PANELS:
         ink.rectangle(tuple(v * S for v in panel), outline="#737c7b", width=S)
-    draw_polygon(ink, city, city_extent, city_box,
-                 fill=(248, 230, 119, 95), outline=(58, 64, 55, 235), width=2)
     cx, cy = area.centroid.x, area.centroid.y
     px, py = point_in_panel(cx, cy, city_extent, city_box)
     ink.ellipse((px - 8 * S, py - 8 * S, px + 8 * S, py + 8 * S), fill="white", outline=RED, width=4 * S)
@@ -198,11 +196,23 @@ def draw():
     draw_polygon(ink, area, local_extent, local_box, outline="white", width=7)
     draw_polygon(ink, area, local_extent, local_box, outline=RED, width=4)
 
-    buildings = gpd.read_parquet(DATA / "buildings.parquet").to_crs(3857)
+    import sys
+    sys.path.insert(0, str(ROOT / "05_Shanghai Power to Form Students"))
+    from engine.optimization.data import load_study
+    study = load_study("public_coordination", shared_experiment_controls=True)
+    buildings = study.buildings.to_crs(3857)
+    label_colors = {"resident": "#0072B2", "developer": "#E69F00", "state": "#009E73", "unknown": "#BDBDBD"}
+    zones = gpd.read_file(DATA / "intervention_zones.geojson").to_crs(3857)
+    for _, zone in zones.iterrows():
+        draw_polygon(ink, zone.geometry, units_extent, units_box, outline="#a0a0a0", width=1)
     for _, record in buildings.iterrows():
         draw_polygon(ink, record.geometry, units_extent, units_box,
-                     fill=FUNCTION_COLORS[building_function(record)], outline="#373737", width=1)
-    draw_polygon(ink, area, units_extent, units_box, outline=RED, width=4)
+                     fill=label_colors.get(record.stakeholder_proxy, "#BDBDBD"), outline="white", width=1)
+    for _, record in buildings[buildings.heritage].iterrows():
+        draw_polygon(ink, record.geometry, units_extent, units_box, outline="#111111", width=2)
+    for _, record in buildings[buildings.zone_id.isna()].iterrows():
+        draw_polygon(ink, record.geometry, units_extent, units_box, outline="#CC79A7", width=2)
+    draw_polygon(ink, area, units_extent, units_box, outline=RED, width=3)
 
     for a, b in ((545, 572), (1293, 1320)):
         ink.line((a * S, 395 * S, b * S, 395 * S), fill=INK, width=3 * S)
@@ -215,15 +225,17 @@ def draw():
     ink.rectangle((620 * S, 612 * S, (620 + bar_px) * S, 620 * S), fill="white", outline=INK, width=S)
     ink.text(((620 + bar_px / 2) * S, 600 * S), "500 m", font=font(14, True), fill="white", stroke_width=S, stroke_fill=INK, anchor="mb")
 
-    for index, (label, color) in enumerate(FUNCTION_COLORS.items()):
-        col, row = index % 4, index // 4
-        x, y = 55 + col * 435, 681 + row * 32
-        ink.rectangle((x * S, y * S, (x + 24) * S, (y + 20) * S), fill=color, outline="#444444", width=S)
+    legend = {"Resident": "#0072B2", "Developer / operator": "#E69F00", "Public asset": "#009E73", "Unknown": "#BDBDBD", "Heritage freeze (outline)": "#111111", "Unmatched unit (outline)": "#CC79A7"}
+    for index, (label, color) in enumerate(legend.items()):
+        col, row = index % 3, index // 3
+        x, y = 55 + col * 620, 681 + row * 32
+        box = (x * S, y * S, (x + 24) * S, (y + 20) * S)
+        ink.rectangle(box, fill=color if index < 4 else None, outline=color, width=2*S)
         ink.text(((x + 34) * S, (y + 10) * S), label, font=font(16, True), fill=INK, anchor="lm")
     ink.line((50 * S, 754 * S, 83 * S, 754 * S), fill=RED, width=3 * S)
     ink.text((95 * S, 754 * S), "Study boundary", font=font(13, True), fill=INK, anchor="lm")
     ink.text((550 * S, 754 * S), "OpenFreeMap / © OpenMapTiles · © OpenStreetMap contributors · geoBoundaries 2019 · Esri · EOXCloudless (CC BY 4.0)", font=font(11), fill="#4a5352", anchor="lm")
-    image.resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS).save(OUTPUT, optimize=True)
+    image.save(OUTPUT, dpi=(300, 300), optimize=True)
     print(OUTPUT)
 
 
