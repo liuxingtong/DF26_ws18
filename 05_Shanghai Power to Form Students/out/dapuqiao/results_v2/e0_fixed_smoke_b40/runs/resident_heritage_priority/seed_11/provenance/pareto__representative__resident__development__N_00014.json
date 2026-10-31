@@ -1,0 +1,344 @@
+{
+  "labels": [
+    "pareto",
+    "representative",
+    "resident",
+    "development"
+  ],
+  "solution_id": "N_00014",
+  "objectives": {
+    "residential_disruption": 0.0,
+    "development_capacity": -0.00045925149674659913,
+    "street_connected_released_ground": 0.0002362345311128136
+  },
+  "descriptors": {
+    "far": 2.8207342516691876,
+    "coverage": 0.28179204411704567,
+    "height_mean_m": 33.70988796351924,
+    "height_max_m": 176.14076633333357,
+    "changed_buildings": 6.0,
+    "gross_added_m2": 0.0,
+    "gross_removed_m2": 722.8268790283928,
+    "positive_gfa_increment_m2": 0.0,
+    "net_gfa_change_m2": -722.8268790282309,
+    "net_gfa_change_far": -0.00045925149674659913,
+    "direct_residential_change_ratio": 0.0,
+    "exposed_resident_buildings": 0.0,
+    "street_access_buffer_m": 5.0,
+    "street_buffer_area_m2": 246966.54259954803,
+    "densify_count": 0.0,
+    "open_ground_count": 6.0,
+    "split_to_towers_count": 0.0,
+    "heritage_step_down_count": 0.0,
+    "public_space_reconfiguration_count": 0.0,
+    "courtyard_access_improvement_count": 0.0,
+    "parameter_count": 0.0,
+    "changed_resident_buildings": 0.0,
+    "changed_developer_buildings": 6.0,
+    "changed_state_buildings": 0.0,
+    "changed_unknown_buildings": 0.0
+  },
+  "decisions": [
+    {
+      "zone_id": "Z01",
+      "operator": "courtyard_access_improvement",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z02",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z03",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z04",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z05",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z06",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z07",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z08",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z09",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z10",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z11",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z12",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z13",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z14",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z15",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z16",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z17",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z18",
+      "operator": "open_ground",
+      "intensity": 0.5
+    },
+    {
+      "zone_id": "Z19",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z20",
+      "operator": "open_ground",
+      "intensity": 0.5
+    },
+    {
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.5
+    },
+    {
+      "zone_id": "Z22",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z23",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z24",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z25",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z26",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z27",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z28",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z29",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z30",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z31",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z32",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z33",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z34",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z35",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z36",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z37",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z38",
+      "operator": "noop",
+      "intensity": 0.0
+    }
+  ],
+  "changes": [
+    {
+      "bid": "964",
+      "zone_id": "Z18",
+      "operator": "open_ground",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "height_limit",
+      "before_height_m": 63.32776633333332,
+      "after_height_m": 63.32776633333332,
+      "before_area_m2": 319.59365980403305,
+      "after_area_m2": 279.6444523223895,
+      "footprint_change_m2": 39.949207481643555,
+      "gfa_change_m2": -722.8268790283928,
+      "requested_height_m": 63.32776633333332,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "360",
+      "zone_id": "Z20",
+      "operator": "open_ground",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 14.368032999999997,
+      "after_height_m": 16.42060914309113,
+      "before_area_m2": 31.261631744775414,
+      "after_area_m2": 27.353927776288696,
+      "footprint_change_m2": 3.907703968486718,
+      "gfa_change_m2": -2.842170943040401e-14,
+      "requested_height_m": 14.368032999999997,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "364",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 17.023366333333342,
+      "after_height_m": 19.507163563448167,
+      "before_area_m2": 414.05805203123083,
+      "after_area_m2": 361.3370995771817,
+      "footprint_change_m2": 52.720952454049154,
+      "gfa_change_m2": 0.0,
+      "requested_height_m": 17.023366333333342,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "365",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 20.52803299999996,
+      "after_height_m": 23.464674029499882,
+      "before_area_m2": 556.6156128823709,
+      "after_area_m2": 486.9542894650665,
+      "footprint_change_m2": 69.6613234173044,
+      "gfa_change_m2": 0.0,
+      "requested_height_m": 20.52803299999996,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "366",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 26.38229966666667,
+      "after_height_m": 30.151199618947555,
+      "before_area_m2": 442.8717660633499,
+      "after_area_m2": 387.5127953067173,
+      "footprint_change_m2": 55.35897075663263,
+      "gfa_change_m2": 0.0,
+      "requested_height_m": 26.38229966666667,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "369",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 28.054033,
+      "after_height_m": 32.06175199970434,
+      "before_area_m2": 192.58713736474536,
+      "after_area_m2": 168.51374519570615,
+      "footprint_change_m2": 24.07339216903921,
+      "gfa_change_m2": 0.0,
+      "requested_height_m": 28.054033,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    }
+  ],
+  "violations": []
+}

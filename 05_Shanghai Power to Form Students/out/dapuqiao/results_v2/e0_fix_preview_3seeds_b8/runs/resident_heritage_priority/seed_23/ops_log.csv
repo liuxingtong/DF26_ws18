@@ -1,0 +1,2 @@
+﻿solution_id,labels,bid,zone_id,operator,intensity,requested_intensity,clamped_by,before_height_m,after_height_m,requested_height_m,before_area_m2,after_area_m2,gfa_change_m2,capacity_allocation_ratio
+N_00004,pareto__representative__resident__development__public_planning__balanced_compromise,360,Z20,open_ground,0.5,0.5,,14.368032999999997,16.42060914309113,14.368032999999997,31.261631744775414,27.353927776288696,-2.842170943040401e-14,1.0

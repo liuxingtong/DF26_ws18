@@ -1,0 +1,93 @@
+{
+  "scenario": "development_growth",
+  "arm": null,
+  "budget": 800,
+  "calls": 159,
+  "budget_exhausted": false,
+  "capacity": 0.017155503145411,
+  "release": 0.0,
+  "disruption": 0.09128613063890409,
+  "feasible": true,
+  "far": 2.8383490063113452,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 27001.45537815988,
+  "gross_added_m2": 27001.455378159648,
+  "changed_zones": 6,
+  "operator_counts": {
+    "densify": 6
+  },
+  "decision_signature": "Z05:densify:1.0000;Z07:densify:1.0000;Z20:densify:1.0000;Z21:densify:1.0000;Z29:densify:1.0000;Z31:densify:1.0000",
+  "scope": "loose",
+  "attribution": "on",
+  "diff": {
+    "arm": {
+      "before": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "split_to_towers",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "densify": [
+            "developer"
+          ],
+          "open_ground": [
+            "developer"
+          ],
+          "split_to_towers": [
+            "developer"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "densify": 1.0,
+          "open_ground": 0.55,
+          "split_to_towers": 1.0,
+          "courtyard_access_improvement": 0.25
+        }
+      },
+      "after": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "split_to_towers",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "densify": [
+            "developer"
+          ],
+          "open_ground": [
+            "developer"
+          ],
+          "split_to_towers": [
+            "developer"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "densify": 1.0,
+          "open_ground": 0.55,
+          "split_to_towers": 1.0,
+          "courtyard_access_improvement": 0.25
+        }
+      }
+    },
+    "scope": {
+      "before": {
+        "maximum_changed_zone_ratio": 0.45,
+        "maximum_changed_building_ratio": 0.3
+      },
+      "after": {
+        "maximum_changed_zone_ratio": 0.45,
+        "maximum_changed_building_ratio": 0.3
+      }
+    }
+  },
+  "runtime_seconds": 135.62696304102428
+}

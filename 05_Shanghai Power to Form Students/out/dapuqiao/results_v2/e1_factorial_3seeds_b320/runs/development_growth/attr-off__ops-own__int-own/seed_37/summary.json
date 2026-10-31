@@ -1,0 +1,85 @@
+{
+  "scenario": "development_growth",
+  "arm": "attr-off__ops-own__int-own",
+  "seed": 37,
+  "budget": 320,
+  "population": 16,
+  "generations": 20,
+  "amplitude_arm": "v1",
+  "control_envelope": "shared",
+  "generations_executed": 20,
+  "scenario_diff": {
+    "before": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "split_to_towers",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "densify": [
+          "developer"
+        ],
+        "open_ground": [
+          "developer"
+        ],
+        "split_to_towers": [
+          "developer"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "densify": 1.0,
+        "open_ground": 0.55,
+        "split_to_towers": 1.0,
+        "courtyard_access_improvement": 0.25
+      }
+    },
+    "after": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "split_to_towers",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {},
+      "maximum_intensity": {
+        "densify": 1.0,
+        "open_ground": 0.55,
+        "split_to_towers": 1.0,
+        "courtyard_access_improvement": 0.25
+      }
+    }
+  },
+  "runtime_seconds": 310.5270235830103,
+  "effective": 250,
+  "pareto": 20,
+  "feasible_ratio": 0.8685258964143426,
+  "max_net": 0.03581168979971951,
+  "max_release": 0.0026840376924152486,
+  "min_disruption": 0.0,
+  "hypervolume": 0.16644414732071064,
+  "raw_calls": 320,
+  "cache_hits": 45,
+  "candidate_operation_share": {
+    "courtyard_access_improvement": 0.8446215139442231,
+    "densify": 0.8685258964143426,
+    "open_ground": 0.8286852589641435,
+    "split_to_towers": 0.848605577689243
+  },
+  "pareto_operation_share": {
+    "courtyard_access_improvement": 0.55,
+    "densify": 0.95,
+    "open_ground": 0.8,
+    "split_to_towers": 0.6
+  },
+  "max_net_front": 0.03514620159714617,
+  "max_release_front": 0.002475857145395556,
+  "min_disruption_front": 0.0,
+  "max_net_effective": 0.03581168979971951,
+  "max_release_effective": 0.0026840376924152486,
+  "front_size_recomputed": 20,
+  "statistic_note": "max_*_front = 项目既有口径（epsilon 前沿极值）；max_*_effective = 排除现状基线的有效候选极值"
+}

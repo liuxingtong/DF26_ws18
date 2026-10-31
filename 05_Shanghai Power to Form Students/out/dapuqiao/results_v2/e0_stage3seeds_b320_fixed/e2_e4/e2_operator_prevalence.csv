@@ -1,0 +1,14 @@
+﻿method,operator,seed_count,candidate_prevalence_mean,operator_decision_count_mean
+DG,courtyard_access_improvement,10,0.9037270722859289,5745.9
+DG,densify,10,0.6307416905834531,1623.6
+DG,open_ground,10,0.9579671116151547,8167.2
+DG,split_to_towers,10,0.4434715239814887,1008.4
+PC,courtyard_access_improvement,10,0.8206894624027238,2970.3
+PC,densify,10,0.7174777435974325,2166.1
+PC,heritage_step_down,10,0.516953347101822,1120.4
+PC,open_ground,10,0.8744394139913818,3637.9
+PC,public_space_reconfiguration,10,0.9043847047107285,3560.3
+RH,courtyard_access_improvement,10,0.8657791054609505,2672.2
+RH,heritage_step_down,10,0.5063669518866294,957.3
+RH,open_ground,10,0.8996432736317588,3010.8
+RH,public_space_reconfiguration,10,0.9309399182629787,3159.6

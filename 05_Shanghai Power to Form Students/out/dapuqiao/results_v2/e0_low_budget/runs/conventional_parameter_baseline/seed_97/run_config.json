@@ -1,0 +1,548 @@
+{
+  "created_at": "2026-10-29T14:51:45",
+  "seed": 97,
+  "samples": null,
+  "scenario_id": "conventional_parameter_baseline",
+  "method_id": "conventional_parameter_baseline",
+  "scenario": "传统参数驱动形态生成",
+  "source_status": {
+    "buildings": "available",
+    "study_boundary": "available_osm",
+    "street_network": "available_osm",
+    "public_services": "available_osm_candidate",
+    "public_space": "context_only_mixed_verification",
+    "public_space_verification": "available_context_only",
+    "alley_entrances": "context_only_partial_verification",
+    "alley_entrance_verification": "available_context_only",
+    "intervention_zones": "formal_paper_model_input",
+    "planning_controls": "shared_paper_experiment_assumption",
+    "heritage": "frozen_research_input",
+    "formal_input_quality": "verified_sha256",
+    "generation_logic": "geometry_parameters_without_stakeholder_permissions"
+  },
+  "warnings": [
+    "公共空间层仅作背景且不参与目标函数：1 处已确认公共公园身份，1 处候选继续冻结；当前 OSM 多边形不能作为实测面积或法定权属边界",
+    "弄堂入口仅作非穷尽背景且不参与优化：1 处研究级核实，1 处候选冻结；坐标不是实测门点，不能推导通行能力或开放时段",
+    "五组论文对照固定使用同一限高、FAR、覆盖率、住宅保留率与街道缓冲口径；单栋允许高度仍取 max(限高, 现状高度)，因此现状已高于限高的建筑不得再增高",
+    "32 栋建筑未匹配更新单元，已冻结为不可编辑背景"
+  ],
+  "single_pass": true,
+  "role_feedback_enabled": false,
+  "role_preference_model": {
+    "type": "epsilon_tiered_lexicographic",
+    "compromise": "minimum_worst_role_rank",
+    "numeric_weights_used": false
+  },
+  "objective_measurement": {
+    "street_access_buffer_m": 5.0
+  },
+  "epsilon": {
+    "residential_disruption": 0.001,
+    "development_capacity": 0.0005,
+    "street_connected_released_ground": 0.0003
+  },
+  "exported_epsilon_pareto_solution_count": 17,
+  "quality_normalization_reference": {
+    "residential_disruption": {
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "development_capacity": {
+      "minimum": -0.9874177261080769,
+      "maximum": 1.4105967515829672
+    },
+    "street_connected_released_ground": {
+      "minimum": 0.0,
+      "maximum": 0.6201025016040324
+    }
+  },
+  "quality": {
+    "pareto_count": 17,
+    "hypervolume": 0.0660922842083576,
+    "spacing": 0.0495792493939297
+  },
+  "search": {
+    "backend": "nsga2_parameter_baseline",
+    "population": 12,
+    "generations": 10,
+    "generations_executed": 11,
+    "effective_evaluation_budget": 120,
+    "unique_evaluations": 120,
+    "raw_unique_evaluations": 127,
+    "discarded_unique_evaluations": 7,
+    "cache_hits": 5,
+    "uses_stakeholder_categories": false,
+    "uses_scenario_permissions": false,
+    "parameter_ranges": {
+      "height_multiplier": {
+        "min": 1.0,
+        "max": 1.5,
+        "source": "与既有 densify.maximum_height_gain_ratio=0.30 一致"
+      },
+      "footprint_ratio": {
+        "min": 0.65,
+        "max": 1.0,
+        "source": "与既有 open_ground.minimum_footprint_ratio=0.75 一致"
+      }
+    },
+    "maximum_changed_buildings": 411,
+    "shared_hard_constraints": true,
+    "full_pareto_solution_ids": [
+      "P_00000",
+      "P_00026",
+      "P_00058",
+      "P_00060",
+      "P_00062",
+      "P_00065",
+      "P_00067",
+      "P_00072",
+      "P_00073",
+      "P_00075",
+      "P_00082",
+      "P_00084",
+      "P_00087",
+      "P_00093",
+      "P_00095",
+      "P_00096",
+      "P_00098",
+      "P_00106",
+      "P_00107",
+      "P_00109",
+      "P_00111",
+      "P_00115",
+      "P_00117"
+    ],
+    "epsilon_pareto_solution_ids": [
+      "P_00000",
+      "P_00117",
+      "P_00087",
+      "P_00093",
+      "P_00026",
+      "P_00106",
+      "P_00111",
+      "P_00067",
+      "P_00082",
+      "P_00096",
+      "P_00107",
+      "P_00073",
+      "P_00060",
+      "P_00058",
+      "P_00115",
+      "P_00075",
+      "P_00062"
+    ],
+    "representative_solution_ids": [
+      "P_00000",
+      "P_00096",
+      "P_00117",
+      "P_00075",
+      "P_00062",
+      "P_00082",
+      "P_00073",
+      "P_00026",
+      "P_00087"
+    ],
+    "pareto_diagnostics": {
+      "input_feasible_count": 121,
+      "morphology_duplicate_count": 0,
+      "full_pareto_count": 23,
+      "objective_duplicate_count": 1,
+      "epsilon_pareto_count": 17,
+      "representative_count": 9
+    },
+    "convergence": [
+      {
+        "generation": 1,
+        "evaluation_calls": 12,
+        "effective_independent_evaluations": 12,
+        "pareto_count": 7,
+        "hypervolume": 0.03524953759858352,
+        "spacing": 0.05549367874619791
+      },
+      {
+        "generation": 2,
+        "evaluation_calls": 24,
+        "effective_independent_evaluations": 23,
+        "pareto_count": 11,
+        "hypervolume": 0.036273323213953615,
+        "spacing": 0.05166036489862841
+      },
+      {
+        "generation": 3,
+        "evaluation_calls": 36,
+        "effective_independent_evaluations": 35,
+        "pareto_count": 14,
+        "hypervolume": 0.05024463864863066,
+        "spacing": 0.040559977947850046
+      },
+      {
+        "generation": 4,
+        "evaluation_calls": 48,
+        "effective_independent_evaluations": 47,
+        "pareto_count": 16,
+        "hypervolume": 0.05024463864863066,
+        "spacing": 0.05293551821297414
+      },
+      {
+        "generation": 5,
+        "evaluation_calls": 60,
+        "effective_independent_evaluations": 57,
+        "pareto_count": 15,
+        "hypervolume": 0.05024463864863066,
+        "spacing": 0.04903793223864126
+      },
+      {
+        "generation": 6,
+        "evaluation_calls": 72,
+        "effective_independent_evaluations": 69,
+        "pareto_count": 12,
+        "hypervolume": 0.06134366994432565,
+        "spacing": 0.05824694064528477
+      },
+      {
+        "generation": 7,
+        "evaluation_calls": 84,
+        "effective_independent_evaluations": 80,
+        "pareto_count": 13,
+        "hypervolume": 0.06290095767976711,
+        "spacing": 0.06578182521659105
+      },
+      {
+        "generation": 8,
+        "evaluation_calls": 96,
+        "effective_independent_evaluations": 91,
+        "pareto_count": 14,
+        "hypervolume": 0.06295043424557761,
+        "spacing": 0.0469487070629832
+      },
+      {
+        "generation": 9,
+        "evaluation_calls": 108,
+        "effective_independent_evaluations": 103,
+        "pareto_count": 16,
+        "hypervolume": 0.06373047370603033,
+        "spacing": 0.03981826859532785
+      },
+      {
+        "generation": 10,
+        "evaluation_calls": 120,
+        "effective_independent_evaluations": 115,
+        "pareto_count": 16,
+        "hypervolume": 0.06374046578032334,
+        "spacing": 0.053989084261466605
+      },
+      {
+        "generation": 11,
+        "evaluation_calls": 132,
+        "effective_independent_evaluations": 120,
+        "pareto_count": 17,
+        "hypervolume": 0.12245651526255179,
+        "spacing": 0.34733853811941523
+      }
+    ]
+  },
+  "reproducibility": {
+    "input_files": {
+      "SOURCE_ARCHIVE.json": {
+        "sha256": "a823ec2063f7fdbf8064477c1019cda540fca0e5ca9e53186834cb547a0489e8",
+        "bytes": 7497
+      },
+      "buildings.parquet": {
+        "sha256": "5b9ec15c6a80b264a68992c28f7dbeb6d90b0534d5da7ecba3f71781e2a49032",
+        "bytes": 212404
+      },
+      "study_boundary.geojson": {
+        "sha256": "cc86182c448c01c6a9aa1e81d6222a0a40252ffa07bda780e7357d257ef344ab",
+        "bytes": 1681
+      },
+      "street_network.geojson": {
+        "sha256": "90b105f0beab8b35496a11c42803ff0b24be8cc5a3f7401163a343a6bc8bcf59",
+        "bytes": 136892
+      },
+      "public_services.geojson": {
+        "sha256": "bab01bbdf435661e55cb4d182592bd52b8dc7c07ddf83fcccee14b73b2d0fa80",
+        "bytes": 43100
+      },
+      "public_space_candidates.geojson": {
+        "sha256": "7ad4d6836bbd7a0d9fe4feaa05d4dd3fc37ca9461ae801b5edde9d79ff84aba9",
+        "bytes": 3937
+      },
+      "public_space_verification.json": {
+        "sha256": "93dd0e43a67c70f0b12fcb0f545309527c332808062095c3b2ff5ee504858c5e",
+        "bytes": 3581
+      },
+      "alley_entrances.geojson": {
+        "sha256": "7e2f84eafdf519a8a3c52eb1726b30e3960d476a4bf992db9e9147dbed3f11dd",
+        "bytes": 2093
+      },
+      "alley_entrance_verification.json": {
+        "sha256": "2cd98a85892bc4da46f9b09f255ae11a731acc5bacc100ea681f6a1b5699f8ef",
+        "bytes": 2782
+      },
+      "online_gap_freeze.json": {
+        "sha256": "6aff2e12c868d30b883d239439692806326521956bf9ce267d71c5980243f083",
+        "bytes": 3925
+      },
+      "open_data_quality.json": {
+        "sha256": "c2b23fd1b660144cc90b3eb7f40caec5b5bf42b38201dae07cf8d9f34ce1ddb3",
+        "bytes": 2189
+      },
+      "open_data_sources.yaml": {
+        "sha256": "833bf353526ea595a1147a49dbcfe787383d138ad3f44ee478295acf358318c9",
+        "bytes": 3436
+      },
+      "intervention_zones.geojson": {
+        "sha256": "44309c41765dd5b259b06034e034c5362672a0098550dc543cac0ec14e8bdf95",
+        "bytes": 79297
+      },
+      "planning_controls.csv": {
+        "sha256": "27143e3975bc625de2971cca3d9460f06f14f02cde9320b972c80bd5fff96b73",
+        "bytes": 13702
+      },
+      "heritage_buildings.geojson": {
+        "sha256": "f2a0114f12098fbb51d22322a6f668c1379898992854ef051799886ca60f068e",
+        "bytes": 21953
+      },
+      "formal_input_quality.json": {
+        "sha256": "b4d5cb363a266a4363a1ed4fb94a780f9fbe43d56146f6e29245a309c7a4db7b",
+        "bytes": 1606
+      },
+      "site.yaml": {
+        "sha256": "ed053bf61729961836be6fc08944e027fbe8ac005472ebf670c98252a5802cc5",
+        "bytes": 173
+      }
+    },
+    "code_files": {
+      "engine/optimization/__init__.py": {
+        "sha256": "ee100c35680728c0ed0244f1b9e2c4031050c806f3b737a73a8e906ccb2588d8",
+        "bytes": 208
+      },
+      "engine/optimization/amplitude.py": {
+        "sha256": "1ae7734f9d0b91a6c0c9696b0c16ef5a80b788baf7f1607457bb35a1f62e5700",
+        "bytes": 3196
+      },
+      "engine/optimization/constraints.py": {
+        "sha256": "66cd6f795ef21721cea2ab2a0c955e323e37ee8e4016d60b784ec15ab561e413",
+        "bytes": 9924
+      },
+      "engine/optimization/data.py": {
+        "sha256": "4f8a9894de9bfa733dae0912a83790061fe9fff900ef73956e0dc5f181e129b5",
+        "bytes": 24361
+      },
+      "engine/optimization/metrics.py": {
+        "sha256": "352f35e133f123f850f588770180b303a2161dce224244f57b299c39679f4cb7",
+        "bytes": 8536
+      },
+      "engine/optimization/models.py": {
+        "sha256": "5a9089477a67c98ae106a9a5f551138d360ebcfad7aad3af604a534439fcb645",
+        "bytes": 1919
+      },
+      "engine/optimization/nsga2.py": {
+        "sha256": "538f64bf43d073b9d1c1038f440c74ea0ec265962a769a6471ffc2fbb797b8a4",
+        "bytes": 13824
+      },
+      "engine/optimization/objectives.py": {
+        "sha256": "97ce451493df152672c8df49e877c6dee7952024b4afcbd26d4591eec345cd63",
+        "bytes": 8692
+      },
+      "engine/optimization/operators.py": {
+        "sha256": "bef29512221c3e147775ff31bf45ad811782264ca3920e9de884cc0dd31375c7",
+        "bytes": 23375
+      },
+      "engine/optimization/parameter_baseline.py": {
+        "sha256": "4d6f78a78629c8c50c0273b31186aa6dc4b7b4f67e4494db4a5e94217afeb8a0",
+        "bytes": 16958
+      },
+      "engine/optimization/pareto.py": {
+        "sha256": "3e69162d87971f4d65d76cc36248ec363a9b961b961ddf783630cbf74c02a18b",
+        "bytes": 7234
+      },
+      "engine/optimization/roles.py": {
+        "sha256": "561b1e6f986b664314f9955a9545735c182ca27fb0dd1591a0668ceb5d0c065b",
+        "bytes": 7993
+      },
+      "engine/optimization/search.py": {
+        "sha256": "346e07142ec08896461b8093425a4da03e1d68911169b15a1a30e216b8a779fe",
+        "bytes": 6209
+      },
+      "scripts/audit_dapuqiao_source_archive.py": {
+        "sha256": "19d06756dea9fde353a021b2ed6bd4e794dec33f5e4a4cebadf7b4a56aa1a254",
+        "bytes": 2719
+      },
+      "scripts/build_dapuqiao_draft_zones.py": {
+        "sha256": "e47df2bc71de9d70f1191e0645c64d66878b77d5a8f2aedd821b0e2149a5e390",
+        "bytes": 9683
+      },
+      "scripts/build_dapuqiao_open_data.py": {
+        "sha256": "b381598f8d342b8f366860ab0ed4705a105895b1f7f755b8edde92985151b1fa",
+        "bytes": 20147
+      },
+      "scripts/calibrate_dapuqiao_operators.py": {
+        "sha256": "f5515516b9efc8c98000b780202bb7c3af0eca4e2becfc59aa397e5aeff7dfda",
+        "bytes": 6550
+      },
+      "scripts/compare_dapuqiao_methods.py": {
+        "sha256": "747f3b61efb68d7ac4c4e2ae3a06de05d0d22cc0710d052f9347f8a8707bce5a",
+        "bytes": 35545
+      },
+      "scripts/compare_dapuqiao_search.py": {
+        "sha256": "16c7930079a8ef94fee49c3d1383db0b9cb7da94df80dd3fca7780a6b9493125",
+        "bytes": 7972
+      },
+      "scripts/materialize_dapuqiao_heritage_freeze.py": {
+        "sha256": "c3346e0180619be1bb79c171f41ba198e38a62cc622b1b9a50c5a7894045fcdf",
+        "bytes": 4926
+      },
+      "scripts/preflight_dapuqiao_formal_experiment.py": {
+        "sha256": "b7f0015d21ecfee163b78e23bdcde474aabfc3e84dabe203ac6f1aa7608526a8",
+        "bytes": 10518
+      },
+      "scripts/promote_dapuqiao_formal_inputs.py": {
+        "sha256": "633de398929cd9248b337774024a0548c3011c11fbb86ecb16e5dbd55006a411",
+        "bytes": 9711
+      },
+      "scripts/run_dapuqiao_optimization.py": {
+        "sha256": "2edc077055e059c633c1beb5630bb52e4d2ede2613d8ffd59dd81ae3bb3ac42a",
+        "bytes": 18596
+      },
+      "scripts/run_dapuqiao_scenario_suite.py": {
+        "sha256": "e5d7e02f918dbc58a620f271835f8b736e17b713989c6d632133315374dc59b6",
+        "bytes": 7857
+      },
+      "optimization/amplitude_arms.yaml": {
+        "sha256": "d0ebb3f1ddb1ca88567cba9777c7bb9e29ff3c109aa0878b0a36b3ad2f360c57",
+        "bytes": 2049
+      },
+      "optimization/constraints.yaml": {
+        "sha256": "a835f003819fd5fdc76f68f2232c9eb9b798a16d8ee8180635f386200abc84e4",
+        "bytes": 1418
+      },
+      "optimization/objectives.yaml": {
+        "sha256": "45cd30e062d244eb2a24464bf34c4719c8974b53ea90d7f5f52257615b5903d2",
+        "bytes": 3015
+      },
+      "optimization/operator_specs.yaml": {
+        "sha256": "f8ec2eeb760302651f83d21196db8fd6a5c6131c1ed12bacca5e0f04249f1b79",
+        "bytes": 3237
+      },
+      "optimization/parameter_baseline.yaml": {
+        "sha256": "7143c41655cf0424bbbb339f48cb3c48cb720c20a376c6c3a8acd7b31d9600cb",
+        "bytes": 808
+      },
+      "optimization/research_assumptions.yaml": {
+        "sha256": "9e1a5e55f4d04c46862eb295ca7f756f3b6e8966634473f9c6d6dbba571626d2",
+        "bytes": 3771
+      },
+      "optimization/role_profiles.yaml": {
+        "sha256": "e6d2f245b24838db6419b5479989e5504508971d5f5b545a10fe4e9936914d92",
+        "bytes": 1031
+      },
+      "optimization/scenarios.yaml": {
+        "sha256": "e8ecb03a837ec8d4f03c951eead11852b1bc3a1d648dc74b6df61168c7f6e7ba",
+        "bytes": 8172
+      },
+      "engine/requirements.txt": {
+        "sha256": "a85b506af793b2fc62217320a80771090ab2efc3d3538e2f65b1e688488ffaff",
+        "bytes": 967
+      }
+    },
+    "git": {
+      "commit": "bd5dd8a5412e81d9ce8c5bcfc95311058f012ba7",
+      "branch": "master",
+      "working_tree_dirty": true
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "platform": "macOS-14.5-arm64-arm-64bit",
+      "packages": {
+        "geopandas": "1.2.0",
+        "pandas": "3.0.6",
+        "shapely": "2.1.2",
+        "numpy": "2.5.3",
+        "pymoo": "0.6.2",
+        "pyarrow": "25.0.1",
+        "PyYAML": "6.0.3"
+      }
+    },
+    "optimization_runtime_seconds": 739.2971504169982
+  },
+  "input_scope": {
+    "heritage_records_unresolved_and_excluded": 4,
+    "buildings_unmatched_to_zones_and_frozen": 32,
+    "public_space_context": {
+      "candidate_count": 2,
+      "verified_public_park_context": 1,
+      "unverified_excluded": 1,
+      "included_in_objective": 0
+    },
+    "alley_entrance_context": {
+      "candidate_count": 2,
+      "verified_research_entrance": 1,
+      "unverified_frozen": 1,
+      "included_in_optimization": 0,
+      "included_in_objective": 0,
+      "exhaustive_inventory": false
+    },
+    "online_gap_freeze": {
+      "items_reviewed": 5,
+      "partially_enriched_then_frozen": 2,
+      "frozen_without_model_use": 3,
+      "new_proxy_variables_added": 0
+    },
+    "third_objective": {
+      "id": "street_connected_released_ground",
+      "interpretation": "street-connected released-ground potential",
+      "required_layers": [
+        "buildings.parquet",
+        "street_network.geojson",
+        "study_boundary.geojson"
+      ],
+      "excluded_context_layers": [
+        "public_space_candidates.geojson",
+        "public_space_verification.json",
+        "alley_entrances.geojson",
+        "alley_entrance_verification.json"
+      ],
+      "street_access_buffer_m": 5.0,
+      "public_space_candidates_used": false,
+      "not_interpreted_as": [
+        "public-space area",
+        "public-space ownership",
+        "public-space accessibility",
+        "historical park area",
+        "OSM research polygon",
+        "alley entrance point"
+      ]
+    }
+  },
+  "amplitude_arm": {
+    "amplitude_arm": "expanded",
+    "label": "放大体量幅度（会议意见 ④）",
+    "source": "2026-10-14 会议纪要",
+    "operator_parameters": {
+      "densify": {
+        "maximum_height_gain_ratio": 0.5
+      },
+      "open_ground": {
+        "minimum_footprint_ratio": 0.65
+      },
+      "split_to_towers": {
+        "maximum_gap_ratio": 0.15
+      },
+      "heritage_step_down": {
+        "maximum_height_redistribution_ratio": 0.5
+      }
+    },
+    "parameter_baseline_parameters": {
+      "height_multiplier": {
+        "min": 1.0,
+        "max": 1.5
+      },
+      "footprint_ratio": {
+        "min": 0.65,
+        "max": 1.0
+      }
+    }
+  },
+  "control_envelope": "shared"
+}

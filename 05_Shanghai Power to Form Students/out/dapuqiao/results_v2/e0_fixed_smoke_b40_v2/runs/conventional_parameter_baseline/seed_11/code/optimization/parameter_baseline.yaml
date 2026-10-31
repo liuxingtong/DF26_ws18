@@ -1,0 +1,20 @@
+baseline:
+  id: conventional_parameter_baseline
+  label: 传统参数驱动形态生成
+  description: >-
+    不读取利益相关者类别或情景许可规则；只在更新单元内控制统一高度倍率与足迹保留率，
+    并接受与四个主方法情景完全相同的基础数据、目标函数和共同硬约束。
+  source_status: research_assumption
+  parameters:
+    height_multiplier:
+      min: 1.0
+      max: 1.30
+      source: 与既有 densify.maximum_height_gain_ratio=0.30 一致
+    footprint_ratio:
+      min: 0.75
+      max: 1.0
+      source: 与既有 open_ground.minimum_footprint_ratio=0.75 一致
+  implementation:
+    maximum_changed_zone_ratio: 0.40
+    maximum_changed_building_ratio: 0.30
+    source: 复用旧版共同任务 dapuqiao_tourism_livability 的改动范围

@@ -1,0 +1,85 @@
+{
+  "scenario": "resident_heritage_priority",
+  "arm": "attr-off__ops-own__int-common",
+  "seed": 11,
+  "budget": 320,
+  "population": 16,
+  "generations": 20,
+  "amplitude_arm": "v1",
+  "control_envelope": "shared",
+  "generations_executed": 20,
+  "scenario_diff": {
+    "before": {
+      "allowed_operators": [
+        "open_ground",
+        "heritage_step_down",
+        "public_space_reconfiguration",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "open_ground": [
+          "developer"
+        ],
+        "heritage_step_down": [
+          "developer"
+        ],
+        "public_space_reconfiguration": [
+          "state"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "open_ground": 0.75,
+        "heritage_step_down": 1.0,
+        "public_space_reconfiguration": 1.0,
+        "courtyard_access_improvement": 0.65
+      }
+    },
+    "after": {
+      "allowed_operators": [
+        "open_ground",
+        "heritage_step_down",
+        "public_space_reconfiguration",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {},
+      "maximum_intensity": {
+        "open_ground": 0.75,
+        "heritage_step_down": 1.0,
+        "public_space_reconfiguration": 1.0,
+        "courtyard_access_improvement": 0.65
+      }
+    }
+  },
+  "runtime_seconds": 253.7215950420068,
+  "effective": 195,
+  "pareto": 13,
+  "feasible_ratio": 0.7448979591836735,
+  "max_net": 0.0,
+  "max_release": 0.003777034123021535,
+  "min_disruption": 0.0,
+  "hypervolume": 0.19298839613807967,
+  "raw_calls": 320,
+  "cache_hits": 91,
+  "candidate_operation_share": {
+    "courtyard_access_improvement": 0.7959183673469388,
+    "heritage_step_down": 0.3622448979591837,
+    "open_ground": 0.7806122448979592,
+    "public_space_reconfiguration": 0.6071428571428571
+  },
+  "pareto_operation_share": {
+    "courtyard_access_improvement": 0.46153846153846156,
+    "heritage_step_down": 0.3076923076923077,
+    "open_ground": 0.9230769230769231,
+    "public_space_reconfiguration": 0.6923076923076923
+  },
+  "max_net_front": -1.4942653059470752e-06,
+  "max_release_front": 0.003777034123021535,
+  "min_disruption_front": 0.0,
+  "max_net_effective": -1.4942653059470752e-06,
+  "max_release_effective": 0.003777034123021535,
+  "front_size_recomputed": 13,
+  "statistic_note": "max_*_front = 项目既有口径（epsilon 前沿极值）；max_*_effective = 排除现状基线的有效候选极值"
+}

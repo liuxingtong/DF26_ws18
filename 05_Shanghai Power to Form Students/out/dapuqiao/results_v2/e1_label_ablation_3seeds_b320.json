@@ -1,0 +1,92 @@
+[
+  {
+    "scenario": "development_growth",
+    "seed": 11,
+    "raw_calls": 320,
+    "effective": 225,
+    "pareto": 11,
+    "max_net": 0.02620234009328224,
+    "max_release": 0.0022320809244115846,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "development_growth",
+    "seed": 23,
+    "raw_calls": 320,
+    "effective": 245,
+    "pareto": 21,
+    "max_net": 0.019291248897918136,
+    "max_release": 0.004600871004990824,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "development_growth",
+    "seed": 37,
+    "raw_calls": 320,
+    "effective": 250,
+    "pareto": 20,
+    "max_net": 0.03514620159714617,
+    "max_release": 0.002475857145395556,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "public_coordination",
+    "seed": 11,
+    "raw_calls": 320,
+    "effective": 247,
+    "pareto": 19,
+    "max_net": 0.017347735550690135,
+    "max_release": 0.003386369048168032,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "public_coordination",
+    "seed": 23,
+    "raw_calls": 320,
+    "effective": 256,
+    "pareto": 26,
+    "max_net": 0.007224188682981319,
+    "max_release": 0.005320398297725531,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "public_coordination",
+    "seed": 37,
+    "raw_calls": 320,
+    "effective": 183,
+    "pareto": 16,
+    "max_net": 5.484260485527829e-05,
+    "max_release": 0.004164748611406455,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "resident_heritage_priority",
+    "seed": 11,
+    "raw_calls": 320,
+    "effective": 195,
+    "pareto": 13,
+    "max_net": -1.4942653059470752e-06,
+    "max_release": 0.003777034123021535,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "resident_heritage_priority",
+    "seed": 23,
+    "raw_calls": 320,
+    "effective": 198,
+    "pareto": 15,
+    "max_net": 0.0,
+    "max_release": 0.005159786129479864,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "resident_heritage_priority",
+    "seed": 37,
+    "raw_calls": 320,
+    "effective": 209,
+    "pareto": 12,
+    "max_net": 0.0,
+    "max_release": 0.004978156095373845,
+    "min_disruption": 0.0
+  }
+]

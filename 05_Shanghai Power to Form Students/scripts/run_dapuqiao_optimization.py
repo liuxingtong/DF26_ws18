@@ -260,7 +260,8 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
                method_id: str | None = None, export_geometries: bool = True,
                role_priority_sensitivity_rows: list[dict] | None = None,
                quality_config: dict | None = None,
-               optimization_runtime_seconds: float | None = None) -> Path:
+               optimization_runtime_seconds: float | None = None,
+               extra_run_config: dict | None = None) -> Path:
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     scenario_id = study.scenario.get("id", "scenario")
     output = output_dir or (
@@ -305,6 +306,8 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
         },
         "input_scope": input_scope_metadata(),
     }
+    if extra_run_config:
+        run_config.update(extra_run_config)
     (output / "run_config.json").write_text(
         json.dumps(run_config, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
@@ -349,6 +352,22 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
         for item in candidate.violations:
             violation_rows.append({"solution_id": candidate.solution_id, **asdict(item)})
     write_csv(output / "constraint_violations.csv", violation_rows)
+    write_csv(output / "constraint_log.csv", [
+        {
+            "solution_id": candidate.solution_id,
+            "feasible": candidate.feasible,
+            "intensity_reduced_by": ";".join(sorted({
+                reason for change in candidate.changes
+                for reason in str(change.get("clamped_by", "")).split(";") if reason
+            })),
+            "rejected_by": ";".join(sorted({
+                violation.code for violation in candidate.violations
+                if violation.severity == "blocking"
+            })),
+            "changed_building_count": len({str(change.get("bid")) for change in candidate.changes}),
+        }
+        for candidate in candidates
+    ])
     (output / "selected_solutions.json").write_text(
         json.dumps(selections, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
@@ -363,6 +382,7 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
         labels = labels_by_solution.setdefault(solution_id, [])
         if label not in labels:
             labels.append(label)
+    ops_rows: list[dict] = []
     for solution_id, labels in labels_by_solution.items():
         candidate = by_id[solution_id]
         label = "__".join(labels)
@@ -381,6 +401,27 @@ def export_run(study, candidates, pareto, role_rows, selections, *, seed: int, s
         (output / "provenance" / f"{label}__{solution_id}.json").write_text(
             json.dumps(provenance, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
+        for change in candidate.changes:
+            ops_rows.append(
+                {
+                    "solution_id": solution_id,
+                    "labels": label,
+                    "bid": change.get("bid"),
+                    "zone_id": change.get("zone_id"),
+                    "operator": change.get("operator"),
+                    "intensity": change.get("intensity"),
+                    "requested_intensity": change.get("requested_intensity"),
+                    "clamped_by": change.get("clamped_by", ""),
+                    "before_height_m": change.get("before_height_m"),
+                    "after_height_m": change.get("after_height_m"),
+                    "requested_height_m": change.get("requested_height_m"),
+                    "before_area_m2": change.get("before_area_m2"),
+                    "after_area_m2": change.get("after_area_m2"),
+                    "gfa_change_m2": change.get("gfa_change_m2"),
+                    "capacity_allocation_ratio": change.get("capacity_allocation_ratio"),
+                }
+            )
+    write_csv(output / "ops_log.csv", ops_rows)
 
     for config_path in CONFIG_ROOT.glob("*.yaml"):
         shutil.copy2(config_path, output / "config" / config_path.name)

@@ -1,0 +1,22 @@
+{
+  "scenario": "development_growth",
+  "arm": "attr-off__ops-union__int-common",
+  "budget": 320,
+  "calls": 320,
+  "budget_exhausted": true,
+  "capacity": 0.10449563419863961,
+  "release": 0.0,
+  "disruption": 0.43287566419759727,
+  "feasible": true,
+  "far": 2.9256891373645737,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 164468.1697826991,
+  "gross_added_m2": 164468.16978269865,
+  "changed_zones": 13,
+  "operator_counts": {
+    "densify": 13
+  },
+  "decision_signature": "Z02:densify:1.0000;Z03:densify:1.0000;Z05:densify:1.0000;Z11:densify:1.0000;Z13:densify:1.0000;Z14:densify:1.0000;Z15:densify:1.0000;Z20:densify:1.0000;Z25:densify:1.0000;Z31:densify:1.0000;Z32:densify:1.0000;Z36:densify:1.0000;Z37:densify:1.0000",
+  "control_envelope": "shared",
+  "runtime_seconds": 295.5472141250211
+}

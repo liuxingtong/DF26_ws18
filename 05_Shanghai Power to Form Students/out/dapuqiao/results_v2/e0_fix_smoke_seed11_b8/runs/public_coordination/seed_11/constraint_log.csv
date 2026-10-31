@@ -1,0 +1,10 @@
+﻿solution_id,feasible,intensity_reduced_by,rejected_by,changed_building_count
+S_0000,True,,,0
+N_00002,True,height_limit,,99
+N_00003,True,height_limit,,54
+N_00004,True,height_limit,,118
+N_00005,True,height_limit,,120
+N_00006,True,height_limit,,118
+N_00007,True,height_limit,,199
+N_00008,True,height_limit,,72
+N_00009,True,height_limit,,199

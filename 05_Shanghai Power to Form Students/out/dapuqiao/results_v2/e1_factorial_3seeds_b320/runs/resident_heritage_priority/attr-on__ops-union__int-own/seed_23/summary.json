@@ -1,0 +1,121 @@
+{
+  "scenario": "resident_heritage_priority",
+  "arm": "attr-on__ops-union__int-own",
+  "seed": 23,
+  "budget": 320,
+  "population": 16,
+  "generations": 20,
+  "amplitude_arm": "v1",
+  "control_envelope": "shared",
+  "generations_executed": 20,
+  "scenario_diff": {
+    "before": {
+      "allowed_operators": [
+        "open_ground",
+        "heritage_step_down",
+        "public_space_reconfiguration",
+        "courtyard_access_improvement",
+        "densify",
+        "split_to_towers"
+      ],
+      "stakeholder_targets": {
+        "open_ground": [
+          "developer"
+        ],
+        "heritage_step_down": [
+          "developer"
+        ],
+        "public_space_reconfiguration": [
+          "state"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ],
+        "densify": [
+          "developer"
+        ],
+        "split_to_towers": [
+          "developer"
+        ]
+      },
+      "maximum_intensity": {
+        "open_ground": 0.75,
+        "heritage_step_down": 1.0,
+        "public_space_reconfiguration": 1.0,
+        "courtyard_access_improvement": 0.65,
+        "densify": 1.0,
+        "split_to_towers": 1.0
+      }
+    },
+    "after": {
+      "allowed_operators": [
+        "open_ground",
+        "heritage_step_down",
+        "public_space_reconfiguration",
+        "courtyard_access_improvement",
+        "densify",
+        "split_to_towers"
+      ],
+      "stakeholder_targets": {
+        "open_ground": [
+          "developer"
+        ],
+        "heritage_step_down": [
+          "developer"
+        ],
+        "public_space_reconfiguration": [
+          "state"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ],
+        "densify": [
+          "developer"
+        ],
+        "split_to_towers": [
+          "developer"
+        ]
+      },
+      "maximum_intensity": {
+        "open_ground": 0.75,
+        "heritage_step_down": 1.0,
+        "public_space_reconfiguration": 1.0,
+        "courtyard_access_improvement": 0.65,
+        "densify": 1.0,
+        "split_to_towers": 1.0
+      }
+    }
+  },
+  "runtime_seconds": 251.36643358299625,
+  "effective": 231,
+  "pareto": 8,
+  "feasible_ratio": 0.9698275862068966,
+  "max_net": 0.01130493243466041,
+  "max_release": 0.00188285447522137,
+  "min_disruption": 0.0,
+  "hypervolume": 0.13988507886692494,
+  "raw_calls": 320,
+  "cache_hits": 86,
+  "candidate_operation_share": {
+    "courtyard_access_improvement": 0.6551724137931034,
+    "densify": 0.6594827586206896,
+    "heritage_step_down": 0.47413793103448276,
+    "open_ground": 0.6982758620689655,
+    "public_space_reconfiguration": 0.7543103448275862,
+    "split_to_towers": 0.6853448275862069
+  },
+  "pareto_operation_share": {
+    "densify": 0.875,
+    "heritage_step_down": 0.25,
+    "open_ground": 0.75,
+    "public_space_reconfiguration": 0.75,
+    "split_to_towers": 0.25
+  },
+  "max_net_front": 0.011290862273669646,
+  "max_release_front": 0.0015363366479616476,
+  "min_disruption_front": 0.0,
+  "max_net_effective": 0.01130493243466041,
+  "max_release_effective": 0.00188285447522137,
+  "front_size_recomputed": 8,
+  "statistic_note": "max_*_front = 项目既有口径（epsilon 前沿极值）；max_*_effective = 排除现状基线的有效候选极值"
+}

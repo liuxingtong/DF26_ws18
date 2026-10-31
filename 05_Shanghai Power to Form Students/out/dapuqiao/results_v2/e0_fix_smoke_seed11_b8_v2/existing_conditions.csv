@@ -1,0 +1,2 @@
+﻿seed,method_id,residential_disruption,net_gfa_change_pct,gross_added_m2,gross_removed_m2,street_release_pct_buffer,gfa_m2,buildings,role
+11,existing_conditions,0.0,0.0,0.0,0.0,0.0,4440343.710307689,1370,reference

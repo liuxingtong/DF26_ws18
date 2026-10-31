@@ -1,0 +1,98 @@
+{
+  "scenario": "development_growth",
+  "arm": "attr-on__ops-own__int-own",
+  "seed": 11,
+  "budget": 320,
+  "population": 16,
+  "generations": 20,
+  "amplitude_arm": "v1",
+  "control_envelope": "shared",
+  "generations_executed": 20,
+  "scenario_diff": {
+    "before": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "split_to_towers",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "densify": [
+          "developer"
+        ],
+        "open_ground": [
+          "developer"
+        ],
+        "split_to_towers": [
+          "developer"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "densify": 1.0,
+        "open_ground": 0.55,
+        "split_to_towers": 1.0,
+        "courtyard_access_improvement": 0.25
+      }
+    },
+    "after": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "split_to_towers",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "densify": [
+          "developer"
+        ],
+        "open_ground": [
+          "developer"
+        ],
+        "split_to_towers": [
+          "developer"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "densify": 1.0,
+        "open_ground": 0.55,
+        "split_to_towers": 1.0,
+        "courtyard_access_improvement": 0.25
+      }
+    }
+  },
+  "runtime_seconds": 258.3425038330024,
+  "effective": 246,
+  "pareto": 10,
+  "feasible_ratio": 0.9311740890688259,
+  "max_net": 0.005496509730360907,
+  "max_release": 0.002666599081045967,
+  "min_disruption": 0.0,
+  "hypervolume": 0.11604662028153147,
+  "raw_calls": 320,
+  "cache_hits": 66,
+  "candidate_operation_share": {
+    "courtyard_access_improvement": 0.7651821862348178,
+    "densify": 0.6356275303643725,
+    "open_ground": 0.7368421052631579,
+    "split_to_towers": 0.38461538461538464
+  },
+  "pareto_operation_share": {
+    "courtyard_access_improvement": 0.4,
+    "densify": 0.9,
+    "open_ground": 0.8,
+    "split_to_towers": 0.3
+  },
+  "max_net_front": 0.005496509730360907,
+  "max_release_front": 0.0024480059427352623,
+  "min_disruption_front": 0.0,
+  "max_net_effective": 0.005496509730360907,
+  "max_release_effective": 0.002666599081045967,
+  "front_size_recomputed": 10,
+  "statistic_note": "max_*_front = 项目既有口径（epsilon 前沿极值）；max_*_effective = 排除现状基线的有效候选极值"
+}

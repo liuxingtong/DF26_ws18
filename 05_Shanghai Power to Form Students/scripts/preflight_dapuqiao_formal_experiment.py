@@ -41,9 +41,13 @@ EXPECTED_CONSTRAINT_CODES = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--seeds", default="11,23,37,53,71")
-    parser.add_argument("--population", type=int, default=20)
-    parser.add_argument("--generations", type=int, default=20)
+    # 默认值对齐 experiments_brief 的 E0：10 个配对种子、种群 ≥40、代数 ≥50，
+    # 即每次运行约 2,000 次有效独立评价。5 个种子时 Wilcoxon 双侧最小 p 值为
+    # 0.0625，Holm 校正后下限 0.1875，检验从设计上就不可能显著。
+    parser.add_argument("--seeds", default="11,23,37,53,71,83,97,109,127,149")
+    parser.add_argument("--population", type=int, default=40)
+    parser.add_argument("--generations", type=int, default=50)
+    parser.add_argument("--amplitude-arm", default="expanded")
     parser.add_argument("--output", type=Path)
     return parser.parse_args()
 
@@ -214,7 +218,7 @@ def main() -> int:
     command = (
         "python scripts/compare_dapuqiao_methods.py "
         f"--seeds {','.join(map(str, seeds))} --population {args.population} "
-        f"--generations {args.generations}"
+        f"--generations {args.generations} --amplitude-arm {args.amplitude_arm}"
     )
     manifest = {
         "created_at": datetime.now().isoformat(timespec="seconds"),
@@ -222,6 +226,8 @@ def main() -> int:
         "checks": checks,
         "plan": {
             "methods": list(METHODS),
+            "comparison_groups": ["existing_conditions", *METHODS],
+            "amplitude_arm": args.amplitude_arm,
             "seeds": seeds,
             "population": args.population,
             "generations": args.generations,

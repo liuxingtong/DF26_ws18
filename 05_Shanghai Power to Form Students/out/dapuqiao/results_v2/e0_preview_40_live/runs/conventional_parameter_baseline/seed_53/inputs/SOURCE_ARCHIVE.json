@@ -1,0 +1,125 @@
+{
+  "archive_date": "2026-09-28",
+  "archive_scope": "Current Dapuqiao model inputs, contextual evidence, source records and all three recorded update rounds.",
+  "status": {
+    "current_model_and_context_files_hashed": true,
+    "supplemental_update_records_present": true,
+    "official_and_open_source_locators_recorded": true,
+    "raw_commercial_source_files_embedded": false,
+    "remote_web_documents_embedded": false
+  },
+  "important_limit": "This archive preserves frozen derived datasets, hashes, scripts, source locators and decisions. It does not redistribute the licensed Shanghai City Dataset, AMap API responses or copies of remote government documents.",
+  "update_rounds": [
+    {
+      "date": "2026-09-18",
+      "id": "osm_open_research_base",
+      "scope": "OSM study boundary, street network, public services and initial public-space candidates.",
+      "record_files": [
+        "data/dapuqiao/open_data_sources.yaml",
+        "data/dapuqiao/open_data_quality.json"
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "id": "heritage_review_and_formal_input_freeze",
+      "scope": "Sixteen official heritage records reviewed; twelve records mapped to 21 frozen building footprints; four unresolved records excluded; 38 research zones and control rows frozen.",
+      "record_files": [
+        "review_app/public/data/review_cases.json",
+        "review_app/public/data/FREEZE_MANIFEST.json",
+        "review_app/DATA_FREEZE.md",
+        "data/dapuqiao/formal_input_quality.json",
+        "optimization/research_assumptions.yaml"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "id": "online_context_enrichment_and_gap_freeze",
+      "scope": "Public-space research polygons and historical official schedule, partial alley-entrance evidence, and explicit freeze of unresolved boundaries, hours and setbacks.",
+      "record_files": [
+        "data/dapuqiao/public_space_verification.json",
+        "data/dapuqiao/alley_entrance_verification.json",
+        "data/dapuqiao/online_gap_freeze.json"
+      ]
+    }
+  ],
+  "source_groups": [
+    {
+      "id": "building_morphology_and_roles",
+      "frozen_output": "data/dapuqiao/buildings.parquet",
+      "source_type": "licensed course dataset; raw files not redistributed",
+      "source_components": [
+        "Shanghai township/subdistrict boundary",
+        "Shanghai AI-interpreted building footprints with height",
+        "EULUC open land-use layer",
+        "building function/year layer",
+        "Baidu AOI auxiliary layer"
+      ],
+      "transformation_code": "engine/common.py",
+      "documentation": "数据集说明.md",
+      "limitations": "Height is AI-interpreted rather than surveyed; stakeholder labels are deterministic research mappings rather than ownership findings."
+    },
+    {
+      "id": "osm_open_research_layers",
+      "source_type": "OpenStreetMap ODbL-1.0",
+      "primary_locator": "https://www.openstreetmap.org/relation/12235958",
+      "query_records": "data/dapuqiao/open_data_sources.yaml",
+      "transformation_code": "scripts/build_dapuqiao_open_data.py"
+    },
+    {
+      "id": "heritage_records_and_matches",
+      "source_type": "official record plus frozen geocoding/building-match review",
+      "primary_locator": "https://www.shhuangpu.gov.cn/uploadfile/6051185f-9fc3-44b3-93e3-e4aa4c122c1a/%E9%BB%84%E6%B5%A6%E5%8C%BA%E7%AC%AC%E4%BA%8C%E6%89%B9%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4%E7%82%B9%E5%85%AC%E5%B8%83%E5%90%8D%E5%8D%95.pdf",
+      "review_record": "review_app/public/data/review_cases.json",
+      "transformation_code": "scripts/materialize_dapuqiao_heritage_freeze.py"
+    },
+    {
+      "id": "planning_context_and_research_controls",
+      "source_type": "official policy context plus disclosed research assumptions",
+      "source_record": "optimization/research_assumptions.yaml",
+      "freeze_code": "scripts/promote_dapuqiao_formal_inputs.py",
+      "limitations": "The 38 control rows are model assumptions, not statutory parcel controls."
+    },
+    {
+      "id": "public_space_context",
+      "source_type": "OSM, AMap record id, Huangpu yearbook and Shanghai park-management evidence",
+      "source_record": "data/dapuqiao/public_space_verification.json",
+      "limitations": "OSM polygons are research geometry; the 2021 schedule is historical; neither candidate enters an objective."
+    },
+    {
+      "id": "alley_entrance_context",
+      "source_type": "official narrative/contract evidence plus OSM entrance nodes",
+      "source_record": "data/dapuqiao/alley_entrance_verification.json",
+      "limitations": "Non-exhaustive, not surveyed and excluded from optimization."
+    },
+    {
+      "id": "unresolved_gap_register",
+      "source_type": "targeted online verification and explicit non-imputation decisions",
+      "source_record": "data/dapuqiao/online_gap_freeze.json"
+    }
+  ],
+  "files": {
+    "data/dapuqiao/buildings.parquet": "5b9ec15c6a80b264a68992c28f7dbeb6d90b0534d5da7ecba3f71781e2a49032",
+    "data/dapuqiao/study_boundary.geojson": "cc86182c448c01c6a9aa1e81d6222a0a40252ffa07bda780e7357d257ef344ab",
+    "data/dapuqiao/street_network.geojson": "90b105f0beab8b35496a11c42803ff0b24be8cc5a3f7401163a343a6bc8bcf59",
+    "data/dapuqiao/public_services.geojson": "bab01bbdf435661e55cb4d182592bd52b8dc7c07ddf83fcccee14b73b2d0fa80",
+    "data/dapuqiao/open_data_sources.yaml": "833bf353526ea595a1147a49dbcfe787383d138ad3f44ee478295acf358318c9",
+    "data/dapuqiao/open_data_quality.json": "c2b23fd1b660144cc90b3eb7f40caec5b5bf42b38201dae07cf8d9f34ce1ddb3",
+    "data/dapuqiao/public_space_candidates.geojson": "7ad4d6836bbd7a0d9fe4feaa05d4dd3fc37ca9461ae801b5edde9d79ff84aba9",
+    "data/dapuqiao/public_space_verification.json": "93dd0e43a67c70f0b12fcb0f545309527c332808062095c3b2ff5ee504858c5e",
+    "data/dapuqiao/alley_entrances.geojson": "7e2f84eafdf519a8a3c52eb1726b30e3960d476a4bf992db9e9147dbed3f11dd",
+    "data/dapuqiao/alley_entrance_verification.json": "2cd98a85892bc4da46f9b09f255ae11a731acc5bacc100ea681f6a1b5699f8ef",
+    "data/dapuqiao/online_gap_freeze.json": "6aff2e12c868d30b883d239439692806326521956bf9ce267d71c5980243f083",
+    "data/dapuqiao/intervention_zones.geojson": "44309c41765dd5b259b06034e034c5362672a0098550dc543cac0ec14e8bdf95",
+    "data/dapuqiao/planning_controls.csv": "27143e3975bc625de2971cca3d9460f06f14f02cde9320b972c80bd5fff96b73",
+    "data/dapuqiao/heritage_buildings.geojson": "f2a0114f12098fbb51d22322a6f668c1379898992854ef051799886ca60f068e",
+    "data/dapuqiao/formal_input_quality.json": "b4d5cb363a266a4363a1ed4fb94a780f9fbe43d56146f6e29245a309c7a4db7b",
+    "review_app/public/data/review_cases.json": "22fa8d3998d50d9e020cfe22fecc3db5a0de0dadc2531d2621e1f76b218b01f3",
+    "review_app/public/data/FREEZE_MANIFEST.json": "a7fb553ba90fa0df169ef31009f85c5cc1e69035408c6a932433c6be999af8a5",
+    "review_app/public/data/public_spaces.geojson": "3dea15903811852e906edf3a0273a23e265aafd150e6c99cb8bf5f2581020cde",
+    "optimization/research_assumptions.yaml": "9e1a5e55f4d04c46862eb295ca7f756f3b6e8966634473f9c6d6dbba571626d2",
+    "engine/common.py": "9cc1ef59b0ee847d9903ff6d6db8a5a464e433361b2311bb642d3ab4f901aa54",
+    "scripts/build_dapuqiao_open_data.py": "b381598f8d342b8f366860ab0ed4705a105895b1f7f755b8edde92985151b1fa",
+    "scripts/materialize_dapuqiao_heritage_freeze.py": "c3346e0180619be1bb79c171f41ba198e38a62cc622b1b9a50c5a7894045fcdf",
+    "scripts/promote_dapuqiao_formal_inputs.py": "633de398929cd9248b337774024a0548c3011c11fbb86ecb16e5dbd55006a411"
+  }
+}

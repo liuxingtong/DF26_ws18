@@ -1,0 +1,1166 @@
+{
+  "created_at": "2026-10-29T14:06:03",
+  "seed": 127,
+  "samples": null,
+  "scenario_id": "conventional_parameter_baseline",
+  "method_id": "conventional_parameter_baseline",
+  "scenario": "传统参数驱动形态生成",
+  "source_status": {
+    "buildings": "available",
+    "study_boundary": "available_osm",
+    "street_network": "available_osm",
+    "public_services": "available_osm_candidate",
+    "public_space": "context_only_mixed_verification",
+    "public_space_verification": "available_context_only",
+    "alley_entrances": "context_only_partial_verification",
+    "alley_entrance_verification": "available_context_only",
+    "intervention_zones": "formal_paper_model_input",
+    "planning_controls": "shared_paper_experiment_assumption",
+    "heritage": "frozen_research_input",
+    "formal_input_quality": "verified_sha256",
+    "generation_logic": "geometry_parameters_without_stakeholder_permissions"
+  },
+  "warnings": [
+    "公共空间层仅作背景且不参与目标函数：1 处已确认公共公园身份，1 处候选继续冻结；当前 OSM 多边形不能作为实测面积或法定权属边界",
+    "弄堂入口仅作非穷尽背景且不参与优化：1 处研究级核实，1 处候选冻结；坐标不是实测门点，不能推导通行能力或开放时段",
+    "五组论文对照固定使用同一限高、FAR、覆盖率、住宅保留率与街道缓冲口径；单栋允许高度仍取 max(限高, 现状高度)，因此现状已高于限高的建筑不得再增高",
+    "32 栋建筑未匹配更新单元，已冻结为不可编辑背景"
+  ],
+  "single_pass": true,
+  "role_feedback_enabled": false,
+  "role_preference_model": {
+    "type": "epsilon_tiered_lexicographic",
+    "compromise": "minimum_worst_role_rank",
+    "numeric_weights_used": false
+  },
+  "objective_measurement": {
+    "street_access_buffer_m": 5.0
+  },
+  "epsilon": {
+    "residential_disruption": 0.001,
+    "development_capacity": 0.0005,
+    "street_connected_released_ground": 0.0003
+  },
+  "exported_epsilon_pareto_solution_count": 113,
+  "quality_normalization_reference": {
+    "residential_disruption": {
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "development_capacity": {
+      "minimum": -0.9874177261080769,
+      "maximum": 1.4105967515829672
+    },
+    "street_connected_released_ground": {
+      "minimum": 0.0,
+      "maximum": 0.6201025016040324
+    }
+  },
+  "quality": {
+    "pareto_count": 113,
+    "hypervolume": 0.0719037682395122,
+    "spacing": 0.01098231166168121
+  },
+  "search": {
+    "backend": "nsga2_parameter_baseline",
+    "population": 40,
+    "generations": 50,
+    "generations_executed": 54,
+    "effective_evaluation_budget": 2000,
+    "unique_evaluations": 2000,
+    "raw_unique_evaluations": 2100,
+    "discarded_unique_evaluations": 99,
+    "cache_hits": 60,
+    "uses_stakeholder_categories": false,
+    "uses_scenario_permissions": false,
+    "parameter_ranges": {
+      "height_multiplier": {
+        "min": 1.0,
+        "max": 1.5,
+        "source": "与既有 densify.maximum_height_gain_ratio=0.30 一致"
+      },
+      "footprint_ratio": {
+        "min": 0.65,
+        "max": 1.0,
+        "source": "与既有 open_ground.minimum_footprint_ratio=0.75 一致"
+      }
+    },
+    "maximum_changed_buildings": 411,
+    "shared_hard_constraints": true,
+    "full_pareto_solution_ids": [
+      "P_00000",
+      "P_00413",
+      "P_00610",
+      "P_00616",
+      "P_00684",
+      "P_00747",
+      "P_00772",
+      "P_00786",
+      "P_00825",
+      "P_00826",
+      "P_00838",
+      "P_00848",
+      "P_00876",
+      "P_00895",
+      "P_00919",
+      "P_00954",
+      "P_00956",
+      "P_00992",
+      "P_00993",
+      "P_01002",
+      "P_01037",
+      "P_01045",
+      "P_01046",
+      "P_01052",
+      "P_01056",
+      "P_01058",
+      "P_01067",
+      "P_01075",
+      "P_01108",
+      "P_01111",
+      "P_01113",
+      "P_01129",
+      "P_01130",
+      "P_01141",
+      "P_01211",
+      "P_01220",
+      "P_01227",
+      "P_01239",
+      "P_01257",
+      "P_01268",
+      "P_01306",
+      "P_01307",
+      "P_01313",
+      "P_01320",
+      "P_01321",
+      "P_01334",
+      "P_01344",
+      "P_01371",
+      "P_01375",
+      "P_01381",
+      "P_01382",
+      "P_01383",
+      "P_01384",
+      "P_01399",
+      "P_01406",
+      "P_01410",
+      "P_01419",
+      "P_01429",
+      "P_01437",
+      "P_01439",
+      "P_01445",
+      "P_01453",
+      "P_01455",
+      "P_01473",
+      "P_01474",
+      "P_01477",
+      "P_01481",
+      "P_01490",
+      "P_01491",
+      "P_01492",
+      "P_01501",
+      "P_01504",
+      "P_01508",
+      "P_01522",
+      "P_01524",
+      "P_01531",
+      "P_01534",
+      "P_01542",
+      "P_01547",
+      "P_01554",
+      "P_01565",
+      "P_01576",
+      "P_01579",
+      "P_01580",
+      "P_01581",
+      "P_01582",
+      "P_01586",
+      "P_01587",
+      "P_01590",
+      "P_01596",
+      "P_01602",
+      "P_01605",
+      "P_01607",
+      "P_01610",
+      "P_01612",
+      "P_01617",
+      "P_01618",
+      "P_01628",
+      "P_01630",
+      "P_01632",
+      "P_01633",
+      "P_01635",
+      "P_01636",
+      "P_01638",
+      "P_01651",
+      "P_01658",
+      "P_01661",
+      "P_01663",
+      "P_01664",
+      "P_01667",
+      "P_01670",
+      "P_01673",
+      "P_01674",
+      "P_01675",
+      "P_01683",
+      "P_01688",
+      "P_01693",
+      "P_01694",
+      "P_01695",
+      "P_01699",
+      "P_01700",
+      "P_01704",
+      "P_01705",
+      "P_01709",
+      "P_01721",
+      "P_01723",
+      "P_01724",
+      "P_01725",
+      "P_01734",
+      "P_01737",
+      "P_01738",
+      "P_01741",
+      "P_01743",
+      "P_01744",
+      "P_01746",
+      "P_01747",
+      "P_01750",
+      "P_01751",
+      "P_01757",
+      "P_01763",
+      "P_01764",
+      "P_01767",
+      "P_01768",
+      "P_01772",
+      "P_01773",
+      "P_01775",
+      "P_01781",
+      "P_01782",
+      "P_01784",
+      "P_01785",
+      "P_01787",
+      "P_01788",
+      "P_01789",
+      "P_01794",
+      "P_01796",
+      "P_01800",
+      "P_01806",
+      "P_01807",
+      "P_01808",
+      "P_01815",
+      "P_01819",
+      "P_01821",
+      "P_01825",
+      "P_01827",
+      "P_01830",
+      "P_01834",
+      "P_01835",
+      "P_01837",
+      "P_01839",
+      "P_01841",
+      "P_01844",
+      "P_01846",
+      "P_01852",
+      "P_01853",
+      "P_01856",
+      "P_01865",
+      "P_01866",
+      "P_01867",
+      "P_01878",
+      "P_01885",
+      "P_01888",
+      "P_01891",
+      "P_01892",
+      "P_01901",
+      "P_01909",
+      "P_01910",
+      "P_01913",
+      "P_01929",
+      "P_01930",
+      "P_01932",
+      "P_01933",
+      "P_01947",
+      "P_01948",
+      "P_01949",
+      "P_01951",
+      "P_01952",
+      "P_01955",
+      "P_01958",
+      "P_01961",
+      "P_01963",
+      "P_01966",
+      "P_01967",
+      "P_01968",
+      "P_01969",
+      "P_01972",
+      "P_01976",
+      "P_01978",
+      "P_01980",
+      "P_01982",
+      "P_01983",
+      "P_01984",
+      "P_01986",
+      "P_01992",
+      "P_01994",
+      "P_01996",
+      "P_01997",
+      "P_01998"
+    ],
+    "epsilon_pareto_solution_ids": [
+      "P_01721",
+      "P_01547",
+      "P_01961",
+      "P_01947",
+      "P_01313",
+      "P_01674",
+      "P_01955",
+      "P_01844",
+      "P_01796",
+      "P_00919",
+      "P_01633",
+      "P_00000",
+      "P_01784",
+      "P_01524",
+      "P_01382",
+      "P_01846",
+      "P_01587",
+      "P_01763",
+      "P_01806",
+      "P_01787",
+      "P_01580",
+      "P_01789",
+      "P_01688",
+      "P_00747",
+      "P_01306",
+      "P_00992",
+      "P_01227",
+      "P_01683",
+      "P_00993",
+      "P_01638",
+      "P_01910",
+      "P_01651",
+      "P_01307",
+      "P_01605",
+      "P_01827",
+      "P_01581",
+      "P_01610",
+      "P_01628",
+      "P_01113",
+      "P_01220",
+      "P_01888",
+      "P_01841",
+      "P_01399",
+      "P_01966",
+      "P_01885",
+      "P_01724",
+      "P_01437",
+      "P_00825",
+      "P_01693",
+      "P_01998",
+      "P_01867",
+      "P_01892",
+      "P_01933",
+      "P_01968",
+      "P_01750",
+      "P_01635",
+      "P_01501",
+      "P_01948",
+      "P_01834",
+      "P_00956",
+      "P_01108",
+      "P_01439",
+      "P_01384",
+      "P_01579",
+      "P_01986",
+      "P_01807",
+      "P_01958",
+      "P_01531",
+      "P_01815",
+      "P_01737",
+      "P_01334",
+      "P_01607",
+      "P_01419",
+      "P_01695",
+      "P_01772",
+      "P_01996",
+      "P_01673",
+      "P_01976",
+      "P_00838",
+      "P_01694",
+      "P_01891",
+      "P_01474",
+      "P_01982",
+      "P_01972",
+      "P_01967",
+      "P_01866",
+      "P_01785",
+      "P_01949",
+      "P_01984",
+      "P_01839",
+      "P_01670",
+      "P_01455",
+      "P_01825",
+      "P_01406",
+      "P_01952",
+      "P_01522",
+      "P_01929",
+      "P_00786",
+      "P_01381",
+      "P_01658",
+      "P_01504",
+      "P_00826",
+      "P_01743",
+      "P_01491",
+      "P_01667",
+      "P_01129",
+      "P_01781",
+      "P_01994",
+      "P_01554",
+      "P_01741",
+      "P_01951",
+      "P_01045",
+      "P_01767"
+    ],
+    "representative_solution_ids": [
+      "P_00000",
+      "P_01721",
+      "P_01955",
+      "P_01767",
+      "P_01972",
+      "P_01633",
+      "P_01888",
+      "P_01787",
+      "P_01554"
+    ],
+    "pareto_diagnostics": {
+      "input_feasible_count": 2001,
+      "morphology_duplicate_count": 0,
+      "full_pareto_count": 217,
+      "objective_duplicate_count": 13,
+      "epsilon_pareto_count": 113,
+      "representative_count": 9
+    },
+    "convergence": [
+      {
+        "generation": 1,
+        "evaluation_calls": 40,
+        "effective_independent_evaluations": 40,
+        "pareto_count": 15,
+        "hypervolume": 0.04224098615471028,
+        "spacing": 0.04349850038223431
+      },
+      {
+        "generation": 2,
+        "evaluation_calls": 80,
+        "effective_independent_evaluations": 79,
+        "pareto_count": 17,
+        "hypervolume": 0.050545539513117736,
+        "spacing": 0.07405785857194355
+      },
+      {
+        "generation": 3,
+        "evaluation_calls": 120,
+        "effective_independent_evaluations": 119,
+        "pareto_count": 14,
+        "hypervolume": 0.05704094807296504,
+        "spacing": 0.044120390054529376
+      },
+      {
+        "generation": 4,
+        "evaluation_calls": 160,
+        "effective_independent_evaluations": 156,
+        "pareto_count": 15,
+        "hypervolume": 0.062118599886641285,
+        "spacing": 0.051221179013356245
+      },
+      {
+        "generation": 5,
+        "evaluation_calls": 200,
+        "effective_independent_evaluations": 195,
+        "pareto_count": 18,
+        "hypervolume": 0.06696190605574542,
+        "spacing": 0.050085844972596015
+      },
+      {
+        "generation": 6,
+        "evaluation_calls": 240,
+        "effective_independent_evaluations": 231,
+        "pareto_count": 19,
+        "hypervolume": 0.06921723936695308,
+        "spacing": 0.05186409981474473
+      },
+      {
+        "generation": 7,
+        "evaluation_calls": 280,
+        "effective_independent_evaluations": 271,
+        "pareto_count": 24,
+        "hypervolume": 0.07047413764235035,
+        "spacing": 0.042978353952286476
+      },
+      {
+        "generation": 8,
+        "evaluation_calls": 320,
+        "effective_independent_evaluations": 311,
+        "pareto_count": 23,
+        "hypervolume": 0.07084257956147438,
+        "spacing": 0.03445469215720736
+      },
+      {
+        "generation": 9,
+        "evaluation_calls": 360,
+        "effective_independent_evaluations": 349,
+        "pareto_count": 26,
+        "hypervolume": 0.07296686679226216,
+        "spacing": 0.03695892744031858
+      },
+      {
+        "generation": 10,
+        "evaluation_calls": 400,
+        "effective_independent_evaluations": 389,
+        "pareto_count": 24,
+        "hypervolume": 0.07625307952896065,
+        "spacing": 0.034000589478957725
+      },
+      {
+        "generation": 11,
+        "evaluation_calls": 440,
+        "effective_independent_evaluations": 427,
+        "pareto_count": 23,
+        "hypervolume": 0.0770804590182769,
+        "spacing": 0.026438422296569154
+      },
+      {
+        "generation": 12,
+        "evaluation_calls": 480,
+        "effective_independent_evaluations": 466,
+        "pareto_count": 27,
+        "hypervolume": 0.08107832197541523,
+        "spacing": 0.03440036605141197
+      },
+      {
+        "generation": 13,
+        "evaluation_calls": 520,
+        "effective_independent_evaluations": 505,
+        "pareto_count": 27,
+        "hypervolume": 0.0811885194915637,
+        "spacing": 0.0327326225224892
+      },
+      {
+        "generation": 14,
+        "evaluation_calls": 560,
+        "effective_independent_evaluations": 544,
+        "pareto_count": 31,
+        "hypervolume": 0.09548029530149178,
+        "spacing": 0.02687553639250173
+      },
+      {
+        "generation": 15,
+        "evaluation_calls": 600,
+        "effective_independent_evaluations": 581,
+        "pareto_count": 37,
+        "hypervolume": 0.12666645052951445,
+        "spacing": 0.03820478904471623
+      },
+      {
+        "generation": 16,
+        "evaluation_calls": 640,
+        "effective_independent_evaluations": 621,
+        "pareto_count": 42,
+        "hypervolume": 0.12835077837105585,
+        "spacing": 0.03588790668848329
+      },
+      {
+        "generation": 17,
+        "evaluation_calls": 680,
+        "effective_independent_evaluations": 661,
+        "pareto_count": 43,
+        "hypervolume": 0.1733381145609906,
+        "spacing": 0.05121656454416532
+      },
+      {
+        "generation": 18,
+        "evaluation_calls": 720,
+        "effective_independent_evaluations": 701,
+        "pareto_count": 44,
+        "hypervolume": 0.17342672166398376,
+        "spacing": 0.05352688602358342
+      },
+      {
+        "generation": 19,
+        "evaluation_calls": 760,
+        "effective_independent_evaluations": 741,
+        "pareto_count": 46,
+        "hypervolume": 0.17346787258804486,
+        "spacing": 0.0507393584954616
+      },
+      {
+        "generation": 20,
+        "evaluation_calls": 800,
+        "effective_independent_evaluations": 781,
+        "pareto_count": 44,
+        "hypervolume": 0.2379386812917692,
+        "spacing": 0.048693696475742766
+      },
+      {
+        "generation": 21,
+        "evaluation_calls": 840,
+        "effective_independent_evaluations": 818,
+        "pareto_count": 43,
+        "hypervolume": 0.23881927413776216,
+        "spacing": 0.04777237947189979
+      },
+      {
+        "generation": 22,
+        "evaluation_calls": 880,
+        "effective_independent_evaluations": 857,
+        "pareto_count": 47,
+        "hypervolume": 0.25066389927550214,
+        "spacing": 0.04228809204648306
+      },
+      {
+        "generation": 23,
+        "evaluation_calls": 920,
+        "effective_independent_evaluations": 896,
+        "pareto_count": 48,
+        "hypervolume": 0.2564907173368013,
+        "spacing": 0.04040731523765606
+      },
+      {
+        "generation": 24,
+        "evaluation_calls": 960,
+        "effective_independent_evaluations": 935,
+        "pareto_count": 48,
+        "hypervolume": 0.2570816450041804,
+        "spacing": 0.040992858005088624
+      },
+      {
+        "generation": 25,
+        "evaluation_calls": 1000,
+        "effective_independent_evaluations": 973,
+        "pareto_count": 55,
+        "hypervolume": 0.2583757096537642,
+        "spacing": 0.03758247281669353
+      },
+      {
+        "generation": 26,
+        "evaluation_calls": 1040,
+        "effective_independent_evaluations": 1012,
+        "pareto_count": 60,
+        "hypervolume": 0.2659699592863681,
+        "spacing": 0.032766598241417935
+      },
+      {
+        "generation": 27,
+        "evaluation_calls": 1080,
+        "effective_independent_evaluations": 1052,
+        "pareto_count": 62,
+        "hypervolume": 0.2668744311782421,
+        "spacing": 0.03056036699282974
+      },
+      {
+        "generation": 28,
+        "evaluation_calls": 1120,
+        "effective_independent_evaluations": 1092,
+        "pareto_count": 64,
+        "hypervolume": 0.2676633661429565,
+        "spacing": 0.02975513854072912
+      },
+      {
+        "generation": 29,
+        "evaluation_calls": 1160,
+        "effective_independent_evaluations": 1131,
+        "pareto_count": 69,
+        "hypervolume": 0.27484844830559507,
+        "spacing": 0.028411356276412676
+      },
+      {
+        "generation": 30,
+        "evaluation_calls": 1200,
+        "effective_independent_evaluations": 1169,
+        "pareto_count": 69,
+        "hypervolume": 0.2790123015114652,
+        "spacing": 0.036900181482722685
+      },
+      {
+        "generation": 31,
+        "evaluation_calls": 1240,
+        "effective_independent_evaluations": 1208,
+        "pareto_count": 75,
+        "hypervolume": 0.2791389994703167,
+        "spacing": 0.03570705107529491
+      },
+      {
+        "generation": 32,
+        "evaluation_calls": 1280,
+        "effective_independent_evaluations": 1248,
+        "pareto_count": 73,
+        "hypervolume": 0.2809847100969106,
+        "spacing": 0.03997088163981524
+      },
+      {
+        "generation": 33,
+        "evaluation_calls": 1320,
+        "effective_independent_evaluations": 1285,
+        "pareto_count": 74,
+        "hypervolume": 0.2809847100969106,
+        "spacing": 0.03915577426194668
+      },
+      {
+        "generation": 34,
+        "evaluation_calls": 1360,
+        "effective_independent_evaluations": 1325,
+        "pareto_count": 77,
+        "hypervolume": 0.3050653091262469,
+        "spacing": 0.0405385003932032
+      },
+      {
+        "generation": 35,
+        "evaluation_calls": 1400,
+        "effective_independent_evaluations": 1361,
+        "pareto_count": 77,
+        "hypervolume": 0.30836540318881694,
+        "spacing": 0.03643368048962553
+      },
+      {
+        "generation": 36,
+        "evaluation_calls": 1440,
+        "effective_independent_evaluations": 1401,
+        "pareto_count": 80,
+        "hypervolume": 0.31784762801449545,
+        "spacing": 0.04412556477097751
+      },
+      {
+        "generation": 37,
+        "evaluation_calls": 1480,
+        "effective_independent_evaluations": 1438,
+        "pareto_count": 82,
+        "hypervolume": 0.3202078051286975,
+        "spacing": 0.03597526273071284
+      },
+      {
+        "generation": 38,
+        "evaluation_calls": 1520,
+        "effective_independent_evaluations": 1477,
+        "pareto_count": 78,
+        "hypervolume": 0.35889772819823307,
+        "spacing": 0.04314229366470048
+      },
+      {
+        "generation": 39,
+        "evaluation_calls": 1560,
+        "effective_independent_evaluations": 1515,
+        "pareto_count": 85,
+        "hypervolume": 0.36812061860088174,
+        "spacing": 0.04884091019894552
+      },
+      {
+        "generation": 40,
+        "evaluation_calls": 1600,
+        "effective_independent_evaluations": 1554,
+        "pareto_count": 80,
+        "hypervolume": 0.40144277224612196,
+        "spacing": 0.056422556861533794
+      },
+      {
+        "generation": 41,
+        "evaluation_calls": 1640,
+        "effective_independent_evaluations": 1594,
+        "pareto_count": 79,
+        "hypervolume": 0.40498738289670005,
+        "spacing": 0.05688927612743045
+      },
+      {
+        "generation": 42,
+        "evaluation_calls": 1680,
+        "effective_independent_evaluations": 1634,
+        "pareto_count": 81,
+        "hypervolume": 0.41169628225569554,
+        "spacing": 0.05473032740507983
+      },
+      {
+        "generation": 43,
+        "evaluation_calls": 1720,
+        "effective_independent_evaluations": 1673,
+        "pareto_count": 92,
+        "hypervolume": 0.41196351130176645,
+        "spacing": 0.049411012370327176
+      },
+      {
+        "generation": 44,
+        "evaluation_calls": 1760,
+        "effective_independent_evaluations": 1711,
+        "pareto_count": 94,
+        "hypervolume": 0.4119937897048479,
+        "spacing": 0.049045301280096876
+      },
+      {
+        "generation": 45,
+        "evaluation_calls": 1800,
+        "effective_independent_evaluations": 1751,
+        "pareto_count": 96,
+        "hypervolume": 0.4406057322620841,
+        "spacing": 0.039284757936154706
+      },
+      {
+        "generation": 46,
+        "evaluation_calls": 1840,
+        "effective_independent_evaluations": 1791,
+        "pareto_count": 104,
+        "hypervolume": 0.44130932543861384,
+        "spacing": 0.04016118439108343
+      },
+      {
+        "generation": 47,
+        "evaluation_calls": 1880,
+        "effective_independent_evaluations": 1831,
+        "pareto_count": 105,
+        "hypervolume": 0.4414788385546104,
+        "spacing": 0.03861349852029767
+      },
+      {
+        "generation": 48,
+        "evaluation_calls": 1920,
+        "effective_independent_evaluations": 1868,
+        "pareto_count": 107,
+        "hypervolume": 0.44194764526589375,
+        "spacing": 0.03924409423124082
+      },
+      {
+        "generation": 49,
+        "evaluation_calls": 1960,
+        "effective_independent_evaluations": 1905,
+        "pareto_count": 107,
+        "hypervolume": 0.4498534847174644,
+        "spacing": 0.04137736849071067
+      },
+      {
+        "generation": 50,
+        "evaluation_calls": 2000,
+        "effective_independent_evaluations": 1945,
+        "pareto_count": 108,
+        "hypervolume": 0.4499915433308131,
+        "spacing": 0.04081111424790321
+      },
+      {
+        "generation": 51,
+        "evaluation_calls": 2040,
+        "effective_independent_evaluations": 1981,
+        "pareto_count": 112,
+        "hypervolume": 0.4583551466103602,
+        "spacing": 0.0455804916531772
+      },
+      {
+        "generation": 52,
+        "evaluation_calls": 2080,
+        "effective_independent_evaluations": 2000,
+        "pareto_count": 113,
+        "hypervolume": 0.48096447638720824,
+        "spacing": 0.0894866222836734
+      }
+    ]
+  },
+  "reproducibility": {
+    "input_files": {
+      "SOURCE_ARCHIVE.json": {
+        "sha256": "a823ec2063f7fdbf8064477c1019cda540fca0e5ca9e53186834cb547a0489e8",
+        "bytes": 7497
+      },
+      "buildings.parquet": {
+        "sha256": "5b9ec15c6a80b264a68992c28f7dbeb6d90b0534d5da7ecba3f71781e2a49032",
+        "bytes": 212404
+      },
+      "study_boundary.geojson": {
+        "sha256": "cc86182c448c01c6a9aa1e81d6222a0a40252ffa07bda780e7357d257ef344ab",
+        "bytes": 1681
+      },
+      "street_network.geojson": {
+        "sha256": "90b105f0beab8b35496a11c42803ff0b24be8cc5a3f7401163a343a6bc8bcf59",
+        "bytes": 136892
+      },
+      "public_services.geojson": {
+        "sha256": "bab01bbdf435661e55cb4d182592bd52b8dc7c07ddf83fcccee14b73b2d0fa80",
+        "bytes": 43100
+      },
+      "public_space_candidates.geojson": {
+        "sha256": "7ad4d6836bbd7a0d9fe4feaa05d4dd3fc37ca9461ae801b5edde9d79ff84aba9",
+        "bytes": 3937
+      },
+      "public_space_verification.json": {
+        "sha256": "93dd0e43a67c70f0b12fcb0f545309527c332808062095c3b2ff5ee504858c5e",
+        "bytes": 3581
+      },
+      "alley_entrances.geojson": {
+        "sha256": "7e2f84eafdf519a8a3c52eb1726b30e3960d476a4bf992db9e9147dbed3f11dd",
+        "bytes": 2093
+      },
+      "alley_entrance_verification.json": {
+        "sha256": "2cd98a85892bc4da46f9b09f255ae11a731acc5bacc100ea681f6a1b5699f8ef",
+        "bytes": 2782
+      },
+      "online_gap_freeze.json": {
+        "sha256": "6aff2e12c868d30b883d239439692806326521956bf9ce267d71c5980243f083",
+        "bytes": 3925
+      },
+      "open_data_quality.json": {
+        "sha256": "c2b23fd1b660144cc90b3eb7f40caec5b5bf42b38201dae07cf8d9f34ce1ddb3",
+        "bytes": 2189
+      },
+      "open_data_sources.yaml": {
+        "sha256": "833bf353526ea595a1147a49dbcfe787383d138ad3f44ee478295acf358318c9",
+        "bytes": 3436
+      },
+      "intervention_zones.geojson": {
+        "sha256": "44309c41765dd5b259b06034e034c5362672a0098550dc543cac0ec14e8bdf95",
+        "bytes": 79297
+      },
+      "planning_controls.csv": {
+        "sha256": "27143e3975bc625de2971cca3d9460f06f14f02cde9320b972c80bd5fff96b73",
+        "bytes": 13702
+      },
+      "heritage_buildings.geojson": {
+        "sha256": "f2a0114f12098fbb51d22322a6f668c1379898992854ef051799886ca60f068e",
+        "bytes": 21953
+      },
+      "formal_input_quality.json": {
+        "sha256": "b4d5cb363a266a4363a1ed4fb94a780f9fbe43d56146f6e29245a309c7a4db7b",
+        "bytes": 1606
+      },
+      "site.yaml": {
+        "sha256": "ed053bf61729961836be6fc08944e027fbe8ac005472ebf670c98252a5802cc5",
+        "bytes": 173
+      }
+    },
+    "code_files": {
+      "engine/optimization/__init__.py": {
+        "sha256": "ee100c35680728c0ed0244f1b9e2c4031050c806f3b737a73a8e906ccb2588d8",
+        "bytes": 208
+      },
+      "engine/optimization/amplitude.py": {
+        "sha256": "1ae7734f9d0b91a6c0c9696b0c16ef5a80b788baf7f1607457bb35a1f62e5700",
+        "bytes": 3196
+      },
+      "engine/optimization/constraints.py": {
+        "sha256": "66cd6f795ef21721cea2ab2a0c955e323e37ee8e4016d60b784ec15ab561e413",
+        "bytes": 9924
+      },
+      "engine/optimization/data.py": {
+        "sha256": "4f8a9894de9bfa733dae0912a83790061fe9fff900ef73956e0dc5f181e129b5",
+        "bytes": 24361
+      },
+      "engine/optimization/metrics.py": {
+        "sha256": "352f35e133f123f850f588770180b303a2161dce224244f57b299c39679f4cb7",
+        "bytes": 8536
+      },
+      "engine/optimization/models.py": {
+        "sha256": "5a9089477a67c98ae106a9a5f551138d360ebcfad7aad3af604a534439fcb645",
+        "bytes": 1919
+      },
+      "engine/optimization/nsga2.py": {
+        "sha256": "538f64bf43d073b9d1c1038f440c74ea0ec265962a769a6471ffc2fbb797b8a4",
+        "bytes": 13824
+      },
+      "engine/optimization/objectives.py": {
+        "sha256": "97ce451493df152672c8df49e877c6dee7952024b4afcbd26d4591eec345cd63",
+        "bytes": 8692
+      },
+      "engine/optimization/operators.py": {
+        "sha256": "bef29512221c3e147775ff31bf45ad811782264ca3920e9de884cc0dd31375c7",
+        "bytes": 23375
+      },
+      "engine/optimization/parameter_baseline.py": {
+        "sha256": "4d6f78a78629c8c50c0273b31186aa6dc4b7b4f67e4494db4a5e94217afeb8a0",
+        "bytes": 16958
+      },
+      "engine/optimization/pareto.py": {
+        "sha256": "3e69162d87971f4d65d76cc36248ec363a9b961b961ddf783630cbf74c02a18b",
+        "bytes": 7234
+      },
+      "engine/optimization/roles.py": {
+        "sha256": "561b1e6f986b664314f9955a9545735c182ca27fb0dd1591a0668ceb5d0c065b",
+        "bytes": 7993
+      },
+      "engine/optimization/search.py": {
+        "sha256": "346e07142ec08896461b8093425a4da03e1d68911169b15a1a30e216b8a779fe",
+        "bytes": 6209
+      },
+      "scripts/audit_dapuqiao_source_archive.py": {
+        "sha256": "19d06756dea9fde353a021b2ed6bd4e794dec33f5e4a4cebadf7b4a56aa1a254",
+        "bytes": 2719
+      },
+      "scripts/build_dapuqiao_draft_zones.py": {
+        "sha256": "e47df2bc71de9d70f1191e0645c64d66878b77d5a8f2aedd821b0e2149a5e390",
+        "bytes": 9683
+      },
+      "scripts/build_dapuqiao_open_data.py": {
+        "sha256": "b381598f8d342b8f366860ab0ed4705a105895b1f7f755b8edde92985151b1fa",
+        "bytes": 20147
+      },
+      "scripts/calibrate_dapuqiao_operators.py": {
+        "sha256": "f5515516b9efc8c98000b780202bb7c3af0eca4e2becfc59aa397e5aeff7dfda",
+        "bytes": 6550
+      },
+      "scripts/compare_dapuqiao_methods.py": {
+        "sha256": "06d6ee5d973b125bb5ba265411d77da78a2e6ad59f4475df9469e8652208b1c8",
+        "bytes": 33983
+      },
+      "scripts/compare_dapuqiao_search.py": {
+        "sha256": "16c7930079a8ef94fee49c3d1383db0b9cb7da94df80dd3fca7780a6b9493125",
+        "bytes": 7972
+      },
+      "scripts/materialize_dapuqiao_heritage_freeze.py": {
+        "sha256": "c3346e0180619be1bb79c171f41ba198e38a62cc622b1b9a50c5a7894045fcdf",
+        "bytes": 4926
+      },
+      "scripts/preflight_dapuqiao_formal_experiment.py": {
+        "sha256": "b7f0015d21ecfee163b78e23bdcde474aabfc3e84dabe203ac6f1aa7608526a8",
+        "bytes": 10518
+      },
+      "scripts/promote_dapuqiao_formal_inputs.py": {
+        "sha256": "633de398929cd9248b337774024a0548c3011c11fbb86ecb16e5dbd55006a411",
+        "bytes": 9711
+      },
+      "scripts/run_dapuqiao_optimization.py": {
+        "sha256": "2edc077055e059c633c1beb5630bb52e4d2ede2613d8ffd59dd81ae3bb3ac42a",
+        "bytes": 18596
+      },
+      "scripts/run_dapuqiao_scenario_suite.py": {
+        "sha256": "e5d7e02f918dbc58a620f271835f8b736e17b713989c6d632133315374dc59b6",
+        "bytes": 7857
+      },
+      "optimization/amplitude_arms.yaml": {
+        "sha256": "d0ebb3f1ddb1ca88567cba9777c7bb9e29ff3c109aa0878b0a36b3ad2f360c57",
+        "bytes": 2049
+      },
+      "optimization/constraints.yaml": {
+        "sha256": "a835f003819fd5fdc76f68f2232c9eb9b798a16d8ee8180635f386200abc84e4",
+        "bytes": 1418
+      },
+      "optimization/objectives.yaml": {
+        "sha256": "45cd30e062d244eb2a24464bf34c4719c8974b53ea90d7f5f52257615b5903d2",
+        "bytes": 3015
+      },
+      "optimization/operator_specs.yaml": {
+        "sha256": "f8ec2eeb760302651f83d21196db8fd6a5c6131c1ed12bacca5e0f04249f1b79",
+        "bytes": 3237
+      },
+      "optimization/parameter_baseline.yaml": {
+        "sha256": "7143c41655cf0424bbbb339f48cb3c48cb720c20a376c6c3a8acd7b31d9600cb",
+        "bytes": 808
+      },
+      "optimization/research_assumptions.yaml": {
+        "sha256": "9e1a5e55f4d04c46862eb295ca7f756f3b6e8966634473f9c6d6dbba571626d2",
+        "bytes": 3771
+      },
+      "optimization/role_profiles.yaml": {
+        "sha256": "e6d2f245b24838db6419b5479989e5504508971d5f5b545a10fe4e9936914d92",
+        "bytes": 1031
+      },
+      "optimization/scenarios.yaml": {
+        "sha256": "e8ecb03a837ec8d4f03c951eead11852b1bc3a1d648dc74b6df61168c7f6e7ba",
+        "bytes": 8172
+      },
+      "engine/requirements.txt": {
+        "sha256": "a85b506af793b2fc62217320a80771090ab2efc3d3538e2f65b1e688488ffaff",
+        "bytes": 967
+      }
+    },
+    "git": {
+      "commit": "bd5dd8a5412e81d9ce8c5bcfc95311058f012ba7",
+      "branch": "master",
+      "working_tree_dirty": true
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "platform": "macOS-14.5-arm64-arm-64bit",
+      "packages": {
+        "geopandas": "1.2.0",
+        "pandas": "3.0.6",
+        "shapely": "2.1.2",
+        "numpy": "2.5.3",
+        "pymoo": "0.6.2",
+        "pyarrow": "25.0.1",
+        "PyYAML": "6.0.3"
+      }
+    },
+    "optimization_runtime_seconds": 13036.726140291008
+  },
+  "input_scope": {
+    "heritage_records_unresolved_and_excluded": 4,
+    "buildings_unmatched_to_zones_and_frozen": 32,
+    "public_space_context": {
+      "candidate_count": 2,
+      "verified_public_park_context": 1,
+      "unverified_excluded": 1,
+      "included_in_objective": 0
+    },
+    "alley_entrance_context": {
+      "candidate_count": 2,
+      "verified_research_entrance": 1,
+      "unverified_frozen": 1,
+      "included_in_optimization": 0,
+      "included_in_objective": 0,
+      "exhaustive_inventory": false
+    },
+    "online_gap_freeze": {
+      "items_reviewed": 5,
+      "partially_enriched_then_frozen": 2,
+      "frozen_without_model_use": 3,
+      "new_proxy_variables_added": 0
+    },
+    "third_objective": {
+      "id": "street_connected_released_ground",
+      "interpretation": "street-connected released-ground potential",
+      "required_layers": [
+        "buildings.parquet",
+        "street_network.geojson",
+        "study_boundary.geojson"
+      ],
+      "excluded_context_layers": [
+        "public_space_candidates.geojson",
+        "public_space_verification.json",
+        "alley_entrances.geojson",
+        "alley_entrance_verification.json"
+      ],
+      "street_access_buffer_m": 5.0,
+      "public_space_candidates_used": false,
+      "not_interpreted_as": [
+        "public-space area",
+        "public-space ownership",
+        "public-space accessibility",
+        "historical park area",
+        "OSM research polygon",
+        "alley entrance point"
+      ]
+    }
+  },
+  "amplitude_arm": {
+    "amplitude_arm": "expanded",
+    "label": "放大体量幅度（会议意见 ④）",
+    "source": "2026-10-14 会议纪要",
+    "operator_parameters": {
+      "densify": {
+        "maximum_height_gain_ratio": 0.5
+      },
+      "open_ground": {
+        "minimum_footprint_ratio": 0.65
+      },
+      "split_to_towers": {
+        "maximum_gap_ratio": 0.15
+      },
+      "heritage_step_down": {
+        "maximum_height_redistribution_ratio": 0.5
+      }
+    },
+    "parameter_baseline_parameters": {
+      "height_multiplier": {
+        "min": 1.0,
+        "max": 1.5
+      },
+      "footprint_ratio": {
+        "min": 0.65,
+        "max": 1.0
+      }
+    }
+  },
+  "control_envelope": "shared"
+}

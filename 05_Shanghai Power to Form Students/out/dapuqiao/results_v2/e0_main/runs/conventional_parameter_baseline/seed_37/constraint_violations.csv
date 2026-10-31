@@ -1,0 +1,2 @@
+﻿solution_id,code,message,severity,action,zone_id,bid,value,limit
+P_01714,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z26,,3.6164967903272256,3.6164707805917375

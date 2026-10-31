@@ -1,0 +1,78 @@
+{
+  "scenario": "resident_heritage_priority",
+  "arm": null,
+  "budget": 800,
+  "calls": 37,
+  "budget_exhausted": false,
+  "capacity": 0.0,
+  "release": 0.0,
+  "disruption": 0.0,
+  "feasible": true,
+  "far": 2.8211935031659343,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 0.0,
+  "gross_added_m2": 0.0,
+  "changed_zones": 0,
+  "operator_counts": {},
+  "decision_signature": "",
+  "scope": "loose",
+  "attribution": "off",
+  "diff": {
+    "arm": {
+      "before": {
+        "allowed_operators": [
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "open_ground": [
+            "developer"
+          ],
+          "heritage_step_down": [
+            "developer"
+          ],
+          "public_space_reconfiguration": [
+            "state"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "open_ground": 0.75,
+          "heritage_step_down": 1.0,
+          "public_space_reconfiguration": 1.0,
+          "courtyard_access_improvement": 0.65
+        }
+      },
+      "after": {
+        "allowed_operators": [
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {},
+        "maximum_intensity": {
+          "open_ground": 0.75,
+          "heritage_step_down": 1.0,
+          "public_space_reconfiguration": 1.0,
+          "courtyard_access_improvement": 0.65
+        }
+      }
+    },
+    "scope": {
+      "before": {
+        "maximum_changed_zone_ratio": 0.22,
+        "maximum_changed_building_ratio": 0.14
+      },
+      "after": {
+        "maximum_changed_zone_ratio": 0.45,
+        "maximum_changed_building_ratio": 0.3
+      }
+    }
+  },
+  "runtime_seconds": 29.427959207998356
+}

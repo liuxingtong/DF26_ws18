@@ -1,0 +1,84 @@
+{
+  "verification_date": "2026-09-28",
+  "intended_use": "context-only alley entrance evidence; excluded from optimization objectives and constraints",
+  "summary": {
+    "candidate_count": 2,
+    "verified_research_entrance": 1,
+    "unverified_frozen": 1,
+    "included_in_optimization": 0,
+    "included_in_objective": 0,
+    "exhaustive_inventory": false
+  },
+  "verified_scope": {
+    "official_operational_area_lanes": [
+      "泰康路210弄",
+      "泰康路274弄",
+      "泰康路248弄",
+      "建国中路155弄部分"
+    ],
+    "scope_evidence": "2025 Shanghai government-procurement sanitation contract",
+    "scope_limit": "The contract establishes an operational service area, not an exhaustive entrance list or surveyed boundary."
+  },
+  "decisions": [
+    {
+      "entrance_id": "TZF_E01",
+      "decision": "verified_research_entrance",
+      "supported_fields": [
+        "gate reference 1",
+        "泰康路210弄1号门 address description",
+        "OSM research point"
+      ],
+      "frozen_or_unresolved_fields": [
+        "surveyed gate coordinate",
+        "opening and closure schedule",
+        "access capacity"
+      ],
+      "evidence": [
+        "Shanghai Municipal Civil Affairs Bureau article: entry through 泰康路210弄1号门",
+        "OpenStreetMap node 6944504085"
+      ]
+    },
+    {
+      "entrance_id": "TZF_E02",
+      "decision": "osm_candidate_unverified_frozen",
+      "supported_fields": [
+        "OSM entrance tag",
+        "OSM gate reference 2",
+        "OSM research point"
+      ],
+      "frozen_or_unresolved_fields": [
+        "official gate identity",
+        "address",
+        "surveyed gate coordinate",
+        "opening and closure schedule",
+        "access capacity"
+      ],
+      "evidence": [
+        "OpenStreetMap node 7113940227"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "畅游田子坊",
+      "publisher": "上海市民政局",
+      "url": "https://mzj.sh.gov.cn/lnb-lyxx/20201215/c866c6e45002465aae7880724081d3cf.html"
+    },
+    {
+      "title": "田子坊保洁费用（环卫保洁2025）合同",
+      "publisher": "上海政府采购网",
+      "url": "https://jpg.zfcg.sh.gov.cn/sh-gov-open-doc/1035IC/86b57ec4-2392-441c-8af3-8e20b0305ab3.pdf"
+    },
+    {
+      "title": "OpenStreetMap entrance nodes",
+      "publisher": "OpenStreetMap contributors",
+      "url": "https://www.openstreetmap.org/node/6944504085"
+    },
+    {
+      "title": "OpenStreetMap entrance node 7113940227",
+      "publisher": "OpenStreetMap contributors",
+      "url": "https://www.openstreetmap.org/node/7113940227"
+    }
+  ],
+  "model_interpretation": "The entrance layer is contextual only. It does not replace the street network, define access capacity, or enter any objective or constraint."
+}

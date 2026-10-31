@@ -1,0 +1,55 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "entrance_id": "TZF_E01",
+        "name": "田子坊1号门（泰康路210弄）",
+        "ref": "1",
+        "address": "泰康路210弄1号门",
+        "osm_element_type": "node",
+        "osm_id": 6944504085,
+        "osm_version": 2,
+        "osm_last_updated": "2020-01-09T09:07:51Z",
+        "research_status": "verified_research_entrance",
+        "verification_date": "2026-09-28",
+        "verification_method": "official Shanghai civil-affairs narrative cross-checked with OSM entrance node",
+        "include_in_optimization": false,
+        "include_in_objective": false,
+        "source": "OpenStreetMap; Shanghai Municipal Civil Affairs Bureau",
+        "license": "OSM geometry ODbL-1.0; factual verification source cited separately",
+        "verification_note": "Official text explicitly describes entry through 泰康路210弄1号门; OSM supplies the research point. This is not a surveyed gate coordinate."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.4648262, 31.2097271]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "entrance_id": "TZF_E02",
+        "name": "田子坊2号门候选",
+        "ref": "2",
+        "address": "泰康路（门牌未由官方来源确认）",
+        "osm_element_type": "node",
+        "osm_id": 7113940227,
+        "osm_version": 2,
+        "osm_last_updated": "2020-01-09T09:08:03Z",
+        "research_status": "osm_candidate_unverified_frozen",
+        "verification_date": "2026-09-28",
+        "verification_method": "OSM entrance node only",
+        "include_in_optimization": false,
+        "include_in_objective": false,
+        "source": "OpenStreetMap",
+        "license": "ODbL-1.0",
+        "verification_note": "No authoritative source located that fixes the current gate identity or exact surveyed coordinate; keep frozen."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.4643017, 31.2095959]
+      }
+    }
+  ]
+}

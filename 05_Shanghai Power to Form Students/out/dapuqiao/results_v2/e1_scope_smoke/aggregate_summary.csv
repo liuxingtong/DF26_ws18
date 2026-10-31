@@ -1,0 +1,3 @@
+﻿scenario,scope,attribution,n,max_net_mean,max_net_std,max_net_effective_mean,max_net_effective_std,max_release_mean,max_release_std,hypervolume_mean,hypervolume_std,pareto_mean,pareto_std
+public_coordination,mid,off,1,0.0,0.0,0.01569439552127614,0.0,0.0033176070729742674,0.0,0.15343853661649948,0.0,6.0,0.0
+public_coordination,tight,off,1,0.0,0.0,0.010026860052512417,0.0,0.0033985736951155725,0.0,0.1509240570685549,0.0,4.0,0.0

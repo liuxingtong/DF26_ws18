@@ -1,0 +1,105 @@
+{
+  "scenario": "public_coordination",
+  "arm": "attr-on__ops-own__int-own",
+  "seed": 37,
+  "budget": 1000,
+  "population": 40,
+  "generations": 25,
+  "amplitude_arm": "v1",
+  "control_envelope": "shared",
+  "generations_executed": 25,
+  "scenario_diff": {
+    "before": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "heritage_step_down",
+        "public_space_reconfiguration",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "densify": [
+          "developer"
+        ],
+        "open_ground": [
+          "developer"
+        ],
+        "heritage_step_down": [
+          "developer"
+        ],
+        "public_space_reconfiguration": [
+          "state"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "densify": 0.45,
+        "open_ground": 0.75,
+        "heritage_step_down": 0.7,
+        "public_space_reconfiguration": 0.7,
+        "courtyard_access_improvement": 0.5
+      }
+    },
+    "after": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "heritage_step_down",
+        "public_space_reconfiguration",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "densify": [
+          "developer"
+        ],
+        "open_ground": [
+          "developer"
+        ],
+        "heritage_step_down": [
+          "developer"
+        ],
+        "public_space_reconfiguration": [
+          "state"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "densify": 0.45,
+        "open_ground": 0.75,
+        "heritage_step_down": 0.7,
+        "public_space_reconfiguration": 0.7,
+        "courtyard_access_improvement": 0.5
+      }
+    }
+  },
+  "runtime_seconds": 848.4387621660026,
+  "effective": 817,
+  "pareto": 20,
+  "feasible_ratio": 0.910757946210269,
+  "max_net": 0.0065528392849896816,
+  "max_release": 0.0035379556588020352,
+  "min_disruption": 0.0,
+  "max_net_effective": 0.006775156746879549,
+  "max_release_effective": 0.003733488732921604,
+  "hypervolume": 0.17041086791071428,
+  "raw_calls": 1000,
+  "cache_hits": 171,
+  "candidate_operation_share": {
+    "courtyard_access_improvement": 0.8300733496332519,
+    "densify": 0.628361858190709,
+    "heritage_step_down": 0.6442542787286064,
+    "open_ground": 0.9339853300733496,
+    "public_space_reconfiguration": 0.9070904645476773
+  },
+  "pareto_operation_share": {
+    "courtyard_access_improvement": 0.75,
+    "densify": 0.6,
+    "heritage_step_down": 0.85,
+    "open_ground": 1.0,
+    "public_space_reconfiguration": 0.95
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "scenario": "public_coordination",
+  "arm": null,
+  "budget": 800,
+  "calls": 412,
+  "budget_exhausted": false,
+  "capacity": 0.0411542225817304,
+  "release": 0.0,
+  "disruption": 0.24906631911381835,
+  "feasible": true,
+  "far": 2.8623477257476644,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 64773.612015028484,
+  "gross_added_m2": 64773.61201502867,
+  "changed_zones": 7,
+  "operator_counts": {
+    "densify": 7
+  },
+  "decision_signature": "Z03:densify:0.4500;Z25:densify:0.4500;Z29:densify:0.4500;Z31:densify:0.4500;Z32:densify:0.4500;Z36:densify:0.4500;Z37:densify:0.4500",
+  "scope": "mid",
+  "attribution": "off",
+  "diff": {
+    "arm": {
+      "before": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "densify": [
+            "developer"
+          ],
+          "open_ground": [
+            "developer"
+          ],
+          "heritage_step_down": [
+            "developer"
+          ],
+          "public_space_reconfiguration": [
+            "state"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "densify": 0.45,
+          "open_ground": 0.75,
+          "heritage_step_down": 0.7,
+          "public_space_reconfiguration": 0.7,
+          "courtyard_access_improvement": 0.5
+        }
+      },
+      "after": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {},
+        "maximum_intensity": {
+          "densify": 0.45,
+          "open_ground": 0.75,
+          "heritage_step_down": 0.7,
+          "public_space_reconfiguration": 0.7,
+          "courtyard_access_improvement": 0.5
+        }
+      }
+    },
+    "scope": {
+      "before": {
+        "maximum_changed_zone_ratio": 0.3,
+        "maximum_changed_building_ratio": 0.18
+      },
+      "after": {
+        "maximum_changed_zone_ratio": 0.3,
+        "maximum_changed_building_ratio": 0.18
+      }
+    }
+  },
+  "runtime_seconds": 382.88289079099195
+}

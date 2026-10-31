@@ -1,0 +1,5 @@
+﻿seed,method_id,requested_effective_budget,requested_raw_budget,reported_raw_evaluation_calls,reported_effective_budget,candidate_count_including_current,expected_candidate_count_including_current,effective_budget_match,candidate_count_match
+11,conventional_parameter_baseline,40,40,40,40,41,41,True,True
+11,public_coordination,40,40,40,28,29,29,True,True
+11,development_growth,40,40,40,30,31,31,True,True
+11,resident_heritage_priority,40,40,40,18,19,19,True,True

@@ -1,0 +1,31 @@
+{
+  "runs": "out/dapuqiao/results_v2/e6_budget_3seeds_b1000/runs",
+  "methods": [
+    "public_coordination",
+    "development_growth"
+  ],
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "capacity": {
+    "bands_pct": [
+      0.0,
+      0.2,
+      0.4,
+      0.6
+    ],
+    "tolerance_pp": 0.05
+  },
+  "disruption": {
+    "ceiling_pct": [
+      0.0,
+      5.0,
+      10.0,
+      20.0,
+      30.0
+    ]
+  },
+  "note": "unreachable 表示该方法在该档没有可行候选；不做插值。"
+}

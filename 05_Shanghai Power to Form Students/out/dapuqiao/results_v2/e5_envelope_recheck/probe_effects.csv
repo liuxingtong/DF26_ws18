@@ -1,0 +1,5 @@
+﻿scenario,factor,value,capacity_pct,disruption_pct,changed_zones,calls,budget_exhausted,delta_vs_baseline_pp
+development_growth,height_limit_m,24.0,6.358446451876863,47.72424793761454,17,789,False,-4.091116967987098
+development_growth,height_limit_m,30.0,9.305214501101773,44.30367509460355,14,800,True,-1.1443489187621878
+development_growth,height_limit_m,36.0,10.44956341986396,43.28756641975973,13,800,True,0.0
+development_growth,height_limit_m,45.0,11.495203897384384,37.04320162589717,12,800,True,1.0456404775204222

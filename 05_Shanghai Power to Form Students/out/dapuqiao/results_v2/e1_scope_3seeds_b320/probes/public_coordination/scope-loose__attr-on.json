@@ -1,0 +1,103 @@
+{
+  "scenario": "public_coordination",
+  "arm": null,
+  "budget": 800,
+  "calls": 90,
+  "budget_exhausted": false,
+  "capacity": 0.008013068508920477,
+  "release": 0.0,
+  "disruption": 0.09128613063890409,
+  "feasible": true,
+  "far": 2.8292065716748547,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 12611.959553260356,
+  "gross_added_m2": 12611.959553259925,
+  "changed_zones": 6,
+  "operator_counts": {
+    "densify": 6
+  },
+  "decision_signature": "Z05:densify:0.4500;Z07:densify:0.4500;Z20:densify:0.4500;Z21:densify:0.4500;Z29:densify:0.4500;Z31:densify:0.4500",
+  "scope": "loose",
+  "attribution": "on",
+  "diff": {
+    "arm": {
+      "before": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "densify": [
+            "developer"
+          ],
+          "open_ground": [
+            "developer"
+          ],
+          "heritage_step_down": [
+            "developer"
+          ],
+          "public_space_reconfiguration": [
+            "state"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "densify": 0.45,
+          "open_ground": 0.75,
+          "heritage_step_down": 0.7,
+          "public_space_reconfiguration": 0.7,
+          "courtyard_access_improvement": 0.5
+        }
+      },
+      "after": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "densify": [
+            "developer"
+          ],
+          "open_ground": [
+            "developer"
+          ],
+          "heritage_step_down": [
+            "developer"
+          ],
+          "public_space_reconfiguration": [
+            "state"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "densify": 0.45,
+          "open_ground": 0.75,
+          "heritage_step_down": 0.7,
+          "public_space_reconfiguration": 0.7,
+          "courtyard_access_improvement": 0.5
+        }
+      }
+    },
+    "scope": {
+      "before": {
+        "maximum_changed_zone_ratio": 0.3,
+        "maximum_changed_building_ratio": 0.18
+      },
+      "after": {
+        "maximum_changed_zone_ratio": 0.45,
+        "maximum_changed_building_ratio": 0.3
+      }
+    }
+  },
+  "runtime_seconds": 81.02390583400847
+}

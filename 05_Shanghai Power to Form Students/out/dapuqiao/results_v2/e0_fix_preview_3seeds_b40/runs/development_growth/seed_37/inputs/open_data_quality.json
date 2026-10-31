@@ -1,0 +1,103 @@
+{
+  "study_boundary": {
+    "features": 1,
+    "crs": "EPSG:4326",
+    "empty_geometries": 0,
+    "null_geometries": 0,
+    "invalid_geometries": 0,
+    "duplicate_osm_keys": 0,
+    "geometry_types": [
+      "Polygon"
+    ],
+    "bounds": [
+      121.4574087,
+      31.2030929,
+      121.4802155,
+      31.2158231
+    ],
+    "null_names": 0,
+    "null_name_rate": 0.0
+  },
+  "street_network": {
+    "features": 260,
+    "crs": "EPSG:4326",
+    "empty_geometries": 0,
+    "null_geometries": 0,
+    "invalid_geometries": 0,
+    "duplicate_osm_keys": 0,
+    "geometry_types": [
+      "LineString",
+      "MultiLineString"
+    ],
+    "bounds": [
+      121.4574114,
+      31.2031163,
+      121.4802094,
+      31.2158158
+    ],
+    "null_names": 115,
+    "null_name_rate": 0.442308
+  },
+  "public_services": {
+    "features": 89,
+    "crs": "EPSG:4326",
+    "empty_geometries": 0,
+    "null_geometries": 0,
+    "invalid_geometries": 0,
+    "duplicate_osm_keys": 0,
+    "geometry_types": [
+      "Point"
+    ],
+    "bounds": [
+      121.4575669,
+      31.2036619,
+      121.4798531,
+      31.2154532
+    ],
+    "null_names": 6,
+    "null_name_rate": 0.067416
+  },
+  "public_space_candidates": {
+    "features": 2,
+    "crs": "EPSG:4326",
+    "empty_geometries": 0,
+    "null_geometries": 0,
+    "invalid_geometries": 0,
+    "duplicate_osm_keys": 0,
+    "geometry_types": [
+      "Polygon"
+    ],
+    "bounds": [
+      121.4657517,
+      31.2062964,
+      121.4758566,
+      31.2097813
+    ],
+    "null_names": 0,
+    "null_name_rate": 0.0,
+    "research_status_counts": {
+      "candidate_unverified_excluded": 1,
+      "verified_public_park_context": 1
+    },
+    "included_in_objective": 0,
+    "verification_date": "2026-09-28"
+  },
+  "alley_entrances": {
+    "features": 2,
+    "crs": "EPSG:4326",
+    "empty_geometries": 0,
+    "null_geometries": 0,
+    "invalid_geometries": 0,
+    "geometry_types": [
+      "Point"
+    ],
+    "research_status_counts": {
+      "verified_research_entrance": 1,
+      "osm_candidate_unverified_frozen": 1
+    },
+    "included_in_optimization": 0,
+    "included_in_objective": 0,
+    "exhaustive_inventory": false,
+    "verification_date": "2026-09-28"
+  }
+}

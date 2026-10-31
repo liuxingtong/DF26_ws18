@@ -1,0 +1,29 @@
+[
+  {
+    "scenario": "public_coordination",
+    "raw_calls": 40,
+    "effective": 24,
+    "pareto": 6,
+    "max_net": 0.0,
+    "max_release": 0.0033176070729742674,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "development_growth",
+    "raw_calls": 40,
+    "effective": 25,
+    "pareto": 4,
+    "max_net": 0.0021874651122083776,
+    "max_release": 0.000332265769158151,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "resident_heritage_priority",
+    "raw_calls": 40,
+    "effective": 25,
+    "pareto": 3,
+    "max_net": 0.0,
+    "max_release": 0.002568731633646984,
+    "min_disruption": 0.0
+  }
+]

@@ -1,0 +1,50 @@
+# 体量调整幅度实验臂（amplitude arms）
+#
+# 背景：2026-10-14 会议要求"增大原有建筑体量的调整幅度，重新运行实验"；
+# 而 experiments_brief 的 E0 要求"约束、算子上限、输入数据与 v1 完全一致，只改 M1、M2"。
+# 两者冲突，因此不写死某一档，而是把幅度抽成显式实验臂：
+#   - 正文比较用 expanded（满足会议意见）；
+#   - 复现与可比性核对用 v1（满足 brief 的"与 v1 完全一致"）。
+# 参数基线必须与算子同步放大，否则"基线包络 ⊇ 情景包络"的论证（稿件 5.1）不成立。
+meta:
+  status: research_assumption
+  default: v1
+  # 论文里用 A0 / A1 命名两档幅度；仓库沿用 v1 / expanded，两者等价。
+  aliases:
+    a0: v1
+    a1: expanded
+  rule: 一次运行只允许一个臂；参数基线的高度倍率与足迹保留率必须随算子同步调整
+  selected_by: scripts/compare_dapuqiao_methods.py --amplitude-arm、scripts/run_dapuqiao_scenario_suite.py --amplitude-arm
+
+arms:
+  v1:
+    label: v1 原始幅度（与 2026-10-04 正式对照一致）
+    source: 复现 formal_three_scenario_20261004
+    operator_parameters:
+      densify:
+        maximum_height_gain_ratio: 0.30
+      open_ground:
+        minimum_footprint_ratio: 0.75
+      split_to_towers:
+        maximum_gap_ratio: 0.08
+      heritage_step_down:
+        maximum_height_redistribution_ratio: 0.30
+    parameter_baseline_parameters:
+      height_multiplier: {min: 1.0, max: 1.30}
+      footprint_ratio: {min: 0.75, max: 1.0}
+
+  expanded:
+    label: 放大体量幅度（会议意见 ④）
+    source: 2026-10-14 会议纪要
+    operator_parameters:
+      densify:
+        maximum_height_gain_ratio: 0.50
+      open_ground:
+        minimum_footprint_ratio: 0.65
+      split_to_towers:
+        maximum_gap_ratio: 0.15
+      heritage_step_down:
+        maximum_height_redistribution_ratio: 0.50
+    parameter_baseline_parameters:
+      height_multiplier: {min: 1.0, max: 1.50}
+      footprint_ratio: {min: 0.65, max: 1.0}

@@ -1,0 +1,10 @@
+﻿pareto_layer,objective,direction,solution_count,unique_value_count,zero_fraction,minimum,q25,median,mean,q75,maximum,standard_deviation
+exact_full,residential_disruption,minimize,6,1,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+exact_full,development_capacity,maximize,6,6,0.16666666666666666,-0.028212586707397843,-0.018611444344951565,-0.013975966151562593,-0.013782569401009847,-0.00827471177748177,0.0,0.009939968272612537
+exact_full,street_connected_released_ground,maximize,6,6,0.0,3.815413165896458e-06,0.00010998976380083758,0.00025313750792874855,0.00032422626198081795,0.0005408228120982238,0.0007362753802819314,0.0002958498933584447
+epsilon_filtered,residential_disruption,minimize,1,1,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+epsilon_filtered,development_capacity,maximize,1,1,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+epsilon_filtered,street_connected_released_ground,maximize,1,1,0.0,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,0.0
+representative,residential_disruption,minimize,1,1,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+representative,development_capacity,maximize,1,1,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+representative,street_connected_released_ground,maximize,1,1,0.0,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,3.815413165896458e-06,0.0

@@ -1,0 +1,92 @@
+{
+  "verification_date": "2026-09-28",
+  "intended_use": "context-only public-space evidence; excluded from optimization objectives",
+  "summary": {
+    "candidate_count": 2,
+    "verified_public_park_context": 1,
+    "unverified_excluded": 1,
+    "included_in_objective": 0
+  },
+  "decisions": [
+    {
+      "osm_id": 72083112,
+      "name": "丽园公园",
+      "decision": "verified_public_park_context",
+      "supported_fields": [
+        "name",
+        "address_verified",
+        "public-park category",
+        "historical reported area and green area",
+        "2021 official published opening schedule 05:00-21:00",
+        "current OSM polygon as non-legal research geometry"
+      ],
+      "frozen_or_unresolved_fields": [
+        "current surveyed polygon",
+        "legal ownership boundary",
+        "current operating hours"
+      ],
+      "evidence": [
+        "AMap POI B00155HQDA, 丽园路565号",
+        "Huangpu statistical yearbook: 2013 park area 17,460 m2 and green area 11,131 m2",
+        "Shanghai municipal 2021 extended-opening list: 05:00-21:00",
+        "Shanghai municipal 2025 shared-lawn program",
+        "OpenStreetMap way 72083112 version 5, updated 2025-10-04"
+      ]
+    },
+    {
+      "osm_id": 1209934031,
+      "name": "白玉兰广场",
+      "decision": "candidate_unverified_excluded",
+      "supported_fields": [
+        "OSM name",
+        "OSM place=square tag",
+        "current OSM polygon as non-legal research geometry"
+      ],
+      "frozen_or_unresolved_fields": [
+        "same-name identity",
+        "public access",
+        "ownership",
+        "surveyed or legal polygon boundary",
+        "opening_hours"
+      ],
+      "evidence": [
+        "OpenStreetMap way 1209934031 version 1, updated 2023-09-22",
+        "No same-name AMap public-space POI returned in the local cross-check"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "OpenStreetMap way 72083112（丽园公园）",
+      "publisher": "OpenStreetMap contributors",
+      "url": "https://www.openstreetmap.org/way/72083112"
+    },
+    {
+      "title": "OpenStreetMap way 1209934031（白玉兰广场候选）",
+      "publisher": "OpenStreetMap contributors",
+      "url": "https://www.openstreetmap.org/way/1209934031"
+    },
+    {
+      "title": "2014年黄浦统计年鉴（载2013年公园面积与绿地面积）",
+      "publisher": "上海市黄浦区人民政府",
+      "url": "https://www.shhuangpu.gov.cn/uploadfile/de2d24bb-b3a2-4ac8-a4f5-5e15bc8fa8bf/2014%E5%B9%B4%E9%BB%84%E6%B5%A6%E7%BB%9F%E8%AE%A1%E5%B9%B4%E9%89%B4.pdf"
+    },
+    {
+      "title": "高德地图地点检索交叉核查",
+      "publisher": "高德地图 Web 服务",
+      "record_id": "B00155HQDA",
+      "archive_note": "The API response is represented by the frozen POI id and verified address fields; no API key is stored."
+    },
+    {
+      "title": "2021年城市公园延长开放名单",
+      "publisher": "上海市绿化和市容管理局",
+      "url": "https://lhsr.sh.gov.cn/cmsres/99/99d8041e933d40259d86d3a556daeb12/051e89e66f8b0d8cfa9e00e63822dbfc.pdf"
+    },
+    {
+      "title": "搭帐篷、带宠物……黄浦这7座公园开始试点",
+      "publisher": "上海市绿化和市容管理局",
+      "url": "https://lhsr.sh.gov.cn/ywdt/20250915/c44b20ec-3822-4053-a336-65f2cd27a29b.html"
+    }
+  ],
+  "model_interpretation": "The third objective remains street-connected released-ground potential computed from the street network. Neither OSM research polygon is used to calculate public-space area, accessibility or ownership benefit."
+}

@@ -1,0 +1,10 @@
+﻿role,variant_type,parameter,priority_order,selected_solution_id,accepted_count,selected_rank
+resident,base,none,residential_disruption>development_capacity>street_connected_released_ground,S_0000,5,1
+resident,adjacent_priority_swap,1<->2,development_capacity>residential_disruption>street_connected_released_ground,S_0000,5,1
+resident,adjacent_priority_swap,2<->3,residential_disruption>street_connected_released_ground>development_capacity,N_00025,5,1
+development,base,none,development_capacity>street_connected_released_ground>residential_disruption,S_0000,5,1
+development,adjacent_priority_swap,1<->2,street_connected_released_ground>development_capacity>residential_disruption,N_00025,5,1
+development,adjacent_priority_swap,2<->3,development_capacity>residential_disruption>street_connected_released_ground,S_0000,5,1
+public_planning,base,none,street_connected_released_ground>residential_disruption>development_capacity,N_00025,5,1
+public_planning,adjacent_priority_swap,1<->2,residential_disruption>street_connected_released_ground>development_capacity,N_00025,5,1
+public_planning,adjacent_priority_swap,2<->3,street_connected_released_ground>development_capacity>residential_disruption,N_00025,5,1

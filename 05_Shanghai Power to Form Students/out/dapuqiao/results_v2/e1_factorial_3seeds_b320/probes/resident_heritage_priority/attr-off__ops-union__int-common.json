@@ -1,0 +1,22 @@
+{
+  "scenario": "resident_heritage_priority",
+  "arm": "attr-off__ops-union__int-common",
+  "budget": 320,
+  "calls": 320,
+  "budget_exhausted": true,
+  "capacity": 0.06336826992873036,
+  "release": 0.0,
+  "disruption": 0.23147974219808265,
+  "feasible": true,
+  "far": 2.8845617730946644,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 99736.83070493303,
+  "gross_added_m2": 99736.83070493379,
+  "changed_zones": 5,
+  "operator_counts": {
+    "densify": 5
+  },
+  "decision_signature": "Z11:densify:1.0000;Z14:densify:1.0000;Z25:densify:1.0000;Z31:densify:1.0000;Z32:densify:1.0000",
+  "control_envelope": "shared",
+  "runtime_seconds": 236.04990491599892
+}

@@ -1,0 +1,93 @@
+{
+  "scenario": "development_growth",
+  "arm": "attr-on__ops-own__int-own",
+  "seed": 37,
+  "budget": 1000,
+  "population": 40,
+  "generations": 25,
+  "amplitude_arm": "v1",
+  "control_envelope": "shared",
+  "generations_executed": 25,
+  "scenario_diff": {
+    "before": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "split_to_towers",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "densify": [
+          "developer"
+        ],
+        "open_ground": [
+          "developer"
+        ],
+        "split_to_towers": [
+          "developer"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "densify": 1.0,
+        "open_ground": 0.55,
+        "split_to_towers": 1.0,
+        "courtyard_access_improvement": 0.25
+      }
+    },
+    "after": {
+      "allowed_operators": [
+        "densify",
+        "open_ground",
+        "split_to_towers",
+        "courtyard_access_improvement"
+      ],
+      "stakeholder_targets": {
+        "densify": [
+          "developer"
+        ],
+        "open_ground": [
+          "developer"
+        ],
+        "split_to_towers": [
+          "developer"
+        ],
+        "courtyard_access_improvement": [
+          "resident"
+        ]
+      },
+      "maximum_intensity": {
+        "densify": 1.0,
+        "open_ground": 0.55,
+        "split_to_towers": 1.0,
+        "courtyard_access_improvement": 0.25
+      }
+    }
+  },
+  "runtime_seconds": 852.1654528330037,
+  "effective": 785,
+  "pareto": 11,
+  "feasible_ratio": 0.9312977099236641,
+  "max_net": 0.009880097858366528,
+  "max_release": 0.0023591587315333943,
+  "min_disruption": 0.0,
+  "max_net_effective": 0.009880097858366528,
+  "max_release_effective": 0.0029553990481963146,
+  "hypervolume": 0.13076649362583648,
+  "raw_calls": 1000,
+  "cache_hits": 204,
+  "candidate_operation_share": {
+    "courtyard_access_improvement": 0.8740458015267175,
+    "densify": 0.6615776081424937,
+    "open_ground": 0.9529262086513995,
+    "split_to_towers": 0.3384223918575064
+  },
+  "pareto_operation_share": {
+    "courtyard_access_improvement": 0.5454545454545454,
+    "densify": 0.7272727272727273,
+    "open_ground": 0.8181818181818182,
+    "split_to_towers": 0.18181818181818182
+  }
+}

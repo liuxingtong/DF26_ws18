@@ -1,0 +1,37 @@
+{
+  "freeze_date": "2026-09-27",
+  "intended_use": "canonical paper-experiment model input",
+  "statutory_or_cadastral": false,
+  "counts": {
+    "buildings": 1370,
+    "intervention_zones": 38,
+    "planning_control_rows": 38,
+    "heritage_building_footprints": 21,
+    "heritage_official_records_represented": 12,
+    "heritage_official_records_unresolved_and_excluded": 4,
+    "buildings_matched_to_zones": 1338,
+    "buildings_unmatched_and_frozen": 32
+  },
+  "checks": {
+    "zone_id_unique": true,
+    "zone_geometry_valid": true,
+    "zone_pairwise_overlap_area_m2": 0.0,
+    "controls_one_to_one_with_zones": true,
+    "control_ids_unique": true,
+    "control_numeric_values_present": true,
+    "heritage_bid_unique": true,
+    "heritage_bids_exist_in_buildings": true,
+    "unresolved_records_excluded": true
+  },
+  "limitations": [
+    "Intervention zones are reproducible OSM-derived road enclosures, not manually surveyed parcels.",
+    "All 38 planning-control rows remain research assumptions and are not statutory control-plan values.",
+    "Heritage geometry is a frozen building-level research match for 12 official records, not a legal protection boundary.",
+    "Four unresolved heritage records remain in review_cases.json and are excluded from optimization."
+  ],
+  "sha256": {
+    "intervention_zones.geojson": "44309c41765dd5b259b06034e034c5362672a0098550dc543cac0ec14e8bdf95",
+    "planning_controls.csv": "27143e3975bc625de2971cca3d9460f06f14f02cde9320b972c80bd5fff96b73",
+    "heritage_buildings.geojson": "f2a0114f12098fbb51d22322a6f668c1379898992854ef051799886ca60f068e"
+  }
+}

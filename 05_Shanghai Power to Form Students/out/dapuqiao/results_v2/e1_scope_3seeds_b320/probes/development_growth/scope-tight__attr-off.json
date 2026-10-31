@@ -1,0 +1,80 @@
+{
+  "scenario": "development_growth",
+  "arm": null,
+  "budget": 800,
+  "calls": 553,
+  "budget_exhausted": false,
+  "capacity": 0.06336826992873036,
+  "release": 0.0,
+  "disruption": 0.23147974219808265,
+  "feasible": true,
+  "far": 2.8845617730946644,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 99736.83070493303,
+  "gross_added_m2": 99736.83070493379,
+  "changed_zones": 5,
+  "operator_counts": {
+    "densify": 5
+  },
+  "decision_signature": "Z11:densify:1.0000;Z14:densify:1.0000;Z25:densify:1.0000;Z31:densify:1.0000;Z32:densify:1.0000",
+  "scope": "tight",
+  "attribution": "off",
+  "diff": {
+    "arm": {
+      "before": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "split_to_towers",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "densify": [
+            "developer"
+          ],
+          "open_ground": [
+            "developer"
+          ],
+          "split_to_towers": [
+            "developer"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "densify": 1.0,
+          "open_ground": 0.55,
+          "split_to_towers": 1.0,
+          "courtyard_access_improvement": 0.25
+        }
+      },
+      "after": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "split_to_towers",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {},
+        "maximum_intensity": {
+          "densify": 1.0,
+          "open_ground": 0.55,
+          "split_to_towers": 1.0,
+          "courtyard_access_improvement": 0.25
+        }
+      }
+    },
+    "scope": {
+      "before": {
+        "maximum_changed_zone_ratio": 0.45,
+        "maximum_changed_building_ratio": 0.3
+      },
+      "after": {
+        "maximum_changed_zone_ratio": 0.22,
+        "maximum_changed_building_ratio": 0.14
+      }
+    }
+  },
+  "runtime_seconds": 468.30803620800725
+}

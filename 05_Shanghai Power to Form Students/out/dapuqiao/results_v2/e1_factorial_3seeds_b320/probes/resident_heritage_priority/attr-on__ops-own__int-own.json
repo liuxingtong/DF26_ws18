@@ -1,0 +1,20 @@
+{
+  "scenario": "resident_heritage_priority",
+  "arm": "attr-on__ops-own__int-own",
+  "budget": 320,
+  "calls": 16,
+  "budget_exhausted": false,
+  "capacity": 0.0,
+  "release": 0.0,
+  "disruption": 0.0,
+  "feasible": true,
+  "far": 2.8211935031659343,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 0.0,
+  "gross_added_m2": 0.0,
+  "changed_zones": 0,
+  "operator_counts": {},
+  "decision_signature": "",
+  "control_envelope": "shared",
+  "runtime_seconds": 14.295190792006906
+}

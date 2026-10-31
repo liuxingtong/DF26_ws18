@@ -1,0 +1,92 @@
+[
+  {
+    "scenario": "development_growth",
+    "seed": 11,
+    "raw_calls": 320,
+    "effective": 277,
+    "pareto": 37,
+    "max_net": 0.00779627287690283,
+    "max_release": 0.004782750626630963,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "development_growth",
+    "seed": 23,
+    "raw_calls": 320,
+    "effective": 270,
+    "pareto": 27,
+    "max_net": 0.003604729774510735,
+    "max_release": 0.004267512328889147,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "development_growth",
+    "seed": 37,
+    "raw_calls": 320,
+    "effective": 274,
+    "pareto": 27,
+    "max_net": 0.003604729774510735,
+    "max_release": 0.003810416337678916,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "public_coordination",
+    "seed": 11,
+    "raw_calls": 320,
+    "effective": 262,
+    "pareto": 15,
+    "max_net": 0.005331639435926024,
+    "max_release": 0.0029077978521112008,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "public_coordination",
+    "seed": 23,
+    "raw_calls": 320,
+    "effective": 237,
+    "pareto": 24,
+    "max_net": 0.003604729774510735,
+    "max_release": 0.003330875499290312,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "public_coordination",
+    "seed": 37,
+    "raw_calls": 320,
+    "effective": 265,
+    "pareto": 18,
+    "max_net": 0.0034432334694585775,
+    "max_release": 0.0032599836494050915,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "resident_heritage_priority",
+    "seed": 11,
+    "raw_calls": 320,
+    "effective": 251,
+    "pareto": 23,
+    "max_net": 0.005819294793280119,
+    "max_release": 0.0031126634731594976,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "resident_heritage_priority",
+    "seed": 23,
+    "raw_calls": 320,
+    "effective": 262,
+    "pareto": 29,
+    "max_net": 0.01906352159107566,
+    "max_release": 0.0030565630570339496,
+    "min_disruption": 0.0
+  },
+  {
+    "scenario": "resident_heritage_priority",
+    "seed": 37,
+    "raw_calls": 320,
+    "effective": 246,
+    "pareto": 19,
+    "max_net": 0.02693008530136047,
+    "max_release": 0.001779380585927494,
+    "min_disruption": 0.0
+  }
+]

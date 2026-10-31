@@ -17,6 +17,11 @@ from pathlib import Path
 WS05 = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WS05))
 
+from engine.optimization.amplitude import (  # noqa: E402
+    apply_operator_arm,
+    arm_metadata,
+    resolve_arm,
+)
 from engine.optimization.data import CONFIG_ROOT, load_study, load_yaml  # noqa: E402
 from engine.optimization.nsga2 import run_nsga2  # noqa: E402
 from engine.optimization.metrics import quality_summary  # noqa: E402
@@ -50,8 +55,22 @@ def main() -> int:
         "--research-demo", action="store_true",
         help="仅在规范输入缺失时使用草稿研究假设",
     )
+    parser.add_argument(
+        "--amplitude-arm", default=None,
+        help="体量幅度实验臂（v1 / expanded）；缺省取 amplitude_arms.yaml 的默认值",
+    )
+    parser.add_argument(
+        "--control-envelope", choices=("shared", "frozen_per_zone"), default="shared",
+        help=(
+            "shared = 三情景统一 36 m / FAR 3.0 / 覆盖率 0.60 / 住宅保留 0.80（与论文一致）；"
+            "frozen_per_zone = 逐单元冻结值 max(36, 现状)"
+        ),
+    )
     args = parser.parse_args()
-    operator_specs = load_yaml(CONFIG_ROOT / "operator_specs.yaml").get("operators", {})
+    arm_id, arm = resolve_arm(args.amplitude_arm)
+    operator_specs = apply_operator_arm(
+        load_yaml(CONFIG_ROOT / "operator_specs.yaml").get("operators", {}), arm
+    )
     role_config = load_yaml(CONFIG_ROOT / "role_profiles.yaml")
 
     seeds = [int(value.strip()) for value in args.seeds.split(",") if value.strip()]
@@ -63,7 +82,11 @@ def main() -> int:
     summary_rows = []
     for scenario_id in SCENARIOS:
         for seed in seeds:
-            study = load_study(scenario_id, research_demo=args.research_demo)
+            study = load_study(
+                scenario_id,
+                research_demo=args.research_demo,
+                shared_experiment_controls=args.control_envelope == "shared",
+            )
             if study.blockers:
                 raise RuntimeError(
                     f"{scenario_id} 规范研究输入仍有阻塞项：{study.blockers}"
@@ -94,6 +117,10 @@ def main() -> int:
                 output_dir=suite_root / scenario_id / f"seed_{seed}",
                 role_priority_sensitivity_rows=sensitivity_rows,
                 optimization_runtime_seconds=optimization_runtime_seconds,
+                extra_run_config={
+                    "amplitude_arm": arm_metadata(arm_id, arm),
+                    "control_envelope": args.control_envelope,
+                },
             )
             summary_rows.append({
                 "scenario": scenario_id,
@@ -139,6 +166,8 @@ def main() -> int:
             "generations": args.generations,
             "shared_objective_measurement": True,
             "shared_role_epsilon": True,
+            "amplitude_arm": arm_metadata(arm_id, arm),
+            "control_envelope": args.control_envelope,
             "role_preference_model": "epsilon_tiered_lexicographic",
             "objective_measurement": study.objective_config.get("measurement", {}),
             "epsilon": study.objective_config.get("epsilon", {}),

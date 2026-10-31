@@ -1,0 +1,424 @@
+{
+  "created_at": "2026-10-29T17:31:18",
+  "study": "dapuqiao",
+  "methods": [
+    "conventional_parameter_baseline",
+    "public_coordination",
+    "development_growth",
+    "resident_heritage_priority"
+  ],
+  "comparison_groups": [
+    "existing_conditions",
+    "conventional_parameter_baseline",
+    "public_coordination",
+    "development_growth",
+    "resident_heritage_priority"
+  ],
+  "comparison_groups_note": "现状组（existing_conditions）三目标按定义全为 0，只作参照零点，不参与超体积比较；见 existing_conditions.csv 与 pareto_fronts.png 的原点标记",
+  "amplitude_arm": {
+    "amplitude_arm": "v1",
+    "label": "v1 原始幅度（与 2026-10-04 正式对照一致）",
+    "source": "复现 formal_three_scenario_20261004",
+    "operator_parameters": {
+      "densify": {
+        "maximum_height_gain_ratio": 0.3
+      },
+      "open_ground": {
+        "minimum_footprint_ratio": 0.75
+      },
+      "split_to_towers": {
+        "maximum_gap_ratio": 0.08
+      },
+      "heritage_step_down": {
+        "maximum_height_redistribution_ratio": 0.3
+      }
+    },
+    "parameter_baseline_parameters": {
+      "height_multiplier": {
+        "min": 1.0,
+        "max": 1.3
+      },
+      "footprint_ratio": {
+        "min": 0.75,
+        "max": 1.0
+      }
+    }
+  },
+  "control_envelope": "shared",
+  "objective_definitions": {
+    "residential_disruption": "居住 GFA 中被直接修改、或与增高/拆分/退台建筑处于同一更新单元的比例",
+    "development_capacity": "净建筑面积变化 = (Σ GFA_方案 − Σ GFA_现状) / 研究区面积；增建与拆减分别另列 gross_added_m2、gross_removed_m2",
+    "street_connected_released_ground": "临街释放地面 = 方案占地相对现状的净减少中与 5 m 道路缓冲相交的面积 / 研究区内缓冲总面积"
+  },
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "population": 8,
+  "requested_generations": 5,
+  "effective_independent_evaluation_budget": 40,
+  "parallel_execution": {
+    "unit": "random_seed",
+    "requested_jobs": 3,
+    "used_processes": 3,
+    "methods_within_seed": "sequential",
+    "aggregation_order": "seed_then_method"
+  },
+  "common_input_data": true,
+  "common_objectives": [
+    "residential_disruption",
+    "development_capacity",
+    "street_connected_released_ground"
+  ],
+  "common_hard_constraints": {
+    "height_limit_m": 36.0,
+    "max_far": 3.0,
+    "max_coverage_ratio": 0.6,
+    "minimum_residential_retention": 0.8
+  },
+  "common_hard_constraint_checks": [
+    "geometry_validity",
+    "study_boundary",
+    "heritage_unchanged",
+    "height_limit",
+    "zone_far",
+    "zone_coverage",
+    "residential_retention",
+    "new_overlap"
+  ],
+  "common_objective_measurement": {
+    "street_access_buffer_m": 5.0,
+    "street_buffer_area_m2": 246966.54259954803,
+    "floor_height_m": 3.5
+  },
+  "objective_interpretation": {
+    "id": "street_connected_released_ground",
+    "interpretation": "street-connected released-ground potential",
+    "required_layers": [
+      "buildings.parquet",
+      "street_network.geojson",
+      "study_boundary.geojson"
+    ],
+    "excluded_context_layers": [
+      "public_space_candidates.geojson",
+      "public_space_verification.json",
+      "alley_entrances.geojson",
+      "alley_entrance_verification.json"
+    ],
+    "street_access_buffer_m": 5.0,
+    "public_space_candidates_used": false,
+    "not_interpreted_as": [
+      "public-space area",
+      "public-space ownership",
+      "public-space accessibility",
+      "historical park area",
+      "OSM research polygon",
+      "alley entrance point"
+    ]
+  },
+  "documented_exclusions": {
+    "heritage_records_unresolved_and_excluded": 4,
+    "buildings_unmatched_to_zones_and_frozen": 32,
+    "public_space_context": {
+      "candidate_count": 2,
+      "verified_public_park_context": 1,
+      "unverified_excluded": 1,
+      "included_in_objective": 0
+    },
+    "alley_entrance_context": {
+      "candidate_count": 2,
+      "verified_research_entrance": 1,
+      "unverified_frozen": 1,
+      "included_in_optimization": 0,
+      "included_in_objective": 0,
+      "exhaustive_inventory": false
+    },
+    "online_gap_freeze": {
+      "items_reviewed": 5,
+      "partially_enriched_then_frozen": 2,
+      "frozen_without_model_use": 3,
+      "new_proxy_variables_added": 0
+    }
+  },
+  "parameter_baseline": {
+    "id": "conventional_parameter_baseline",
+    "label": "传统参数驱动形态生成",
+    "description": "不读取利益相关者类别或情景许可规则；只在更新单元内控制统一高度倍率与足迹保留率， 并接受与四个主方法情景完全相同的基础数据、目标函数和共同硬约束。",
+    "source_status": "research_assumption",
+    "parameters": {
+      "height_multiplier": {
+        "min": 1.0,
+        "max": 1.3,
+        "source": "与既有 densify.maximum_height_gain_ratio=0.30 一致"
+      },
+      "footprint_ratio": {
+        "min": 0.75,
+        "max": 1.0,
+        "source": "与既有 open_ground.minimum_footprint_ratio=0.75 一致"
+      }
+    },
+    "implementation": {
+      "maximum_changed_zone_ratio": 0.4,
+      "maximum_changed_building_ratio": 0.3,
+      "source": "复用旧版共同任务 dapuqiao_tourism_livability 的改动范围"
+    }
+  },
+  "normalization": {
+    "basis": "pooled min-max over every feasible evaluated candidate from all four methods and all seeds",
+    "minimization_ideal": [
+      0.0,
+      -0.07159284046064356,
+      -0.011670511860667239
+    ],
+    "minimization_nadir": [
+      0.5448937669409037,
+      0.2845774288486831,
+      -0.0
+    ],
+    "convergence_basis": "pooled_all_feasible_candidates; front vectors retained per generation",
+    "hypervolume_reference": [
+      1.1,
+      1.1,
+      1.1
+    ]
+  },
+  "coverage_definition": "C(A,B) is the fraction of B's Pareto front dominated by A.",
+  "statistical_analysis": {
+    "paired_unit": "random seed",
+    "test": "two-sided paired Wilcoxon signed-rank",
+    "effect_size": "matched-pairs rank-biserial correlation; positive favors scenario",
+    "multiplicity": "Holm correction across three scenario-vs-baseline tests per metric",
+    "primary_metric": "hypervolume",
+    "caution": "3 paired seeds; report raw seed values and effect sizes."
+  },
+  "random_search_role": "algorithm appendix only; run compare_dapuqiao_search.py",
+  "input_mode": "canonical_research_inputs",
+  "research_demo": false,
+  "statutory_planning_result": false,
+  "geometries_exported": false,
+  "reproducibility": {
+    "input_files": {
+      "SOURCE_ARCHIVE.json": {
+        "sha256": "a823ec2063f7fdbf8064477c1019cda540fca0e5ca9e53186834cb547a0489e8",
+        "bytes": 7497
+      },
+      "buildings.parquet": {
+        "sha256": "5b9ec15c6a80b264a68992c28f7dbeb6d90b0534d5da7ecba3f71781e2a49032",
+        "bytes": 212404
+      },
+      "study_boundary.geojson": {
+        "sha256": "cc86182c448c01c6a9aa1e81d6222a0a40252ffa07bda780e7357d257ef344ab",
+        "bytes": 1681
+      },
+      "street_network.geojson": {
+        "sha256": "90b105f0beab8b35496a11c42803ff0b24be8cc5a3f7401163a343a6bc8bcf59",
+        "bytes": 136892
+      },
+      "public_services.geojson": {
+        "sha256": "bab01bbdf435661e55cb4d182592bd52b8dc7c07ddf83fcccee14b73b2d0fa80",
+        "bytes": 43100
+      },
+      "public_space_candidates.geojson": {
+        "sha256": "7ad4d6836bbd7a0d9fe4feaa05d4dd3fc37ca9461ae801b5edde9d79ff84aba9",
+        "bytes": 3937
+      },
+      "public_space_verification.json": {
+        "sha256": "93dd0e43a67c70f0b12fcb0f545309527c332808062095c3b2ff5ee504858c5e",
+        "bytes": 3581
+      },
+      "alley_entrances.geojson": {
+        "sha256": "7e2f84eafdf519a8a3c52eb1726b30e3960d476a4bf992db9e9147dbed3f11dd",
+        "bytes": 2093
+      },
+      "alley_entrance_verification.json": {
+        "sha256": "2cd98a85892bc4da46f9b09f255ae11a731acc5bacc100ea681f6a1b5699f8ef",
+        "bytes": 2782
+      },
+      "online_gap_freeze.json": {
+        "sha256": "6aff2e12c868d30b883d239439692806326521956bf9ce267d71c5980243f083",
+        "bytes": 3925
+      },
+      "open_data_quality.json": {
+        "sha256": "c2b23fd1b660144cc90b3eb7f40caec5b5bf42b38201dae07cf8d9f34ce1ddb3",
+        "bytes": 2189
+      },
+      "open_data_sources.yaml": {
+        "sha256": "833bf353526ea595a1147a49dbcfe787383d138ad3f44ee478295acf358318c9",
+        "bytes": 3436
+      },
+      "intervention_zones.geojson": {
+        "sha256": "44309c41765dd5b259b06034e034c5362672a0098550dc543cac0ec14e8bdf95",
+        "bytes": 79297
+      },
+      "planning_controls.csv": {
+        "sha256": "27143e3975bc625de2971cca3d9460f06f14f02cde9320b972c80bd5fff96b73",
+        "bytes": 13702
+      },
+      "heritage_buildings.geojson": {
+        "sha256": "f2a0114f12098fbb51d22322a6f668c1379898992854ef051799886ca60f068e",
+        "bytes": 21953
+      },
+      "formal_input_quality.json": {
+        "sha256": "b4d5cb363a266a4363a1ed4fb94a780f9fbe43d56146f6e29245a309c7a4db7b",
+        "bytes": 1606
+      },
+      "site.yaml": {
+        "sha256": "ed053bf61729961836be6fc08944e027fbe8ac005472ebf670c98252a5802cc5",
+        "bytes": 173
+      }
+    },
+    "code_files": {
+      "engine/optimization/__init__.py": {
+        "sha256": "ee100c35680728c0ed0244f1b9e2c4031050c806f3b737a73a8e906ccb2588d8",
+        "bytes": 208
+      },
+      "engine/optimization/amplitude.py": {
+        "sha256": "1ae7734f9d0b91a6c0c9696b0c16ef5a80b788baf7f1607457bb35a1f62e5700",
+        "bytes": 3196
+      },
+      "engine/optimization/constraints.py": {
+        "sha256": "66cd6f795ef21721cea2ab2a0c955e323e37ee8e4016d60b784ec15ab561e413",
+        "bytes": 9924
+      },
+      "engine/optimization/data.py": {
+        "sha256": "4f8a9894de9bfa733dae0912a83790061fe9fff900ef73956e0dc5f181e129b5",
+        "bytes": 24361
+      },
+      "engine/optimization/metrics.py": {
+        "sha256": "352f35e133f123f850f588770180b303a2161dce224244f57b299c39679f4cb7",
+        "bytes": 8536
+      },
+      "engine/optimization/models.py": {
+        "sha256": "5a9089477a67c98ae106a9a5f551138d360ebcfad7aad3af604a534439fcb645",
+        "bytes": 1919
+      },
+      "engine/optimization/nsga2.py": {
+        "sha256": "9b304cfb047d634418c5ae0c14f1776619f9b89ebdf6f3a561f9cad937db2991",
+        "bytes": 14116
+      },
+      "engine/optimization/objectives.py": {
+        "sha256": "97ce451493df152672c8df49e877c6dee7952024b4afcbd26d4591eec345cd63",
+        "bytes": 8692
+      },
+      "engine/optimization/operators.py": {
+        "sha256": "bef29512221c3e147775ff31bf45ad811782264ca3920e9de884cc0dd31375c7",
+        "bytes": 23375
+      },
+      "engine/optimization/parameter_baseline.py": {
+        "sha256": "80a33206b0f05562caddfe0a2602b12390cecaf580e564d4effe3a4d3697bb5e",
+        "bytes": 18211
+      },
+      "engine/optimization/pareto.py": {
+        "sha256": "3e69162d87971f4d65d76cc36248ec363a9b961b961ddf783630cbf74c02a18b",
+        "bytes": 7234
+      },
+      "engine/optimization/roles.py": {
+        "sha256": "561b1e6f986b664314f9955a9545735c182ca27fb0dd1591a0668ceb5d0c065b",
+        "bytes": 7993
+      },
+      "engine/optimization/search.py": {
+        "sha256": "346e07142ec08896461b8093425a4da03e1d68911169b15a1a30e216b8a779fe",
+        "bytes": 6209
+      },
+      "scripts/audit_dapuqiao_source_archive.py": {
+        "sha256": "19d06756dea9fde353a021b2ed6bd4e794dec33f5e4a4cebadf7b4a56aa1a254",
+        "bytes": 2719
+      },
+      "scripts/build_dapuqiao_draft_zones.py": {
+        "sha256": "e47df2bc71de9d70f1191e0645c64d66878b77d5a8f2aedd821b0e2149a5e390",
+        "bytes": 9683
+      },
+      "scripts/build_dapuqiao_open_data.py": {
+        "sha256": "b381598f8d342b8f366860ab0ed4705a105895b1f7f755b8edde92985151b1fa",
+        "bytes": 20147
+      },
+      "scripts/calibrate_dapuqiao_operators.py": {
+        "sha256": "f5515516b9efc8c98000b780202bb7c3af0eca4e2becfc59aa397e5aeff7dfda",
+        "bytes": 6550
+      },
+      "scripts/compare_dapuqiao_methods.py": {
+        "sha256": "1f15fdd75f4239ef1ea7952fc17df38edc7c017e2cca4c1b8c073f22aa9641b9",
+        "bytes": 38049
+      },
+      "scripts/compare_dapuqiao_search.py": {
+        "sha256": "16c7930079a8ef94fee49c3d1383db0b9cb7da94df80dd3fca7780a6b9493125",
+        "bytes": 7972
+      },
+      "scripts/materialize_dapuqiao_heritage_freeze.py": {
+        "sha256": "c3346e0180619be1bb79c171f41ba198e38a62cc622b1b9a50c5a7894045fcdf",
+        "bytes": 4926
+      },
+      "scripts/preflight_dapuqiao_formal_experiment.py": {
+        "sha256": "b7f0015d21ecfee163b78e23bdcde474aabfc3e84dabe203ac6f1aa7608526a8",
+        "bytes": 10518
+      },
+      "scripts/promote_dapuqiao_formal_inputs.py": {
+        "sha256": "633de398929cd9248b337774024a0548c3011c11fbb86ecb16e5dbd55006a411",
+        "bytes": 9711
+      },
+      "scripts/run_dapuqiao_optimization.py": {
+        "sha256": "b78190519d7e29d9e02acdeba002c51095fa3df6cd46582e606cc91b1868bb15",
+        "bytes": 19295
+      },
+      "scripts/run_dapuqiao_scenario_suite.py": {
+        "sha256": "e5d7e02f918dbc58a620f271835f8b736e17b713989c6d632133315374dc59b6",
+        "bytes": 7857
+      },
+      "optimization/amplitude_arms.yaml": {
+        "sha256": "d0ebb3f1ddb1ca88567cba9777c7bb9e29ff3c109aa0878b0a36b3ad2f360c57",
+        "bytes": 2049
+      },
+      "optimization/constraints.yaml": {
+        "sha256": "a835f003819fd5fdc76f68f2232c9eb9b798a16d8ee8180635f386200abc84e4",
+        "bytes": 1418
+      },
+      "optimization/objectives.yaml": {
+        "sha256": "45cd30e062d244eb2a24464bf34c4719c8974b53ea90d7f5f52257615b5903d2",
+        "bytes": 3015
+      },
+      "optimization/operator_specs.yaml": {
+        "sha256": "f8ec2eeb760302651f83d21196db8fd6a5c6131c1ed12bacca5e0f04249f1b79",
+        "bytes": 3237
+      },
+      "optimization/parameter_baseline.yaml": {
+        "sha256": "7143c41655cf0424bbbb339f48cb3c48cb720c20a376c6c3a8acd7b31d9600cb",
+        "bytes": 808
+      },
+      "optimization/research_assumptions.yaml": {
+        "sha256": "9e1a5e55f4d04c46862eb295ca7f756f3b6e8966634473f9c6d6dbba571626d2",
+        "bytes": 3771
+      },
+      "optimization/role_profiles.yaml": {
+        "sha256": "e6d2f245b24838db6419b5479989e5504508971d5f5b545a10fe4e9936914d92",
+        "bytes": 1031
+      },
+      "optimization/scenarios.yaml": {
+        "sha256": "e8ecb03a837ec8d4f03c951eead11852b1bc3a1d648dc74b6df61168c7f6e7ba",
+        "bytes": 8172
+      },
+      "engine/requirements.txt": {
+        "sha256": "a85b506af793b2fc62217320a80771090ab2efc3d3538e2f65b1e688488ffaff",
+        "bytes": 967
+      }
+    },
+    "git": {
+      "commit": "bd5dd8a5412e81d9ce8c5bcfc95311058f012ba7",
+      "branch": "master",
+      "working_tree_dirty": true
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "platform": "macOS-14.5-arm64-arm-64bit",
+      "packages": {
+        "geopandas": "1.2.0",
+        "pandas": "3.0.6",
+        "shapely": "2.1.2",
+        "numpy": "2.5.3",
+        "pymoo": "0.6.2",
+        "pyarrow": "25.0.1",
+        "PyYAML": "6.0.3"
+      }
+    }
+  }
+}

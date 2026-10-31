@@ -1,0 +1,23 @@
+﻿solution_id,code,message,severity,action,zone_id,bid,value,limit
+P_00021,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.247925756547297,4.247900978896161
+P_00026,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z22,,3.715162025626495,3.7150884980385523
+P_00043,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z28,,3.0000574591921287,3.0
+P_00058,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z13,,3.000019315524612,3.0
+P_00058,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z37,,3.0000204404827073,3.0
+P_00060,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z28,,3.0000386666440706,3.0
+P_00060,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z37,,3.000018580857603,3.0
+P_00068,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z22,,3.7151393562231383,3.7150884980385523
+P_00081,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z09,,4.0494122163342325,4.0493616477209935
+P_00081,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z22,,3.715152523675303,3.7150884980385523
+P_00082,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z09,,4.049416598655708,4.0493616477209935
+P_00082,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z27,,4.047849650766394,4.0477269030250635
+P_00100,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z33,,4.598537351430285,4.5985120712793215
+P_00130,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z24,,4.5820298781152635,4.581821665345465
+P_00149,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z34,,5.105601533654521,5.105579708571944
+P_00181,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z13,,3.0000065729309076,3.0
+P_00189,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z35,,3.974920299291683,3.974864308767014
+P_00205,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z32,,3.0000073399724774,3.0
+P_00251,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z26,,3.616593287126618,3.6164707805917375
+P_00277,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z35,,3.974878956243632,3.974864308767014
+P_00280,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z26,,3.616537992077943,3.6164707805917375
+P_00295,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z06,,3.6864339776929818,3.6863575104093673

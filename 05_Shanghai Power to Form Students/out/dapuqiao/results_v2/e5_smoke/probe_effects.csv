@@ -1,0 +1,4 @@
+﻿scenario,factor,value,capacity_pct,disruption_pct,changed_zones,calls,budget_exhausted,delta_vs_baseline_pp
+public_coordination,max_far,2.5,1.7441880894459785,11.129715953751681,11,100,True,-2.3712341687270615
+public_coordination,max_far,3.0,4.11542225817304,24.906631911381837,7,100,True,0.0
+public_coordination,max_far,3.5,4.140450623298761,24.906631911381837,7,100,True,0.025028365125720486

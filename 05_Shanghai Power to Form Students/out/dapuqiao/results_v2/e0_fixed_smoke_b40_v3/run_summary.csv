@@ -1,0 +1,5 @@
+﻿seed,method_id,effective_evaluation_budget,requested_evaluation_budget,raw_evaluation_calls,candidate_count_including_current,feasible_count,feasible_ratio,pareto_count,minimum_residential_disruption,maximum_development_capacity,maximum_released_ground,runtime_seconds,violation_counts,generations_executed,raw_unique_evaluations,cache_hits,hypervolume,spacing
+11,conventional_parameter_baseline,40,40,40,41,38,0.926829268292683,15,0.0,0.07159284046064356,0.009230843256924514,35.418738958003814,"{""zone_far"": 3}",5,40,0,0.6220450170390174,0.1761736948114562
+11,public_coordination,28,40,40,29,25,0.8620689655172413,8,0.0,0.003229994666925278,0.001209288489669534,22.831338457996026,"{""change_scope"": 4}",5,31,9,0.22387840565775455,0.01820348584465577
+11,development_growth,30,40,40,31,26,0.8387096774193549,11,0.0,0.0033592787535471234,0.002597078468103594,25.940190334004,"{""change_scope"": 5}",5,31,9,0.33335824719115104,0.1459059581931016
+11,resident_heritage_priority,18,40,40,19,14,0.7368421052631579,3,0.0,-0.00045925149674659913,0.0014674006927724041,15.614350333999027,"{""change_scope"": 5}",5,21,19,0.24693043100955145,0.03685461425424148

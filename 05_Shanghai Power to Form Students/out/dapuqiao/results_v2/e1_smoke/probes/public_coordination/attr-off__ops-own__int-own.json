@@ -1,0 +1,22 @@
+{
+  "scenario": "public_coordination",
+  "arm": "attr-off__ops-own__int-own",
+  "budget": 60,
+  "calls": 60,
+  "budget_exhausted": true,
+  "capacity": 0.03738898334200121,
+  "release": 0.0,
+  "disruption": 0.2292291350522378,
+  "feasible": true,
+  "far": 2.8585824865079354,
+  "coverage": 0.281948132705382,
+  "net_gfa_change_m2": 58847.41221442167,
+  "gross_added_m2": 58847.41221442161,
+  "changed_zones": 4,
+  "operator_counts": {
+    "densify": 4
+  },
+  "decision_signature": "Z25:densify:0.4500;Z31:densify:0.4500;Z32:densify:0.4500;Z37:densify:0.4500",
+  "control_envelope": "shared",
+  "runtime_seconds": 38.19000433399924
+}

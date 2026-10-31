@@ -1,0 +1,13 @@
+﻿seed,method_id,requested_effective_budget,reported_effective_budget,candidate_count_including_current,expected_candidate_count_including_current,effective_budget_match,candidate_count_match
+11,conventional_parameter_baseline,40,40,41,41,True,True
+11,public_coordination,40,40,41,41,True,True
+11,development_growth,40,40,41,41,True,True
+11,resident_heritage_priority,40,40,41,41,True,True
+23,conventional_parameter_baseline,40,40,41,41,True,True
+23,public_coordination,40,40,41,41,True,True
+23,development_growth,40,40,41,41,True,True
+23,resident_heritage_priority,40,40,41,41,True,True
+37,conventional_parameter_baseline,40,40,41,41,True,True
+37,public_coordination,40,40,41,41,True,True
+37,development_growth,40,40,41,41,True,True
+37,resident_heritage_priority,40,40,41,41,True,True

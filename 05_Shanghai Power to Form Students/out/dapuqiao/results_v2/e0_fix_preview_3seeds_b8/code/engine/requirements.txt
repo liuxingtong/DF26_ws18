@@ -1,0 +1,22 @@
+# 上海 power_to_form 依赖。装法:pip install -r engine/requirements.txt
+# 核心(读缓存、贴角色、只调高度、算子、出图、挤 OBJ —— 主流程离线必需):
+numpy
+pandas
+matplotlib
+pyyaml
+shapely
+geopandas
+pyarrow          # 读 data/<slug>/buildings.parquet 缓存
+
+# 可选(缺了对应功能会友好跳过,不影响主流程):
+contextily       # 卫星底图(需联网 Esri;阶段 B 的卫星底 / 06 canvas.html 地面)
+pyproj           # 卫星重投影
+pillow           # 卫星底图存 JPEG
+plotly           # 阶段 C 的浏览器可拖动 3D（matplotlib 3D 不需要它)
+
+# 单轮多目标优化框架（当前先用可复现随机基线验证全管线；NSGA-II 接入时使用）:
+pymoo
+scipy             # 配对 Wilcoxon 检验与秩双列效应量
+
+# 注:换街道 / 自己建缓存(build_cache)需 geopandas 能读原始 shapefile(已含)。
+# 不需要 osmnx（那是 04_OSM 版用的;上海版用本地多源数据）。

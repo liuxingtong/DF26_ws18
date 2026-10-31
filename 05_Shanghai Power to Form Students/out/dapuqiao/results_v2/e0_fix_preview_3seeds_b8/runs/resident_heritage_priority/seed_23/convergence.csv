@@ -1,0 +1,5 @@
+﻿generation,evaluation_calls,effective_independent_evaluations,front_minimization_vectors,pareto_count,hypervolume,spacing,normalization_basis
+1,4,1,"[[0.0, -0.0, -0.0], [0.0, 0.01813710669070054, -0.0003881874925555049]]",2,0.13988961741064657,0.0,pooled_all_feasible_candidates
+2,8,4,"[[0.0, -0.0, -3.815413165896458e-06]]",1,0.10322330432396656,0.0,pooled_all_feasible_candidates
+3,12,7,"[[0.0, -0.0, -3.815413165896458e-06]]",1,0.10322330432396656,0.0,pooled_all_feasible_candidates
+4,16,8,"[[0.0, -0.0, -3.815413165896458e-06]]",1,0.10322330432396656,0.0,pooled_all_feasible_candidates

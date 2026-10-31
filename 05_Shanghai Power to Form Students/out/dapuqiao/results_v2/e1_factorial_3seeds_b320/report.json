@@ -1,0 +1,635 @@
+{
+  "effects": [
+    {
+      "scenario": "development_growth",
+      "metric": "max_net_front",
+      "term": "attribution",
+      "effect": -0.015649496909165055
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_net_front",
+      "term": "operator_set",
+      "effect": -0.005355070571441911
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_net_front",
+      "term": "intensity",
+      "effect": -0.0009594964978365345
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_net_front",
+      "term": "attribution x operator_set",
+      "effect": 0.004942406500421239
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_net_front",
+      "term": "attribution x intensity",
+      "effect": -0.0014494684257187979
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_net_front",
+      "term": "operator_set x intensity",
+      "effect": 0.0016542099020051503
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_net_front",
+      "term": "attribution x operator_set x intensity",
+      "effect": -0.0015110691546485365
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_release_front",
+      "term": "attribution",
+      "effect": -0.0026719030182516734
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_release_front",
+      "term": "operator_set",
+      "effect": 0.0017533848113630993
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_release_front",
+      "term": "intensity",
+      "effect": 0.0007440686150691424
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_release_front",
+      "term": "attribution x operator_set",
+      "effect": -0.0013871574592801165
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_release_front",
+      "term": "attribution x intensity",
+      "effect": -0.0004970672550643563
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_release_front",
+      "term": "operator_set x intensity",
+      "effect": -0.0001649383142357045
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "max_release_front",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.0001159599843076915
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "hypervolume",
+      "term": "attribution",
+      "effect": -0.0919168049271727
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "hypervolume",
+      "term": "operator_set",
+      "effect": 0.012005886771080367
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "hypervolume",
+      "term": "intensity",
+      "effect": 0.003266893458407002
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "hypervolume",
+      "term": "attribution x operator_set",
+      "effect": -0.002750303946209729
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "hypervolume",
+      "term": "attribution x intensity",
+      "effect": -0.002218710444869388
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "hypervolume",
+      "term": "operator_set x intensity",
+      "effect": -0.003489755522596038
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "hypervolume",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.0044386623068105036
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "pareto",
+      "term": "attribution",
+      "effect": -7.333333333333333
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "pareto",
+      "term": "operator_set",
+      "effect": 4.833333333333333
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "pareto",
+      "term": "intensity",
+      "effect": 3.6666666666666665
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "pareto",
+      "term": "attribution x operator_set",
+      "effect": -1.3333333333333333
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "pareto",
+      "term": "attribution x intensity",
+      "effect": 0.5
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "pareto",
+      "term": "operator_set x intensity",
+      "effect": -3.0
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "pareto",
+      "term": "attribution x operator_set x intensity",
+      "effect": -0.5
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "effective",
+      "term": "attribution",
+      "effect": 5.416666666666667
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "effective",
+      "term": "operator_set",
+      "effect": 18.25
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "effective",
+      "term": "intensity",
+      "effect": 5.916666666666667
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "effective",
+      "term": "attribution x operator_set",
+      "effect": -8.583333333333334
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "effective",
+      "term": "attribution x intensity",
+      "effect": 4.75
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "effective",
+      "term": "operator_set x intensity",
+      "effect": 7.583333333333333
+    },
+    {
+      "scenario": "development_growth",
+      "metric": "effective",
+      "term": "attribution x operator_set x intensity",
+      "effect": -7.25
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_net_front",
+      "term": "attribution",
+      "effect": -0.005933253416265349
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_net_front",
+      "term": "operator_set",
+      "effect": 3.6859622685411806e-05
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_net_front",
+      "term": "intensity",
+      "effect": 0.0003405376945201666
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_net_front",
+      "term": "attribution x operator_set",
+      "effect": -0.0013314022706950946
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_net_front",
+      "term": "attribution x intensity",
+      "effect": -0.00035807864579980465
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_net_front",
+      "term": "operator_set x intensity",
+      "effect": -0.0018161756254118715
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_net_front",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.00202662957574896
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_release_front",
+      "term": "attribution",
+      "effect": -0.0017834256507197077
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_release_front",
+      "term": "operator_set",
+      "effect": 0.0003721571914301391
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_release_front",
+      "term": "intensity",
+      "effect": -0.00024668936773351516
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_release_front",
+      "term": "attribution x operator_set",
+      "effect": -5.711030756210708e-05
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_release_front",
+      "term": "attribution x intensity",
+      "effect": 0.0004607613143536051
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_release_front",
+      "term": "operator_set x intensity",
+      "effect": -5.5241425421639934e-05
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "max_release_front",
+      "term": "attribution x operator_set x intensity",
+      "effect": -0.0005333484912141122
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "hypervolume",
+      "term": "attribution",
+      "effect": -0.059468251922462655
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "hypervolume",
+      "term": "operator_set",
+      "effect": -0.001206782012535319
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "hypervolume",
+      "term": "intensity",
+      "effect": -0.009853567530919982
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "hypervolume",
+      "term": "attribution x operator_set",
+      "effect": 0.002505111800831896
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "hypervolume",
+      "term": "attribution x intensity",
+      "effect": 0.01101907197794103
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "hypervolume",
+      "term": "operator_set x intensity",
+      "effect": -0.005254124689378946
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "hypervolume",
+      "term": "attribution x operator_set x intensity",
+      "effect": -0.0012702113880293335
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "pareto",
+      "term": "attribution",
+      "effect": -8.083333333333334
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "pareto",
+      "term": "operator_set",
+      "effect": 2.25
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "pareto",
+      "term": "intensity",
+      "effect": -1.0833333333333333
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "pareto",
+      "term": "attribution x operator_set",
+      "effect": -1.9166666666666667
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "pareto",
+      "term": "attribution x intensity",
+      "effect": 0.75
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "pareto",
+      "term": "operator_set x intensity",
+      "effect": -0.5833333333333334
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "pareto",
+      "term": "attribution x operator_set x intensity",
+      "effect": -1.75
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "effective",
+      "term": "attribution",
+      "effect": 3.75
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "effective",
+      "term": "operator_set",
+      "effect": 12.75
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "effective",
+      "term": "intensity",
+      "effect": 3.9166666666666665
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "effective",
+      "term": "attribution x operator_set",
+      "effect": -7.916666666666667
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "effective",
+      "term": "attribution x intensity",
+      "effect": -0.4166666666666667
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "effective",
+      "term": "operator_set x intensity",
+      "effect": 4.25
+    },
+    {
+      "scenario": "public_coordination",
+      "metric": "effective",
+      "term": "attribution x operator_set x intensity",
+      "effect": -4.416666666666667
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_net_front",
+      "term": "attribution",
+      "effect": 0.0011872759487173204
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_net_front",
+      "term": "operator_set",
+      "effect": 0.007117186705365835
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_net_front",
+      "term": "intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_net_front",
+      "term": "attribution x operator_set",
+      "effect": 0.0013124526722346971
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_net_front",
+      "term": "attribution x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_net_front",
+      "term": "operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_net_front",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_release_front",
+      "term": "attribution",
+      "effect": -0.0023668620380652198
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_release_front",
+      "term": "operator_set",
+      "effect": 0.00022357774344443663
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_release_front",
+      "term": "intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_release_front",
+      "term": "attribution x operator_set",
+      "effect": 0.00039697911042536633
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_release_front",
+      "term": "attribution x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_release_front",
+      "term": "operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "max_release_front",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "hypervolume",
+      "term": "attribution",
+      "effect": -0.07445220084828678
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "hypervolume",
+      "term": "operator_set",
+      "effect": 0.012782218981752386
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "hypervolume",
+      "term": "intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "hypervolume",
+      "term": "attribution x operator_set",
+      "effect": 0.006548556334614051
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "hypervolume",
+      "term": "attribution x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "hypervolume",
+      "term": "operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "hypervolume",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "pareto",
+      "term": "attribution",
+      "effect": -4.833333333333333
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "pareto",
+      "term": "operator_set",
+      "effect": 3.8333333333333335
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "pareto",
+      "term": "intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "pareto",
+      "term": "attribution x operator_set",
+      "effect": 1.8333333333333333
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "pareto",
+      "term": "attribution x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "pareto",
+      "term": "operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "pareto",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "effective",
+      "term": "attribution",
+      "effect": 8.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "effective",
+      "term": "operator_set",
+      "effect": 16.666666666666668
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "effective",
+      "term": "intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "effective",
+      "term": "attribution x operator_set",
+      "effect": 0.3333333333333333
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "effective",
+      "term": "attribution x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "effective",
+      "term": "operator_set x intensity",
+      "effect": 0.0
+    },
+    {
+      "scenario": "resident_heritage_priority",
+      "metric": "effective",
+      "term": "attribution x operator_set x intensity",
+      "effect": 0.0
+    }
+  ],
+  "source": "out/dapuqiao/results_v2/e1_factorial_3seeds_b320"
+}

@@ -1,0 +1,99 @@
+{
+  "scenario": "public_coordination",
+  "scope": "loose",
+  "attribution": "off",
+  "seed": 37,
+  "budget": 320,
+  "population": 16,
+  "generations": 20,
+  "diff": {
+    "arm": {
+      "before": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {
+          "densify": [
+            "developer"
+          ],
+          "open_ground": [
+            "developer"
+          ],
+          "heritage_step_down": [
+            "developer"
+          ],
+          "public_space_reconfiguration": [
+            "state"
+          ],
+          "courtyard_access_improvement": [
+            "resident"
+          ]
+        },
+        "maximum_intensity": {
+          "densify": 0.45,
+          "open_ground": 0.75,
+          "heritage_step_down": 0.7,
+          "public_space_reconfiguration": 0.7,
+          "courtyard_access_improvement": 0.5
+        }
+      },
+      "after": {
+        "allowed_operators": [
+          "densify",
+          "open_ground",
+          "heritage_step_down",
+          "public_space_reconfiguration",
+          "courtyard_access_improvement"
+        ],
+        "stakeholder_targets": {},
+        "maximum_intensity": {
+          "densify": 0.45,
+          "open_ground": 0.75,
+          "heritage_step_down": 0.7,
+          "public_space_reconfiguration": 0.7,
+          "courtyard_access_improvement": 0.5
+        }
+      }
+    },
+    "scope": {
+      "before": {
+        "maximum_changed_zone_ratio": 0.3,
+        "maximum_changed_building_ratio": 0.18
+      },
+      "after": {
+        "maximum_changed_zone_ratio": 0.45,
+        "maximum_changed_building_ratio": 0.3
+      }
+    }
+  },
+  "runtime_seconds": 320.31900079199113,
+  "effective": 222,
+  "pareto": 29,
+  "feasible_ratio": 0.8116591928251121,
+  "max_net": 0.015656035410228617,
+  "max_release": 0.0054831253740554005,
+  "min_disruption": 0.0,
+  "max_net_effective": 0.026670963032413265,
+  "max_release_effective": 0.007735285168575471,
+  "hypervolume": 0.27230377548741613,
+  "raw_calls": 320,
+  "cache_hits": 48,
+  "candidate_operation_share": {
+    "courtyard_access_improvement": 0.4798206278026906,
+    "densify": 0.5291479820627802,
+    "heritage_step_down": 0.48878923766816146,
+    "open_ground": 0.8385650224215246,
+    "public_space_reconfiguration": 0.8340807174887892
+  },
+  "pareto_operation_share": {
+    "courtyard_access_improvement": 0.2413793103448276,
+    "densify": 0.6896551724137931,
+    "heritage_step_down": 0.27586206896551724,
+    "open_ground": 0.8275862068965517,
+    "public_space_reconfiguration": 0.8620689655172413
+  }
+}

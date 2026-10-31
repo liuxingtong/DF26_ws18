@@ -1,0 +1,6 @@
+﻿solution_id,code,message,severity,action,zone_id,bid,value,limit
+N_00005,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.16569343065693432,0.14
+N_00017,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20656934306569344,0.14
+N_00024,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.17883211678832117,0.14
+N_00026,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.14014598540145987,0.14
+N_00041,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.17372262773722627,0.14
