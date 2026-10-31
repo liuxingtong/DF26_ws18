@@ -36,6 +36,11 @@ def main(argv):
     if cmd == "canvas":
         for site in (rest or settings.REPORT_SITES):
             build_canvas.build(site)
+    elif cmd == "serve-canvas":
+        if rest and rest[0] != "dapuqiao":
+            sys.exit("Live recomputation currently supports dapuqiao only")
+        import canvas_server
+        canvas_server.serve()
     elif cmd == "report":
         for site in (rest or settings.REPORT_SITES):
             build_report.build(site)

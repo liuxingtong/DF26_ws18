@@ -4,6 +4,7 @@ import csv
 import math
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw
 
 from make_preview_pareto import font
@@ -15,7 +16,7 @@ HERE = Path(__file__).resolve().parent
 S = 2
 INK = "#111111"
 GRID = "#dbe3e0"
-COLORS = ("#555f63", "#16716b", "#c45d42", "#8a6b3f")
+COLORS = ("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728")
 METHODS = (
     ("conventional_parameter_baseline", "Parameter baseline"),
     ("public_coordination", "Public coordination"),
@@ -61,6 +62,40 @@ def scale_max(values, floor=0.001):
     top = max(max(values, default=0), floor) * 1.1
     magnitude = 10 ** math.floor(math.log10(top))
     return math.ceil(top / magnitude * 2) / 2 * magnitude
+
+
+def range_figure():
+    """Compare the two reported maxima without mixing their different scales."""
+    plt.rcParams.update({
+        "font.family": "DejaVu Sans",
+        "font.size": 12,
+        "axes.unicode_minus": False,
+    })
+    indexed = {row["method_id"]: row for row in rows(SOURCE / "aggregate_summary.csv")}
+    metrics = (
+        ("maximum_development_capacity", "Maximum added GFA", 1),
+        ("maximum_released_ground", "Maximum ground release", 3),
+    )
+    fig, axes = plt.subplots(1, 2, figsize=(12.8, 4.5), dpi=180)
+    names = ("Baseline", "Public", "Growth", "Heritage")
+    for ax, (metric, title, decimals) in zip(axes, metrics):
+        values = [float(indexed[key][f"{metric}_mean"]) * 100 for key, _ in METHODS]
+        errors = [float(indexed[key][f"{metric}_std"]) * 100 for key, _ in METHODS]
+        xs = range(4)
+        ax.bar(xs, values, yerr=errors, color=COLORS, width=.62,
+               capsize=3, error_kw={"elinewidth": 1, "ecolor": "#333333"})
+        ax.set_xticks(list(xs), names)
+        ax.set_ylim(0, max(v + e for v, e in zip(values, errors)) * 1.28)
+        ax.set_ylabel("Share of study area (%)")
+        ax.set_title(title, pad=14)
+        ax.spines[["top", "right"]].set_visible(False)
+        ax.tick_params(axis="both", length=3, color="#555555")
+        for x, value, error in zip(xs, values, errors):
+            ax.text(x, value + error + ax.get_ylim()[1] * .035,
+                    f"{value:.{decimals}f}", ha="center", va="bottom", fontsize=10)
+    fig.tight_layout(w_pad=3)
+    fig.savefig(HERE / "formal_objective_ranges.png", bbox_inches="tight", pad_inches=.12)
+    plt.close(fig)
 
 
 def front_figure():
@@ -156,7 +191,7 @@ def coverage_figure():
             sum(float(row["scenario_over_baseline"]) for row in grouped[key]) / 5,
             sum(float(row["baseline_over_scenario"]) for row in grouped[key]) / 5,
         )
-        for j, (value, name, color) in enumerate(zip(values, ("Scenario", "Baseline"), ("#16716b", "#c45d42"))):
+        for j, (value, name, color) in enumerate(zip(values, ("Scenario", "Baseline"), (COLORS[1], COLORS[0]))):
             cx = x0 + 100 + j * 145
             y = top + ph - value * ph
             draw.rectangle((round((cx - 36) * S), round(y * S), round((cx + 36) * S), round((top + ph) * S)), fill=color)
@@ -169,5 +204,6 @@ if __name__ == "__main__":
     if not (SOURCE / "fairness_audit.csv").exists():
         raise SystemExit("Formal experiment has not completed")
     front_figure()
+    range_figure()
     quality_figure()
     coverage_figure()

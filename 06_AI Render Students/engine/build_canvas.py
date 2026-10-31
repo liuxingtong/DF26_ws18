@@ -233,6 +233,7 @@ def _load_research_bundle(slug, ox, oy):
             "role_keys": role_keys,
             "solution_metrics": run_metrics,
             "run_config": run_config,
+            "interactive_settings": json.loads((run / "interactive_settings.json").read_text(encoding="utf-8")) if (run / "interactive_settings.json").exists() else None,
             **_run_provenance(run_config),
             "missing_role_geometries": [
                 role for role in (*roles.get("roles", {}), "balanced_compromise")
@@ -445,6 +446,10 @@ summary::-webkit-details-marker{display:none;}summary::after{content:'⌄';font-
 .settings-row input[type=range]{width:100%;margin:0;accent-color:var(--accent);}
 .settings-row input[type=number]{width:62px;padding:4px;border:1px solid var(--line);border-radius:5px;font:inherit;font-size:12px;text-align:right;}
 .settings-note{font-size:10.5px;color:var(--muted);line-height:1.4;margin:8px 0;}
+.operator-table{width:100%;border-collapse:collapse;font-size:11px;line-height:1.45}.operator-table th,.operator-table td{padding:6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.operator-table th{color:var(--muted)}
+.scenario-ranges{grid-column:1/-1;font-size:10px;line-height:1.5;color:var(--muted)}
+.scenario-ranges span{display:inline-block;margin-right:8px}.scenario-ranges i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px}
+#recomputeStatus{min-height:18px;white-space:pre-wrap}
 @media(max-width:700px){.panel{width:calc(100vw - 20px);left:10px;top:10px;max-height:56vh}.hint{display:none}.cards{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 """
 
@@ -576,7 +581,7 @@ const SCENARIOS={
   resident_heritage_priority:{label:"Residents and heritage",description:"Housing and heritage receive stronger protection; small access and ground-release actions remain possible."}
 };
 const ROLES={resident:"Residents",development:"Development",public_planning:"Public planning"};
-const OBJECTIVES={residential_disruption:"Residential exposure",development_capacity:"Added floor area",street_connected_released_ground:"Street-facing ground release"};
+const OBJECTIVES={residential_disruption:"Residential exposure",development_capacity:"Net floor-area change",street_connected_released_ground:"Street-adjacent ground release"};
 const OPERATORS={noop:"Keep existing form",densify:"Add capacity",open_ground:"Release ground",split_to_towers:"Split large mass",heritage_step_down:"Step down near sensitive sites",public_space_reconfiguration:"Reconfigure public space",courtyard_access_improvement:"Improve courtyard access"};
 const OP_TEXT={
   noop:"Keep the existing form as a baseline.",densify:"Allocate additional floor area within height and FAR limits.",
@@ -588,8 +593,8 @@ const OP_TEXT={
 };
 const OBJECTIVE_TEXT={
   residential_disruption:"Existing residential GFA directly changed or exposed within an intervention zone, divided by total residential GFA.",
-  development_capacity:"Sum of positive building-level GFA additions divided by the study area; reductions do not offset additions.",
-  street_connected_released_ground:"Ground released from building footprints within the street buffer, divided by the study area."
+  development_capacity:"Signed net floor-area change: (sum of proposed GFA − sum of existing GFA) divided by the study area; additions and removals cancel, and gross additions and removals are reported separately.",
+  street_connected_released_ground:"Ground released from building footprints inside the 5 m street buffer, divided by the total street-buffer area within the site."
 };
 function scenarioName(key){return (SCENARIOS[key]||{}).label||key;}
 function roleName(key){return ROLES[key]||key;}
@@ -600,9 +605,9 @@ function renderSolutionMetrics(key){const el=document.getElementById("solutionMe
   if(!m){el.innerHTML='<div class="note">Select a Pareto point to inspect its 3D form and measures.</div>';return;}
   el.innerHTML=`<div class="card ok"><h3>${esc(solutionName(key))}</h3><div class="metric-grid">
     <div class="metric"><b>${pct(m.residential_disruption)}</b><span>Residential exposure · lower is better</span></div>
-    <div class="metric"><b>${num(m.development_capacity,4)}</b><span>Added floor area · higher is better</span></div>
+    <div class="metric"><b>${num(m.development_capacity,4)}</b><span>Net floor-area change · higher is better</span></div>
     <div class="metric"><b>${pct(m.street_connected_released_ground,3)}</b><span>Street-facing ground release · higher is better</span></div>
-    <div class="metric"><b>${num(m.net_gfa_change_m2,0)} m²</b><span>Net GFA change</span></div>
+    <div class="metric"><b>+${num(m.gross_added_m2,0)} / −${num(m.gross_removed_m2,0)} m²</b><span>Added / removed GFA</span></div>
     <div class="metric"><b>${esc(m.changed_buildings||0)}</b><span>Buildings changed</span></div></div>
     <p class="meta">Solution ${esc(m.solution_id)} · Feasible: ${esc(m.feasible)} · Violations: ${esc(m.violation_count||0)}</p></div>`;}
 function renderPareto(){const sr=currentScenarioRun(),rows=sr.pareto||[],svg=document.getElementById("paretoPlot");if(!svg)return;
@@ -617,11 +622,11 @@ function renderPareto(){const sr=currentScenarioRun(),rows=sr.pareto||[],svg=doc
     body+=`<line x1="${xx}" y1="${T}" x2="${xx}" y2="${H-B}" stroke="#e2e7e5"/><text x="${xx}" y="${H-B+14}" text-anchor="middle" font-size="9" fill="#677472">${pct(xv,1)}</text>`;
     body+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#e2e7e5"/><text x="${L-5}" y="${yy+3}" text-anchor="end" font-size="9" fill="#677472">${pct(yv,2)}</text>`;}
   body+=`<line class="axis" x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}"/><line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${H-B}"/>
-    <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#677472">Added floor area / site area →</text>
+    <text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#677472">Net floor-area change / site area →</text>
     <text x="11" y="${H/2}" transform="rotate(-90 11 ${H/2})" text-anchor="middle" font-size="10" fill="#677472">Ground release →</text>`;
   for(const row of rows){const d=Number(row.residential_disruption),t=(d-dr[0])/(dr[1]-dr[0]||1),red=Math.round(72+160*t),green=Math.round(142-70*t);
     const sid=row.solution_id,selected=selectedIds.has(sid),key=Object.keys(sr.solution_metrics||{}).find(k=>sr.solution_metrics[k].solution_id===sid);
-    body+=`<circle class="dot ${selected?'sel':''}" tabindex="0" role="button" aria-label="View solution ${esc(sid)}" data-sid="${esc(sid)}" data-key="${esc(key||'')}" cx="${sx(Number(row.development_capacity))}" cy="${sy(Number(row.street_connected_released_ground))}" r="${selected?5.5:4}" fill="rgb(${red},${green},92)"><title>${esc(sid)} | Residential exposure ${pct(d)} | Added floor area ${num(row.development_capacity,4)} | Net GFA ${num(row.net_gfa_change_m2,0)} m² | Ground release ${pct(row.street_connected_released_ground,3)}</title></circle>`;}
+    body+=`<circle class="dot ${selected?'sel':''}" tabindex="0" role="button" aria-label="View solution ${esc(sid)}" data-sid="${esc(sid)}" data-key="${esc(key||'')}" cx="${sx(Number(row.development_capacity))}" cy="${sy(Number(row.street_connected_released_ground))}" r="${selected?5.5:4}" fill="rgb(${red},${green},92)"><title>${esc(sid)} | Residential exposure ${pct(d)} | Net floor-area change ${num(row.development_capacity,4)} | Net GFA ${num(row.net_gfa_change_m2,0)} m² | Ground release ${pct(row.street_connected_released_ground,3)}</title></circle>`;}
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.innerHTML=body;
   svg.querySelectorAll(".dot").forEach(dot=>{const open=()=>{const key=dot.dataset.key;if(key)setRegime(key);};dot.onclick=open;dot.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}};});}
 function highlightPareto(key){const r=GEOM.research||{},m=(r.solution_metrics||{})[key],svg=document.getElementById("paretoPlot");if(!svg)return;
@@ -630,7 +635,7 @@ function selectScenario(key){const r=GEOM.research||{},s=(r.scenario_catalog||{}
   selectedScenario=key;
   document.querySelectorAll("[data-scenario]").forEach(b=>b.classList.toggle("on",b.dataset.scenario===key));
   const sr=currentScenarioRun(),cfg=sr.run_config||{},policy=((cfg.search||{}).operator_policy)||{};
-  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(scenarioName(key))}</h3><p>${esc((SCENARIOS[key]||{}).description||"")}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(OPERATORS[op]||op)}</span>`).join("")}</div></div>`;
+  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(scenarioName(key))}</h3><p>${esc((SCENARIOS[key]||{}).description||"")}</p><p class="meta">${sr.interactive_settings?'Locally recomputed with edited settings':'Archived scenario run'}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(OPERATORS[op]||op)}</span>`).join("")}</div></div>`;
   renderPareto();renderScenarioTechnical();
   const roleKey=(sr.role_keys||{})[selectedRole],fallbackKey=roleKey||Object.keys(sr.solution_metrics||{})[0]||"current";setRegime(fallbackKey);
   renderCombination();}
@@ -643,18 +648,27 @@ function renderCombination(){const r=GEOM.research||{},s=(r.scenario_catalog||{}
   if(!key||!m){el.innerHTML=`<div class="card warning"><h3>${esc(scenarioName(selectedScenario))} × ${esc(roleName(selectedRole))}</h3><p>No verified 3D geometry is available for this preferred solution.</p></div>`;return;}
   el.innerHTML=`<div class="card ok"><h3>${esc(scenarioName(selectedScenario))} × ${esc(roleName(selectedRole))}</h3><p>This is the preferred Pareto solution for the selected perspective.</p><p class="meta">Solution ${esc(m.solution_id)} · Preferences are applied after optimization.</p></div>`;}
 function renderScenarioTechnical(){const r=GEOM.research||{},sr=currentScenarioRun(),cfg=sr.run_config||{},search=cfg.search||{},scenarioId=cfg.scenario_id||selectedScenario;
-  const scenarioDefs=r.scenario_definitions||{},s=scenarioDefs[scenarioId]||{},def=s.defaults||{},impl=s.implementation||{},ranges=s.uncertainty_ranges||{};
+  const scenarioDefs=r.scenario_definitions||{},s=scenarioDefs[scenarioId]||{},edited=(sr.interactive_settings||{}).values||{},def={...(s.defaults||{}),...edited},impl={...(s.implementation||{}),...edited},ranges=s.uncertainty_ranges||{};
   const range=(name,formatter)=>{const v=ranges[name];return Array.isArray(v)?`${formatter(v[0])}–${formatter(v[1])}`:"—";};
   const operatorRanges=[["densify_intensity","Addition"],["open_ground_intensity","Ground release"],["split_to_towers_intensity","Mass split"],["heritage_step_down_intensity","Height redistribution"],["public_space_reconfiguration_intensity","Public space"],["courtyard_access_improvement_intensity","Courtyard access"]].filter(([k])=>Array.isArray(ranges[k])).map(([k,label])=>`<span class="pill">${label}: ${range(k,x=>num(x,2))}</span>`).join("");
   document.getElementById("scenarioCard").innerHTML=`<h3>${esc(scenarioName(scenarioId))}</h3><p>${esc((SCENARIOS[scenarioId]||{}).description||"")}</p><div class="row"><span class="pill">Housing retained: ${range("minimum_residential_retention",x=>pct(x,0))}</span><span class="pill">Zones changed: ${range("maximum_changed_zone_ratio",x=>pct(x,0))}</span><span class="pill">Buildings changed: ${range("maximum_changed_building_ratio",x=>pct(x,0))}</span>${operatorRanges}</div>`;
   const settingRows=[
-    ["Housing retained (%)",Math.round(100*Number(def.minimum_residential_retention??0.8)),50,100,1],
-    ["Building-change cap (%)",Math.round(100*Number(impl.maximum_changed_building_ratio??0.3)),0,100,1],
-    ["Height limit (m)",Number(def.height_limit_m??36),10,200,1],
-    ["Maximum FAR",Number(def.max_far??3),0,10,0.1],
-    ["Maximum coverage (%)",Math.round(100*Number(def.max_coverage_ratio??0.6)),0,100,1]
+    ["minimum_residential_retention","Housing retained (%)",Math.round(100*Number(def.minimum_residential_retention??0.8)),50,100,1,100],
+    ["maximum_changed_building_ratio","Building-change cap (%)",Math.round(100*Number(impl.maximum_changed_building_ratio??0.3)),0,100,1,100],
+    ["height_limit_m","Height limit (m)",Number(def.height_limit_m??36),10,200,1,1],
+    ["max_far","Maximum FAR",Number(def.max_far??3),0,10,0.1,1],
+    ["max_coverage_ratio","Maximum coverage (%)",Math.round(100*Number(def.max_coverage_ratio??0.6)),0,100,1,100]
   ];
-  document.getElementById("settingsControls").innerHTML=settingRows.map(([label,value,min,max,step],i)=>`<div class="settings-row"><label for="settingRange${i}">${esc(label)}</label><input id="settingRange${i}" type="range" min="${min}" max="${max}" step="${step}" value="${value}"><input aria-label="${esc(label)} value" type="number" min="${min}" max="${max}" step="${step}" value="${value}"></div>`).join("");
+  const colors=['#376fbd','#bd7737','#5b9161'];
+  document.getElementById("settingsControls").innerHTML=settingRows.map(([key,label,value,min,max,step,mult],i)=>{
+    const marks=Object.entries(r.scenario_definitions||{}).filter(([id])=>['public_coordination','development_growth','resident_heritage_priority'].includes(id)).map(([id,item],j)=>{
+      const raw=(item.uncertainty_ranges||{})[key]||(item.defaults||{})[key]||(item.implementation||{})[key];
+      if(raw==null)return '';
+      const vals=(Array.isArray(raw)?raw:[raw]).map(x=>Number((x*mult).toFixed(2)));
+      return `<span><i style="background:${colors[j]}"></i>${esc(scenarioName(id))}: ${vals.join('–')}</span>`;
+    }).join('');
+    return `<div class="settings-row" data-setting="${key}" data-mult="${mult}"><label for="settingRange${i}">${esc(label)}</label><input id="settingRange${i}" type="range" min="${min}" max="${max}" step="${step}" value="${value}"><input aria-label="${esc(label)} value" type="number" min="${min}" max="${max}" step="${step}" value="${value}"><div class="scenario-ranges">${marks}</div></div>`;
+  }).join("");
   document.querySelectorAll(".settings-row").forEach(row=>{const range=row.querySelector('input[type="range"]'),number=row.querySelector('input[type="number"]');range.oninput=()=>{number.value=range.value;};number.oninput=()=>{const v=Number(number.value);if(Number.isFinite(v))range.value=Math.max(Number(range.min),Math.min(Number(range.max),v));};});
   document.getElementById("workflowCard").innerHTML=`<p><b>Urban data</b> → scenario rules → 38 street-bounded zones → form operations → constraint checks → NSGA-II → Pareto set → perspective ranking → 3D comparison</p>`;
   const avail=search.operator_availability||{},zoneCount=Object.keys(avail).length,opCount=k=>Object.values(avail).filter(xs=>xs.includes(k)).length;
@@ -668,6 +682,16 @@ function exportSettingsDraft(){
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
   const link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`${GEOM.slug}_${selectedScenario}_settings_draft.json`;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
 }
+async function recomputeSettings(){
+  const status=document.getElementById('recomputeStatus'),button=document.getElementById('recomputeButton');
+  const values=Object.fromEntries([...document.querySelectorAll('.settings-row')].map(row=>[row.dataset.setting,Number(row.querySelector('input[type="number"]').value)/Number(row.dataset.mult)]));
+  button.disabled=true;status.textContent='Starting a new optimization run…';
+  try{
+    const response=await fetch('/api/recalculate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({scenario:selectedScenario,values})});
+    const data=await response.json();if(!response.ok)throw Error(data.error||'Run could not start');
+    const timer=setInterval(async()=>{try{const check=await fetch('/api/status');const state=await check.json();status.textContent=state.message||state.state;if(state.state==='complete'){clearInterval(timer);location.reload();}else if(state.state==='error'){clearInterval(timer);button.disabled=false;}}catch(e){clearInterval(timer);button.disabled=false;status.textContent=String(e);}},2000);
+  }catch(e){button.disabled=false;status.textContent=`Local recompute service unavailable: ${e.message}. Start it with python run.py serve-canvas dapuqiao.`;}
+}
 function renderResearch(){const r=GEOM.research||{},d=r.draft_summary||{},q=(r.formal_input_quality||{}).counts||{},ass=(r.assumptions||{}).profile||{};
   const stats=document.getElementById("researchStats");if(!stats)return;
   stats.innerHTML=[[q.buildings||d.building_count||1370,"Buildings"],[q.intervention_zones||d.zone_count||38,"Zones"],[q.heritage_building_footprints||21,"Protected buildings"],[3,"Objectives"]].map(x=>`<div class="stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
@@ -679,7 +703,8 @@ function renderResearch(){const r=GEOM.research||{},d=r.draft_summary||{},q=(r.f
   const roleViewButtons=document.getElementById("roleViewButtons");
   roleViewButtons.innerHTML=Object.entries(r.roles||{}).map(([k,v])=>`<button data-role-view="${esc(k)}">${esc(roleName(k))}</button>`).join("");
   roleViewButtons.querySelectorAll("[data-role-view]").forEach(b=>b.onclick=()=>selectRole(b.dataset.roleView));
-  document.getElementById("operatorsList").innerHTML=Object.entries(r.operators||{}).map(([k,v])=>`<div class="card operator"><h3>${esc(OPERATORS[k]||k)} <span class="pill">${esc(k)}</span></h3><p>${esc(OP_TEXT[k]||v.action)}</p><p class="meta" data-op-availability="${esc(k)}"></p></div>`).join("");
+  const opFormula={densify:'h′ ≤ min[h(1 + 0.30t), limit]; A′ = A',open_ground:'A′ ≲ A(1 − 0.25t); height may compensate',split_to_towers:'A′ = A − central gap',heritage_step_down:'Δh near sensitive objects < 0; farther away > 0',public_space_reconfiguration:'A′ = A − street-facing setback; h′ = h',courtyard_access_improvement:'A′ = A − narrow corridor; h′ = h'};
+  document.getElementById("operatorsList").innerHTML=`<table class="operator-table"><thead><tr><th>Operation</th><th>Form change</th><th>Meaning</th></tr></thead><tbody>${Object.entries(r.operators||{}).filter(([k])=>k!=='noop').map(([k,v])=>`<tr><td>${esc(OPERATORS[k]||k)}<br><small data-op-availability="${esc(k)}"></small></td><td>${esc(opFormula[k]||'—')}</td><td>${esc(OP_TEXT[k]||v.action)}</td></tr>`).join('')}</tbody></table><p class="settings-note">h = height; A = footprint area; t = operation intensity. Every candidate still passes eligibility and hard-constraint checks.</p>`;
   document.getElementById("objectivesList").innerHTML=Object.entries(r.objectives||{}).map(([k,v])=>`<div class="card"><h3>${esc(OBJECTIVES[k]||k)} <span class="pill">${esc(v.direction)}</span></h3><p>${esc(OBJECTIVE_TEXT[k]||"")}</p></div>`).join("");
   const constraintLabels={geometry_validity:"Valid geometry",study_boundary:"Study area",heritage_unchanged:"Heritage unchanged",height_limit:"Building height",zone_far:"Zone FAR",zone_coverage:"Zone coverage",residential_retention:"Housing retained",new_overlap:"No new overlap",change_scope:"Change extent"};
   document.getElementById("constraintsList").innerHTML=Object.keys(r.constraints||{}).map(k=>`<span class="pill">${esc(constraintLabels[k]||k)}</span>`).join(" ");
@@ -738,7 +763,9 @@ HTML = """<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
   <details><summary>Optimization settings and priorities</summary>
     <div id="researchStats" class="stats"></div>
     <div id="settingsControls"></div>
-    <p class="settings-note">Exploratory values only. The displayed solutions were generated with the archived settings; changing a slider does not rerun optimization.</p>
+    <p class="settings-note">Colored values show each scenario's suggested research range. Dragging a slider changes the next run's inputs. Archived paper results remain available separately.</p>
+    <button id="recomputeButton" class="big acc" onclick="recomputeSettings()">Recompute with these settings</button>
+    <p id="recomputeStatus" class="settings-note"></p>
     <button class="big" onclick="exportSettingsDraft()">Download settings draft</button>
     <div class="grp">Shared optimization task</div>
     <div id="scenarioCard" class="card"></div>

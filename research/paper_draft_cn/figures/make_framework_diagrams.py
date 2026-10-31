@@ -1,102 +1,151 @@
-"""Create restrained conceptual and procedural figures for the paper draft."""
+"""Render wide, English-language PNG flowcharts for the paper."""
 
 from pathlib import Path
 
-from PIL import Image, ImageDraw
-
-from make_preview_pareto import font
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
 
 HERE = Path(__file__).resolve().parent
-SCALE = 2
-INK = "#111111"
-LINE = "#7d908c"
-ACCENT = "#135d61"
+BLUE, ORANGE, GREEN, RED = "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"
+INK, EDGE = "#222222", "#888888"
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
 
 
-def canvas(width, height, title):
-    image = Image.new("RGB", (width * SCALE, height * SCALE), "white")
-    ink = ImageDraw.Draw(image)
-    ink.text((width * SCALE / 2, 42 * SCALE), title, font=font(27, True), fill=INK, anchor="mm")
-    return image, ink
+def base(title, width=19, height=5.4):
+    fig, ax = plt.subplots(figsize=(width, height), dpi=180)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    ax.axis("off")
+    ax.text(.5, .94, title, ha="center", va="center", fontsize=17, weight="bold")
+    return fig, ax
 
 
-def box(ink, x, y, w, h, heading, lines=()):
-    coords = (x * SCALE, y * SCALE, (x + w) * SCALE, (y + h) * SCALE)
-    ink.rounded_rectangle(coords, radius=5 * SCALE, fill="#f8faf9", outline=LINE, width=2 * SCALE)
-    ink.rectangle((x * SCALE, y * SCALE, (x + 6) * SCALE, (y + h) * SCALE), fill=ACCENT)
-    ink.text(((x + w / 2) * SCALE, (y + 29) * SCALE), heading, font=font(19, True), fill=INK, anchor="mm")
-    for index, line in enumerate(lines):
-        ink.text(((x + w / 2) * SCALE, (y + 62 + index * 24) * SCALE), line, font=font(15), fill=INK, anchor="mm")
+def box(ax, x, y, w, h, title, detail="", edge=EDGE):
+    ax.add_patch(FancyBboxPatch(
+        (x, y - h / 2), w, h,
+        boxstyle="round,pad=0.007,rounding_size=0.016",
+        facecolor="white", edgecolor=edge, linewidth=1.25))
+    ax.text(x + w / 2, y + (0.018 if detail else 0), title,
+            ha="center", va="center", fontsize=10.1, weight="bold", color=INK)
+    if detail:
+        ax.text(x + w / 2, y - .031, detail,
+                ha="center", va="center", fontsize=7.5, color="#444444")
 
 
-def arrow(ink, x1, y1, x2, y2):
-    ink.line(((x1 * SCALE, y1 * SCALE), (x2 * SCALE, y2 * SCALE)), fill=ACCENT, width=3 * SCALE)
-    ink.polygon(((x2 * SCALE, y2 * SCALE), ((x2 - 12) * SCALE, (y2 - 7) * SCALE), ((x2 - 12) * SCALE, (y2 + 7) * SCALE)), fill=ACCENT)
+def arrow(ax, x1, y1, x2, y2, color=EDGE):
+    ax.add_patch(FancyArrowPatch(
+        (x1, y1), (x2, y2), arrowstyle="-|>", mutation_scale=10,
+        linewidth=1.2, color=color, shrinkA=0, shrinkB=0))
 
 
-def save(image, name, width, height):
-    path = HERE / name
-    image.resize((width, height), Image.Resampling.LANCZOS).save(path, optimize=True)
-    print(path)
+def bus(ax, incoming, outgoing, x0, x1, start, end, centers, colors):
+    """Connect one stage to three branches and merge at the next stage."""
+    y = .5
+    ax.plot((incoming, x0), (y, y), color=EDGE, lw=1.2)
+    ax.plot((x0, x0), (min(centers), max(centers)), color=EDGE, lw=1.2)
+    for cy, color in zip(centers, colors):
+        arrow(ax, x0, cy, start, cy, color)
+        ax.plot((end, x1), (cy, cy), color=color, lw=1.2)
+    ax.plot((x1, x1), (min(centers), max(centers)), color=EDGE, lw=1.2)
+    arrow(ax, x1, y, outgoing, y)
+
+
+def finish(fig, name):
+    fig.savefig(HERE / name, bbox_inches="tight", pad_inches=.12, facecolor="white")
+    plt.close(fig)
 
 
 def conceptual():
-    width, height = 1600, 400
-    image, ink = canvas(width, height, "Governance, Form and Preference")
-    boxes = [
-        (55, "Urban evidence", ("Buildings and streets", "Heritage records")),
-        (450, "Governance rules", ("Who may change what", "Allowed form operations")),
-        (845, "Spatial trade-offs", ("Three shared objectives", "Pareto alternatives")),
-        (1240, "Role interpretation", ("Ordinal priorities", "3D and building changes")),
-    ]
-    for x, heading, lines in boxes:
-        box(ink, x, 127, 305, 150, heading, lines)
-    for x in (360, 755, 1150):
-        arrow(ink, x + 8, 202, x + 82, 202)
-    ink.text((800 * SCALE, 332 * SCALE), "Rules shape the candidate set; preferences select from it.", font=font(17, True), fill=INK, anchor="mm")
-    save(image, "conceptual_framework.png", width, height)
+    fig, ax = base("From Urban Evidence to Spatial Decisions")
+    xs = (.025, .165, .305, .445, .585, .725, .865)
+    w, h = .105, .12
+    centers = (.72, .5, .28)
+    colors = (BLUE, ORANGE, GREEN)
+    headings = ("Urban data", "Governance rules", "Form generation",
+                "Evaluation", "Pareto solutions", "Role preferences", "Spatial review")
+    for x, heading in zip(xs, headings):
+        ax.text(x + w / 2, .82, heading, ha="center", fontsize=9.5, color="#555555")
+    box(ax, xs[0], .5, w, h, "Urban evidence", "Buildings / streets")
+    for cy, title, color in zip(centers, ("Public coordination", "Development growth",
+                                          "Residents + heritage"), colors):
+        box(ax, xs[1], cy, w, h, title, edge=color)
+    box(ax, xs[2], .5, w, h, "Candidates", "Building operations")
+    box(ax, xs[3], .5, w, h, "Shared tests", "Constraints + 3 objectives")
+    box(ax, xs[4], .5, w, h, "Pareto sets", "One set per scenario")
+    for cy, title, color in zip(centers, ("Residents", "Development", "Public planning"), colors):
+        box(ax, xs[5], cy, w, h, title, edge=color)
+    box(ax, xs[6], .5, w, h, "Spatial review", "3D + building records")
+    bus(ax, xs[0] + w, xs[2], .147, .287, xs[1], xs[1] + w, centers, colors)
+    for left, right in ((2, 3), (3, 4)):
+        arrow(ax, xs[left] + w, .5, xs[right], .5)
+    bus(ax, xs[4] + w, xs[6], .707, .847, xs[5], xs[5] + w, centers, colors)
+    ax.text(.5, .10, "Each scenario produces a Pareto set; each role can rank every set.",
+            ha="center", fontsize=10, color="#555555")
+    finish(fig, "conceptual_framework.png")
 
 
 def workflow():
-    width, height = 1600, 390
-    image, ink = canvas(width, height, "Research Workflow")
-    centers = [145, 405, 665, 925, 1185, 1445]
-    labels = ["Urban data", "Scenario rules", "Form generation", "Pareto search", "Role choice", "3D review"]
-    for x in centers:
-        ink.rounded_rectangle(((x - 97) * SCALE, 120 * SCALE, (x + 97) * SCALE, 270 * SCALE), radius=7 * SCALE, fill="#fbfcfb", outline="#aab4b2", width=2 * SCALE)
-    for x in (242, 502, 762, 1022, 1282):
-        arrow(ink, x + 5, 194, x + 70, 194)
-    for x, label in zip(centers, labels):
-        ink.text((x * SCALE, 309 * SCALE), label, font=font(19, True), fill=INK, anchor="mm")
-    # Roads and buildings
-    for dx in (-42, 0, 42):
-        ink.rectangle(((centers[0] + dx - 15) * SCALE, 165 * SCALE, (centers[0] + dx + 15) * SCALE, 224 * SCALE), outline=INK, width=2 * SCALE)
-    ink.line(((85 * SCALE, 151 * SCALE), (205 * SCALE, 240 * SCALE)), fill=INK, width=3 * SCALE)
-    # Rule sliders
-    for dy, knob in ((-27, -20), (0, 28), (27, 0)):
-        y = 194 + dy
-        ink.line(((355 * SCALE, y * SCALE), (455 * SCALE, y * SCALE)), fill=INK, width=2 * SCALE)
-        ink.ellipse(((405 + knob - 6) * SCALE, (y - 6) * SCALE, (405 + knob + 6) * SCALE, (y + 6) * SCALE), fill="white", outline=INK, width=2 * SCALE)
-    # Massing block silhouettes
-    for dx, h in ((-45, 38), (-12, 66), (25, 50)):
-        ink.rectangle(((665 + dx) * SCALE, (225 - h) * SCALE, (665 + dx + 28) * SCALE, 225 * SCALE), outline=INK, width=2 * SCALE)
-    # Pareto front
-    ink.line(((876 * SCALE, 227 * SCALE), (876 * SCALE, 153 * SCALE), (977 * SCALE, 153 * SCALE)), fill=INK, width=2 * SCALE)
-    for dx, dy in ((-28, 13), (-10, -8), (13, -18), (37, -34)):
-        x, y = 925 + dx, 196 + dy
-        ink.ellipse(((x - 5) * SCALE, (y - 5) * SCALE, (x + 5) * SCALE, (y + 5) * SCALE), fill=INK)
-    # Preference ranks
-    for i, dx in enumerate((-32, 0, 32), start=1):
-        ink.ellipse(((1185 + dx - 15) * SCALE, 181 * SCALE, (1185 + dx + 15) * SCALE, 211 * SCALE), outline=INK, width=2 * SCALE)
-        ink.text(((1185 + dx) * SCALE, 196 * SCALE), str(i), font=font(15, True), fill=INK, anchor="mm")
-    # 3D blocks
-    ink.polygon(((1400 * SCALE, 218 * SCALE), (1438 * SCALE, 200 * SCALE), (1474 * SCALE, 218 * SCALE), (1436 * SCALE, 238 * SCALE)), outline=INK)
-    ink.line(((1400 * SCALE, 218 * SCALE), (1400 * SCALE, 179 * SCALE), (1438 * SCALE, 161 * SCALE), (1474 * SCALE, 179 * SCALE), (1474 * SCALE, 218 * SCALE)), fill=INK, width=2 * SCALE)
-    ink.line(((1438 * SCALE, 161 * SCALE), (1438 * SCALE, 200 * SCALE)), fill=INK, width=2 * SCALE)
-    save(image, "research_workflow.png", width, height)
+    fig, ax = base("Generation and Selection Workflow", width=19, height=5.8)
+    xs = (.02, .145, .27, .395, .52, .645, .77, .895)
+    w, h = .085, .12
+    centers = (.72, .5, .28)
+    colors = (BLUE, ORANGE, GREEN)
+    box(ax, xs[0], .5, w, h, "Frozen input", "Urban + heritage data")
+    for cy, title, color in zip(centers, ("Public", "Growth", "Heritage"), colors):
+        box(ax, xs[1], cy, w, h, title, "Permissions", color)
+    box(ax, xs[2], .5, w, h, "Generate", "Form operations")
+    box(ax, xs[3], .5, w, h, "Validate", "Hard constraints")
+    for cy, title, color in zip(centers, ("Exposure", "Added GFA", "Ground release"), colors):
+        box(ax, xs[4], cy, w, h, title, "Shared objective", color)
+    box(ax, xs[5], .5, w, h, "Search", "Pareto sets")
+    box(ax, xs[6], .5, w, h, "Rank by role", "3 perspectives")
+    box(ax, xs[7], .5, w, h, "Inspect", "3D + building log")
+    bus(ax, xs[0] + w, xs[2], .125, .25, xs[1], xs[1] + w, centers, colors)
+    arrow(ax, xs[2] + w, .5, xs[3], .5)
+    bus(ax, xs[3] + w, xs[5], .5, .625, xs[4], xs[4] + w, centers, colors)
+    arrow(ax, xs[5] + w, .5, xs[6], .5)
+    arrow(ax, xs[6] + w, .5, xs[7], .5)
+    ax.text(.5, .12, "Scenario-specific generation  /  shared evaluation  /  role-specific selection",
+            ha="center", fontsize=10, color="#555555")
+    finish(fig, "research_workflow.png")
 
 
 if __name__ == "__main__":
     conceptual()
     workflow()
+
+def operator_chains():
+    fig, ax = plt.subplots(figsize=(19, 5.8), dpi=180)
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis('off')
+    ax.text(.5,.94,'Governance Scenarios and Operator Chains',ha='center',fontsize=17,weight='bold',color=INK)
+    scenario_colors=(BLUE,ORANGE,GREEN)
+    operator_colors={
+        'Densify':'#9467bd',
+        'Ground release':'#8c564b',
+        'Volume splitting':'#17becf',
+        'Height redistribution':'#e377c2',
+        'Public setback':'#7f7f7f',
+        'Courtyard access':'#bcbd22',
+    }
+    rows=[
+        ('Public coordination',['Densify','Public setback','Height redistribution','Courtyard access']),
+        ('Development growth',['Densify','Ground release','Volume splitting','Courtyard access']),
+        ('Resident + heritage priority',['Ground release','Height redistribution','Public setback','Courtyard access']),
+    ]
+    ys=(.70,.50,.30)
+    for (title,ops),y,sc in zip(rows,ys,scenario_colors):
+        box(ax,.035,y,.19,.13,title,'scenario',edge=sc)
+        x=.255; arrow(ax,.23,y,x,y)
+        for j,op in enumerate(ops):
+            w=.13
+            box(ax,x,y,w,.13,op,'operator',edge=operator_colors[op])
+            if j<3: arrow(ax,x+w+.006,y,x+w+.035,y)
+            x += .155
+        arrow(ax,x-.02,y,.91,y)
+    box(ax,.91,.5,.08,.22,'Candidate','checks + objectives',edge=EDGE)
+    ax.text(.5,.08,'Operator colors are consistent across scenarios',ha='center',fontsize=10,color='#555555')
+    finish(fig, 'scenario_operator_chains.png')
+
+if __name__ == '__main__':
+    operator_chains()
