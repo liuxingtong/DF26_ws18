@@ -160,12 +160,24 @@ def _load_research_bundle(slug, ox, oy):
     scenario_definitions = scenarios.get("scenarios", {})
     scenario_catalog = {}
     for key in (
+        "conventional_parameter_baseline",
         "public_coordination",
         "development_growth",
         "resident_heritage_priority",
     ):
         item = regime_definitions.get(key, {})
         quantitative = scenario_definitions.get(key, {})
+        if key == "conventional_parameter_baseline":
+            scenario_catalog[key] = {
+                "label": "BL · Parameter baseline",
+                "description": "Label-blind parameter baseline used as the common reference for the three governance scenarios.",
+                "rule_description": "No stakeholder-specific permission table; parameterized form changes under the shared constraints.",
+                "operators": [],
+                "rule_operators": [],
+                "status": "formal_reference_only",
+                "interactive_supported": False,
+            }
+            continue
         scenario_catalog[key] = {
             "label": quantitative.get("label", item.get("label", key)),
             "description": quantitative.get("description", item.get("desc", "")),
@@ -176,6 +188,7 @@ def _load_research_bundle(slug, ox, oy):
             ),
             "rule_operators": [step.get("op") for step in item.get("steps", [])],
             "status": "scenario_specific_optimization",
+            "interactive_supported": True,
         }
     draft_summary_path = ws05.WS05 / "data" / slug / "drafts" / "draft_summary.json"
     draft_summary = json.loads(draft_summary_path.read_text(encoding="utf-8")) if draft_summary_path.exists() else {}
@@ -576,6 +589,7 @@ function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 function num(v,d=3){const n=Number(v);return Number.isFinite(n)?n.toFixed(d):"—";}
 function pct(v,d=1){const n=Number(v);return Number.isFinite(n)?`${(n*100).toFixed(d)}%`:"—";}
 const SCENARIOS={
+  conventional_parameter_baseline:{label:"BL · Parameter baseline",description:"Label-blind parameter baseline used as the common reference. It is a formal archived reference, not a governance scenario."},
   public_coordination:{label:"Public coordination",description:"Public agencies protect heritage while allowing modest changes to public land, courtyard access and selected development sites."},
   development_growth:{label:"Development growth",description:"A wider action area allows compliant additions and mass splitting while keeping shared heritage and safety limits."},
   resident_heritage_priority:{label:"Residents and heritage",description:"Housing and heritage receive stronger protection; small access and ground-release actions remain possible."}
@@ -635,7 +649,7 @@ function selectScenario(key){const r=GEOM.research||{},s=(r.scenario_catalog||{}
   selectedScenario=key;
   document.querySelectorAll("[data-scenario]").forEach(b=>b.classList.toggle("on",b.dataset.scenario===key));
   const sr=currentScenarioRun(),cfg=sr.run_config||{},policy=((cfg.search||{}).operator_policy)||{};
-  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(scenarioName(key))}</h3><p>${esc((SCENARIOS[key]||{}).description||"")}</p><p class="meta">${sr.interactive_settings?'Locally recomputed with edited settings':'Archived scenario run'}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(OPERATORS[op]||op)}</span>`).join("")}</div></div>`;
+  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(scenarioName(key))}</h3><p>${esc((SCENARIOS[key]||{}).description||"")}</p><p class="meta">${sr.interactive_settings?'Exploratory single-seed recomputation':'Formal archived result'} · ${s.status||''}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(OPERATORS[op]||op)}</span>`).join("")}</div></div>`;
   renderPareto();renderScenarioTechnical();
   const roleKey=(sr.role_keys||{})[selectedRole],fallbackKey=roleKey||Object.keys(sr.solution_metrics||{})[0]||"current";setRegime(fallbackKey);
   renderCombination();}
@@ -763,7 +777,7 @@ HTML = """<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
   <details><summary>Optimization settings and priorities</summary>
     <div id="researchStats" class="stats"></div>
     <div id="settingsControls"></div>
-    <p class="settings-note">Colored values show each scenario's suggested research range. Dragging a slider changes the next run's inputs. Archived paper results remain available separately.</p>
+    <p class="settings-note">Formal results are archived 10-seed comparisons. Sliders create exploratory single-seed recomputations for governance scenarios; they do not replace the paper results. BL is reference-only and is not recomputed here.</p>
     <button id="recomputeButton" class="big acc" onclick="recomputeSettings()">Recompute with these settings</button>
     <p id="recomputeStatus" class="settings-note"></p>
     <button class="big" onclick="exportSettingsDraft()">Download settings draft</button>
