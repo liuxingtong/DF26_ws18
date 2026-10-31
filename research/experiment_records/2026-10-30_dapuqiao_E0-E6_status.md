@@ -653,3 +653,15 @@ cd "05_Shanghai Power to Form Students"
 
 - 只翻转 resident↔developer，没有测 state 误判（它直接改变可编辑集合，属于设定变更而非标签噪声）。
 - 每档只有 3 次重复，给出的是幅度范围而非分布。
+
+## 18. BL 合并前沿支配分析口径修正（2026-10-31）
+
+原 baseline_dominance.csv 使用全部可行候选作为分母，原 PC 43.97%、DG 26.81%、RH 62.37% 不是 brief 所要求的 Pareto 解比例，停止用于论文。
+
+从远端取回正式 40 份 pareto_solutions.csv，逐一核对解数与 run_summary.csv 相同。BL 合并后按三个目标的标准支配关系重新筛选，得到 383 个解；容差 1e-12，未重新施加 epsilon。以每个 seed 导出的 Pareto 解数为分母，PC 未被 BL 支配比例为 73.03% [63.16%,83.33%]，DG 69.21% [66.67%,85.71%]，RH 100% [100%,100%]。
+
+PC 共 151 个 Pareto 解，其中 112 个未被支配（24 个正净增建）；DG 共 99 个，其中 71 个未被支配（11 个正净增建）；RH 共 76 个，全部未被支配且均为非正净增建。DG 未被支配解中有 2 个与 BL 具有相同目标值，标准支配关系要求至少一个目标严格更好，因此相同目标值不算被支配。不能由未支配比例推出几何空间超出 BL 或容量更优。
+
+脚本 scripts/analyze_dapuqiao_baseline_dominance.py；修正输出 baseline_dominance_pareto/（含逐种子统计、每条 Pareto 解的 dominated_by_baseline、BL 合并前沿和输入 SHA256）。原文件未改写。NumPy 独立复算所有支配标记一致；已检验严格劣解、目标相同、互有取舍和已知 50% 分母示例。
+
+出图为 fig3_merged_pareto_fronts、fig3_merged_pareto_zoom 和 fig3_baseline_nondominated_share，均包含 PNG/PDF/SVG。原右侧建筑用途面板替换为主体标签和冻结对象，独立标签图移出正文。

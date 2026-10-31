@@ -1,0 +1,221 @@
+{
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71,
+    83,
+    97,
+    109,
+    127,
+    139
+  ],
+  "denominator": "exported per-seed Pareto set",
+  "baseline": "all 10 BL exported Pareto sets, merged and filtered by exact dominance",
+  "tolerance": 1e-12,
+  "epsilon_reapplied": false,
+  "sources": [
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_11/pareto_solutions.csv",
+      "rows": 122,
+      "sha256": "59be448952b0bc697df056450a55ba3223a08a3fa460940905b8018eceb29749"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_23/pareto_solutions.csv",
+      "rows": 109,
+      "sha256": "af974c01ad1cdb932d4fe3cc668fd42c689e204b6438c63550be5c5a9cc273c8"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_37/pareto_solutions.csv",
+      "rows": 108,
+      "sha256": "cde42f9791e851a0302b0edea809041c72cfc5b13f5183a07057c637e4c5a177"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_53/pareto_solutions.csv",
+      "rows": 93,
+      "sha256": "6ffdab09e2d519d2b22c7aa3ba48a3aaf2db6748dfa67eaece0c3d3a805222c8"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_71/pareto_solutions.csv",
+      "rows": 101,
+      "sha256": "108036e63ccf5d3c2114f1c00e1264ad25927b5466790019797206ce068316f2"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_83/pareto_solutions.csv",
+      "rows": 120,
+      "sha256": "6cddf3e3968d52d07449929cc1a8ffec32088bb9cd4af083a3afc41c576f04fe"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_97/pareto_solutions.csv",
+      "rows": 175,
+      "sha256": "33ab5fdd85284502f9909924ac1053fab4a770602747bacbd7734806651269f4"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_109/pareto_solutions.csv",
+      "rows": 114,
+      "sha256": "c7c5a42b269292b58b70fb9670c65712ffbabf51c35a2f9de75da8444c271d66"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_127/pareto_solutions.csv",
+      "rows": 106,
+      "sha256": "c1f39b2b9f1e0630b3037b6cdc639b1a1039cdfcbd8cd24165c3b542e5a00230"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/conventional_parameter_baseline/seed_139/pareto_solutions.csv",
+      "rows": 130,
+      "sha256": "c6adec0cfed3a2df99488e34f591f117923489932130f3503e52cf2b8dbee35e"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_11/pareto_solutions.csv",
+      "rows": 11,
+      "sha256": "1d1419d4d0736c1a2a676f78383a329b94a6b1da51b81ec3e1cb47dad4627699"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_23/pareto_solutions.csv",
+      "rows": 19,
+      "sha256": "1d2e1365a222ef7ca7d591ccfad990f6a854e8b97a19ab24013677de7a7fdabf"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_37/pareto_solutions.csv",
+      "rows": 13,
+      "sha256": "d3f9b0eb0010ecd4dd34f8ef7832adc6cd29ef8fff33ff10fe2d4c67a98f0c69"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_53/pareto_solutions.csv",
+      "rows": 25,
+      "sha256": "99e67556dd38e245d28d1fad738f3b9191801edff72ad99ca4e1c1f2c26295a2"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_71/pareto_solutions.csv",
+      "rows": 15,
+      "sha256": "6266025651564272ca6ef7260e749651c96101c42e56007040bdf1cacbc079df"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_83/pareto_solutions.csv",
+      "rows": 11,
+      "sha256": "d27b5892489227990d32906116a3969a3011f5844b3b70610900bfab39a9e986"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_97/pareto_solutions.csv",
+      "rows": 12,
+      "sha256": "08ee79fc2b7a2557a096541f236cc1670020297c2548259dd2e5de7e658af9d9"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_109/pareto_solutions.csv",
+      "rows": 17,
+      "sha256": "7ee37958681bd90e16c44c72a98be121e0541d09a4f26601f9bc893d2cc8d451"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_127/pareto_solutions.csv",
+      "rows": 7,
+      "sha256": "9a185dbb595b5a225cd61480df1bb5c9d67cd6eb212c6ef5f1659c340713b0a1"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/public_coordination/seed_139/pareto_solutions.csv",
+      "rows": 21,
+      "sha256": "6a2820b1c3531f964614cf0aebf9d1e8787ccfbb2d86d2e3e7d275411864281c"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_11/pareto_solutions.csv",
+      "rows": 6,
+      "sha256": "69f17ed738ae722392975c449a7e0cc44c4e991dbe5465a89a261c0e976251c6"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_23/pareto_solutions.csv",
+      "rows": 8,
+      "sha256": "6b42c6dc59b1d550ed91d36fed47451488750bd2c0e064108b3e48c11846feff"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_37/pareto_solutions.csv",
+      "rows": 19,
+      "sha256": "a1b0b2d8a863776bba7dadbad8df324893ac6bdd849dfa751b9c3d381c86c238"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_53/pareto_solutions.csv",
+      "rows": 4,
+      "sha256": "ae5cd52a5cbd35372c57d455a5486caca50ee2f3a64df9f285fa105d0a6a6de5"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_71/pareto_solutions.csv",
+      "rows": 6,
+      "sha256": "6cf834ac1563540e42578a4ac51d088bf413b7eba8ddece8a6dea58420ba459f"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_83/pareto_solutions.csv",
+      "rows": 15,
+      "sha256": "baa82243068c874e0fb721eca3ac2b0e5424d9c5b159db99035076f542ed121f"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_97/pareto_solutions.csv",
+      "rows": 9,
+      "sha256": "ca37c7f978f854ca3bc8bb2be8b1e2e3263844ee56be68050d59a6ddd2727c7f"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_109/pareto_solutions.csv",
+      "rows": 10,
+      "sha256": "d58832434b38cb8edfd0870f818356cb46f85fb5b10f72797afb9df5dd703ab3"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_127/pareto_solutions.csv",
+      "rows": 7,
+      "sha256": "a06510f278f41f0c51d795f5041e6c838b7ffb3c0113ae8b41703f541e43ea48"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/development_growth/seed_139/pareto_solutions.csv",
+      "rows": 15,
+      "sha256": "abc03474e8bc181a53d01d00c3cc459a82222dec45fd66e125eead8d37bfe3df"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_11/pareto_solutions.csv",
+      "rows": 10,
+      "sha256": "58bc759a2d6aed0110364ce0e27bf3f1e3d822ecbce2f4e321687f7eb32f2a43"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_23/pareto_solutions.csv",
+      "rows": 8,
+      "sha256": "119361e7b6988e6951be47ed60dd377268e705287457159432a7fd609355c99c"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_37/pareto_solutions.csv",
+      "rows": 9,
+      "sha256": "e6c26cfa6c4a8cd3853be833fd9e3ab535811b9cb240bd8040b947f5d4be2520"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_53/pareto_solutions.csv",
+      "rows": 13,
+      "sha256": "f06c1305194ebd53bd2b1343334991d8d7f14839731672e2191a652ed0e81289"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_71/pareto_solutions.csv",
+      "rows": 6,
+      "sha256": "64d60b9ffd4ca311d1a20eb1e9280643b65cf73f0a78bcb829ac40d550b24e03"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_83/pareto_solutions.csv",
+      "rows": 9,
+      "sha256": "c95cb783fac06aa51d2ba93e844762468991e33961ff1fe4ea285a77463d7dc5"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_97/pareto_solutions.csv",
+      "rows": 4,
+      "sha256": "b13d3d1209e1dd5a7ef376b9954c2a58a76ebde7cee404e1e25e37a3eb0f4e56"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_109/pareto_solutions.csv",
+      "rows": 3,
+      "sha256": "5fb866d17a09d8ea7ee1b871bb61f224b6afd95996ee8e34c305de49a19e69e9"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_127/pareto_solutions.csv",
+      "rows": 5,
+      "sha256": "fe5ff564c4aa32b2b58188cc8b5b63734c4600e330d9610f2669432ff57168ab"
+    },
+    {
+      "path": "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/runs/resident_heritage_priority/seed_139/pareto_solutions.csv",
+      "rows": 9,
+      "sha256": "e131a1843ce1966fb2b17f26f83abd967d0cee932aa5df1b5ad1f3c662226cc0"
+    }
+  ],
+  "baseline_front_count": 383
+}
