@@ -1,6 +1,6 @@
 """Figures from exact BL merged-front analysis, all source files are CSV."""
 from pathlib import Path
-import csv
+import csv,argparse
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -8,7 +8,10 @@ import numpy as np
 from matplotlib.lines import Line2D
 from matplotlib.colors import Normalize
 R=Path(__file__).resolve().parents[3]; F=Path(__file__).resolve().parent
-D=R/'05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/baseline_dominance_pareto'
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--analysis-root',type=Path,default=R/'05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_formal_remote_20261029/baseline_dominance_pareto')
+parser.add_argument('--output',type=Path,default=F)
+a=parser.parse_args();D=a.analysis_root;F=a.output;F.mkdir(parents=True,exist_ok=True)
 read=lambda p:list(csv.DictReader(open(p,encoding='utf-8-sig')))
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':8,'axes.spines.top':False,'axes.spines.right':False,'svg.fonttype':'none','pdf.fonttype':42})
 def save(fig,name):

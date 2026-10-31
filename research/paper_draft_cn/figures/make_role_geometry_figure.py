@@ -1,4 +1,4 @@
-"""Reconstruct archived role picks and verify geometry against archived changes."""
+"""Reconstruct role picks from frozen inputs and complete-precision decisions."""
 import sys,csv,json,argparse,hashlib
 from pathlib import Path
 import numpy as np
