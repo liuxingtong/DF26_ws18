@@ -1,0 +1,4 @@
+﻿epsilon_factor,epsilon_residential_disruption,epsilon_development_capacity,epsilon_street_connected_released_ground,full_pareto_count,epsilon_pareto_count,representative_count,objective_duplicate_count,pareto_count,hypervolume,spacing
+0.5,0.0005,0.00025,0.00015,183,63,9,18,63,0.2019750213621161,0.042676001819604605
+1.0,0.001,0.0005,0.0003,183,31,9,30,31,0.19703927396501109,0.044744502913275364
+2.0,0.002,0.001,0.0006,183,10,9,42,10,0.1737326126150558,0.08656303859629615

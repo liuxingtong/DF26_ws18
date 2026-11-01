@@ -1,0 +1,161 @@
+scenarios:
+  public_coordination:
+    id: public_coordination
+    label: 公共部门协调导向
+    description: 公共部门锁定遗产底线，同时允许公共资产释放少量地面、居民院落改善通行，并协调开发主体有限增建、释放地面和敏感区高度退让。
+    source_status: research_assumption
+    governance_logic: public_rules_coordinate_multiple_interests
+    defaults:
+      height_limit_m: 30.0
+      max_far: 2.80
+      max_coverage_ratio: 0.55
+      minimum_residential_retention: 0.95
+    implementation:
+      maximum_changed_zone_ratio: 0.30
+      maximum_changed_building_ratio: 0.18
+    operator_policy:
+      allowed_operators: [densify, open_ground, heritage_step_down, public_space_reconfiguration, courtyard_access_improvement]
+      stakeholder_targets:
+        densify: [developer]
+        open_ground: [developer]
+        heritage_step_down: [developer]
+        public_space_reconfiguration: [state]
+        courtyard_access_improvement: [resident]
+      maximum_intensity: {densify: 0.45, open_ground: 0.75, heritage_step_down: 0.70, public_space_reconfiguration: 0.70, courtyard_access_improvement: 0.50}
+    uncertainty_ranges:
+      minimum_residential_retention: [0.90, 0.98]
+      maximum_changed_zone_ratio: [0.25, 0.35]
+      maximum_changed_building_ratio: [0.15, 0.22]
+      densify_intensity: [0.30, 0.60]
+      open_ground_intensity: [0.60, 0.90]
+      heritage_step_down_intensity: [0.45, 0.85]
+      public_space_reconfiguration_intensity: [0.40, 0.80]
+      courtyard_access_improvement_intensity: [0.25, 0.60]
+
+  development_growth:
+    id: development_growth
+    label: 开发增长导向
+    description: 在共同遗产与安全底线内扩大可更新范围，让开发主体通过大体量拆分、合规增建和少量地面释放争取容量；居民住宅仅允许低强度院落通行改善。
+    source_status: research_assumption
+    governance_logic: development_capacity_has_priority_in_action_space
+    defaults:
+      height_limit_m: 36.0
+      max_far: 3.20
+      max_coverage_ratio: 0.65
+      minimum_residential_retention: 0.90
+    implementation:
+      maximum_changed_zone_ratio: 0.45
+      maximum_changed_building_ratio: 0.30
+    operator_policy:
+      allowed_operators: [densify, open_ground, split_to_towers, courtyard_access_improvement]
+      stakeholder_targets:
+        densify: [developer]
+        open_ground: [developer]
+        split_to_towers: [developer]
+        courtyard_access_improvement: [resident]
+      maximum_intensity: {densify: 1.0, open_ground: 0.55, split_to_towers: 1.0, courtyard_access_improvement: 0.25}
+    uncertainty_ranges:
+      minimum_residential_retention: [0.85, 0.95]
+      maximum_changed_zone_ratio: [0.35, 0.50]
+      maximum_changed_building_ratio: [0.25, 0.35]
+      densify_intensity: [0.75, 1.00]
+      open_ground_intensity: [0.40, 0.70]
+      split_to_towers_intensity: [0.65, 1.00]
+      courtyard_access_improvement_intensity: [0.10, 0.30]
+
+  resident_heritage_priority:
+    id: resident_heritage_priority
+    label: 居民生活与遗产保护导向
+    description: 冻结遗产本体和居民住宅的强形态操作，仅允许居民院落低强度改善、公共资产释放公共地面，以及开发主体释放地面并把高度从敏感对象附近转移到远处。
+    source_status: research_assumption
+    governance_logic: resident_continuity_and_heritage_are_protected
+    defaults:
+      height_limit_m: 27.0
+      max_far: 2.65
+      max_coverage_ratio: 0.55
+      minimum_residential_retention: 0.99
+    implementation:
+      maximum_changed_zone_ratio: 0.22
+      maximum_changed_building_ratio: 0.14
+    operator_policy:
+      allowed_operators: [open_ground, heritage_step_down, public_space_reconfiguration, courtyard_access_improvement]
+      stakeholder_targets:
+        open_ground: [developer]
+        heritage_step_down: [developer]
+        public_space_reconfiguration: [state]
+        courtyard_access_improvement: [resident]
+      maximum_intensity: {open_ground: 0.75, heritage_step_down: 1.0, public_space_reconfiguration: 1.0, courtyard_access_improvement: 0.65}
+    uncertainty_ranges:
+      minimum_residential_retention: [0.98, 1.00]
+      maximum_changed_zone_ratio: [0.18, 0.26]
+      maximum_changed_building_ratio: [0.10, 0.18]
+      open_ground_intensity: [0.60, 0.90]
+      heritage_step_down_intensity: [0.70, 1.00]
+      public_space_reconfiguration_intensity: [0.70, 1.00]
+      courtyard_access_improvement_intensity: [0.40, 0.75]
+
+# The frozen 04d8073 experiment used these four identifiers. They remain
+# loadable only to reproduce that archived result and are excluded from current
+# suites and the 3D platform.
+archived_scenarios:
+  tourism_capture:
+    id: tourism_capture
+    label: 旅游流量资本主导（冻结旧情景）
+    description: 冻结实验 04d8073 的旧情景，仅用于复现。
+    source_status: archived_research_assumption
+    defaults: {height_limit_m: 36.0, max_far: 3.20, max_coverage_ratio: 0.65, minimum_residential_retention: 0.90}
+    implementation: {maximum_changed_zone_ratio: 0.45, maximum_changed_building_ratio: 0.30}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [resident, developer]}
+      maximum_intensity: {densify: 1.0, open_ground: 0.55}
+
+  everyday_life_first:
+    id: everyday_life_first
+    label: 居民安全与日常生活优先（冻结旧情景）
+    description: 冻结实验 04d8073 的旧情景，仅用于复现。
+    source_status: archived_research_assumption
+    defaults: {height_limit_m: 30.0, max_far: 2.80, max_coverage_ratio: 0.55, minimum_residential_retention: 0.98}
+    implementation: {maximum_changed_zone_ratio: 0.25, maximum_changed_building_ratio: 0.15}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [developer]}
+      maximum_intensity: {densify: 0.25, open_ground: 0.85}
+
+  heritage_micro_economy:
+    id: heritage_micro_economy
+    label: 遗产与小商户共生（冻结旧情景）
+    description: 冻结实验 04d8073 的旧情景，仅用于复现。
+    source_status: archived_research_assumption
+    defaults: {height_limit_m: 24.0, max_far: 2.50, max_coverage_ratio: 0.55, minimum_residential_retention: 1.00}
+    implementation: {maximum_changed_zone_ratio: 0.20, maximum_changed_building_ratio: 0.12}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [developer]}
+      maximum_intensity: {densify: 0.20, open_ground: 0.50}
+      deferred_indicators: [affordable_micro_units, local_service_frontage, cultural_space_ratio]
+
+  negotiated_24h_alley:
+    id: negotiated_24h_alley
+    label: 24小时协商弄堂（冻结旧情景）
+    description: 冻结实验 04d8073 的旧情景，仅用于复现。
+    source_status: archived_research_assumption
+    defaults: {height_limit_m: 30.0, max_far: 2.80, max_coverage_ratio: 0.52, minimum_residential_retention: 0.98}
+    implementation: {maximum_changed_zone_ratio: 0.30, maximum_changed_building_ratio: 0.18}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [developer], open_ground: [resident, developer]}
+      maximum_intensity: {densify: 0.35, open_ground: 1.0}
+      operational_rules: [crowd_valve, night_reversion]
+
+  dapuqiao_tourism_livability:
+    id: dapuqiao_tourism_livability
+    label: 打浦桥旅游增长与日常生活保护（旧版共同任务）
+    description: 旧版单情景实验，仅保留用于复现实验。
+    source_status: archived_research_assumption
+    defaults: {height_limit_m: 36.0, max_far: 3.0, max_coverage_ratio: 0.60, minimum_residential_retention: 0.80}
+    implementation: {maximum_changed_zone_ratio: 0.40, maximum_changed_building_ratio: 0.30}
+    operator_policy:
+      allowed_operators: [densify, open_ground]
+      stakeholder_targets: {densify: [resident, developer], open_ground: [resident, developer]}
+      maximum_intensity: {densify: 1.0, open_ground: 1.0}

@@ -1,0 +1,9 @@
+{
+  "state": "completed",
+  "scenario": "development_growth",
+  "table": 5,
+  "seed": 37,
+  "runtime_seconds": 3495.785156980157,
+  "pareto_count": 11,
+  "candidates": 1549
+}

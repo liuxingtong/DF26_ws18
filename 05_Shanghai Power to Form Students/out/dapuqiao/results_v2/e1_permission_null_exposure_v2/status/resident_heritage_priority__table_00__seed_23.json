@@ -1,0 +1,9 @@
+{
+  "state": "completed",
+  "scenario": "resident_heritage_priority",
+  "table": 0,
+  "seed": 23,
+  "runtime_seconds": 3014.0105708539486,
+  "pareto_count": 15,
+  "candidates": 1428
+}

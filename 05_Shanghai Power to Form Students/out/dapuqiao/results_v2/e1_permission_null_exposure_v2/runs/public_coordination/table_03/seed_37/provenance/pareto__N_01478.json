@@ -1,0 +1,449 @@
+{
+  "labels": [
+    "pareto"
+  ],
+  "solution_id": "N_01478",
+  "objectives": {
+    "residential_disruption": 0.0003955694297354733,
+    "development_capacity": -0.0013087938058897676,
+    "street_connected_released_ground": 0.0003772011406485504
+  },
+  "descriptors": {
+    "far": 2.8198847093603865,
+    "coverage": 0.2817714967037797,
+    "height_mean_m": 33.70445732988115,
+    "height_max_m": 176.14076633333357,
+    "changed_buildings": 12.0,
+    "gross_added_m2": 0.0,
+    "gross_removed_m2": 2059.941772001695,
+    "positive_gfa_increment_m2": 0.0,
+    "net_gfa_change_m2": -2059.9417720017955,
+    "net_gfa_change_far": -0.0013087938058897676,
+    "direct_residential_change_ratio": 0.0003955694297354733,
+    "exposed_resident_buildings": 1.0,
+    "street_access_buffer_m": 5.0,
+    "street_buffer_area_m2": 246966.5425994333,
+    "densify_count": 0.0,
+    "open_ground_count": 4.0,
+    "split_to_towers_count": 0.0,
+    "heritage_step_down_count": 0.0,
+    "public_space_reconfiguration_count": 8.0,
+    "courtyard_access_improvement_count": 0.0,
+    "parameter_count": 0.0,
+    "changed_resident_buildings": 1.0,
+    "changed_developer_buildings": 11.0,
+    "changed_state_buildings": 0.0,
+    "changed_unknown_buildings": 0.0
+  },
+  "decisions": [
+    {
+      "zone_id": "Z01",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z02",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z03",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z04",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z05",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z06",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z07",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z08",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z09",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z10",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z11",
+      "operator": "courtyard_access_improvement",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z12",
+      "operator": "courtyard_access_improvement",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z13",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z14",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z15",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z16",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z17",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z18",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z19",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z20",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.3118121464388773
+    },
+    {
+      "zone_id": "Z22",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z23",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z24",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z25",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z26",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z27",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z28",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z29",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z30",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z31",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z32",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5
+    },
+    {
+      "zone_id": "Z34",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z35",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z36",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z37",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z38",
+      "operator": "noop",
+      "intensity": 0.0
+    }
+  ],
+  "changes": [
+    {
+      "bid": "364",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.3118121464388773,
+      "requested_intensity": 0.3118121464388773,
+      "clamped_by": "",
+      "before_height_m": 17.023366333333342,
+      "after_height_m": 18.49280549370594,
+      "before_area_m2": 414.05805203123083,
+      "after_area_m2": 381.15698050212364,
+      "footprint_change_m2": 32.901071529107185,
+      "gfa_change_m2": 0.0,
+      "requested_height_m": 17.023366333333342,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "365",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.3118121464388773,
+      "requested_intensity": 0.3118121464388773,
+      "clamped_by": "",
+      "before_height_m": 20.52803299999996,
+      "after_height_m": 22.266023430610737,
+      "before_area_m2": 556.6156128823709,
+      "after_area_m2": 513.1685819505626,
+      "footprint_change_m2": 43.447030931808285,
+      "gfa_change_m2": 0.0,
+      "requested_height_m": 20.52803299999996,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "366",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.3118121464388773,
+      "requested_intensity": 0.3118121464388773,
+      "clamped_by": "",
+      "before_height_m": 26.38229966666667,
+      "after_height_m": 28.61275044987345,
+      "before_area_m2": 442.8717660633499,
+      "after_area_m2": 408.348567071813,
+      "footprint_change_m2": 34.5231989915369,
+      "gfa_change_m2": 0.0,
+      "requested_height_m": 26.38229966666667,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "369",
+      "zone_id": "Z21",
+      "operator": "open_ground",
+      "intensity": 0.3118121464388773,
+      "requested_intensity": 0.3118121464388773,
+      "clamped_by": "",
+      "before_height_m": 28.054033,
+      "after_height_m": 30.425817896324045,
+      "before_area_m2": 192.58713736474536,
+      "after_area_m2": 177.57438519537234,
+      "footprint_change_m2": 15.012752169373016,
+      "gfa_change_m2": -2.2737367544323206e-13,
+      "requested_height_m": 28.054033,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "151",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 16.376033000000003,
+      "after_height_m": 16.376033000000003,
+      "before_area_m2": 460.4949570693151,
+      "after_area_m2": 414.90619292240945,
+      "footprint_change_m2": 45.588764146905646,
+      "gfa_change_m2": -213.30374459969835,
+      "requested_height_m": 16.376033000000003,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "169",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 22.07183300000001,
+      "after_height_m": 22.07183300000001,
+      "before_area_m2": 41.829083998017644,
+      "after_area_m2": 37.6517358430539,
+      "footprint_change_m2": 4.177348154963745,
+      "gfa_change_m2": -26.34335167406229,
+      "requested_height_m": 22.07183300000001,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "198",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 39.326433,
+      "after_height_m": 39.326433,
+      "before_area_m2": 76.37189931589516,
+      "after_area_m2": 72.39734822016604,
+      "footprint_change_m2": 3.974551095729126,
+      "gfa_change_m2": -44.6585478203624,
+      "requested_height_m": 39.326433,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "205",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 39.76329966666658,
+      "after_height_m": 39.76329966666658,
+      "before_area_m2": 188.45488843088373,
+      "after_area_m2": 184.05790556897728,
+      "footprint_change_m2": 4.3969828619064515,
+      "gfa_change_m2": -49.95387061919564,
+      "requested_height_m": 39.76329966666658,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "213",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 88.91423300000017,
+      "after_height_m": 88.91423300000017,
+      "before_area_m2": 1533.954168555036,
+      "after_area_m2": 1507.2522908167257,
+      "footprint_change_m2": 26.70187773831026,
+      "gfa_change_m2": -678.3362796461879,
+      "requested_height_m": 88.91423300000017,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "222",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 67.5290329999999,
+      "after_height_m": 67.5290329999999,
+      "before_area_m2": 193.2213778678631,
+      "after_area_m2": 189.2985045073007,
+      "footprint_change_m2": 3.92287336056242,
+      "gfa_change_m2": -75.68795560578292,
+      "requested_height_m": 67.5290329999999,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "440",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 51.17383299999997,
+      "after_height_m": 51.17383299999997,
+      "before_area_m2": 1037.0595016451991,
+      "after_area_m2": 979.7698895058769,
+      "footprint_change_m2": 57.28961213932223,
+      "gfa_change_m2": -837.6368697864145,
+      "requested_height_m": 51.17383299999997,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "443",
+      "zone_id": "Z33",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.5,
+      "requested_intensity": 0.5,
+      "clamped_by": "",
+      "before_height_m": 77.2068329999999,
+      "after_height_m": 77.2068329999999,
+      "before_area_m2": 61.05402400871537,
+      "after_area_m2": 54.978473249173554,
+      "footprint_change_m2": 6.0755507595418194,
+      "gfa_change_m2": -134.0211522499908,
+      "requested_height_m": 77.2068329999999,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    }
+  ],
+  "violations": []
+}

@@ -1,0 +1,33 @@
+roles:
+  resident:
+    label: 居民利益视角
+    priority_order:
+      - residential_disruption
+      - development_capacity
+      - street_connected_released_ground
+    feasibility_required: true
+
+  development:
+    label: 开发实施视角
+    priority_order:
+      - development_capacity
+      - street_connected_released_ground
+      - residential_disruption
+    feasibility_required: true
+
+  public_planning:
+    label: 公共规划视角
+    priority_order:
+      - street_connected_released_ground
+      - residential_disruption
+      - development_capacity
+    feasibility_required: true
+
+metadata:
+  status: ordinal_research_hypothesis
+  selection_method: epsilon_tiered_lexicographic
+  compromise_method: minimum_worst_role_rank
+  note: 角色只声明目标优先顺序，不使用精确权重；目标差异小于 objectives.yaml 的 epsilon 时视为同一档，再比较下一优先级。角色排序仅用于 Pareto 解生成后的选择，不回写优化循环。
+
+sensitivity:
+  adjacent_priority_swaps: true

@@ -1,0 +1,271 @@
+{
+  "labels": [
+    "pareto",
+    "representative",
+    "resident"
+  ],
+  "solution_id": "N_01396",
+  "objectives": {
+    "residential_disruption": 0.0,
+    "development_capacity": 3.5736388909533485e-06,
+    "street_connected_released_ground": 3.2139081574515597e-06
+  },
+  "descriptors": {
+    "far": 2.8211970768051673,
+    "coverage": 0.2819476284066944,
+    "height_mean_m": 33.699877403391724,
+    "height_max_m": 176.14076633333357,
+    "changed_buildings": 2.0,
+    "gross_added_m2": 13.488610521902984,
+    "gross_removed_m2": 7.863975077889336,
+    "positive_gfa_increment_m2": 13.488610521902984,
+    "net_gfa_change_m2": 5.624635444022715,
+    "net_gfa_change_far": 3.5736388909533485e-06,
+    "direct_residential_change_ratio": 0.0,
+    "exposed_resident_buildings": 0.0,
+    "street_access_buffer_m": 5.0,
+    "street_buffer_area_m2": 246966.5425994333,
+    "densify_count": 1.0,
+    "open_ground_count": 0.0,
+    "split_to_towers_count": 0.0,
+    "heritage_step_down_count": 0.0,
+    "public_space_reconfiguration_count": 1.0,
+    "courtyard_access_improvement_count": 0.0,
+    "parameter_count": 0.0,
+    "changed_resident_buildings": 1.0,
+    "changed_developer_buildings": 1.0,
+    "changed_state_buildings": 0.0,
+    "changed_unknown_buildings": 0.0
+  },
+  "decisions": [
+    {
+      "zone_id": "Z01",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z02",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z03",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z04",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z05",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z06",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z07",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z08",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z09",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z10",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z11",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z12",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z13",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z14",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z15",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z16",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z17",
+      "operator": "courtyard_access_improvement",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z18",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z19",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z20",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z21",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z22",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z23",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z24",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z25",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z26",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z27",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z28",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z29",
+      "operator": "densify",
+      "intensity": 0.2
+    },
+    {
+      "zone_id": "Z30",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z31",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z32",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z33",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z34",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z35",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z36",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z37",
+      "operator": "noop",
+      "intensity": 0.0
+    },
+    {
+      "zone_id": "Z38",
+      "operator": "noop",
+      "intensity": 0.0
+    }
+  ],
+  "changes": [
+    {
+      "bid": "845",
+      "zone_id": "Z19",
+      "operator": "public_space_reconfiguration",
+      "intensity": 0.0,
+      "requested_intensity": 0.0,
+      "clamped_by": "",
+      "before_height_m": 34.67676633333335,
+      "after_height_m": 34.67676633333335,
+      "before_area_m2": 1713.586725629194,
+      "after_area_m2": 1712.792997848811,
+      "footprint_change_m2": 0.7937277803830511,
+      "gfa_change_m2": -7.863975077889336,
+      "requested_height_m": 34.67676633333335,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": null,
+      "zone_requested_gfa_m2": null
+    },
+    {
+      "bid": "340",
+      "zone_id": "Z29",
+      "operator": "densify",
+      "intensity": 0.2,
+      "requested_intensity": 0.2,
+      "clamped_by": "",
+      "before_height_m": 25.586099666666676,
+      "after_height_m": 27.12126564666668,
+      "before_area_m2": 30.752464190654035,
+      "after_area_m2": 30.752464190654035,
+      "footprint_change_m2": 0.0,
+      "gfa_change_m2": 13.488610521902984,
+      "requested_height_m": 27.12126564666668,
+      "capacity_allocation_ratio": 1.0,
+      "zone_available_gfa_m2": 96888.35629682017,
+      "zone_requested_gfa_m2": 13.488610521902965
+    }
+  ],
+  "violations": []
+}

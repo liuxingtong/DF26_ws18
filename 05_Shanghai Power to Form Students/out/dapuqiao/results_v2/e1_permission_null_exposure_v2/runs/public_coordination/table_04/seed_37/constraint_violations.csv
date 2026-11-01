@@ -1,0 +1,115 @@
+﻿solution_id,code,message,severity,action,zone_id,bid,value,limit
+N_00006,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.22262773722627738,0.18
+N_00012,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19124087591240876,0.18
+N_00018,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20875912408759123,0.18
+N_00019,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18905109489051095,0.18
+N_00024,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18321167883211678,0.18
+N_00027,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.21532846715328466,0.18
+N_00030,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.247926405573919,4.2479009788970385
+N_00036,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20583941605839415,0.18
+N_00037,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2948905109489051,0.18
+N_00038,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479101918589315,4.2479009788970385
+N_00046,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.247926405573919,4.2479009788970385
+N_00050,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19124087591240876,0.18
+N_00068,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18832116788321168,0.18
+N_00078,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2240875912408759,0.18
+N_00086,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19562043795620437,0.18
+N_00093,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19416058394160585,0.18
+N_00100,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.23138686131386862,0.18
+N_00111,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19124087591240876,0.18
+N_00114,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20802919708029197,0.18
+N_00121,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_00131,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18248175182481752,0.18
+N_00139,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2072992700729927,0.18
+N_00141,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20364963503649636,0.18
+N_00151,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18686131386861313,0.18
+N_00157,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19416058394160585,0.18
+N_00159,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20437956204379562,0.18
+N_00168,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18467153284671534,0.18
+N_00174,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18759124087591242,0.18
+N_00185,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19416058394160585,0.18
+N_00194,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2072992700729927,0.18
+N_00197,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20802919708029197,0.18
+N_00205,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19416058394160585,0.18
+N_00222,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20072992700729927,0.18
+N_00242,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2116788321167883,0.18
+N_00246,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18832116788321168,0.18
+N_00265,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.1948905109489051,0.18
+N_00270,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18832116788321168,0.18
+N_00282,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_00285,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2029197080291971,0.18
+N_00288,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18467153284671534,0.18
+N_00290,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2021897810218978,0.18
+N_00314,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.1905109489051095,0.18
+N_00327,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18759124087591242,0.18
+N_00335,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18613138686131386,0.18
+N_00349,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.22481751824817517,0.18
+N_00413,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2,0.18
+N_00425,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20583941605839415,0.18
+N_00432,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19635036496350364,0.18
+N_00452,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.21094890510948905,0.18
+N_00457,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2029197080291971,0.18
+N_00478,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2021897810218978,0.18
+N_00487,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.1897810218978102,0.18
+N_00488,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18321167883211678,0.18
+N_00520,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20510948905109488,0.18
+N_00521,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_00526,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18394160583941604,0.18
+N_00545,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20510948905109488,0.18
+N_00573,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18394160583941604,0.18
+N_00587,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.21021897810218979,0.18
+N_00617,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18248175182481752,0.18
+N_00656,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_00660,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18905109489051095,0.18
+N_00674,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18394160583941604,0.18
+N_00687,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18613138686131386,0.18
+N_00710,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18248175182481752,0.18
+N_00727,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18905109489051095,0.18
+N_00728,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19854014598540146,0.18
+N_00819,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2240875912408759,0.18
+N_00923,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_00929,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.1854014598540146,0.18
+N_00972,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.181021897810219,0.18
+N_00981,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.1948905109489051,0.18
+N_00997,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2021897810218978,0.18
+N_01016,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20656934306569344,0.18
+N_01017,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01030,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01038,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01043,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19635036496350364,0.18
+N_01054,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18467153284671534,0.18
+N_01069,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01086,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_01086,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01106,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01117,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.24792090037751,4.2479009788970385
+N_01132,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.20583941605839415,0.18
+N_01155,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_01163,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19562043795620437,0.18
+N_01172,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19343065693430658,0.18
+N_01189,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19708029197080293,0.18
+N_01200,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.1897810218978102,0.18
+N_01210,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.24792090037751,4.2479009788970385
+N_01238,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19343065693430658,0.18
+N_01250,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01279,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18613138686131386,0.18
+N_01301,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01308,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_01309,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01340,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19562043795620437,0.18
+N_01355,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18905109489051095,0.18
+N_01357,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2029197080291971,0.18
+N_01372,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.19927007299270072,0.18
+N_01386,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2021897810218978,0.18
+N_01391,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01406,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18248175182481752,0.18
+N_01440,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01450,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_01462,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01504,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.2072992700729927,0.18
+N_01525,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.181021897810219,0.18
+N_01541,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.18175182481751825,0.18
+N_01542,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01548,change_scope,发生形态变化的建筑比例超过情景范围,blocking,reject_candidate,,,0.1854014598540146,0.18
+N_01550,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385
+N_01562,zone_far,更新单元新增或加重 FAR 违规,blocking,reject_candidate,Z10,,4.2479239689868695,4.2479009788970385

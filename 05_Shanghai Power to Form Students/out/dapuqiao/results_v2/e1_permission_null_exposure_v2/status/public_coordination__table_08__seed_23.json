@@ -1,0 +1,9 @@
+{
+  "state": "completed",
+  "scenario": "public_coordination",
+  "table": 8,
+  "seed": 23,
+  "runtime_seconds": 3250.891688719392,
+  "pareto_count": 15,
+  "candidates": 1509
+}
