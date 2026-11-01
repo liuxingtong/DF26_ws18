@@ -1,0 +1,122 @@
+[
+  {
+    "key": "Deb2002",
+    "type": "article",
+    "author": "Deb, Kalyanmoy and Pratap, Amrit and Agarwal, Sameer and Meyarivan, T.",
+    "year": "2002",
+    "title": "A fast and elitist multiobjective genetic algorithm: {NSGA-II}",
+    "journal": "IEEE Transactions on Evolutionary Computation",
+    "volume": "6",
+    "number": "2",
+    "pages": "182--197",
+    "doi": "10.1109/4235.996017"
+  },
+  {
+    "key": "EOXCloudless",
+    "type": "misc",
+    "author": "{EOX IT Services GmbH}",
+    "title": "{EOxCloudless}: License non-commercial",
+    "url": "https://cloudless.eox.at/license-non-commercial",
+    "urldate": "2026-11-01",
+    "note": "Official imagery licence information, including the conditions for the 2016 layer"
+  },
+  {
+    "key": "EsriWorldImagery",
+    "type": "misc",
+    "author": "{Esri}",
+    "title": "World Imagery",
+    "url": "https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9",
+    "urldate": "2026-11-01",
+    "note": "Basemap"
+  },
+  {
+    "key": "Huangpu2023",
+    "type": "misc",
+    "author": "{Huangpu District People's Government}",
+    "year": "2023",
+    "month": "February",
+    "day": "10",
+    "title": "Measures for the comprehensive management of the {Tianzifang} area in {Huangpu District}",
+    "url": "https://service.shanghai.gov.cn/XingZhengWenDangKuJyh/XZGFDetails.aspx?docid=230220141250SGUTAJDzyGiwTLVshtA",
+    "note": "Huang Fu Gui [2023] No. 3; effective March 12, 2023",
+    "language": "Chinese"
+  },
+  {
+    "key": "Kaim2020",
+    "type": "article",
+    "author": "Kaim, Andrea and Strauch, Michael and Volk, Martin",
+    "year": "2020",
+    "title": "Using stakeholder preferences to identify optimal land use configurations",
+    "journal": "Frontiers in Water",
+    "volume": "2",
+    "pages": "579087",
+    "doi": "10.3389/frwa.2020.579087"
+  },
+  {
+    "key": "LeongJanssen2022",
+    "type": "inproceedings",
+    "author": "Leong, Siew Leng and Janssen, Patrick",
+    "year": "2022",
+    "title": "Participatory planning: Heritage conservation through co-design and co-decision",
+    "booktitle": "Post-Carbon: Proceedings of the 27th International Conference of the Association for Computer-Aided Architectural Design Research in Asia ({CAADRIA})",
+    "volume": "2",
+    "pages": "505--514",
+    "publisher": "Association for Computer-Aided Architectural Design Research in Asia",
+    "doi": "10.52842/conf.caadria.2022.2.505"
+  },
+  {
+    "key": "OpenFreeMap",
+    "type": "misc",
+    "author": "{OpenFreeMap}",
+    "title": "Positron map style",
+    "url": "https://openfreemap.org/",
+    "urldate": "2026-11-01",
+    "note": "Map tiles; OpenMapTiles and OpenStreetMap attribution retained in Figure 1"
+  },
+  {
+    "key": "OpenStreetMap",
+    "type": "misc",
+    "author": "{OpenStreetMap contributors}",
+    "title": "{OpenStreetMap}",
+    "url": "https://www.openstreetmap.org/copyright",
+    "urldate": "2026-11-01",
+    "note": "Map data"
+  },
+  {
+    "key": "WangZhou2022",
+    "type": "article",
+    "author": "Wang, Mingfeng and Zhou, Yuan",
+    "year": "2022",
+    "title": "The production and evolution of urban cultural and creative tourism destination from the perspective of power space: A case study of {Tianzifang, Shanghai}",
+    "journal": "Geographical Research",
+    "volume": "41",
+    "number": "2",
+    "pages": "373--389",
+    "doi": "10.11821/dlyj020201265",
+    "language": "Chinese"
+  },
+  {
+    "key": "Zhang2024",
+    "type": "inproceedings",
+    "author": "Zhang, Baizhou and Mo, Yichen and Li, Biao and Wang, Yanyu and Zhang, Chao and Shi, Ji",
+    "year": "2024",
+    "title": "{SIMForms}: A web-based generative application fusing forms, metrics, and visuals for early-stage design",
+    "booktitle": "Accelerated Design: Proceedings of the 29th International Conference of the Association for Computer-Aided Architectural Design Research in Asia ({CAADRIA})",
+    "volume": "1",
+    "pages": "373--382",
+    "publisher": "Association for Computer-Aided Architectural Design Research in Asia",
+    "doi": "10.52842/conf.caadria.2024.1.373"
+  },
+  {
+    "key": "ZitzlerThiele1999",
+    "type": "article",
+    "author": "Zitzler, Eckart and Thiele, Lothar",
+    "year": "1999",
+    "title": "Multiobjective evolutionary algorithms: A comparative case study and the strength {Pareto} approach",
+    "journal": "IEEE Transactions on Evolutionary Computation",
+    "volume": "3",
+    "number": "4",
+    "pages": "257--271",
+    "doi": "10.1109/4235.797969"
+  }
+]

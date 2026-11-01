@@ -1,0 +1,5 @@
+Method,Effective evaluations,Feasibility ratio,Pareto solutions,Hypervolume,Max. net floor-area change (%),Max. ground release (%)
+BL,1929–1962,0.892,96–147,0.849,7.283–9.540,1.423
+PC,1433–1575,0.964,10–27,0.281,0.407–0.716,0.327
+DG,1516–1575,0.976,9–15,0.225,0.708–1.340,0.233
+RH,1267–1432,0.937,10–21,0.289,−0.004 to 0.000,0.350

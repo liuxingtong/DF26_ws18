@@ -1,0 +1,21 @@
+Deb, K., Pratap, A., Agarwal, S., & Meyarivan, T. (2002). A fast and elitist multiobjective genetic algorithm: NSGA-II. *IEEE Transactions on Evolutionary Computation, 6*(2), 182–197. https://doi.org/10.1109/4235.996017
+
+EOX IT Services GmbH. (n.d.). *EOxCloudless: License non-commercial* [Imagery licence information]. https://cloudless.eox.at/license-non-commercial
+
+Esri. (n.d.). *World Imagery* [Basemap]. Retrieved November 1, 2026, from https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9
+
+Huangpu District People's Government. (2023, February 10). *Measures for the comprehensive management of the Tianzifang area in Huangpu District* (Huang Fu Gui [2023] No. 3). https://service.shanghai.gov.cn/XingZhengWenDangKuJyh/XZGFDetails.aspx?docid=230220141250SGUTAJDzyGiwTLVshtA
+
+Kaim, A., Strauch, M., & Volk, M. (2020). Using stakeholder preferences to identify optimal land use configurations. *Frontiers in Water, 2*, Article 579087. https://doi.org/10.3389/frwa.2020.579087
+
+Leong, S. L., & Janssen, P. (2022). Participatory planning: Heritage conservation through co-design and co-decision. In *Post-Carbon: Proceedings of the 27th International Conference of the Association for Computer-Aided Architectural Design Research in Asia (CAADRIA)* (Vol. 2, pp. 505–514). Association for Computer-Aided Architectural Design Research in Asia. https://doi.org/10.52842/conf.caadria.2022.2.505
+
+OpenFreeMap. (n.d.). *Positron map style* [Map tiles]. https://openfreemap.org/
+
+OpenStreetMap contributors. (n.d.). *OpenStreetMap* [Map data]. Retrieved November 1, 2026, from https://www.openstreetmap.org/copyright
+
+Wang, M., & Zhou, Y. (2022). The production and evolution of urban cultural and creative tourism destination from the perspective of power space: A case study of Tianzifang, Shanghai. *Geographical Research, 41*(2), 373–389. https://doi.org/10.11821/dlyj020201265
+
+Zhang, B., Mo, Y., Li, B., Wang, Y., Zhang, C., & Shi, J. (2024). SIMForms: A web-based generative application fusing forms, metrics, and visuals for early-stage design. In *Accelerated Design: Proceedings of the 29th International Conference of the Association for Computer-Aided Architectural Design Research in Asia (CAADRIA)* (Vol. 1, pp. 373–382). Association for Computer-Aided Architectural Design Research in Asia. https://doi.org/10.52842/conf.caadria.2024.1.373
+
+Zitzler, E., & Thiele, L. (1999). Multiobjective evolutionary algorithms: A comparative case study and the strength Pareto approach. *IEEE Transactions on Evolutionary Computation, 3*(4), 257–271. https://doi.org/10.1109/4235.797969
