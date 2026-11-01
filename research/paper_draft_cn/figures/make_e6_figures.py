@@ -16,14 +16,17 @@ def read(path):
     with path.open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
 
 
-def make(source, output):
+def make(source, output, compact=False):
     capacity=read(source/'matched_capacity_detail.csv')
     disruption=read(source/'matched_disruption_detail.csv')
     panels=[(capacity,'capacity_band_pct','min_disruption_pct','Target net floor-area change (%)','Minimum residential exposure (%)'),
             (disruption,'disruption_ceiling_pct','max_capacity_pct','Residential exposure ceiling (%)','Maximum net floor-area change (%)')]
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':8,'pdf.fonttype':42,'svg.fonttype':'none',
                          'axes.spines.top':False,'axes.spines.right':False})
-    fig,axes=plt.subplots(1,2,figsize=(6.5,2.8),layout='constrained')
+    fig,axes=plt.subplots(1,2,figsize=(6.7,2.0) if compact else (6.5,2.8),layout='constrained')
+    if compact:
+        panels[0]=(*panels[0][:4], 'Minimum residential\nexposure (%)')
+        panels[1]=(*panels[1][:4], 'Maximum net floor-\narea change (%)')
     audit=[]
     for ax,(rows,xkey,ykey,xlabel,ylabel) in zip(axes,panels):
         xs=sorted({float(r[xkey]) for r in rows})
@@ -62,4 +65,5 @@ def make(source, output):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--matching-root',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
-    a=p.parse_args();make(a.matching_root,a.output)
+    p.add_argument('--compact',action='store_true',help='Shorter, wide layout for the proceedings manuscript')
+    a=p.parse_args();make(a.matching_root,a.output,compact=a.compact)

@@ -18,12 +18,13 @@ parser.add_argument('--run',type=Path,default=W/'out/dapuqiao/results_v2/e0_form
 parser.add_argument('--inputs',type=Path)
 parser.add_argument('--figure-output',type=Path,default=Path(__file__).resolve().parent)
 parser.add_argument('--table-output',type=Path)
-a=parser.parse_args();P=a.run;F=a.figure_output
+parser.add_argument('--compact',action='store_true',help='Reduce vertical gaps and bar-chart height without changing projection')
+args=parser.parse_args();P=args.run;F=args.figure_output
 config=json.loads((P/'run_config.json').read_text())
 version=config.get('metric_version','legacy_operator_tags')
 scenario=config['scenario_id'];seed=config['seed']
-OUT=a.table_output or P.parent.parent.parent/'role_geometry'
-inputs=a.inputs or P/'inputs'
+OUT=args.table_output or P.parent.parent.parent/'role_geometry'
+inputs=args.inputs or P/'inputs'
 data_module.CONFIG_ROOT=P/'config'
 if version=='actual_geometry_v2':
  for name,item in config['reproducibility']['input_files'].items():
@@ -69,7 +70,7 @@ for role in roles:
 OUT.mkdir(parents=True,exist_ok=True)
 (OUT/'reconstruction_checks.json').write_text(json.dumps(checks,indent=2))
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':7,'svg.fonttype':'none','pdf.fonttype':42})
-fig=plt.figure(figsize=(8.0,3.2));gs=fig.add_gridspec(2,3,height_ratios=[1.5,1],hspace=.15,wspace=.32)
+fig=plt.figure(figsize=(7.6,2.25) if args.compact else (8.0,3.2));gs=fig.add_gridspec(2,3,height_ratios=[1.5,.65] if args.compact else [1.5,1],hspace=.06 if args.compact else .15,wspace=.22 if args.compact else .32)
 minx,miny,maxx,maxy=study.buildings.total_bounds;cx=(minx+maxx)/2;cy=(miny+maxy)/2
 baseline=study.buildings.set_index(study.buildings.bid.astype(str));class_names=['resident','developer','state'];bars=[];table=[]
 az=np.deg2rad(25);el=np.deg2rad(35)
@@ -93,7 +94,7 @@ for i,(role,c,archived) in enumerate(results):
  projected=[np.asarray(face)@basis.T for face in faces]
  order=sorted(range(len(faces)),key=lambda k:float(projected[k][:,2].mean()))
  ax.add_collection(PolyCollection([projected[k][:,:2] for k in order],facecolors=[facecolors[k] for k in order],edgecolors=[edgecolors[k] for k in order],linewidths=.10))
- ax.set_xlim(limits[:,0].min(),limits[:,0].max());ax.set_ylim(limits[:,1].min(),limits[:,1].max());ax.set_aspect('equal');ax.set_axis_off();ax.set_title(names[i]+' / '+c.solution_id,fontsize=8,pad=3)
+ ax.set_xlim(limits[:,0].min(),limits[:,0].max());ax.set_ylim(limits[:,1].min(),limits[:,1].max());ax.set_aspect('equal');ax.set_axis_off();ax.set_title(names[i]+' / '+c.solution_id,fontsize=7.5 if args.compact else 8,pad=2 if args.compact else 3)
  delta={k:0. for k in class_names}
  for _,row in c.buildings.iterrows():
   base=baseline.loc[str(row.bid)];cl=str(base.stakeholder_proxy)
@@ -106,10 +107,11 @@ for i,(role,c,archived) in enumerate(results):
 yvals=[v/1000 for d in bars for v in d.values()];lo=min(0,min(yvals))*1.15;hi=max(0,max(yvals))*1.2
 for i,d in enumerate(bars):
  ax=fig.add_subplot(gs[1,i]);ax.bar([0,1,2],[d[k]/1000 for k in class_names],color=['#0072B2','#E69F00','#009E73'],width=.55);ax.axhline(0,color='#777777',lw=.6);ax.set(xticks=[0,1,2],xticklabels=['Resident','Developer','Public'],ylim=(lo,hi));ax.tick_params(labelsize=6);ax.spines[['top','right']].set_visible(False)
- if i==0:ax.set_ylabel('Net GFA change (1,000 m²)')
+ if i==0:ax.set_ylabel('Net GFA change\n(1,000 m²)' if args.compact else 'Net GFA change (1,000 m²)',fontsize=7)
  else:ax.tick_params(labelleft=False)
-fig.legend(handles=[Patch(facecolor=v,label=k.replace('_',' ')) for k,v in colors.items()]+[Patch(facecolor='#dddddd',label='Unchanged'),Patch(facecolor='white',edgecolor='black',label='Heritage')],loc='upper center',bbox_to_anchor=(.5,1.01),ncol=4,frameon=False,fontsize=6)
-fig.subplots_adjust(top=.75,bottom=.12,left=.09,right=.98)
+operator_names={'densify':'Densification','open_ground':'Ground release','split_to_towers':'Volume splitting','heritage_step_down':'Height redistribution','public_space_reconfiguration':'Public setback','courtyard_access_improvement':'Courtyard access'}
+fig.legend(handles=[Patch(facecolor=v,label=operator_names[k] if args.compact else k.replace('_',' ')) for k,v in colors.items()]+[Patch(facecolor='#dddddd',label='Unchanged'),Patch(facecolor='white',edgecolor='black',label='Heritage')],loc='upper center',bbox_to_anchor=(.5,1.035 if args.compact else 1.01),ncol=4,frameon=False,fontsize=6.5 if args.compact else 6)
+fig.subplots_adjust(top=.79,bottom=.15,left=.075,right=.99) if args.compact else fig.subplots_adjust(top=.75,bottom=.12,left=.09,right=.98)
 F.mkdir(parents=True,exist_ok=True)
 figure_name='fig6_role_picks_exposure_v2' if version=='actual_geometry_v2' else 'fig6_role_picks_archived'
 for ext in ['png','pdf','svg']:fig.savefig(F/f'{figure_name}.{ext}',dpi=300,bbox_inches='tight',pad_inches=.04)
