@@ -202,6 +202,16 @@ def _load_research_bundle(slug, ox, oy):
         optimization_root, suite_root, scenario_ids
     )
 
+    formal_root = ws05.WS05 / "out" / slug / "results_v2" / "e0_exposure_v2"
+    for scenario_id in scenario_ids:
+        formal_run = formal_root / "platform_runs" / scenario_id
+        if not (formal_run / "run_config.json").exists():
+            continue
+        current = latest_by_scenario.get(scenario_id)
+        current_config = json.loads((current / "run_config.json").read_text()) if current else {}
+        if current_config.get("metric_version") != "actual_geometry_v2" or not (current / "interactive_settings.json").exists():
+            latest_by_scenario[scenario_id] = formal_run
+
     extra_data, extra_labels, extra_keys, solution_metrics = {}, {}, [], {}
     scenario_runs = {}
     role_labels = {
@@ -303,7 +313,15 @@ def _load_research_bundle(slug, ox, oy):
         "optimization_runs": {key: value["directory"] for key, value in scenario_runs.items()},
         "scenario_runs": scenario_runs,
         "solution_metrics": solution_metrics,
-        "experiment": experiment,
+        "experiment": {} if (formal_root / "paper_results_verified.json").exists() else experiment,
+        "formal_results": {
+            "metric_version": "actual_geometry_v2", "seeds": 10, "raw_budget": 2000,
+            "geometry_seed": 97,
+            "matched_capacity": _read_csv(formal_root / "matching" / "matched_capacity_detail.csv"),
+            "null_effects": _read_csv(formal_root.parent / "e1_permission_null_exposure_v2" / "comparison" / "table_paired_effects.csv"),
+            "summary": _read_csv(formal_root / "aggregate_summary.csv"),
+            "dominance": _read_csv(formal_root / "baseline_dominance" / "dominance_summary.csv"),
+        } if (formal_root / "paper_results_verified.json").exists() else {},
     }
     return extra_data, extra_labels, extra_keys, {}, research
 
@@ -606,7 +624,7 @@ const OP_TEXT={
   courtyard_access_improvement:"Open a small access gap at eligible residential courtyards."
 };
 const OBJECTIVE_TEXT={
-  residential_disruption:"Existing residential GFA directly changed or exposed within an intervention zone, divided by total residential GFA.",
+  residential_disruption:"Existing residential floor area directly changed, plus housing in zones with actual height increases or splits. Compensating height increases count for every operation.",
   development_capacity:"Signed net floor-area change: (sum of proposed GFA − sum of existing GFA) divided by the study area; additions and removals cancel, and gross additions and removals are reported separately.",
   street_connected_released_ground:"Ground released from building footprints inside the 5 m street buffer, divided by the total street-buffer area within the site."
 };
@@ -619,9 +637,10 @@ function renderSolutionMetrics(key){const el=document.getElementById("solutionMe
   if(!m){el.innerHTML='<div class="note">Select a Pareto point to inspect its 3D form and measures.</div>';return;}
   el.innerHTML=`<div class="card ok"><h3>${esc(solutionName(key))}</h3><div class="metric-grid">
     <div class="metric"><b>${pct(m.residential_disruption)}</b><span>Residential exposure · lower is better</span></div>
-    <div class="metric"><b>${num(m.development_capacity,4)}</b><span>Net floor-area change · higher is better</span></div>
+    <div class="metric"><b>${pct(m.development_capacity,3)}</b><span>Net floor-area change · higher is better</span></div>
     <div class="metric"><b>${pct(m.street_connected_released_ground,3)}</b><span>Street-facing ground release · higher is better</span></div>
-    <div class="metric"><b>+${num(m.gross_added_m2,0)} / −${num(m.gross_removed_m2,0)} m²</b><span>Added / removed GFA</span></div>
+    <div class="metric"><b>+${num(m.gross_added_m2,0)} / −${num(m.gross_removed_m2,0)} m²</b><span>Added floor area / removed floor area</span></div>
+    <div class="metric"><b>${num(m.net_gfa_change_m2,0)} m²</b><span>Net GFA change</span></div>
     <div class="metric"><b>${esc(m.changed_buildings||0)}</b><span>Buildings changed</span></div></div>
     <p class="meta">Solution ${esc(m.solution_id)} · Feasible: ${esc(m.feasible)} · Violations: ${esc(m.violation_count||0)}</p></div>`;}
 function renderPareto(){const sr=currentScenarioRun(),rows=sr.pareto||[],svg=document.getElementById("paretoPlot");if(!svg)return;
@@ -649,7 +668,7 @@ function selectScenario(key){const r=GEOM.research||{},s=(r.scenario_catalog||{}
   selectedScenario=key;
   document.querySelectorAll("[data-scenario]").forEach(b=>b.classList.toggle("on",b.dataset.scenario===key));
   const sr=currentScenarioRun(),cfg=sr.run_config||{},policy=((cfg.search||{}).operator_policy)||{};
-  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(scenarioName(key))}</h3><p>${esc((SCENARIOS[key]||{}).description||"")}</p><p class="meta">${sr.interactive_settings?'Exploratory single-seed recomputation':'Formal archived result'} · ${s.status||''}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(OPERATORS[op]||op)}</span>`).join("")}</div></div>`;
+  document.getElementById("scenarioDetail").innerHTML=`<div class="card"><h3>${esc(scenarioName(key))}</h3><p>${esc((SCENARIOS[key]||{}).description||"")}</p><p class="meta">${sr.interactive_settings?'Exploratory single-seed recomputation':`Formal archive · seed ${cfg.seed||'—'}`} · ${s.status||''}</p><div>${(policy.allowed_operators||s.operators||[]).map(op=>`<span class="pill">${esc(OPERATORS[op]||op)}</span>`).join("")}</div></div>`;
   renderPareto();renderScenarioTechnical();
   const roleKey=(sr.role_keys||{})[selectedRole],fallbackKey=roleKey||Object.keys(sr.solution_metrics||{})[0]||"current";setRegime(fallbackKey);
   renderCombination();}
@@ -712,7 +731,7 @@ function renderResearch(){const r=GEOM.research||{},d=r.draft_summary||{},q=(r.f
   const scenarioButtons=document.getElementById("scenarioButtons");
   scenarioButtons.innerHTML=Object.entries(r.scenario_catalog||{}).map(([k,v])=>`<button data-scenario="${esc(k)}">${esc(scenarioName(k))}</button>`).join("");
   scenarioButtons.querySelectorAll("[data-scenario]").forEach(b=>b.onclick=()=>selectScenario(b.dataset.scenario));
-  const roleText={resident:"Prioritize lower residential exposure, then ground release, then added floor area.",development:"Prioritize added floor area, then ground release, then lower residential exposure.",public_planning:"Prioritize ground release, then lower residential exposure, then added floor area."};
+  const roleText={resident:"Prioritize lower residential exposure, then added floor area, then ground release.",development:"Prioritize added floor area, then ground release, then lower residential exposure.",public_planning:"Prioritize ground release, then lower residential exposure, then added floor area."};
   document.getElementById("rolesList").innerHTML=Object.entries(r.roles||{}).map(([k,v])=>`<div class="card role"><h3>${esc(roleName(k))}</h3><p>${roleText[k]||"Ranks the same Pareto set after optimization."}</p><div>${(v.priority_order||[]).map((o,i)=>`<span class="pill">${i+1}. ${esc(OBJECTIVES[o]||o)}</span>`).join("")}</div><p class="meta">Ordinal priority · differences within epsilon share a tier</p></div>`).join("");
   const roleViewButtons=document.getElementById("roleViewButtons");
   roleViewButtons.innerHTML=Object.entries(r.roles||{}).map(([k,v])=>`<button data-role-view="${esc(k)}">${esc(roleName(k))}</button>`).join("");
@@ -723,6 +742,9 @@ function renderResearch(){const r=GEOM.research||{},d=r.draft_summary||{},q=(r.f
   const constraintLabels={geometry_validity:"Valid geometry",study_boundary:"Study area",heritage_unchanged:"Heritage unchanged",height_limit:"Building height",zone_far:"Zone FAR",zone_coverage:"Zone coverage",residential_retention:"Housing retained",new_overlap:"No new overlap",change_scope:"Change extent"};
   document.getElementById("constraintsList").innerHTML=Object.keys(r.constraints||{}).map(k=>`<span class="pill">${esc(constraintLabels[k]||k)}</span>`).join(" ");
   const e=r.experiment||{},em=e.means||{},cov=e.coverage||{},manifest=e.manifest||{};document.getElementById("experimentCard").innerHTML=e.run?`<div class="card ${Number(cov.nsga_over_random)>Number(cov.random_over_nsga)?'ok':'warning'}"><h3>Search comparison</h3><p>${esc(scenarioName(manifest.scenario||''))} · ${esc((manifest.seeds||[]).length||'—')} seeds · ${esc(manifest.equal_effective_independent_evaluation_budget||manifest.equal_evaluation_budget||'—')} evaluations per method and seed. Mean Pareto count: NSGA-II ${num((em.nsga2||{}).pareto_count,1)}, random search ${num((em.random||{}).pareto_count,1)}.</p><p>Dominance coverage: C(NSGA-II, random) ${pct(cov.nsga_over_random)}; C(random, NSGA-II) ${pct(cov.random_over_nsga)}.</p></div>`:'<div class="card warning">No equal-budget search comparison is available for these scenarios.</div>';
+  const formal=r.formal_results||{};
+  if(formal.seeds){document.getElementById("experimentCard").innerHTML=`<div class="card"><h3>Updated formal results · 1 Nov 2026</h3><p>${formal.seeds} paired seeds · ${formal.raw_budget} raw evaluations per run. The 3D view and candidate chart show seed ${formal.geometry_seed}.</p><table class="operator-table"><thead><tr><th>Method</th><th>Mean maximum added area</th><th>Mean HV</th></tr></thead><tbody>${formal.summary.map(x=>`<tr><td>${esc(scenarioName(x.method_id))}</td><td>${pct(x.maximum_development_capacity_mean)}</td><td>${num(x.hypervolume_mean,3)}</td></tr>`).join('')}</tbody></table></div>`;}
+  if(formal.seeds){const median=a=>{a.sort((x,y)=>x-y);return a.length?(a[Math.floor((a.length-1)/2)]+a[Math.ceil((a.length-1)/2)])/2:null;};document.getElementById("experimentCard").innerHTML+=`<div class="card"><h3>Same added area · 0.2% ± 0.05 pp</h3><table class="operator-table"><thead><tr><th>Method</th><th>Median minimum exposure</th><th>Matched seeds</th></tr></thead><tbody>${['BL','PC','DG','RH'].map(method=>{const rows=formal.matched_capacity.filter(x=>x.method===method&&Number(x.capacity_band_pct)===.2&&x.min_disruption_pct!=='');return `<tr><td>${method}</td><td>${rows.length?num(median(rows.map(x=>Number(x.min_disruption_pct))),2)+'%':'No match'}</td><td>${rows.length}/10</td></tr>`;}).join('')}</tbody></table></div>`;}
   renderPareto();renderSolutionMetrics(cur);const firstScenario=Object.keys(r.scenario_catalog||{})[0],firstRole=Object.keys(r.roles||{})[0];if(firstScenario)selectScenario(firstScenario);if(firstRole)selectRole(firstRole);}
 // —— 导出 ——
 function dl(name){renderer.render(scene,cam);
