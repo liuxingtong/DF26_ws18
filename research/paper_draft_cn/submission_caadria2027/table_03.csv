@@ -1,0 +1,4 @@
+Role,First priority,Second priority,Third priority
+Residents,Lower residential exposure,Greater net floor-area change,Greater street-adjacent ground release
+Development,Greater net floor-area change,Greater street-adjacent ground release,Lower residential exposure
+Public planning,Greater street-adjacent ground release,Lower residential exposure,Greater net floor-area change

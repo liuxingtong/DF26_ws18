@@ -1,0 +1,8 @@
+Experiment,Purpose,Comparison or calculation,Research question
+E0 Main comparison,Compare the four solution spaces,"Shared inputs, objectives, constraints, evaluation budget, and ten paired seeds; Pareto fronts and hypervolume","Which combinations of capacity, exposure, and ground release does each method produce?"
+E1 Permission test,Examine the effect of where permissions are assigned,Randomise building permissions for each operator while retaining unit-level eligible-building counts and approximately matching floor area,Does the allocation of comparable intervention opportunities change the front?
+E2 Label statistics,Describe stakeholder categories and intervention targets,Rules mapping uses and attributes to labels; counts and areas by category; unknown-label proportions by unit; label perturbation,"How are labels assigned, and which stakeholder categories receive modifications?"
+E3 Constraint statistics,Identify active controls,"Intensity reductions and rejections by method, seed, and constraint","At which stages do height, FAR, and intervention extent restrict candidates?"
+E4 Exposure scale,Examine the effect of spatial scale on exposure,"Recalculate exposure and rankings using 25, 50, and 100 m distances for the same alternatives",How do exposure and rankings change with distance?
+E5 Selection tolerance,Examine the stability of grouping and selection,"Multiply epsilon by 0.5 and 2, then filter and rank again",How sensitive are preferred solutions to the tolerance?
+E6 Matched comparison,Compare equal benefits or equal costs,"Narrow net-addition bands, exposure ceilings, and comparison with the merged BL front","How do exposure, capacity, release, and the proportion of solutions not dominated by BL vary under matched conditions?"
