@@ -1,0 +1,4 @@
+﻿seed,scenario_id,scenario_over_baseline,baseline_over_scenario,scenario_pareto_count,baseline_pareto_count
+11,public_coordination,0.0,0.0,9,9
+11,development_growth,0.0,0.0,4,9
+11,resident_heritage_priority,0.0,0.0,2,9

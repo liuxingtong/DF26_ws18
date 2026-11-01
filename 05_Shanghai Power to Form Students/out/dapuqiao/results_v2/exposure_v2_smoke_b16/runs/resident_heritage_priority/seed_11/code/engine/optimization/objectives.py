@@ -1,0 +1,225 @@
+from __future__ import annotations
+
+from collections import Counter
+from dataclasses import dataclass
+
+import geopandas as gpd
+import numpy as np
+import shapely
+from shapely.ops import unary_union
+
+
+FLOOR_HEIGHT_M = 3.5
+
+
+@dataclass(frozen=True)
+class ObjectiveContext:
+    site_area: float
+    baseline_gfa: float
+    residential_gfa: float
+    baseline_union: object
+    street_access: object
+    street_access_buffer_m: float
+    # Denominator of the street-adjacent release objective: the 5 m street
+    # buffer clipped to the study area, not the study area itself.
+    street_buffer_area: float
+
+
+def _gfa(frame: gpd.GeoDataFrame) -> float:
+    return float((frame.geometry.area * frame["height_m"] / FLOOR_HEIGHT_M).sum())
+
+
+def build_objective_context(
+    baseline: gpd.GeoDataFrame,
+    boundary: gpd.GeoDataFrame,
+    streets: gpd.GeoDataFrame,
+    scenario: dict,
+    objective_config: dict | None = None,
+) -> ObjectiveContext:
+    base_res = baseline[baseline["residential_proxy"].fillna(False)]
+    measurement = (objective_config or {}).get("measurement", {})
+    street_buffer_m = float(measurement.get("street_access_buffer_m", 5.0))
+    site_geometry = boundary.geometry.union_all()
+    street_access = unary_union(list(streets.geometry)).buffer(street_buffer_m)
+    street_buffer_area = float(street_access.intersection(site_geometry).area)
+    if street_buffer_area <= 0:
+        raise ValueError("街道缓冲与研究区没有交集，无法计算临街释放目标")
+    return ObjectiveContext(
+        site_area=float(site_geometry.area),
+        baseline_gfa=_gfa(baseline),
+        residential_gfa=_gfa(base_res),
+        baseline_union=unary_union(list(baseline.geometry)),
+        street_access=street_access,
+        street_access_buffer_m=street_buffer_m,
+        street_buffer_area=street_buffer_area,
+    )
+
+
+def actual_exposure_ids(baseline, candidate, numerical_resolution=None):
+    """Return direct changes and indirect impacts from actual form, not labels.
+
+    Indirect impacts are positive height gains or a newly divided physical mass.
+    Heights and footprint changes use the same resolution as the operators.
+    """
+    resolution = numerical_resolution or {}
+    height_min = float(resolution.get("minimum_building_height_change_m", 0.1))
+    area_min = float(resolution.get("minimum_building_footprint_change_m2", 1.0))
+    before = baseline.set_index(baseline["bid"].astype(str))
+    after = candidate.set_index(candidate["bid"].astype(str))
+    if not before.index.is_unique or not after.index.is_unique or set(before.index) != set(after.index):
+        raise ValueError("Exposure requires matching unique existing-building IDs")
+    after = after.reindex(before.index)
+    height_delta = after["height_m"].to_numpy(float) - before["height_m"].to_numpy(float)
+    height_changed = np.abs(height_delta) >= height_min - 1e-9
+    raised = height_delta >= height_min - 1e-9
+    geometries_differ = ~shapely.equals_exact(before.geometry.array, after.geometry.array, tolerance=0.0)
+    footprint_changed = np.zeros(len(before), dtype=bool)
+    split = np.zeros(len(before), dtype=bool)
+    def components(geom):
+        return sum(p.geom_type == "Polygon" and p.area >= area_min - 1e-9
+                   for p in getattr(geom, "geoms", [geom]))
+    for i in np.flatnonzero(geometries_differ):
+        old, new = before.geometry.iloc[i], after.geometry.iloc[i]
+        footprint_changed[i] = old.symmetric_difference(new).area >= area_min - 1e-9
+        split[i] = footprint_changed[i] and components(new) > components(old)
+    return (set(before.index[height_changed | footprint_changed]),
+            set(before.index[raised | split]))
+
+
+def evaluate_objectives(
+    baseline: gpd.GeoDataFrame,
+    candidate: gpd.GeoDataFrame,
+    changes: list[dict],
+    boundary: gpd.GeoDataFrame,
+    streets: gpd.GeoDataFrame,
+    scenario: dict,
+    context: ObjectiveContext | None = None,
+    objective_config: dict | None = None,
+) -> tuple[dict[str, float], dict[str, float]]:
+    context = context or build_objective_context(
+        baseline, boundary, streets, scenario, objective_config
+    )
+    site_area = context.site_area
+    changed_ids = {item["bid"] for item in changes}
+    base_res = baseline[baseline["residential_proxy"].fillna(False)]
+    actual_changed_ids, height_impact_ids = actual_exposure_ids(
+        baseline, candidate, (objective_config or {}).get("numerical_resolution", {})
+    )
+    changed_res = base_res[base_res["bid"].astype(str).isin(actual_changed_ids)]
+    impacted_zones = baseline.loc[
+        baseline["bid"].astype(str).isin(height_impact_ids), "zone_id"
+    ].dropna()
+    exposed_zone_ids = set(impacted_zones.astype(str))
+    exposed_res = base_res[
+        base_res["bid"].astype(str).isin(actual_changed_ids)
+        | (base_res["zone_id"].notna() & base_res["zone_id"].astype(str).isin(exposed_zone_ids))
+    ]
+    residential_total = context.residential_gfa
+    direct_residential_change_ratio = (
+        _gfa(changed_res) / residential_total if residential_total > 0 else 0.0
+    )
+    residential_disruption = (
+        _gfa(exposed_res) / residential_total if residential_total > 0 else 0.0
+    )
+
+    base_gfa = context.baseline_gfa
+    candidate_gfa = _gfa(candidate)
+    base_by_id = baseline.set_index(baseline["bid"].astype(str))
+    candidate_by_id = candidate.set_index(candidate["bid"].astype(str))
+    gross_added_m2 = 0.0
+    gross_removed_m2 = 0.0
+    minimum_gfa_change_m2 = float(
+        (objective_config or {}).get("numerical_resolution", {}).get(
+            "minimum_building_gfa_change_m2", 1.0
+        )
+    )
+    for bid in candidate_by_id.index:
+        candidate_row = candidate_by_id.loc[bid]
+        candidate_building_gfa = (
+            float(candidate_row.geometry.area) * float(candidate_row["height_m"]) / FLOOR_HEIGHT_M
+        )
+        baseline_building_gfa = 0.0
+        if bid in base_by_id.index:
+            baseline_row = base_by_id.loc[bid]
+            baseline_building_gfa = (
+                float(baseline_row.geometry.area) * float(baseline_row["height_m"]) / FLOOR_HEIGHT_M
+            )
+        increment = candidate_building_gfa - baseline_building_gfa
+        if increment >= minimum_gfa_change_m2:
+            gross_added_m2 += increment
+        elif increment <= -minimum_gfa_change_m2:
+            gross_removed_m2 += -increment
+    net_gfa_change_m2 = candidate_gfa - base_gfa
+    # f2 is the net change: additions and removals cancel, so a candidate cannot
+    # buy capacity by demolishing first and rebuilding later.
+    development_capacity = net_gfa_change_m2 / site_area if site_area > 0 else 0.0
+
+    # Current morphology operators only preserve or shrink footprints. Computing
+    # the union of all 1,370 buildings for every candidate is unnecessary: start
+    # with the released pieces of changed buildings, then remove any area still
+    # covered by nearby candidate buildings (including legacy overlaps).
+    released_parts = []
+    for bid in changed_ids:
+        if bid not in base_by_id.index or bid not in candidate_by_id.index:
+            continue
+        released_part = base_by_id.loc[bid].geometry.difference(
+            candidate_by_id.loc[bid].geometry
+        )
+        if not released_part.is_empty and released_part.area > 1e-9:
+            released_parts.append(released_part)
+    if released_parts:
+        potential_release = unary_union(released_parts)
+        nearby_indices = candidate.sindex.query(potential_release, predicate="intersects")
+        nearby_cover = unary_union(list(candidate.iloc[nearby_indices].geometry))
+        released = potential_release.difference(nearby_cover)
+    else:
+        released = context.baseline_union.difference(context.baseline_union)
+    connected_released = released.intersection(context.street_access)
+    released_ratio = (
+        float(connected_released.area / context.street_buffer_area)
+        if context.street_buffer_area > 0 else 0.0
+    )
+
+    op_counts = Counter(item["operator"] for item in changes)
+    changed_stakeholders = Counter(
+        baseline.loc[baseline["bid"].astype(str).isin(changed_ids), "stakeholder_proxy"]
+        .fillna("unknown")
+        .astype(str)
+    )
+    objectives = {
+        "residential_disruption": float(residential_disruption),
+        "development_capacity": float(development_capacity),
+        "street_connected_released_ground": float(released_ratio),
+    }
+    heights = candidate["height_m"].astype(float)
+    descriptors = {
+        "far": candidate_gfa / site_area if site_area > 0 else 0.0,
+        "coverage": float(candidate.geometry.area.sum() / site_area) if site_area > 0 else 0.0,
+        "height_mean_m": float(heights.mean()),
+        "height_max_m": float(heights.max()),
+        "changed_buildings": float(len(changed_ids)),
+        "gross_added_m2": float(gross_added_m2),
+        "gross_removed_m2": float(gross_removed_m2),
+        # Legacy alias kept so archived runners and figures keep reading the
+        # added floor area without a schema change.
+        "positive_gfa_increment_m2": float(gross_added_m2),
+        "net_gfa_change_m2": float(net_gfa_change_m2),
+        "net_gfa_change_far": float(net_gfa_change_m2 / site_area)
+        if site_area > 0 else 0.0,
+        "direct_residential_change_ratio": float(direct_residential_change_ratio),
+        "exposed_resident_buildings": float(len(exposed_res)),
+        "street_access_buffer_m": context.street_access_buffer_m,
+        "street_buffer_area_m2": float(context.street_buffer_area),
+        "densify_count": float(op_counts.get("densify", 0)),
+        "open_ground_count": float(op_counts.get("open_ground", 0)),
+        "split_to_towers_count": float(op_counts.get("split_to_towers", 0)),
+        "heritage_step_down_count": float(op_counts.get("heritage_step_down", 0)),
+        "public_space_reconfiguration_count": float(op_counts.get("public_space_reconfiguration", 0)),
+        "courtyard_access_improvement_count": float(op_counts.get("courtyard_access_improvement", 0)),
+        "parameter_count": float(op_counts.get("parameter_height_footprint", 0)),
+        "changed_resident_buildings": float(changed_stakeholders.get("resident", 0)),
+        "changed_developer_buildings": float(changed_stakeholders.get("developer", 0)),
+        "changed_state_buildings": float(changed_stakeholders.get("state", 0)),
+        "changed_unknown_buildings": float(changed_stakeholders.get("unknown", 0)),
+    }
+    return objectives, descriptors

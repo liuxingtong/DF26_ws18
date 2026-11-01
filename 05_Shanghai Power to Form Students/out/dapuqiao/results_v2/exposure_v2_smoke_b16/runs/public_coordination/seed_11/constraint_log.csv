@@ -1,0 +1,14 @@
+﻿solution_id,feasible,intensity_reduced_by,rejected_by,changed_building_count
+S_0000,True,,,0
+N_00002,True,height_limit,,99
+N_00003,True,height_limit,,54
+N_00004,True,,,220
+N_00005,True,footprint_minimum,,142
+N_00006,False,footprint_minimum,change_scope,305
+N_00007,False,footprint_minimum;height_limit,change_scope,262
+N_00008,True,footprint_minimum;height_limit,,186
+N_00009,True,height_limit,,94
+N_00010,True,height_limit,,30
+N_00011,True,footprint_minimum;height_limit,,123
+N_00012,True,height_limit,,243
+N_00013,True,height_limit,,24

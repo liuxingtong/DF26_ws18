@@ -1,0 +1,5 @@
+﻿method_id,seed_count,feasible_ratio_mean,feasible_ratio_std,pareto_count_mean,pareto_count_std,minimum_residential_disruption_mean,minimum_residential_disruption_std,maximum_development_capacity_mean,maximum_development_capacity_std,maximum_released_ground_mean,maximum_released_ground_std,runtime_seconds_mean,runtime_seconds_std,hypervolume_mean,hypervolume_std,spacing_mean,spacing_std
+conventional_parameter_baseline,1,0.9411764705882353,0.0,9.0,0.0,0.0,0.0,0.03885934670268065,0.0,0.00907216365576265,0.0,14.74464024999179,0.0,0.45485707488114685,0.0,0.182247405337442,0.0
+public_coordination,1,0.8461538461538461,0.0,9.0,0.0,0.0,0.0,0.003604729774510735,0.0,0.0019043919225334828,0.0,10.798777499992866,0.0,0.2785504366632197,0.0,0.07546633574189004,0.0
+development_growth,1,0.9285714285714286,0.0,4.0,0.0,0.0,0.0,0.003604729774510735,0.0,0.002597078468103594,0.0,12.147693915991113,0.0,0.2612815758290872,0.0,0.3732437633984132,0.0
+resident_heritage_priority,1,0.7142857142857143,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0003901393154084359,0.0,6.301051832997473,0.0,0.145495452856917,0.0,0.0,0.0
