@@ -1,0 +1,74 @@
+Figure 1. Study area location, extent, and stakeholder labels. Black outlines indicate protected buildings; purple outlines indicate buildings without an assigned renewal unit. Map and imagery sources: OpenFreeMap (n.d.), Esri (n.d.), and EOX IT Services GmbH (n.d.).
+Figure 2. Alternative generation and selection. The three governance scenarios specify building permissions while sharing common constraints and evaluation objectives. Each resulting Pareto set is subsequently ranked for the stakeholder roles.
+Scenario	Intervention focus	Main restrictions
+Public Coordination	Limited additions, ground release, and height redistribution on developer-labelled buildings; setbacks on public assets; courtyard access improvements for residents	Protected buildings and buildings with unknown stakeholder labels remain unchanged
+Development Growth	Additions, ground release, and volume splitting on developer-labelled buildings	Residential buildings allow low-intensity access improvements; protected buildings and buildings with unknown labels remain unchanged
+Residents and Heritage Priority	Ground release or height redistribution on developer-labelled buildings; low-intensity improvements to public assets and residential buildings	Intensive residential modifications are restricted; protected buildings and buildings with unknown labels remain unchanged
+Table 1. Intervention focus and restrictions of the three governance scenarios.
+Operator	Building transformation	Main controls
+Densification	Increase height while retaining the footprint	Maximum height gain of 30%, subject to height limits and remaining unit capacity
+Ground release	Reduce the footprint and attempt to compensate for floor-area loss by increasing height	Maximum footprint reduction of 25%; compensation is subject to height limits
+Volume splitting	Introduce a central gap and attempt height compensation	Applies to buildings with footprints of at least 300 m²; gap size varies with intensity
+Height redistribution	Reduce height near housing and heritage buildings and transfer height to more distant buildings within the same unit	Resulting buildings must satisfy height and unit-capacity limits
+Public-asset setback	Reduce the street-facing footprint of public assets while retaining height	Maximum setback of 4 m
+Courtyard access improvement	Cut a candidate passage from the street-facing edge towards a courtyard while retaining height	Maximum passage width of 3 m
+Table 2. Transformations and controls for the six morphological operators. Actual changes depend on intensity, the original footprint, and available capacity under the constraints.
+Role	First priority	Second priority	Third priority
+Residents	Lower residential exposure	Greater net floor-area change	Greater street-adjacent ground release
+Development	Greater net floor-area change	Greater street-adjacent ground release	Lower residential exposure
+Public planning	Greater street-adjacent ground release	Lower residential exposure	Greater net floor-area change
+Table 3. Sequential objective priorities for the three roles. Differences below the corresponding epsilon tolerance lead to comparison on the next objective. The priority orders are the role settings used in this study.
+Table 4. Experimental purposes, comparisons, and research questions. E0–E6 identify the analyses in this study.
+Experiment	Purpose	Comparison or calculation	Research question
+E0 Main comparison	Compare the four solution spaces	Shared inputs, objectives, constraints, evaluation budget, and ten paired seeds; Pareto fronts and hypervolume	Which combinations of capacity, exposure, and ground release does each method produce?
+E1 Permission test	Examine the effect of where permissions are assigned	Randomise building permissions for each operator while retaining unit-level eligible-building counts and approximately matching floor area	Does the allocation of comparable intervention opportunities change the front?
+E2 Label statistics	Describe stakeholder categories and intervention targets	Rules mapping uses and attributes to labels; counts and areas by category; unknown-label proportions by unit; label perturbation	How are labels assigned, and which stakeholder categories receive modifications?
+E3 Constraint statistics	Identify active controls	Intensity reductions and rejections by method, seed, and constraint	At which stages do height, FAR, and intervention extent restrict candidates?
+E4 Exposure scale	Examine the effect of spatial scale on exposure	Recalculate exposure and rankings using 25, 50, and 100 m distances for the same alternatives	How do exposure and rankings change with distance?
+E5 Selection tolerance	Examine the stability of grouping and selection	Multiply epsilon by 0.5 and 2, then filter and rank again	How sensitive are preferred solutions to the tolerance?
+E6 Matched comparison	Compare equal benefits or equal costs	Narrow net-addition bands, exposure ceilings, and comparison with the merged BL front	How do exposure, capacity, release, and the proportion of solutions not dominated by BL vary under matched conditions?
+Figure 3. Scenario selection, role switching, the objective scatter plot, and 3D form in the interactive platform.
+Table 5. Main experiment results. Effective evaluations, Pareto counts, and maximum net floor-area change are ranges across seeds. Feasibility, hypervolume, and maximum ground release are medians.
+Method	Effective evaluations	Feasibility ratio	Pareto solutions	Hypervolume	Maximum net floor-area change	Maximum ground release
+BL	1929–1962	0.892	96–147	0.849	7.283–9.540%	1.423%
+PC	1433–1575	0.964	10–27	0.281	0.407–0.716%	0.327%
+DG	1516–1575	0.976	9–15	0.225	0.708–1.340%	0.233%
+RH	1267–1432	0.937	10–21	0.289	−0.004 to 0.000%	0.350%
+Table 6. Minimum residential exposure within each net floor-area change band, summarised by the median across seeds. Parentheses indicate seeds with matching candidates.
+Target net floor-area change	BL	PC	DG	RH
+0.0%	0.00% (10/10)	0.00% (10/10)	0.00% (10/10)	0.00% (10/10)
+0.2%	16.41% (10/10)	2.21% (10/10)	1.65% (10/10)	No match (0/10)
+0.4%	16.73% (10/10)	7.14% (10/10)	7.45% (10/10)	No match (0/10)
+0.6%	19.76% (10/10)	6.40% (9/10)	6.94% (10/10)	No match (0/10)
+Table 7. Maximum net floor-area change under residential exposure ceilings, summarised by the median across ten seeds.
+Residential exposure ceiling	BL	PC	DG	RH
+0%	0.000%	0.100%	0.044%	0.000%
+5%	0.000%	0.178%	0.206%	0.000%
+10%	0.000%	0.657%	1.172%	0.000%
+20%	6.776%	0.657%	1.232%	0.000%
+30%	8.472%	0.657%	1.232%	0.000%
+Table 8. Proportion of solutions not dominated by the merged BL front.
+Scenario	Median	Range across seeds
+PC	42.37%	27.78%–46.67%
+DG	33.33%	15.38%–55.56%
+RH	57.14%	36.36%–90.00%
+Figure 4. Merged governance fronts compared with BL. Grey points represent BL; coloured points indicate residential exposure, with black outlines marking solutions not dominated by BL. All panels share the same axes and colour scale.
+Figure 5. Comparisons at matched net floor-area change bands and residential exposure ceilings. Faint points show individual seeds, solid lines indicate medians, and vertical lines show seed ranges. Lines break at missing conditions; n indicates conditions with fewer than ten matching seeds.
+Table 9. Median paired differences between the permission-matched null model and the original permissions. Differences are calculated as randomised minus original permissions. Exposure is matched at the 0.2% net floor-area change band.
+Scenario	Hypervolume difference	Exposure difference at the 0.2% band
+PC	−0.01378	+0.96 percentage points
+DG	+0.01030	−10.59 percentage points
+RH	+0.00016	No match
+Figure 6. Hypervolume and matched residential exposure under original and randomised permissions. Blue points show the three paired seeds under original permissions, grey points show the remaining original-permission seeds, and orange points show the three-seed median for each random permission table. Axis labels report matching counts. Positive-addition matches for RH remain missing.
+Figure 7. Role-preferred solutions for PC, seed 97. All three views use the same orthographic projection and spatial extent. Modified buildings are coloured by operator, and the charts below show net floor-area change by stakeholder category.
+Table 10. Role-preferred solutions for PC, seed 97.
+Role	Solution ID	Residential exposure (%)	Net floor-area change (m²)	Additions (m²)	Removals (m²)	Ground release (%)
+Residents	N_00914	0.00	1,585	1,698	114	0.000
+Development	N_00761	6.36	9,892	10,005	114	0.000
+Public planning	N_01274	6.96	−70,089	1,554	71,644	0.322
+Table 11. Platform evaluation scores from the three participants.
+Participant	Question 1	Question 2	Question 3	Question 4	Question 5
+1	5	5	4	4	5
+2	4	3	5	5	4
+3	5	3	5	4	4
+Mean	4.67	3.67	4.67	4.33	4.33

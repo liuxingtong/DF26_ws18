@@ -1,0 +1,8 @@
+Equation 1
+f_1 = \frac{\sum_{i \in R,\,i\ exposed} GFA_i^{base}}{\sum_{i \in R} GFA_i^{base}}
+
+Equation 2
+f_2 = \frac{\sum_i (GFA_i^{proposal}-GFA_i^{base})}{A_{site}}
+
+Equation 3
+f_3 = \frac{Area[(Footprint_{base}-Footprint_{proposal}) \cap StreetBuffer_{5m}]}{Area(StreetBuffer_{5m} \cap Site)}

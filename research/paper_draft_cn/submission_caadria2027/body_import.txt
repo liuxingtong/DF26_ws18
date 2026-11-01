@@ -12,7 +12,7 @@ We translate three governance scenarios for Dapuqiao into rules for building mod
 
 2.1 Conservation and Renewal in Dapuqiao
 
-The study focuses on Tianzifang and its surrounding neighbourhoods in Dapuqiao, Shanghai. Shikumen lanes and former industrial buildings contribute to Tianzifang's historic character while accommodating housing, businesses, and cultural activities. The *Measures for the Comprehensive Management of the Tianzifang Area in Huangpu District* call for the conservation of distinctive buildings and the reuse of former factories, alongside improvements to community facilities, building safety, and relations between commercial and residential uses (Huangpu District People's Government, 2023). These requirements establish the governance context for renewal.
+The study focuses on Tianzifang and its surrounding neighbourhoods in Dapuqiao, Shanghai. Shikumen lanes and former industrial buildings contribute to Tianzifang's historic character while accommodating housing, businesses, and cultural activities. The Measures for the Comprehensive Management of the Tianzifang Area in Huangpu District call for the conservation of distinctive buildings and the reuse of former factories, alongside improvements to community facilities, building safety, and relations between commercial and residential uses (Huangpu District People's Government, 2023). These requirements establish the governance context for renewal.
 
 Within this setting, the same operation to add floor area or release ground space encounters different restrictions and affects different users when applied to housing, commercial buildings, or protected buildings. We therefore include conservation status and stakeholder categories in the model to examine how permissions change the location, type, and scale of building interventions.
 
@@ -44,29 +44,23 @@ Generated alternatives must satisfy hard constraints before entering the compari
 
 Three objectives measure residential exposure, net floor-area change, and street-adjacent ground-release potential. Each is normalised by its corresponding reference area. Gross floor area (GFA) is used to quantify the amount of housing and changes in building floor area.
 
-**Residential impact exposure** measures the proportion of existing residential floor area potentially affected by morphological changes; lower values are preferred. A residential building is directly affected when its height changes by at least 0.1 m or its footprint changes by at least 1 m². Indirect exposure includes housing in a renewal unit where a building gains at least 0.1 m in height or increases its number of connected volumes of at least 1 m². Compensating height increases during ground release follow the same rule. Each residential building is counted once, using existing residential floor area as the denominator:
+Residential impact exposure measures the proportion of existing residential floor area potentially affected by morphological changes; lower values are preferred. A residential building is directly affected when its height changes by at least 0.1 m or its footprint changes by at least 1 m². Indirect exposure includes housing in a renewal unit where a building gains at least 0.1 m in height or increases its number of connected volumes of at least 1 m². Compensating height increases during ground release follow the same rule. Each residential building is counted once, using existing residential floor area as the denominator:
 
-\[
-f_1 = \frac{\sum_{i \in R,\,i\ exposed} GFA_i^{base}}{\sum_{i \in R} GFA_i^{base}}
-\]
+f1 = sum of existing GFA of exposed residential buildings / total existing residential GFA
 
-Here, \(R\) is the set of residential buildings, \(GFA_i^{base}\) is the existing GFA of building \(i\), and \(exposed\) indicates that the building meets these conditions. Defining indirect exposure by renewal unit includes housing around an intervention. Exposure can therefore be substantial even when few residential buildings are directly modified.
+Here, R is the set of residential buildings, GFA_i(base) is the existing GFA of building i, and exposed indicates that the building meets these conditions. Defining indirect exposure by renewal unit includes housing around an intervention. Exposure can therefore be substantial even when few residential buildings are directly modified.
 
-**Net floor-area change** is the difference between proposed and existing GFA divided by the study area. Higher values indicate greater net additions:
+Net floor-area change is the difference between proposed and existing GFA divided by the study area. Higher values indicate greater net additions:
 
-\[
-f_2 = \frac{\sum_i (GFA_i^{proposal}-GFA_i^{base})}{A_{site}}
-\]
+f2 = sum of (proposed GFA - existing GFA) / study area
 
-\(GFA_i^{proposal}\) and \(GFA_i^{base}\) denote proposed and existing floor area, and \(A_{site}\) is the study area. Additions and removals offset one another in the net value; their gross amounts are also reported.
+GFA_i(proposal) and GFA_i(base) denote proposed and existing floor area, and A_{site} is the study area. Additions and removals offset one another in the net value; their gross amounts are also reported.
 
-**Street-adjacent ground-release potential** measures ground space created near streets through footprint reduction; higher values are preferred:
+Street-adjacent ground-release potential measures ground space created near streets through footprint reduction; higher values are preferred:
 
-\[
-f_3 = \frac{Area[(Footprint_{base}-Footprint_{proposal}) \cap StreetBuffer_{5m}]}{Area(StreetBuffer_{5m} \cap Site)}
-\]
+f3 = area[(Footprint_base - Footprint_proposal) intersect StreetBuffer_5m] / area[StreetBuffer_5m intersect Site]
 
-\(Footprint\) denotes building footprints, and \(StreetBuffer_{5m}\) is the 5 m street buffer. The metric identifies the difference between existing and proposed footprints and measures the portion within this buffer, capturing opportunities to release ground space beside streets.
+Footprint denotes building footprints, and StreetBuffer_5m is the 5 m street buffer. The metric identifies the difference between existing and proposed footprints and measures the portion within this buffer, capturing opportunities to release ground space beside streets.
 
 3.4 Multiobjective Search and Role-Based Selection
 
@@ -108,11 +102,11 @@ Three participants with backgrounds in architecture or planning used the platfor
 
 After the task, participants rated five statements on a scale from 1 (strongly disagree) to 5 (strongly agree):
 
-1. I can understand which buildings may be modified under each scenario.
-2. I can understand the trade-offs among development capacity, residential exposure, and street-adjacent ground release.
-3. I can understand why the selected solution changes when I switch roles.
-4. I can compare two solutions using the charts and 3D views.
-5. The platform helps me select a solution and explain my reasons.
+Q1. I can understand which buildings may be modified under each scenario.
+Q2. I can understand the trade-offs among development capacity, residential exposure, and street-adjacent ground release.
+Q3. I can understand why the selected solution changes when I switch roles.
+Q4. I can compare two solutions using the charts and 3D views.
+Q5. The platform helps me select a solution and explain my reasons.
 
 The overall mean score was 4.33. Understanding permissions and role-based selection each received a mean of 4.67, while understanding objective trade-offs received 3.67.
 
