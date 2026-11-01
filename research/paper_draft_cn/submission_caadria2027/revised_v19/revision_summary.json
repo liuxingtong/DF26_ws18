@@ -1,0 +1,16 @@
+{
+  "source": "2026-11-01_Dapuqiao_CAADRIA_English_v18_Concise.md",
+  "revision": "2026-11-01_Dapuqiao_CAADRIA_English_v19_Revised.md",
+  "word_count_before": 3171,
+  "word_count_after": 3491,
+  "figures": 5,
+  "tables": 6,
+  "data_recalculated": false,
+  "changes": [
+    "Restored introduction and method explanations",
+    "Clarified compromise selection and platform workflow",
+    "Restored figure 3 and 4 captions",
+    "Defined FAR, GFA and NSGA-II",
+    "Retained compact figure layouts"
+  ]
+}

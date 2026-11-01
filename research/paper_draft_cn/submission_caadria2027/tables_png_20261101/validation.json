@@ -1,0 +1,106 @@
+{
+  "source": "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/2026-11-01_Dapuqiao_CAADRIA_English_v16_ProceeDings.md",
+  "revised_draft": "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/2026-11-01_Dapuqiao_CAADRIA_English_v17_Compact_Tables.md",
+  "retained": [
+    {
+      "file": "Table_01.png",
+      "width_mm": 170,
+      "pixels": [
+        4015,
+        1327
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "font_pt": 9.5,
+      "number": 1,
+      "original_number": 1,
+      "caption": "Intervention focus and restrictions of the three governance scenarios. Protected buildings and buildings with unknown stakeholder labels remain unchanged in all scenarios."
+    },
+    {
+      "file": "Table_02.png",
+      "width_mm": 170,
+      "pixels": [
+        4015,
+        2382
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "font_pt": 9.5,
+      "number": 2,
+      "original_number": 2,
+      "caption": "Transformations and controls for the six morphological operators. Actual changes depend on intensity, the original footprint, and available capacity under the constraints."
+    },
+    {
+      "file": "Table_03.png",
+      "width_mm": 170,
+      "pixels": [
+        4015,
+        2474
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "font_pt": 9.5,
+      "number": 3,
+      "original_number": 4,
+      "caption": "Experimental purposes, comparisons, and research questions. E0–E6 identify the analyses in this study."
+    },
+    {
+      "file": "Table_04.png",
+      "width_mm": 170,
+      "pixels": [
+        4015,
+        1321
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "font_pt": 9.5,
+      "number": 4,
+      "original_number": 5,
+      "caption": "Main experiment results. Effective evaluations, Pareto counts, and maximum net floor-area change are ranges across seeds. Feasibility, hypervolume, and maximum ground release are medians."
+    },
+    {
+      "file": "Table_05.png",
+      "width_mm": 170,
+      "pixels": [
+        4015,
+        937
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "font_pt": 9.5,
+      "number": 5,
+      "original_number": 10,
+      "caption": "Role-preferred solutions for PC, seed 97."
+    },
+    {
+      "file": "Table_06.png",
+      "width_mm": 105,
+      "pixels": [
+        2480,
+        737
+      ],
+      "dpi": [
+        599.9988,
+        599.9988
+      ],
+      "font_pt": 9.5,
+      "number": 6,
+      "original_number": 11,
+      "caption": "Platform evaluation scores from the three participants.",
+      "vertical_padding_pt": 2
+    }
+  ],
+  "original_table_count": 11,
+  "retained_table_count": 6,
+  "cell_overflow_checks": "passed"
+}

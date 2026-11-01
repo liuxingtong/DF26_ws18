@@ -1,0 +1,11 @@
+Table 1. Intervention focus and restrictions of the three governance scenarios. Protected buildings and buildings with unknown stakeholder labels remain unchanged in all scenarios.
+
+Table 2. Transformations and controls for the six morphological operators. Actual changes depend on intensity, the original footprint, and available capacity under the constraints.
+
+Table 3. Experimental purposes, comparisons, and research questions. E0–E6 identify the analyses in this study.
+
+Table 4. Main experiment results. Effective evaluations, Pareto counts, and maximum net floor-area change are ranges across seeds. Feasibility, hypervolume, and maximum ground release are medians.
+
+Table 5. Role-preferred solutions for PC, seed 97.
+
+Table 6. Platform evaluation scores from the three participants.

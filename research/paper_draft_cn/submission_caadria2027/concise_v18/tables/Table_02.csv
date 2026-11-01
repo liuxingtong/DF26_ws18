@@ -1,0 +1,7 @@
+Operator,Building transformation,Main controls
+Densification,Increase height while retaining the footprint,"Maximum height gain of 30%, subject to height limits and remaining unit capacity"
+Ground release,Reduce the footprint and attempt to compensate for floor-area loss by increasing height,Maximum footprint reduction of 25%; compensation is subject to height limits
+Volume splitting,Introduce a central gap and attempt height compensation,Applies to buildings with footprints of at least 300 m²; gap size varies with intensity
+Height redistribution,Reduce height near housing and heritage buildings and transfer height to more distant buildings within the same unit,Resulting buildings must satisfy height and unit-capacity limits
+Public-asset setback,Reduce the street-facing footprint of public assets while retaining height,Maximum setback of 4 m
+Courtyard access improvement,Cut a candidate passage from the street-facing edge towards a courtyard while retaining height,Maximum passage width of 3 m

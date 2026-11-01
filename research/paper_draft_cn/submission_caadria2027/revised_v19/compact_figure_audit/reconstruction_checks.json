@@ -1,0 +1,26 @@
+[
+  {
+    "role": "resident",
+    "solution_id": "N_00914",
+    "complete_precision_decisions": true,
+    "input_and_engine_hashes_match": true,
+    "objectives_match": true,
+    "descriptors_match": true
+  },
+  {
+    "role": "development",
+    "solution_id": "N_00761",
+    "complete_precision_decisions": true,
+    "input_and_engine_hashes_match": true,
+    "objectives_match": true,
+    "descriptors_match": true
+  },
+  {
+    "role": "public_planning",
+    "solution_id": "N_01274",
+    "complete_precision_decisions": true,
+    "input_and_engine_hashes_match": true,
+    "objectives_match": true,
+    "descriptors_match": true
+  }
+]

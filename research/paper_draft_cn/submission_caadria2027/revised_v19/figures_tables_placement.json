@@ -1,0 +1,68 @@
+[
+  {
+    "type": "figure",
+    "number": 1,
+    "file": "figures_for_import/Figure_01.png",
+    "caption": "Study area, imagery, and stakeholder labels. Black outlines mark protected buildings; purple outlines mark unassigned buildings. Sources: OpenFreeMap (n.d.), Esri (n.d.), and EOX IT Services GmbH (n.d.)."
+  },
+  {
+    "type": "table",
+    "number": 1,
+    "file": "tables/Table_01.png",
+    "caption": "Governance scenarios. Protected and unknown-label buildings remain unchanged in all three."
+  },
+  {
+    "type": "table",
+    "number": 2,
+    "file": "tables/Table_02.png",
+    "caption": "Morphological operators and controls."
+  },
+  {
+    "type": "table",
+    "number": 3,
+    "file": "tables/Table_03.png",
+    "caption": "Experimental comparisons and questions. E4–E5 are follow-up analyses."
+  },
+  {
+    "type": "figure",
+    "number": 2,
+    "file": "figures_for_import/Figure_02.png",
+    "caption": "Platform interface linking scenarios, stakeholder roles, objective trade-offs, and building form."
+  },
+  {
+    "type": "table",
+    "number": 4,
+    "file": "tables/Table_04.png",
+    "caption": "Ten-seed results. Effective evaluations, Pareto counts, and maximum net floor-area change show ranges; other columns show medians."
+  },
+  {
+    "type": "figure",
+    "number": 3,
+    "file": "figures_for_import/Figure_03.png",
+    "caption": "Governance fronts compared with BL (grey). Colour indicates residential exposure, and black outlines mark solutions not dominated by the merged BL front. All panels share the same axes and colour scale."
+  },
+  {
+    "type": "figure",
+    "number": 4,
+    "file": "figures_for_import/Figure_04.png",
+    "caption": "Comparisons at matched net floor-area change bands and residential exposure ceilings. Faint points show individual seeds, solid lines indicate medians, and vertical lines show seed ranges. Gaps indicate unmatched conditions; n marks conditions with fewer than ten matching seeds."
+  },
+  {
+    "type": "figure",
+    "number": 5,
+    "file": "figures_for_import/Figure_05.png",
+    "caption": "PC seed 97 role-preferred alternatives, shown at identical projection and extent. Modified buildings are coloured by operator; charts show net GFA change by stakeholder category."
+  },
+  {
+    "type": "table",
+    "number": 5,
+    "file": "tables/Table_05.png",
+    "caption": "Role-preferred solutions, PC seed 97."
+  },
+  {
+    "type": "table",
+    "number": 6,
+    "file": "tables/Table_06.png",
+    "caption": "Participant ratings. Q1–Q5 correspond to the statements above."
+  }
+]

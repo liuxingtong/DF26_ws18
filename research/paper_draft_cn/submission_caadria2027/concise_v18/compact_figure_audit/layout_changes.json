@@ -1,0 +1,110 @@
+{
+  "figures": [
+    {
+      "figure": 3,
+      "source": "fig3_merged_pareto_fronts",
+      "old_pixels": [
+        1774,
+        740
+      ],
+      "new_pixels": [
+        1944,
+        583
+      ],
+      "same_width_height_reduction_pct": 28.11,
+      "height_at_170mm_width_mm": 50.98,
+      "outputs": [
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig3_merged_pareto_fronts.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig3_merged_pareto_fronts.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig3_merged_pareto_fronts.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_03.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_03.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_03.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig3_merged_pareto_fronts.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig3_merged_pareto_fronts.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig3_merged_pareto_fronts.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_03.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_03.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_03.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig3_merged_pareto_fronts.svg",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig3_merged_pareto_fronts.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig3_merged_pareto_fronts.svg",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_03.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_03.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_03.svg"
+      ]
+    },
+    {
+      "figure": 4,
+      "source": "fig4_e6_matched_tradeoffs",
+      "old_pixels": [
+        1984,
+        870
+      ],
+      "new_pixels": [
+        2044,
+        630
+      ],
+      "same_width_height_reduction_pct": 29.71,
+      "height_at_170mm_width_mm": 52.4,
+      "outputs": [
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig4_e6_matched_tradeoffs.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig4_e6_matched_tradeoffs.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig4_e6_matched_tradeoffs.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_04.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_04.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_04.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig4_e6_matched_tradeoffs.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig4_e6_matched_tradeoffs.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig4_e6_matched_tradeoffs.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_04.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_04.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_04.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig4_e6_matched_tradeoffs.svg",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig4_e6_matched_tradeoffs.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig4_e6_matched_tradeoffs.svg",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_04.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_04.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_04.svg"
+      ]
+    },
+    {
+      "figure": 5,
+      "source": "fig6_role_picks_exposure_v2",
+      "old_pixels": [
+        2288,
+        949
+      ],
+      "new_pixels": [
+        2279,
+        662
+      ],
+      "same_width_height_reduction_pct": 29.97,
+      "height_at_170mm_width_mm": 49.38,
+      "outputs": [
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig6_role_picks_exposure_v2.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig6_role_picks_exposure_v2.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig6_role_picks_exposure_v2.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_05.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_05.png",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_05.png",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig6_role_picks_exposure_v2.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig6_role_picks_exposure_v2.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig6_role_picks_exposure_v2.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_05.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_05.pdf",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_05.pdf",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/figures/exposure_v2/fig6_role_picks_exposure_v2.svg",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures/exposure_v2/fig6_role_picks_exposure_v2.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures/exposure_v2/fig6_role_picks_exposure_v2.svg",
+        "/Users/edy/Documents/GitHub/DF26_ws18/research/paper_draft_cn/submission_caadria2027/concise_v18/figures_for_import/Figure_05.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u7cbe\u7b80\u6b63\u6587_v18/figures_for_import/Figure_05.svg",
+        "/Users/edy/Desktop/CAADRIA2027_\u6241\u957f\u7248\u56fe3-5/Figure_05.svg"
+      ]
+    }
+  ],
+  "e6_summary_verified": true,
+  "role_inputs_objectives_and_geometry_verified": true,
+  "data_changed": false,
+  "projection_changed": false
+}

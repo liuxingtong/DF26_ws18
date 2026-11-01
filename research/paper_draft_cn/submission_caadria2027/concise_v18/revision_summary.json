@@ -1,0 +1,16 @@
+{
+  "source": "2026-11-01_Dapuqiao_CAADRIA_English_v17_Compact_Tables.md",
+  "draft": "2026-11-01_Dapuqiao_CAADRIA_English_v18_Concise.md",
+  "all_words_before": 4540,
+  "all_words_after": 3171,
+  "prose_words_before": 3097,
+  "prose_words_after": 2052,
+  "figures_before": 7,
+  "figures_after": 5,
+  "tables": 6,
+  "removed_figures": [
+    "research_workflow.png",
+    "fig5_permission_null.png"
+  ],
+  "numerical_results_recalculated": false
+}

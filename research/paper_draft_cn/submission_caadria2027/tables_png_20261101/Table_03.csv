@@ -1,0 +1,8 @@
+Experiment,Comparison or calculation,Research question
+E0 Main comparison,"Four methods; shared data, objectives, constraints, budget, and ten paired seeds","Which capacity, exposure, and ground-release combinations are produced?"
+E1 Permission test,Randomise permissions within units; retain eligible counts and approximately match eligible GFA,Does permission location change the Pareto front?
+E2 Label statistics,"Label rules, counts, areas, unknown labels, and label perturbation",Which buildings receive labels and interventions?
+E3 Constraint statistics,"Intensity reductions and rejections by method, seed, and constraint",Which controls restrict candidate generation?
+E4 Exposure scale,"Recalculate the same alternatives using 25, 50, and 100 m distances",How does spatial scale change exposure and rankings?
+E5 Selection tolerance,Refilter and rerank with epsilon multiplied by 0.5 and 2,How does tolerance change preferred solutions?
+E6 Matched comparison,"Net-addition bands, exposure ceilings, and merged BL front",How do benefits and costs compare under matched conditions?

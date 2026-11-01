@@ -1,5 +1,9 @@
 # CAADRIA 2027 导入文件
 
+最新版本：[v19英文修订稿与导入文件](revised_v19/README.md)。其中Dapuqiao_ProceeDings_import_v19.txt包含标题、摘要、关键词和正文，不含图表内容、图表注及公式。
+
+当前建议使用 [v18精简导入包](concise_v18/README.md)：六张表、五张图。下面的旧版文件说明对应v16，原文件保留。
+
 官方要求来源：https://www.caadria2027.org/#/full-papers （核对日期 2026-11-01）。
 
 2027 使用 ProceeDings 在线编辑系统，参考文献由系统自动排版。英文 v16 是完整阅读稿，手工参考文献仅供校对，不代表已在在线系统完成排版。

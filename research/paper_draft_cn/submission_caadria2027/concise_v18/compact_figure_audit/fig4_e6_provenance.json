@@ -1,0 +1,8 @@
+{
+  "statistic": "Median of per-seed optima; whiskers show seed min/max; faint points show individual seeds",
+  "missing": "Unmatched conditions remain absent; lines stop at missing values; no interpolation",
+  "sources": {
+    "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_exposure_v2/matching/matched_capacity_detail.csv": "1f7f3e7da6158bede4b43cf8599d57e8f571fac0eb4e4ae0154fa1444102e563",
+    "05_Shanghai Power to Form Students/out/dapuqiao/results_v2/e0_exposure_v2/matching/matched_disruption_detail.csv": "f80a72ab89a1e31a1304dc799bc927dfb622ed3b1fd7a15fa26177b6b40db886"
+  }
+}

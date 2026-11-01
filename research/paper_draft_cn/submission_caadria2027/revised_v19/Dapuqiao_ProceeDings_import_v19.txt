@@ -1,0 +1,111 @@
+Stakeholder-Driven Urban Morphology Simulation: An Interactive Computational Tool for Participatory Historic District Renewal
+
+Abstract
+
+Historic neighbourhood renewal requires coordination among housing, development, and heritage conservation. This study links stakeholder categories to building-operation permissions in a model of 1,370 buildings in Dapuqiao, Shanghai. NSGA-II searches a parametric baseline and three governance scenarios using common constraints and objectives for residential exposure, net floor-area change, and street-adjacent ground release. Stakeholder priorities then select representative alternatives. Across ten paired seeds, median minimum exposure at the 0.2% net floor-area change band is 16.41% for the baseline, 2.21% for public coordination, and 1.65% for development growth. The baseline provides greater capacity at higher exposure ceilings, while some governance solutions remain undominated by its merged front. Randomised permissions change performance in different directions across scenarios. An interactive 3D platform connects these trade-offs to individual building changes. Three participants with architecture or planning backgrounds rated its support for understanding permissions and role-based selection more highly than its explanation of objective trade-offs.
+
+Keywords: Urban Renewal, Heritage Conservation, Multiobjective Optimisation, Stakeholders, Participatory Planning
+
+1. Introduction
+
+Historic neighbourhood renewal requires coordination among housing improvement, development, and heritage conservation. Adding floor area may affect existing housing, while releasing ground space can change commercial activities and everyday access. Renewal decisions therefore concern both spatial performance and the distribution of benefits and costs among residents, businesses, and public agencies. Research in Tianzifang links spatial transformation to power relations and rights to use and modify space (Wang & Zhou, 2022). This perspective raises a computational question: how can these differences in control be represented through the buildings that each stakeholder may change and the interventions they may undertake?
+
+Computational design provides tools for generating and comparing renewal alternatives. SIMForms connects form generation, performance evaluation, and visualisation (Zhang et al., 2024). Participatory heritage planning involves participants in developing and selecting alternatives through co-design and co-decision (Leong & Janssen, 2022). In land-use optimisation, stakeholder preferences can also guide selection after alternatives have been generated (Kaim et al., 2020). Building on these approaches, this study connects two stages of decision-making: permissions shape the alternatives available before selection, and stakeholder priorities guide the choice among those alternatives. We examine how building permissions change achievable trade-offs and how different roles select distinct building forms from the same solution set.
+
+Using Dapuqiao, Shanghai, we compare three governance scenarios with a parametric baseline under shared urban data, evaluation objectives, and common constraints. Matched comparisons examine residential exposure at similar net additions and development capacity under equal exposure ceilings. A permission-matched null model examines how allocating comparable intervention opportunities to different buildings changes performance. We further develop an interactive 3D platform that connects these comparisons to individual building changes, enabling users to inspect alternatives, switch stakeholder perspectives, and discuss the spatial consequences of renewal choices.
+
+2. Study Area and Data
+
+The study covers Tianzifang and surrounding neighbourhoods in Dapuqiao, Shanghai, where Shikumen housing, former factories, and commercial uses coexist. Huangpu District's management measures call for distinctive-building conservation, factory reuse, community facilities, safety improvements, and coordination of residential and commercial uses (Huangpu District People's Government, 2023).
+
+The model integrates footprints, heights, uses, streets, and conservation records for 1,370 buildings. Building and street data come from OpenStreetMap contributors (n.d.). Streets define 38 renewal units. A building is assigned to a unit when an interior representative point falls within its boundary; building and unit IDs link geometry to controls. The 32 unassigned buildings and 21 footprints matched to official conservation records remain unchanged. Areas and distances use projected coordinates. All experiments use the same inputs.
+
+3. Methods
+
+3.1 Permissions and Form Generation
+
+Building uses and attributes are mapped to three stakeholder categories: residents, developers, and public assets. These labels serve as proxies for assigning building-operation permissions and are combined with conservation status to determine permitted interventions. Public Coordination (PC), Development Growth (DG), and Residents and Heritage Priority (RH) differ in eligible buildings, operation types, intensity, and intervention extent (Table 1). Each scenario is searched independently using the same evaluation objectives. Stakeholder preferences are then applied to select representative alternatives from its resulting Pareto set.
+
+Permissions are implemented through six morphological operators, each defining a geometric transformation and its intensity limits (Table 2). Ground release, for example, reduces a building’s footprint and attempts to compensate for lost floor area by increasing height within the available limits. The same intervention can therefore release ground space while increasing exposure for housing in the surrounding renewal unit. The model records both changes so that their combined effects enter the evaluation.
+
+Candidates must satisfy geometry validity, study boundaries, building conservation, height, unit floor area ratio (FAR), coverage, residential retention, and overlap checks. FAR is gross floor area (GFA) divided by unit area; coverage is footprint area divided by unit area. Permissions and intervention extent depend on the scenario. The program reduces operation intensity to available capacity, rejects remaining violations, and records each modified building's ID, unit, operator, intensity, and before-and-after attributes.
+
+3.2 Evaluation Objectives
+
+Three objectives measure residential exposure (minimise), net floor-area change (maximise), and street-adjacent ground release (maximise).
+
+Residential exposure is the share of existing residential GFA affected directly or indirectly. Direct exposure occurs when a residential building changes height by at least 0.1 m or footprint by at least 1 m². Indirect exposure includes housing in any unit where a building gains at least 0.1 m in height or increases its number of connected volumes of at least 1 m². Height compensation during ground release follows this rule. Each residential building is counted once.
+
+Unit-based exposure includes housing around an intervention, so exposure depends on both the modified building and its location.
+
+Net floor-area change divides proposed minus existing GFA by the study area.
+
+Proposed and existing GFA are compared for each building. Gross additions and removals are also reported because similar net changes can result from substantially different amounts of construction and removal.
+
+Street-adjacent ground release divides released footprint area within the 5 m street buffer by the buffer area inside the site.
+
+3.3 Search and Role-Based Selection
+
+The Non-dominated Sorting Genetic Algorithm II (NSGA-II) generates and evaluates candidates, retaining alternatives with different objective trade-offs (Deb et al., 2002). A candidate dominates another when it is at least as good on every objective and better on at least one; the Pareto set contains undominated candidates. Epsilon tolerances group solutions with small objective differences after the search.
+
+Roles rank this set in priority order. Residents prioritise lower exposure, greater net floor-area change, then greater ground release. Development prioritises greater net floor-area change, greater ground release, then lower exposure. Public planning prioritises greater ground release, lower exposure, then greater net floor-area change. Comparison moves to the next objective when values differ by less than its epsilon tolerance.
+
+The framework also identifies a compromise solution. Each alternative receives a rank under all three roles, and the alternative with the best worst rank is selected. This provides a starting point for discussion by favouring an alternative whose least favourable position across the three role rankings is comparatively strong.
+
+3.4 Experimental Design
+
+The Parametric Baseline (BL) adjusts height by multipliers of 1.00–1.30 and retains 0.75–1.00 of each footprint. PC, DG, and RH use the permissions and operators above. Common model limits are 36 m height, unit FAR 3.0, coverage 0.60, and residential GFA retention 0.80. Height, FAR, and coverage limits take the larger of the specified and existing values.
+
+Each method is searched with a population of 40, 50 planned generations, ten paired seeds, and a fixed budget of 2,000 raw evaluations per run. Effective evaluations count distinct forms with actual changes. Feasibility is the proportion of recorded candidates satisfying all constraints, including the existing model in the candidate count. Hypervolume measures the objective space dominated by a front, using shared normalisation and reference points (Zitzler & Thiele, 1999). Statistics report seed medians and ranges. Table 3 summarises the analyses: E0, E1, and E6 provide the reported comparisons; E2–E3 document labels and constraints, and E4–E5 specify follow-up analyses.
+
+The permission-matched null model uses ten random permission tables for each governance scenario and paired seeds 11, 23, and 37: 90 searches at the main experiment's budget. Randomisation preserves each operator's eligible-building count per unit and matches eligible existing GFA within 5%. Residential labels, conservation, intensity, and intervention extent remain fixed. Null-model hypervolume uses shared bounds across all 130 runs. Paired differences are randomised minus original permissions, summarised first by the median of three seeds per table, then by the median of ten tables.
+
+Matched net floor-area bands use ±0.05 percentage points. For each seed, we record minimum exposure in each band and maximum net floor-area change under each exposure ceiling, then summarise seed medians and matching counts. Unmatched conditions remain missing. For dominance analysis, all ten BL fronts are merged and filtered into one reference front.
+
+3.5 Interactive Platform
+
+The interactive platform connects scenario settings, objective comparisons, role-based selection, and building form (Figure 2). Users first choose a scenario and inspect its alternatives in an objective scatter plot. They can then switch stakeholder roles to view the corresponding preferred solution and inspect its 3D form and building-level changes. The statistical panel summarises ten seeds, while 3D exploration uses seed 97, which also provides the role-comparison examples. A settings panel supports adjustment and recalculation, with parameters and results saved for each run. This sequence allows users to trace differences in overall performance to specific building interventions and explain the reasons for their selections.
+
+4. Results
+
+4.1 Alternative Performance
+
+The four methods completed 40 searches of 2,000 raw evaluations each (Table 4).
+
+The merged BL reference contains 398 non-dominated points. Median proportions of governance solutions undominated by BL are 42.37% for PC (range 27.78–46.67%), 33.33% for DG (15.38–55.56%), and 57.14% for RH (36.36–90.00%) (Figure 3).
+
+At the 0.2% addition band, median minimum exposure is 16.41% for BL, 2.21% for PC, and 1.65% for DG, with matches in all ten seeds; RH has no match. Under a 20% exposure ceiling, median maximum net floor-area change is 6.776%, 0.657%, 1.232%, and 0.000%, respectively (Figure 4).
+
+The permission-matched null model yields median paired hypervolume differences of −0.01378 for PC, +0.01030 for DG, and +0.00016 for RH. At the 0.2% addition band, paired exposure differences are +0.96 percentage points for PC and −10.59 for DG; RH has no match. Original DG exposure in the three paired seeds is 12.32%, 12.24%, and 1.65%.
+
+Within PC seed 97, resident and development roles select net additions of 1,585 and 9,892 m², with exposure of 0.00% and 6.36%. Public planning selects a net reduction of 70,089 m² and ground release of 0.322% (Figure 5; Table 5).
+
+4.2 Platform Evaluation
+
+Three participants with architecture or planning backgrounds compared PC and DG near a specified net floor-area change, switched resident and development perspectives, and selected alternatives. They then rated five statements from 1 (strongly disagree) to 5 (strongly agree):
+
+Q1. I can understand which buildings may be modified under each scenario.
+
+Q2. I can understand the trade-offs among capacity, residential exposure, and street-adjacent ground release.
+
+Q3. I can understand why switching roles changes the selected solution.
+
+Q4. I can compare two solutions using the charts and 3D views.
+
+Q5. The platform helps me select a solution and explain my reasons.
+
+The overall mean was 4.33. Understanding permissions and role-based selection each scored 4.67; understanding objective trade-offs scored 3.67.
+
+5. Discussion
+
+Permissions change the spatial cost of additions. PC and DG meet the low addition target with less exposed housing than BL, while BL obtains substantially more capacity once the exposure ceiling rises. This crossover identifies a planning choice between limiting the affected residential area and allowing broader transformation. Unit-based exposure makes intervention location consequential: adding height in a unit can expose surrounding housing even when residential buildings themselves remain unchanged.
+
+The governance fronts preserve objective combinations undominated by BL, including RH alternatives centred on ground release rather than additions. Their value lies in the combination of residential exposure, capacity, and released space. Comparing only maximum additions or aggregate hypervolume would obscure these alternatives.
+
+Randomising comparable permission opportunities helps interpret this mechanism. Original PC permissions outperform random allocation in hypervolume and matched exposure, whereas DG changes in the opposite direction and RH changes little. Stakeholder assignment therefore interacts with each scenario's operators and constraints. For DG, the difference between its three-seed and ten-seed exposure results also shows why the distribution of search outcomes matters when choosing an alternative.
+
+Role selection makes a second decision within the generated space. The public-planning choice exchanges considerable floor area for ground release, while the resident and development choices retain additions with different exposure levels. Displaying gross additions, removals, and individual building changes makes that exchange visible. Participants found permissions and role switching easier to understand than objective trade-offs, suggesting that the platform should explain the capacity–exposure–release relationship more directly.
+
+6. Conclusion
+
+The framework connects stakeholder labels to building permissions, multiobjective form generation, and role-based selection. Matched comparisons reveal lower-exposure addition opportunities under PC and DG and greater capacity under BL at higher exposure ceilings. Permission randomisation shows scenario-specific effects, while the merged-front analysis identifies governance alternatives with distinct objective combinations. The 3D platform connects these choices to building changes, supporting discussion of renewal benefits and residential costs.
