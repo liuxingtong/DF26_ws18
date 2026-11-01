@@ -1,4 +1,4 @@
-# From Stakeholder Power to Urban Form: Multiobjective Generation and A Posteriori Preferences for Urban Renewal in Dapuqiao, Shanghai
+# Stakeholder-Driven Urban Morphology Simulation: An Interactive Computational Tool for Participatory Historic District Renewal
 
 ## Abstract
 
@@ -12,7 +12,7 @@ Renewal in historic neighbourhoods involves building conservation, housing impro
 
 Computational design provides tools for generating and comparing renewal alternatives. SIMForms combines form generation, performance evaluation, and visualisation (Zhang et al., 2024). Multiobjective optimisation considers competing objectives together and retains solutions with different trade-offs. One solution dominates another when it performs at least as well on every objective and better on at least one. The Pareto set consists of solutions that are not dominated by other candidates, revealing trade-offs among additional floor area, residential impacts, and ground-space release (Deb et al., 2002). In historic neighbourhoods, generation also needs to incorporate permissions for building modifications and conservation requirements so that the search reflects local renewal conditions.
 
-Participatory heritage planning involves participants in revising and selecting alternatives through co-design and co-decision (Leong & Janssen, 2022). Kaim et al. (2020) apply a posteriori preferences to land-use optimisation: alternatives with different objective trade-offs are generated first and then selected according to stakeholder preferences. These approaches raise the central question of this study: how can permissions applied before generation and preferences applied after generation be represented within one workflow, and how can their spatial consequences be traced? Permissions shape the alternatives that can be generated, while preferences guide selection within that set.
+Participatory heritage planning involves participants in revising and selecting alternatives through co-design and co-decision (Leong & Janssen, 2022). Kaim et al. (2020) apply a posteriori preferences to land-use optimisation: alternatives with different objective trade-offs are generated first and then selected using stakeholder weights elicited through the Analytic Hierarchy Process. These approaches raise the central question of this study: how can permissions applied before generation and preferences applied after generation be represented within one workflow, and how can their spatial consequences be traced? Permissions shape the alternatives that can be generated, while preferences guide selection within that set.
 
 We translate three governance scenarios for Dapuqiao into rules for building modifications, search each scenario using shared objectives, and select representative solutions according to role-specific priorities. A parametric baseline provides a comparison by directly adjusting building height and footprint. Both approaches use the same urban data, evaluation objectives, and common constraints to compare their solution ranges, housing modifications, and ground-space release. The contribution is an executable and inspectable process for specifying who may intervene, how buildings may change, and how alternatives are selected. Building-level records and 3D views connect aggregate performance to specific spatial changes (Figure 2).
 
@@ -115,7 +115,7 @@ Role-based selection compares objectives in priority order. When values on one o
 | Development | Greater net floor-area change | Greater street-adjacent ground release | Lower residential exposure |
 | Public planning | Greater street-adjacent ground release | Lower residential exposure | Greater net floor-area change |
 
-**Table 3.** Sequential objective priorities for the three roles. Differences below the corresponding epsilon tolerance lead to comparison on the next objective. The approach draws on a posteriori preference research (Kaim et al., 2020).
+**Table 3.** Sequential objective priorities for the three roles. Differences below the corresponding epsilon tolerance lead to comparison on the next objective. The priority orders are the role settings used in this study.
 
 The framework also identifies a compromise solution. Each alternative receives a rank under every role, and the alternative with the best worst rank is selected. This approach improves the solution's position under its least favourable role ranking and provides a shared starting point for comparison.
 
@@ -272,7 +272,7 @@ This study connects stakeholder categories, building-operation permissions, and 
 
 Deb, K., Pratap, A., Agarwal, S., & Meyarivan, T. (2002). A fast and elitist multiobjective genetic algorithm: NSGA-II. *IEEE Transactions on Evolutionary Computation, 6*(2), 182–197. https://doi.org/10.1109/4235.996017
 
-EOX IT Services GmbH. (n.d.). *Sentinel-2 cloudless 2016 imagery* [Satellite imagery]. https://cloudless.eox.at/license-non-commercial
+EOX IT Services GmbH. (n.d.). *EOxCloudless: License non-commercial* [Imagery licence information]. https://cloudless.eox.at/license-non-commercial
 
 Esri. (n.d.). *World Imagery* [Basemap]. Retrieved November 1, 2026, from https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9
 
